@@ -21,7 +21,7 @@
 8. run command for initializing terraform: terraform init
 9. run command to see what changes: terraform plan
 10. run command to apply all changes: terraform apply
-
+11. run command to destroy all created resource: terraform destroy
 --Done--
 
 ## Reference
