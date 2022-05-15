@@ -13,6 +13,14 @@
 - aws config
 7. Create new file "main.tf" with a content like below link:
 - https://www.middlewareinventory.com/blog/terraform-aws-example-ec2/
+5. Add IAM User to the above Policy
+6. Configurate the AWS CLI with your IAM User by using below cmd:
+- aws config
+7. Create new file "main.tf" with a content like below link:
+- https://www.middlewareinventory.com/blog/terraform-aws-example-ec2/
+8. run command for initializing terraform: terraform init
+9. run command to see what changes: terraform plan
+10. run command to apply all changes: terraform apply
 
 --Done--
 
