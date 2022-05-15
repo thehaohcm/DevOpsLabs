@@ -9,6 +9,10 @@
 4. Add new Policy with only Creating EC2 Instance Roles, follow this link:
 - https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-policies-ec2-console.html#ex-launch-wizard
 5. Add IAM User to the above Policy
+6. Configurate the AWS CLI with your IAM User by using below cmd:
+- aws config
+7. Create new file "main.tf" with a content like below link:
+- https://www.middlewareinventory.com/blog/terraform-aws-example-ec2/
 
 --Done--
 
