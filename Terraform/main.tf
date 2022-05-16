@@ -96,6 +96,42 @@ resource "aws_instance" "terraform_ec2_example" {
   ]
 }
 
+# Creates/manages KMS CMK
+resource "aws_kms_key" "terraform_kms_key" {
+  description              = "KMS key for terraform lab"
+  customer_master_key_spec = "SYMMETRIC_DEFAULT"
+  is_enabled               = true
+  enable_key_rotation      = true
+  deletion_window_in_days  = 30
+}
+
+# # Add an alias to the key
+# resource "aws_kms_alias" "this" {
+#   name          = "alias/${var.alias}"
+#   target_key_id = aws_kms_key.this.key_id
+# }
+
+resource "aws_db_instance" "terraform_rds_example" {
+  allocated_storage    = 10
+  engine               = "mysql"
+  instance_class       = "db.t2.micro"
+  name                 = "mydb"
+  username             = "example"
+  password             = "examplepassword"
+  parameter_group_name = "default.mysql.rds.example"
+  kms_key_id           = aws_kms_key.terraform_kms_key.key_id
+  storage_encrypted    = true
+  depends_on           = [ 
+	  aws_security_group.terraform-ec2-sg,
+	  aws_kms_key.terraform_kms_key 
+  ]
+}
+
+resource "aws_s3_bucket" "terraform_s3bucket_example" {
+  bucket = "terraform_s3bucket_example"
+  acl    = private
+}
+
 output "ec2instance" {
   value = aws_instance.terraform_ec2_example.public_ip
 }
