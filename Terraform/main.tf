@@ -87,7 +87,7 @@ resource "aws_instance" "terraform_ec2_example" {
   ]
   
   provisioner "local-exec" {
-    command = "echo public IP address: ${aws_instance.terraform_ec2_example.public_ip} >> public_ip_address.txt"
+    command = "echo public IP address: ${aws_instance.terraform_ec2_example.public_ip} >> instance_info.txt"
   }
 
   depends_on = [ 
@@ -105,33 +105,57 @@ resource "aws_kms_key" "terraform_kms_key" {
   deletion_window_in_days  = 30
 }
 
-# # Add an alias to the key
-# resource "aws_kms_alias" "this" {
-#   name          = "alias/${var.alias}"
-#   target_key_id = aws_kms_key.this.key_id
-# }
+# Add an alias to the key
+resource "aws_kms_alias" "terraform_kms_key" {
+  name          = "alias/terraform_kms_key_alias"
+  target_key_id = aws_kms_key.terraform_kms_key.key_id
+}
 
+//have problem, cannot create rds instance
 resource "aws_db_instance" "terraform_rds_example" {
-  allocated_storage    = 10
+  identifier           = "rdsexample"
+  allocated_storage    = "100"
   engine               = "mysql"
-  instance_class       = "db.t2.micro"
-  name                 = "mydb"
+  engine_version       = "8.0.20"
+  instance_class       = "db.t3.micro"
+  db_name              = "mydb"
   username             = "example"
   password             = "examplepassword"
-  parameter_group_name = "default.mysql.rds.example"
-  kms_key_id           = aws_kms_key.terraform_kms_key.key_id
+  parameter_group_name = "default.mysql8.0"
+  kms_key_id           = aws_kms_key.terraform_kms_key.arn
   storage_encrypted    = true
+  publicly_accessible  = true
+  tags = {
+    Name        = "TerraformExampleRDS"
+    Environment = "DEV"
+  }
   depends_on           = [ 
 	  aws_security_group.terraform-ec2-sg,
 	  aws_kms_key.terraform_kms_key 
   ]
+
+  provisioner "local-exec" {
+    command = "echo RDS address: ${aws_db_instance.terraform_rds_example.address} >> instance_info.txt"
+  }
 }
 
 resource "aws_s3_bucket" "terraform_s3bucket_example" {
-  bucket = "terraform_s3bucket_example"
-  acl    = private
+  bucket = "terraform-s3bucket-example"
+  tags = {
+    Name        = "My Example RDS server"
+    Environment = "DEV"
+  }
+}
+
+resource "aws_s3_bucket_acl" "terraform_s3bucket_example_acl" {
+  bucket = aws_s3_bucket.terraform_s3bucket_example.id
+  acl    = "public-read"
 }
 
 output "ec2instance" {
   value = aws_instance.terraform_ec2_example.public_ip
+}
+
+output "rds_instance" {
+  value = aws_db_instance.terraform_rds_example.address
 }

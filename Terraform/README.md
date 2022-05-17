@@ -22,6 +22,7 @@
 9. run command to see what changes: terraform plan
 10. run command to apply all changes: terraform apply
 11. run command to destroy all created resource: terraform destroy
+Notice: add parameter "-auto-approve" if you don't want to wait and type "yes" for the next step
 --Done--
 
 ## Reference
