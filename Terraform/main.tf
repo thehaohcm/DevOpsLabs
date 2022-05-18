@@ -125,6 +125,7 @@ resource "aws_db_instance" "terraform_rds_example" {
   kms_key_id           = aws_kms_key.terraform_kms_key.arn
   storage_encrypted    = true
   publicly_accessible  = true
+  vpc_security_group_ids = [aws_security_group.terraform-ec2-sg.id]
   tags = {
     Name        = "TerraformExampleRDS"
     Environment = "DEV"
