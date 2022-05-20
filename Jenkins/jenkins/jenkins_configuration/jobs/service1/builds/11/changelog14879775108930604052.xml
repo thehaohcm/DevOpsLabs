@@ -1,0 +1,10 @@
+commit eb42306a8bae85a67f0eb69784242f7dc6f75a44
+tree d7c48b467df50af1f0ec7e8e181a3fbb59346fb2
+parent 7d836556ef610fac18ee115128595e99f7dccb6f
+author Nguyen The Hao <thehaohcm@yahoo.com.vn> 2022-05-20 19:58:56 +0700
+committer Nguyen The Hao <thehaohcm@yahoo.com.vn> 2022-05-20 19:58:56 +0700
+
+    remove AS build in Dockerfile
+
+
+:100644 100644 680193c93044bd2a002fd8c3d5e13e81edd7ccf1 ed1dfb37d0b31ed0a1951b8a1d5aa53cdc9a1701 M	Dockerfile

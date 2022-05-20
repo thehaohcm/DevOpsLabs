@@ -1,0 +1,10 @@
+commit 5ee809a90d38767dd9d8cce96b929b87aa65fffd
+tree 875c899a6d01270d60345956c403ba9de45537d4
+parent c4c05d2196759b5b203a783ed76531f00a50489b
+author Nguyen The Hao <thehaohcm@yahoo.com.vn> 2022-05-20 16:20:36 +0700
+committer Nguyen The Hao <thehaohcm@yahoo.com.vn> 2022-05-20 16:20:36 +0700
+
+    modify credentialsId
+
+
+:100644 100644 1e3a1d63bdb35672777ae02d6f74a06b38a2dfbc eb94cc49decfe0d54de328a6cee7ea5d648114a6 M	Jenkinsfile

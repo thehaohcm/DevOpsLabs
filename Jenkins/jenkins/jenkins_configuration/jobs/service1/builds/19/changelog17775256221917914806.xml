@@ -1,0 +1,10 @@
+commit 1adf421783dd6983e344415b0b3501dc7b3434bc
+tree 3fe6f3b6562e47dde6d9eae80387a8397b10f27e
+parent dd67d649ccc63cc3a42b30f39e830f41ed77e771
+author Nguyen The Hao <thehaohcm@yahoo.com.vn> 2022-05-20 21:30:32 +0700
+committer Nguyen The Hao <thehaohcm@yahoo.com.vn> 2022-05-20 21:30:32 +0700
+
+    UPPER the AS keyword in Dockerfile
+
+
+:100644 100644 f68b11838510b680711ea37c14b0bd0a109c5e6f 024dff8c372b7cdde39f4b9c2bf0e96fd650ef4c M	Dockerfile

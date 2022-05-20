@@ -1,0 +1,10 @@
+commit 7d836556ef610fac18ee115128595e99f7dccb6f
+tree 925529347d1928e7d1c4101983dac4faa4893d5b
+parent 5ee809a90d38767dd9d8cce96b929b87aa65fffd
+author Nguyen The Hao <thehaohcm@yahoo.com.vn> 2022-05-20 19:49:02 +0700
+committer Nguyen The Hao <thehaohcm@yahoo.com.vn> 2022-05-20 19:49:02 +0700
+
+    modify the tag of gradle in Dockerfile
+
+
+:100644 100644 95c85c6bb3dfe9d95b83f32b5841e9cf4876d553 680193c93044bd2a002fd8c3d5e13e81edd7ccf1 M	Dockerfile

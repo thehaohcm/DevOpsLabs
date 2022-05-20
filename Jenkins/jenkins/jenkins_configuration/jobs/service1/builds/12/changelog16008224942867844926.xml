@@ -1,0 +1,10 @@
+commit 8fd560425979025c40aa5c9ab51b5ebd5ea6edf4
+tree db42d06af65cf10ffa86db62250fd9b13c8acec2
+parent eb42306a8bae85a67f0eb69784242f7dc6f75a44
+author Nguyen The Hao <thehaohcm@yahoo.com.vn> 2022-05-20 20:11:51 +0700
+committer Nguyen The Hao <thehaohcm@yahoo.com.vn> 2022-05-20 20:11:51 +0700
+
+    modify tag of openjdk in Dockerfile
+
+
+:100644 100644 ed1dfb37d0b31ed0a1951b8a1d5aa53cdc9a1701 a4f1f31cb5f870844c766d54338e856ce970b483 M	Dockerfile

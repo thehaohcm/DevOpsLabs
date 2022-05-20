@@ -1,0 +1,10 @@
+commit e73e889174fac725fedbabc0a1ff0bebe985b643
+tree 95d5273a85f6c749213d72592c3da893513061b4
+parent f466ef34bf597ec303585352f20a20ac8ee0ca7d
+author Nguyen The Hao <thehaohcm@yahoo.com.vn> 2022-05-20 23:36:24 +0700
+committer Nguyen The Hao <thehaohcm@yahoo.com.vn> 2022-05-20 23:36:24 +0700
+
+    revert code
+
+
+:100644 100644 b69c084f4b597b0af293709ddedc9b6b73aa2a5d 1bb0416508a1827b5ca128bfc7681cae73f71716 M	Jenkinsfile

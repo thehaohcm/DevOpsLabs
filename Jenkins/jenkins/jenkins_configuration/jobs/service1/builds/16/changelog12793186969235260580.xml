@@ -1,0 +1,10 @@
+commit d3c8025f6a2f526d0d0db53af759814e67639ef7
+tree 48d7493e2ed451bfc53c472a5ab849e76d9be7fb
+parent ee9577a4adcffd9d963dc886fe1926e89c1b4162
+author Nguyen The Hao <thehaohcm@yahoo.com.vn> 2022-05-20 20:59:13 +0700
+committer Nguyen The Hao <thehaohcm@yahoo.com.vn> 2022-05-20 20:59:13 +0700
+
+    modify the build path in Dockerfile
+
+
+:100644 100644 490df978aa0033b1c3d04a64fd196088847b5bcb a17ae1a67fec3591a718d1223ab5fc28e5527671 M	Dockerfile

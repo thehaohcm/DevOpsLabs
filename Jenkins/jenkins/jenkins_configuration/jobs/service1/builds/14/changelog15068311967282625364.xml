@@ -1,0 +1,10 @@
+commit 1d5845bf7110b45de6c9013d43fcce12bc53a6a0
+tree 39d4eacb94bf513852b83c4ec0efb58cdbebb539
+parent fc9b2b72955906199ef7390508d3f51e7d8eb772
+author Nguyen The Hao <thehaohcm@yahoo.com.vn> 2022-05-20 20:38:53 +0700
+committer Nguyen The Hao <thehaohcm@yahoo.com.vn> 2022-05-20 20:38:53 +0700
+
+    modify the COPY statement in Dockerfile
+
+
+:100644 100644 5aff12e14da25681a0f08994a5ead4b78241a62d 7297c20e859206a67870e9a0775d84a441de65a8 M	Dockerfile
