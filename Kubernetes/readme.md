@@ -1,6 +1,14 @@
 Commands for Kubernetes and AWS EKS:
 1. Create K8s cluster by eksctl cmd:
-  - eksctl create cluster --profile debi-lab-user --name test-cluster --version 1.21 --region ap-southeast-1 --nodegroup-name linux-nodes --node-type t2.micro --nodes 2
+  - eksctl create cluster --profile debi-lab-user --name test-cluster --version 1.22 --region ap-southeast-1 --nodegroup-name linux-nodes --node-type t2.micro --nodes 2
+
+NOTICE: 
+- Config k8s cluster to correct IAM user by this command:
+aws eks update-kubeconfig --name [cluster-name] --region [region-code] --profile [aim-user-name-config]
+
+- If encounter an issue of K8s clusters authentication, run this command to config again :
+aws eks update-kubeconfig --name test-cluster --region ap-southeast-1 --profile debi-lab-user
+
 
 2. Get nodes info by kubectl cmd:
   - kubectl get nodes
@@ -25,6 +33,9 @@ If we have a Kubernetes Manifest yaml file (ex: deployment.yml), we can follow b
 
 3. List the Pods created by the deployment:
   - kubectl get pods -l app=nginx
+
+Get external IP of k8s cluster:
+kubectl get svc --all-namespaces -o wide
 
 4. Display information about the Pod:
   - kubectl describe pod <pod-name>
