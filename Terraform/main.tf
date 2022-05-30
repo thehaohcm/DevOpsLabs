@@ -129,6 +129,7 @@ resource "aws_db_instance" "terraform_rds_example" {
   backup_retention_period = 0
   apply_immediately = true
   deletion_protection = true //what is it?
+  vpc_security_group_ids = [aws_security_group.terraform-ec2-sg.id]
   tags = {
     Name        = "TerraformExampleRDS"
     Environment = "DEV"

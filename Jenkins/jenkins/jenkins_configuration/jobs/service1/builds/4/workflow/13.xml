@@ -1,0 +1,66 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<Tag plugin="workflow-support@820.vd1a_6cc65ef33">
+  <node class="cps.n.StepEndNode" plugin="workflow-cps@2692.v76b_089ccd026">
+    <parentIds>
+      <string>12</string>
+    </parentIds>
+    <id>13</id>
+    <startId>10</startId>
+  </node>
+  <actions>
+    <wf.a.TimingAction plugin="workflow-api@1153.vb_912c0e47fb_a_">
+      <startTime>1653038344058</startTime>
+    </wf.a.TimingAction>
+    <wf.a.ErrorAction plugin="workflow-api@1153.vb_912c0e47fb_a_">
+      <error class="groovy.lang.MissingPropertyException">
+        <stackTrace>
+          <trace>groovy.lang.Binding.getVariable(Binding.java:63)</trace>
+          <trace>org.jenkinsci.plugins.scriptsecurity.sandbox.groovy.SandboxInterceptor.onGetProperty(SandboxInterceptor.java:251)</trace>
+          <trace>org.kohsuke.groovy.sandbox.impl.Checker$7.call(Checker.java:353)</trace>
+          <trace>org.kohsuke.groovy.sandbox.impl.Checker.checkedGetProperty(Checker.java:357)</trace>
+          <trace>org.kohsuke.groovy.sandbox.impl.Checker.checkedGetProperty(Checker.java:333)</trace>
+          <trace>org.kohsuke.groovy.sandbox.impl.Checker.checkedGetProperty(Checker.java:333)</trace>
+          <trace>com.cloudbees.groovy.cps.sandbox.SandboxInvoker.getProperty(SandboxInvoker.java:29)</trace>
+          <trace>com.cloudbees.groovy.cps.impl.PropertyAccessBlock.rawGet(PropertyAccessBlock.java:20)</trace>
+          <trace>WorkflowScript.run(WorkflowScript:13)</trace>
+          <trace>___cps.transform___(Native Method)</trace>
+          <trace>com.cloudbees.groovy.cps.impl.PropertyishBlock$ContinuationImpl.get(PropertyishBlock.java:74)</trace>
+          <trace>com.cloudbees.groovy.cps.LValueBlock$GetAdapter.receive(LValueBlock.java:30)</trace>
+          <trace>com.cloudbees.groovy.cps.impl.PropertyishBlock$ContinuationImpl.fixName(PropertyishBlock.java:66)</trace>
+          <trace>java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</trace>
+          <trace>java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)</trace>
+          <trace>java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)</trace>
+          <trace>java.base/java.lang.reflect.Method.invoke(Method.java:566)</trace>
+          <trace>com.cloudbees.groovy.cps.impl.ContinuationPtr$ContinuationImpl.receive(ContinuationPtr.java:72)</trace>
+          <trace>com.cloudbees.groovy.cps.impl.ConstantBlock.eval(ConstantBlock.java:21)</trace>
+          <trace>com.cloudbees.groovy.cps.Next.step(Next.java:83)</trace>
+          <trace>com.cloudbees.groovy.cps.Continuable$1.call(Continuable.java:174)</trace>
+          <trace>com.cloudbees.groovy.cps.Continuable$1.call(Continuable.java:163)</trace>
+          <trace>org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo.use(GroovyCategorySupport.java:136)</trace>
+          <trace>org.codehaus.groovy.runtime.GroovyCategorySupport.use(GroovyCategorySupport.java:275)</trace>
+          <trace>com.cloudbees.groovy.cps.Continuable.run0(Continuable.java:163)</trace>
+          <trace>org.jenkinsci.plugins.workflow.cps.SandboxContinuable.access$001(SandboxContinuable.java:18)</trace>
+          <trace>org.jenkinsci.plugins.workflow.cps.SandboxContinuable.run0(SandboxContinuable.java:51)</trace>
+          <trace>org.jenkinsci.plugins.workflow.cps.CpsThread.runNextChunk(CpsThread.java:187)</trace>
+          <trace>org.jenkinsci.plugins.workflow.cps.CpsThreadGroup.run(CpsThreadGroup.java:420)</trace>
+          <trace>org.jenkinsci.plugins.workflow.cps.CpsThreadGroup.access$400(CpsThreadGroup.java:95)</trace>
+          <trace>org.jenkinsci.plugins.workflow.cps.CpsThreadGroup$2.call(CpsThreadGroup.java:330)</trace>
+          <trace>org.jenkinsci.plugins.workflow.cps.CpsThreadGroup$2.call(CpsThreadGroup.java:294)</trace>
+          <trace>org.jenkinsci.plugins.workflow.cps.CpsVmExecutorService$2.call(CpsVmExecutorService.java:67)</trace>
+          <trace>java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)</trace>
+          <trace>hudson.remoting.SingleLaneExecutorService$1.run(SingleLaneExecutorService.java:139)</trace>
+          <trace>jenkins.util.ContextResettingExecutorService$1.run(ContextResettingExecutorService.java:28)</trace>
+          <trace>jenkins.security.ImpersonatingExecutorService$1.run(ImpersonatingExecutorService.java:68)</trace>
+          <trace>java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)</trace>
+          <trace>java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)</trace>
+          <trace>java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)</trace>
+          <trace>java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)</trace>
+          <trace>java.base/java.lang.Thread.run(Thread.java:829)</trace>
+        </stackTrace>
+        <suppressedExceptions class="empty-list"/>
+        <property>docker</property>
+        <type>groovy.lang.Binding</type>
+      </error>
+    </wf.a.ErrorAction>
+  </actions>
+</Tag>

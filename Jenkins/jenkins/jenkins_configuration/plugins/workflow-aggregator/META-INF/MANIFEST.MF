@@ -1,0 +1,27 @@
+Manifest-Version: 1.0
+Hudson-Version: 2.289.3
+Plugin-Dependencies: workflow-basic-steps:2.24,workflow-cps-global-lib
+ :2.21.3,workflow-cps:2660.vb_c0412dc4e6d,workflow-durable-task-step:2
+ .40,workflow-job:1145.v7f2433caa07f,workflow-multibranch:712.vc169a_1
+ 387405,pipeline-build-step:2.18,pipeline-input-step:448.v37cea_9a_10a
+ _70,pipeline-milestone-step:101.vd572fef9d926,pipeline-stage-step:293
+ .v200037eefcd5,pipeline-model-definition:1.9.3
+Implementation-Title: Pipeline
+Long-Name: Pipeline
+Implementation-Version: 578.vf9a_f99755f4a_
+Group-Id: org.jenkins-ci.plugins.workflow
+Minimum-Java-Version: 1.8
+Support-Dynamic-Loading: true
+Plugin-License-Name: MIT License
+Specification-Title: Pipeline
+Plugin-ScmUrl: https://github.com/jenkinsci/workflow-aggregator-plugin
+Plugin-Version: 578.vf9a_f99755f4a_
+Jenkins-Version: 2.289.3
+Url: https://github.com/jenkinsci/workflow-aggregator-plugin
+Short-Name: workflow-aggregator
+Plugin-License-Url: https://opensource.org/licenses/MIT
+Plugin-Developers: 
+Build-Jdk-Spec: 1.8
+Created-By: Maven Archiver 3.5.2
+Specification-Version: 0.0
+

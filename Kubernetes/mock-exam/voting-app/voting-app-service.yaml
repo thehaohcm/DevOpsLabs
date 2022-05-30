@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: voting-service
+  labels:
+    name: voting-service
+    app: demo-voting-app #this app value have to the same in all relevant YAML files
+spec:
+  type: NodePort #allow this service to be exposed
+  selector:
+    name: voting-app-pod
+    app: demo-voting-app
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 30004

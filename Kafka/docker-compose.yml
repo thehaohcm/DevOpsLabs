@@ -1,0 +1,14 @@
+version: "3.3"
+services:
+  zookeeper:
+    image: zookeeper
+    ports:
+      - "2181:2181"
+    container_name: zookeeper
+  rabbit-mq:
+    image: bitnami/kafka:latest
+    ports:
+      - "9092:9092"
+    container_name: kafka
+    depends_on:
+      - zookeeper

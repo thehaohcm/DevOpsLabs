@@ -1,0 +1,10 @@
+commit c0920ba00f4cca3c34967c5e92460660a5ca134f
+tree f99af30c2da054ec50f6401e656ca53871503797
+parent ea08bb2266767a3687db447572b5f3fd892f3ee7
+author Nguyen The Hao <thehaohcm@yahoo.com.vn> 2022-05-20 23:17:45 +0700
+committer Nguyen The Hao <thehaohcm@yahoo.com.vn> 2022-05-20 23:17:45 +0700
+
+    modify the entrypoint in Dockerfile
+
+
+:100644 100644 b67edd5a7a69808982f83aefdef3514d1973ff42 75525ca0c2a5c88d1764d8116e89900b77676742 M	Dockerfile

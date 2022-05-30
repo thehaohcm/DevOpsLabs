@@ -1,0 +1,12 @@
+commit ea08bb2266767a3687db447572b5f3fd892f3ee7
+tree 8306416c0415a116d6b4814c5243fe4a0bfd4bd2
+parent ffadbda2c1279e26df35e3fdadad820934c64f1d
+author Nguyen The Hao <thehaohcm@yahoo.com.vn> 2022-05-20 23:09:56 +0700
+committer Nguyen The Hao <thehaohcm@yahoo.com.vn> 2022-05-20 23:09:56 +0700
+
+    modify port
+
+
+:100644 100644 5e5d35b9cd55c985f6a768ecc32884d2c71baf8e b67edd5a7a69808982f83aefdef3514d1973ff42 M	Dockerfile
+:100644 100644 eb94cc49decfe0d54de328a6cee7ea5d648114a6 d824ed33c70da04213f50bd373553bebf761acba M	Jenkinsfile
+:100644 100644 5ed60d0e1c5931494b4bf94662d010ecf69a1070 d267404d4919b57c05d6098ffb9d06ce8a8e89f1 M	src/main/resources/application-default.yml

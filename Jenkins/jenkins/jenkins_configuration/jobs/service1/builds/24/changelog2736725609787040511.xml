@@ -1,0 +1,11 @@
+commit 7c3cb02a71fb893eb59dd9c3648d1d0455775659
+tree 22e5e77bfba63b20e4681da50a4219e666a2d062
+parent c0920ba00f4cca3c34967c5e92460660a5ca134f
+author Nguyen The Hao <thehaohcm@yahoo.com.vn> 2022-05-20 23:26:59 +0700
+committer Nguyen The Hao <thehaohcm@yahoo.com.vn> 2022-05-20 23:26:59 +0700
+
+    bug fixing
+
+
+:100644 100644 75525ca0c2a5c88d1764d8116e89900b77676742 d78be2f7ce2b8e04f43f3d356267be78eefac187 M	Dockerfile
+:100644 100644 d824ed33c70da04213f50bd373553bebf761acba 1e6ce0307c87e9f5561e3b7325627be22d3d8de9 M	Jenkinsfile

@@ -1,0 +1,14 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<fingerprint>
+  <timestamp>2022-05-20 09:11:15.76 UTC</timestamp>
+  <md5sum>000faec504d22cf2b95a0e9660ca3cef</md5sum>
+  <fileName>Credential id=service1-gitlab-user name=thehaohcm@yahoo.com.vn/******</fileName>
+  <usages/>
+  <facets>
+    <com.cloudbees.plugins.credentials.fingerprints.ItemCredentialsFingerprintFacet plugin="credentials@1087.1089.v2f1b_9a_b_040e4">
+      <timestamp>1653037875057</timestamp>
+      <itemFullName>service1</itemFullName>
+      <timestamp0>1653037875057</timestamp0>
+    </com.cloudbees.plugins.credentials.fingerprints.ItemCredentialsFingerprintFacet>
+  </facets>
+</fingerprint>

@@ -1,0 +1,14 @@
+Started on May 20, 2022, 4:45:00 PM
+Using strategy: Default
+[poll] Last Built Revision: Revision f466ef34bf597ec303585352f20a20ac8ee0ca7d (refs/remotes/origin/master)
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+using credential service1-gitlab-user
+ > git --version # timeout=10
+ > git --version # 'git version 2.30.2'
+using GIT_ASKPASS to set credentials 
+ > git ls-remote -h -- https://gitlab.com/thehaohcm/service1.git # timeout=10
+Found 2 remote heads on https://gitlab.com/thehaohcm/service1.git
+[poll] Latest remote head revision on refs/heads/master is: e73e889174fac725fedbabc0a1ff0bebe985b643
+Done. Took 1 sec
+Changes found

@@ -1,0 +1,10 @@
+commit dd67d649ccc63cc3a42b30f39e830f41ed77e771
+tree 042b3938e6b9619e296da8f98015947d0c911258
+parent 9712cbfa355069eafa4f89bccc26eaa4fc46d754
+author Nguyen The Hao <thehaohcm@yahoo.com.vn> 2022-05-20 21:15:46 +0700
+committer Nguyen The Hao <thehaohcm@yahoo.com.vn> 2022-05-20 21:15:46 +0700
+
+    modify the Dockerfile
+
+
+:100644 100644 ddc891ed263f61f2953cfb7772b34591ded37301 f68b11838510b680711ea37c14b0bd0a109c5e6f M	Dockerfile

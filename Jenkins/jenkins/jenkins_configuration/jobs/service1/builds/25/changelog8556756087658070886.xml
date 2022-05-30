@@ -1,0 +1,10 @@
+commit f466ef34bf597ec303585352f20a20ac8ee0ca7d
+tree de3fd134040611e505db11de20acbf232e760d49
+parent 7c3cb02a71fb893eb59dd9c3648d1d0455775659
+author Nguyen The Hao <thehaohcm@yahoo.com.vn> 2022-05-20 23:31:23 +0700
+committer Nguyen The Hao <thehaohcm@yahoo.com.vn> 2022-05-20 23:31:23 +0700
+
+    bug fixing docker cmd
+
+
+:100644 100644 1e6ce0307c87e9f5561e3b7325627be22d3d8de9 b69c084f4b597b0af293709ddedc9b6b73aa2a5d M	Jenkinsfile

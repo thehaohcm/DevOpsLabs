@@ -1,0 +1,10 @@
+commit ffadbda2c1279e26df35e3fdadad820934c64f1d
+tree 893fd21da8a380d87928514856df26fe53c11c34
+parent 1adf421783dd6983e344415b0b3501dc7b3434bc
+author Nguyen The Hao <thehaohcm@yahoo.com.vn> 2022-05-20 22:51:26 +0700
+committer Nguyen The Hao <thehaohcm@yahoo.com.vn> 2022-05-20 22:51:26 +0700
+
+    edit the jar file path in Dockerfile
+
+
+:100644 100644 024dff8c372b7cdde39f4b9c2bf0e96fd650ef4c 5e5d35b9cd55c985f6a768ecc32884d2c71baf8e M	Dockerfile

@@ -1,0 +1,18 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<com.dabsquared.gitlabjenkins.connection.GitLabConnectionConfig plugin="gitlab-plugin@1.5.32">
+  <useAuthenticatedEndpoint>true</useAuthenticatedEndpoint>
+  <connections>
+    <com.dabsquared.gitlabjenkins.connection.GitLabConnection>
+      <name>devops connect test</name>
+      <url>https://gitlab.com</url>
+      <apiTokenId>gitlab access token</apiTokenId>
+      <clientBuilder class="com.dabsquared.gitlabjenkins.gitlab.api.impl.AutodetectGitLabClientBuilder">
+        <id>autodetect</id>
+        <ordinal>0</ordinal>
+      </clientBuilder>
+      <ignoreCertificateErrors>false</ignoreCertificateErrors>
+      <connectionTimeout>10</connectionTimeout>
+      <readTimeout>10</readTimeout>
+    </com.dabsquared.gitlabjenkins.connection.GitLabConnection>
+  </connections>
+</com.dabsquared.gitlabjenkins.connection.GitLabConnectionConfig>

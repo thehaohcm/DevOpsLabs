@@ -1,0 +1,14 @@
+- name: Execute a script testing
+  hosts: test_ip_address
+  remote_user: centos
+#  sudo: yes
+  tasks:
+    - name: copy file sh to nodes
+      synchronize:
+        src: myscript.sh
+        dest: myscript.sh
+    - name: add execution permission for the file
+#      command: chmod +x ./myscript.sh
+      file: dest=./myscript.sh mode=a+x
+    - name: run the script
+      command: sh ./myscript.sh
