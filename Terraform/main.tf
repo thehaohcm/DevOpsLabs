@@ -125,6 +125,10 @@ resource "aws_db_instance" "terraform_rds_example" {
   kms_key_id           = aws_kms_key.terraform_kms_key.arn
   storage_encrypted    = true
   publicly_accessible  = true
+  skip_final_snapshot  = true
+  backup_retention_period = 0
+  apply_immediately = true
+  deletion_protection = true //what is it?
   tags = {
     Name        = "TerraformExampleRDS"
     Environment = "DEV"
