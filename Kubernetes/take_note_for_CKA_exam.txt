@@ -1,0 +1,8 @@
+Preparing short-command before taking the exam:
+
+alias ks="kubectl -n kube-system"
+
+export dy="--dry-run=client -oyaml"
+
+echo "set ts=2 sts=2 sw=2 et" >> ~/.vimrc
+
