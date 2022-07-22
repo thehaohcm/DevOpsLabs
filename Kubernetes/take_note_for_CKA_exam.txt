@@ -6,3 +6,11 @@ export dy="--dry-run=client -oyaml"
 
 echo "set ts=2 sts=2 sw=2 et" >> ~/.vimrc
 
+create new user:
+kubectl config set-credentials [user_name] --client-certificate=[.crt_path] --client-key=[.key_path]
+
+create new context:
+kubectl config set-context [context_name] --user=[user_name] --cluster=[cluster_name]
+
+switch context:
+kubectl config use-context [context_name]
