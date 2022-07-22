@@ -14,3 +14,28 @@ kubectl config set-context [context_name] --user=[user_name] --cluster=[cluster_
 
 switch context:
 kubectl config use-context [context_name]
+
+CSR:
+create new csr with yaml format
+kubectl certificate approve [csr_name] 
+create new role
+create new rolebinding
+
+run temporary pod (and it will be removed after done) and run a command:
+kubectl run [pod_name] --image=[image_name] --rm -ti --command -- [command]
+ex: kubectl run test --image=busybox --rm -ti --command -- sleep 4600
+
+collect osImage item of all ndoes by using jsonpath:
+kubectl get nodes -o jsonpath="{.item[*].status.nodeInfo.osImage}"
+or we can use jq tool to show json with pretty format:
+kubectl get nodes -o jsonpath | jq
+otherwise: kubectl get nodes -o json | jq -c 'path(..)|[.[]|tostring]|join(".")' | grep -i osImage | grep -v managedFields
+install jq tool: apt install jq
+
+create a new service account
+kubectl create sa [service_account_name]
+
+add serviceaccount for a pod (yaml file)
+spec:
+  serviceAccount: [service_account_name]
+  
