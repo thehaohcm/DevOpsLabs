@@ -2,7 +2,16 @@ Preparing short-command before taking the exam:
 
 alias ks="kubectl -n kube-system"
 
+alias kgp="kubectl get pod"
+alias kgd="kubectl get deploy"
+alias kgs="kubectl get service"
+alias kgn="kubectl get node"
+alias kd="kubectl describe"
+alias kge="kubectl get events --sort-by='.metadata.creationTimestamp' | tail -8"
+
 export dy="--dry-run=client -oyaml"
+
+export now="--force --grace-period 0"
 
 echo "set ts=2 sts=2 sw=2 et" >> ~/.vimrc
 
@@ -23,7 +32,9 @@ create new rolebinding
 
 run temporary pod (and it will be removed after done) and run a command:
 kubectl run [pod_name] --image=[image_name] --rm -ti --command -- [command]
+or kubectl -it  run busybox --rm --image=busybox -- sh
 ex: kubectl run test --image=busybox --rm -ti --command -- sleep 4600
+
 
 collect osImage item of all ndoes by using jsonpath:
 kubectl get nodes -o jsonpath="{.item[*].status.nodeInfo.osImage}"
