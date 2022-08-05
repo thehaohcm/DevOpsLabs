@@ -1,0 +1,21 @@
+VIM tip shortcut
+
+point to the last line of file's contain: Shift + g
+point to the begin line of file's containt: g
+point to the last word of specified line: Shift + 4 ($)
+point to the begin word of specified line: Shift + 6 (^)
+go to the particular line number: esc -> :[number]
+go to the particular line and column number: sec -> :[line_number] -> [column_numner]|
+                                         or: :call cursor(line_number,column_number)
+replace a specified word with another (effect entire file): esc -> :%s/[oldWorld]/[newWord]/g
+replace a specified word with another (effect in specified lines - from line to another): esc -> :[fromLine],[toLine]s/[oldWorld]/[newWord]/g
+delete a single line (specified): dd
+delete all lines in file: :1,$d
+                      or: :%d
+delete next n line from current line pointer: :[n]dd
+delete specified lines (from line to line): :[start_line_number],[end_line_numbner]d
+undo action: :undo
+
+save file: 
+  + [Esc] :wq
+  + ZZ (hit uppercase z twice)

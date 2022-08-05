@@ -1,0 +1,234 @@
+create user: sudo useradd [user_name]
+create ssh key: ssh-keygen -f [file_name_will_be_generated]
+run a script in the other server via ssh: ssh -i [pem_file] [username]@[hostname] "[cmd]"
+list all serivces on linux:
+  - systemctl
+  - systemctl list-unit-files
+  
+example:
+  - systemctl | grep httpd
+  - systemctl list-units --type service
+  - systemctl list-units --type mount 
+  
+get specific service on linux:
+  - systemctl | grep '[name_of_serivce]'
+
+install package in RedHat/Centos:
+  - yum install [package_name] (includes donwloading package from internet) 
+  - dnf install [package_name]
+  - rpm -ihv [package_file_rpm] (install package file rpm in local)
+NOTICE: 
+  - yum will be deprecated in near future and will be replaced with dnf
+  - use yum/dnf if you want to install a new package via the Internet
+  - use rpm if you just want to install an existing rpm file in RedHat distros (cannot use rpm file in Debian distros)
+  - use rpm if you want to check existing libs/apps installed in local PC already or not
+  - all added repositories by yum cmd will be placed in /etc/yum.repos.d file (for RedHat-based distros) or /etc/apt/sources.list (for Debian-based distros)
+
+remove package in RedHat/Centos:
+  - yum remove [package_name]
+  - rpm -e [package_name]
+
+get list of package name in RedHat/Centos:
+  - rpm -qa 
+  
+list configuration files of a package name:
+  - rpm -qc [package_name]
+ 
+ check which package a cmd (or path of cmd) belongs to:
+   - rpm -qf [cmd or path of command]
+   ex:
+     - run cmnd:
+        - which ksh => /usr/bin/sh
+        - rpm -qf /usr/bin/sh => ksh-*.e17.x86_64
+
+count:
+  - rpm -qa | wc -l
+get and check specific package installed or not:
+  - rpm -qa | grep [package_name]
+get info of the rpm file:
+  - rpm -qi [rpm file path]
+
+check version of RedHat machine: cat /etc/redhat-release
+Upgrade Major Version of RedHat distros (ex: 5, 6, 7,...): so cumbersome, we have to backup the current data and then install/upgrade OS from scratch, finally store the data as before
+Upgrade Minor Version (ex: 7.3, 7.4,...): use yum update
+Difference between yum update and yum upgrade:
+  - yum upgrade: delete the old packages version and replace them with the newest (if any)
+  - yum update: update the repo's packages database in /etc/apt/sources.list or /etc/yum.repo.d and not upgrade any packages in machine
+
+
+-------
+
+ls cmd with parameters:
+  -l : get more info about the files folder list
+  -t (stands for time): list the newest files/folders in the top, and the rest in the bottom
+  -r (stands for reverse): list files/folders with a reverse order
+  
+fdisk -l: list all file system and where is it mounted, as well as how many partitions of the disk, disk and partitions's info (sector, size, type,...)
+
+------
+Control Services and Daemons
+
+check all running services: 
+  - systemctl --all
+
+reload service:
+  - systemctl reload [service_name]
+  
+different between stop/start and reload
+  - the stop/start cmd is going to impact service
+  - whereas the reload cmd doens't impact service
+  ex: if we configure a httpd (apache), then restart/stop-start this service, the page will have a downtime
+  but if we use reload service, no downtime happends
+  
+mask/unmask service:
+  - mask is a stronger way to disable service by creating a symbolink to /dev/null to make sure the service cannot be used in future (it is very handful if we want to notice that the service is deprecated or not available in this time, or just want to stop the service temporarily)
+  - we can remove the symbolink mask by unmask command the service
+  - mask: systemctl mask [service_name]
+  - unmask: systemctl unmask [service_name]
+  
+----  
+stuff:
+- in Centos 7, it has 2 firewall services named firewalld and iptables, but we should only choose to use and configure one of them at a time
+
+----
+Configure and secure SSH
+
+Configure Idle Timeout Interval:
+  - Become root
+  - Edit /etc/ssh/sshd_config, append new 2 below lines:
+     + ClientAliveInterval 600
+     + ClientAliveCountMax 0
+  - Run command to restart sshd: systemctl restart sshd
+NOTICE: 600 secs = 10 mins, after this interval, the idle user will be logged out
+
+Configure to disable root login
+Should to do it when setting up the system for the 1st time. It disbale any user to login to system with root account
+  - Become root
+  - Edit /etc/ssh/sshd_config file and replace "PermitRootLogin" from "yes" to "no"
+    + PermitRootLogin no
+  - Restart the sshd: systemctl restart sshd
+
+Disable Empty Password
+prevent remote logins from accounts with empty password for added security
+  - Become root
+  - Edit /etc/ssh/sshd_config, remove # from the line
+    + PermitEmptyPassword no
+  - systemctl restart sshd
+  
+Limit Users' SSH Access
+To provide another layer of security, you should limit your SSH logins to only certain users who need remote access
+  - Become root
+  - Edit /etc/sshd_config and add
+    + AllowUsers [user1] [user2] # only these users are only allowed to access SSH
+  - systemctl restart sshd
+  
+Use a different port
+Make the system more secure by change the default SSH port is 22 to another
+  - Become root
+  - Edit /etc/sshd_config and add the following statement or remove the # signal
+    + Port [22 | or any port number you like]
+  - systemctl restart sshd
+  
+SSH-Keys - Access Remote Server without Password (but with a key)
+Assumes we have 2 Linux machine
+1. Client Machine which needs to access the Server without input username and password
+2. Server machine which serves and allows client access
+A flow how to create a key for accessing server without password:
+- Become root
+  + su -
+- Create/Generate keys in Client machine
+  + ssh-keygen
+- Copy over the keys from client to server
+  + ssh-copy-id [user]@[ip-address]
+- From now, the client doesn't need to provide username and password for login into server
+  + ssh [user]@[ip-address]
+  + ssh -l [user] [ip-address]
+
+
+------
+Monitor and manage Linux processes
+
+df (disk free): report file system disk space usage
+  + df -T: get type of file system
+  
+du (disk usage): estimate file space usage
+  + du -k: show all file usage with kilobyte
+  + du -k / | sort -nr: show all file usage with kilobyte, then sort them with reverse order
+  
+uptime: tell how long the system has been running
+
+top: display linux proccesses
+
+free: display RAM info
+
+lsof: list open files
+
+tcpdump: show all comming into and going out traffics of the system with realtime watch (as feature as wireshake)
+  + tcpdump -i [network interface]: shows all traffic of a specificed network interface 
+  
+netstat: print network connection, routing tables, interface statistics,...
+  + netstat -rnv: shows network traffics and gateways 
+  + netstat -a: shows all connection infomation that is connected to outside
+  + netstat -au: shows all UDP traffics
+  + netstat -at: show all TCP traffics
+  
+ps: report all current proccesses
+  + ps -ef: show all running proccesses
+kill: kill a specificed proccess (with PID)
+  + kill [PID]
+  + kill -9 [PID]: force killing proccess and its associated proccesses
+vmstat
+iostat
+iftop
+...
+
+
+------
+How to reset the root password on RHEL 7 and Centos 7
+
+There are 2 fast ways:
+
+1st way:
+- reboot the machine, then in the option OS black screen, choose the 1st item, then hit 'e' key to edit
+- press a down arrow key to scroll down the text file until see the word 'linux16', then break 'end' key to go to the end of line
+- append this text in the end of line ' rd.break'
+- press ctr + X to save and reboot
+- in the next time when the OS booted, it will show a black terminal screen, type 'mount' and let see the last line with something like '[/sysroot] type xfs (ro,relatime,attr2,inode64,noquota)
+- type 'mount -o remount,rw [/sysroot]/'  (sysroot in this exam is a root directory of the OS)
+- type 'chroot [/sysroot]/'
+- type 'passwd' and type the new password twice
+- type 'touch /.autorelabel' (especially when we use SELinux, to avoid messing up the Linux environment when boot in the next time)
+- type 'exit' couple times to reboot the machine
+
+2nd way:
+- reboot the machine, then in the option OS black screen, choose the 1st item, then hit 'e' key to edit
+- press a down arrow key to scroll down the text file until see the word 'linux16'
+- replace the 'ro' word in this line with a new is 'rw init=/sysroot/bin/sh'
+- press ctr + X to save and reboot
+- in the next time when the OS booted, it will show a black terminal screen, type below commands:
+  + chroot /sysroot
+  + passwd root
+  + touch /.autorelabel'
+  + exit
+  
+------
+SELinux = Security-Enhanced Linux
+SELinux has 3 modes:
+  + Enforcing
+  + Permissive
+  + Disabled
+  
+Commands:
+- getenforce: get current status of SELinux
+
+Configure to turn on/off SELinux by either one of 2 ways: 
+  - SELINUX=[enforcing/permissive/disabled] in file /etc/selinux/config
+  - run command: setenforce [enforcing/permissive/disabled]
+After changing, make sure that the machine has to be restarted to apply a new change
+
+A policy in SELinux is consist of: Users (access to)-> Roles (access to)-> Domains (access to)-> Files
+
+List all modules that are in the SELinux: semodule -l | less
+Change boolean setting:  semanage boolean -l | less
+Get current status of the particular boolean: getsebool ftp_home_dir -> result: ftp_home_dir --> off
+Set status for the particular boolean: setsebool ftp_home_dir -> result: ftp_home_dir --> on

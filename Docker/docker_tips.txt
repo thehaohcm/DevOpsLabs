@@ -1,0 +1,17 @@
+copy file into specific docker container: docker cp [original_file_path] [container_name]:[path]
+show log of docker'container: docker logs [container_name]
+
+# Remove all containers
+docker rm $(docker ps -aq)
+
+# Remove all exited containers
+docker rm $(docker ps -aqf status=exited)
+
+# Remove all images
+docker rmi $(docker images -q)
+
+# Remove all untagged images
+docker rmi $(docker images -qf dangling=true)
+
+# Get all stopped docker containers:
+docker ps -f "status=exited"
