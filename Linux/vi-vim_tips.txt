@@ -25,3 +25,9 @@ There are 3 modes:
   + v (lowercase of v): visual mode with chose words
   + V (uppercase of v): visual mode with a current line of cursor (horizontail mode)
   + Ctrl + v: visual mode with chose columns (vertical mode)
+
+replace word:
+  + R (uppercase of R): begin in a current cursor and continue for all word in a line
+  + r (lowercase of R): with only a word of the current cursor
+  
+more info and tips: https://www.youtube.com/watch?v=knyJt8d6C_8 
