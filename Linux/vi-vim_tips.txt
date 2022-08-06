@@ -1,4 +1,4 @@
-VIM tip shortcut
+VI/VIM tip shortcut
 
 point to the last line of file's contain: Shift + g
 point to the begin line of file's containt: g
@@ -19,3 +19,9 @@ undo action: :undo
 save file: 
   + [Esc] :wq
   + ZZ (hit uppercase z twice)
+  
+Visual mode in vi/vim:
+There are 3 modes:
+  + v (lowercase of v): visual mode with chose words
+  + V (uppercase of v): visual mode with a current line of cursor (horizontail mode)
+  + Ctrl + v: visual mode with chose columns (vertical mode)
