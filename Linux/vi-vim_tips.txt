@@ -1,5 +1,7 @@
 VI/VIM tip shortcut
 
+append into the text: a
+
 point to the last line of file's contain: Shift + g
 point to the begin line of file's containt: g
 point to the last word of specified line: Shift + 4 ($)
