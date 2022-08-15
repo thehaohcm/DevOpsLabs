@@ -74,7 +74,14 @@ create a secret:
   
 get cluster cidr network (2 ways):
   - kubectl cluster-info dump | grep -i 'cluster-ip-range'
-  - cat /etc/kubernetes/manifests/kube-apiserver.yaml | grep -i 'cluster-ip-range'
+  - cat /etc/kubernetes/manifests/kube-apiserver.yaml | grep -i 'server-cluster-ip-range'
+  - cat /etc/kubernetes/manifests/kube-controller-manager.yaml | grep -i 'server-cluster-ip-range'
+  
+change the cluster IP range CIDR:
+  change ip range in 'server-ip-cluster-range' value in 2 files:
+    - /etc/kubernetes/manifests/kube-apiserver.yaml 
+    - /etc/kubernetes/manifests/kube-controller-manager.yaml
+  (static-pod will automatically restart themself, we don't need to do anything after modifying)
   
 join a node worker into cluster:
   run this comment in the master node (ssh into master node):
