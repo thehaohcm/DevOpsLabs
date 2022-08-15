@@ -100,8 +100,9 @@ renew cert with command
   kubeadm certs renew [service]
   ex: kubeadm certs renew apiserver
   
-livenessProbe: check if container is available and 
-readinessProd: check if the app is ready to be used serve traffic
+both livenessProbe and readinessProbe are used to control health of an applicaiton
+  + livenessProbe: check if container is available. Failing liveness probe will start the container
+  + readinessProd: check if the app is ready to be used serve traffic. Failing readiness probe will stop the applicaton from serving traffice
 
 monitor resource in:
   - nodes: kubectl top nodes
