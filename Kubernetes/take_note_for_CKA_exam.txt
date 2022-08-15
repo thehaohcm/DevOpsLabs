@@ -162,7 +162,7 @@ linux stuff tips:
     grep -i '[word]'
     
   find multi texts with insensity case:
-    grep -i -e '^[word1]|[word2]'
+    grep -i -e '^([word1]|[word2])'
     
   count line number:
     wc -l
