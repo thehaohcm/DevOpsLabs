@@ -232,3 +232,11 @@ List all modules that are in the SELinux: semodule -l | less
 Change boolean setting:  semanage boolean -l | less
 Get current status of the particular boolean: getsebool ftp_home_dir -> result: ftp_home_dir --> off
 Set status for the particular boolean: setsebool ftp_home_dir -> result: ftp_home_dir --> on
+
+------
+
+Crontab
+vi /etc/crontab
+*/1 * * * * [cmd] => the command will be executed 1 time every minutes
+[min]   [hour]  [day]   [month] [day of week]
+1 - 59  0 - 23  1 - 31  1 - 12     0 - 7 (0: Sunday, 7: Saturday)
