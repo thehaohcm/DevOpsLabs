@@ -135,3 +135,8 @@ linux stuff tips:
     readlink -f [file_name]
   get a specific column data:
     awk '{print $[column_num]}'
+  encode data 
+    echo -n "[word]" | base64
+    (notice: "-n" paramter means don't print new line character)
+  decode data
+    echo "[word]" | base64 --decode
