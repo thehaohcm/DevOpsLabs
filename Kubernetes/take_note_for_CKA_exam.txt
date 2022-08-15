@@ -101,8 +101,9 @@ renew cert with command
   ex: kubeadm certs renew apiserver
   
 both livenessProbe and readinessProbe are used to control health of an applicaiton
-  + livenessProbe: check if container is available. Failing liveness probe will start the container
-  + readinessProd: check if the app is ready to be used serve traffic. Failing readiness probe will stop the applicaton from serving traffice
+  + livenessProbe: check if container is available. Failing liveness probe will RESTART the container
+  + readinessProd: check if the app is ready to be used serve traffic. Failing readiness probe will stop the applicaton from serving traffic by hiding the container's pod from corresponding Services
+  + StartupProbe: check if container has properly started. StartupProbe has higher priority over the above types, which are disabled by K8s until the startup probe is successful
 
 monitor resource in:
   - nodes: kubectl top nodes
