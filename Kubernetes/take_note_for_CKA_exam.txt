@@ -114,6 +114,8 @@ create a snapshot with ectdctl
      + change the path of parameters, then save this file
      + run a simpler command: ETCDCTL_API=3 ectd snapshot save [path of a new snapshot file]
   
+-------------------------------
+
 tips:
   if a question is asking for inspect to a container of pod:
     - find which node that the pod is running inside
@@ -152,27 +154,45 @@ tips:
     kubectl run [pod_name] --image=busybox [--dry-run=client -oyaml > [yaml file]] --command -- sleep 1d
     
   to make sure the service has connected to a pod/deployment/... successfully, just type command: "kubectl get ep" to check if it has a new endpoint or not => if it has a new endpoint, that means the service connected to object successfully
+  
+-------------------------------
 
 linux stuff tips:
   find a text with insensitiy case:
     grep -i '[word]'
+    
   find multi texts with insensity case:
     grep -i -e '^[word1]|[word2]'
+    
   count line number:
     wc -l
+    
   replace a word with another word:
     sed -i 's/[word1]/[word2]/g'
+    
   check response of url:
     curl -s [url/pod_name/service_name/ip]:[port]
+    
   get an absolute path of a file:
     readlink -f [file_name]
+    
   get a specific column data:
     awk '{print $[column_num]}'
+    
   encode data 
     echo -n "[word]" | base64
     (notice: "-n" paramter means don't print new line character)
+    
   decode data
     echo "[word]" | base64 --decode
+    
+  get last "n" line of a content
+    cat [file] | tail -[n]
+    
+  get first "n" line of a content
+    cat [file] | head -[n]
+    
+-------------------------------
 
 Notice:
   - If the nod is running out of resource, k8s will consider to terminate all pods that are using more than their request. That means all pod which doesn't have any "requests" section will be considered to terminated. To check them, just run command: 
