@@ -59,6 +59,8 @@ create role:
   kubectl create role [role_name] [-n [namespace]] --verb=[create,update,delete,...] --resource=[pod,configmaps,secrets]
 create rolebinding:
   kubectl create rolebinding [role_binding_name] [-n [namespace]] --role=[role_name] [--serviceaccount=[namespace]:[serviceaccount_name]] [--user=[user_name]]
+check auth:
+  kubectl auth can-i [verb] [resource] --as=system:serviceaccount:[namespace]:[service_account_name]
   
 get all resource in k8s cluster:
   kubectl api-resources
@@ -131,6 +133,23 @@ tips:
   3. use nodeAffinity
   4. use podAffinity 
   4. use podAntiAffinity + (topologyKey: kubernete.io/hostname)
+  
+  How to get kubernetes manifest folder path (for static pods):
+    - ps aux | grep kubelet | grep -i '--config='
+    
+  if a question require to create a shared volume 
+    => create an emptyDir{} in volumes section in yaml file
+    
+  if we have to define a chain of command line in a container of pod, we have to add "/bin/sh" and "-c" command into the command section
+  ex:
+    command:
+    - "/bin/sh"
+    - "-c"
+    - "echo...; echo...; echo..."
+    
+  if a question ask to create a pod with running a while time when initializing => use command sleep 1d 
+  ex:
+    kubectl run [pod_name] --image=busybox [--dry-run=client -oyaml > [yaml file]] --command -- sleep 1d
 
 linux stuff tips:
   find a text with insensitiy case:
@@ -152,3 +171,9 @@ linux stuff tips:
     (notice: "-n" paramter means don't print new line character)
   decode data
     echo "[word]" | base64 --decode
+
+Notice:
+  - If the nod is running out of resource, k8s will consider to terminate all pods that are using more than their request. That means all pod which doesn't have any "requests" section will be considered to terminated. To check them, just run command: 
+    + kubectl describe pods | grep -e -i "^(name:| requests:)" -A1
+    => all shown pods are pods that required resource, remove them from the considered list, then all the rest will be terminated
+    + kubectl get pod -o jsonpath="{range .items[*]} {.metadata.name} {.spec.containers[*].resources}{'\n'}"
