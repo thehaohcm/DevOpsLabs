@@ -31,7 +31,7 @@ CSR:
   create new rolebinding
 
 run temporary pod (and it will be removed after done) and run a command:
-  kubectl run [pod_name] --image=[image_name] --rm -ti --command -- [command]
+  kubectl run [pod_name] --restart=Never --image=[image_name] --rm -ti --command -- [command]
 or kubectl -it  run busybox --rm --image=busybox -- sh
 ex: kubectl run test --image=busybox --rm -ti --command -- sleep 4600
 
