@@ -100,6 +100,18 @@ monitor resource in:
   - pod + pod's containers: kubectl top pods --containers
   - specifc pod + pods containers: kubectl top pods [pod_name] --containers
   
+create a snapshot with ectdctl
+  ETCDCTL_API=3 etcdctl --endponint=[endpoint_URL:127.0.0.1]:2379 \
+  --cert-file=[server.crt file path | /etc/kubernetes/pki/etcd/server.crt] \
+  --key-file=[server.key file path | /etc/kubernentes/pki/etcd/server.key] \
+  --trusted-ca-file=[ca.crt file path | /etc/kubernetes/pki/etcd/ca.crt] \
+  snapshot save [path of a new snapshot file]
+  
+  - or we can config all above parameters by a way:
+     + check status of etcd process by cmd: systemctl status ectd, then get its config file path. Usually, it is /etc/ectd/etcd.conf, or we can check its info in file path /etc/systemd/system/ectd
+     + change the path of parameters, then save this file
+     + run a simpler command: ETCDCTL_API=3 ectd snapshot save [path of a new snapshot file]
+  
 tips:
   if a question is asking for inspect to a container of pod:
     - find which node that the pod is running inside
