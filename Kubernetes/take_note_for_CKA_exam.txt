@@ -74,7 +74,7 @@ create a secret:
   
 get cluster cidr network (2 ways):
   - kubectl cluster-info dump | grep -i 'cluster-ip-range'
-  - cat /etc/kubernetes/manifest/kube-apiserver.yaml | grep -i 'cluster-ip-range'
+  - cat /etc/kubernetes/manifests/kube-apiserver.yaml | grep -i 'cluster-ip-range'
   
 join a node worker into cluster:
   run this comment in the master node (ssh into master node):
@@ -113,6 +113,8 @@ create a snapshot with ectdctl
      + check status of etcd process by cmd: systemctl status ectd, then get its config file path. Usually, it is /etc/ectd/etcd.conf, or we can check its info in file path /etc/systemd/system/ectd
      + change the path of parameters, then save this file
      + run a simpler command: ETCDCTL_API=3 ectd snapshot save [path of a new snapshot file]
+  
+  - or check the pod static of etcd in /etc/kubernetes/manifests/etcd.yaml
   
 -------------------------------
 
