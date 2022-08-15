@@ -151,7 +151,7 @@ tips:
     - "-c"
     - "echo...; echo...; echo..."
     
-  if a question ask to create a pod with running a while time when initializing => use command sleep 1d 
+  if a question ask to create a pod with running a while / keep running for sometime => use command sleep 1d 
   ex:
     kubectl run [pod_name] --image=busybox [--dry-run=client -oyaml > [yaml file]] --command -- sleep 1d
     
