@@ -253,4 +253,4 @@ print the 2nd field/columm
 print the 5th line:
   awk 'FNR == 5 {print}'
 print the item in 2nd field and 5 line:
-  awk 'FNR ==5 {print $2}'
+  awk 'FNR == 5 {print $2}'
