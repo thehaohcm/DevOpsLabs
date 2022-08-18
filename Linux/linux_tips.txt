@@ -243,7 +243,14 @@ vi /etc/crontab
 
 -----
 
-awk
+AWK
 Used for check value shown in commandline and show column items based on number
 ex: we can show all docker's image_id whose name="<none>" and then remove them
   docker rmi $(docker images | grep -i "<none>" | awk '$1=="<none>" {print $3}')
+
+print the 2nd field/columm
+  awk '{print $2}'
+print the 5th line:
+  awk 'FNR == 5 {print}'
+print the item in 2nd field and 5 line:
+  awk 'FNR ==5 {print $2}'
