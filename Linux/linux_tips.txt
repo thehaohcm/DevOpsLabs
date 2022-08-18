@@ -240,3 +240,10 @@ vi /etc/crontab
 */1 * * * * [cmd] => the command will be executed 1 time every minutes
 [min]   [hour]  [day]   [month] [day of week]
 1 - 59  0 - 23  1 - 31  1 - 12     0 - 7 (0: Sunday, 7: Saturday)
+
+-----
+
+awk
+Used for check value shown in commandline and show column items based on number
+ex: we can show all docker's image_id whose name="<none>" and then remove them
+  docker rmi $(docker images | grep -i "<none>" | awk '$1=="<none>" {print $3}')
