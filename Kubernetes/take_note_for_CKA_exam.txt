@@ -25,7 +25,13 @@ switch context:
   kubectl config use-context [context_name]
 
 CSR:
+  --option
+    create a key and csr file
+      openssl genrsa -out [filename].key 2048
+      openssl req -new -key [filename].key -out [filename].csr
+  --end--of--option
   create new csr with yaml format
+    spec.request: [run command to get encoded 64 text: echo [filename].csr | base64 | tr -d "\n"]
   kubectl certificate approve [csr_name] 
   create new role
   create new rolebinding
