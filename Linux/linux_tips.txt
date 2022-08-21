@@ -272,4 +272,4 @@ NOTICE: you should to backup/create a snapshot of current machine before do it, 
 (Notice: this new folder mounts to the new partition will be removed after rebooting. To reserve it, we have to add new config into /etc/fstab file). The new config would be:
 [path of new partition] [tab] [path of new folder] [tab] [type of partition, ex: xfs) [tab] default [tab] 0 [tab] 0 -> save file
 if you want to unmount the partition to the path, type
-umount [path of new partition], then the mounted folder is also gone
+umount [path of new partition], then the mounted folder is also gone. Also remove the new added line in /etc/fstab if you don't want it automatically mount in the next reboot
