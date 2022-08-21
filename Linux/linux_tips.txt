@@ -254,3 +254,22 @@ print the 5th line:
   awk 'FNR == 5 {print}'
 print the item in 2nd field and 5 line:
   awk 'FNR == 5 {print $2}'
+
+-----
+
+Add new disk and create a new partition, mount partition to a specific path
+NOTICE: you should to backup/create a snapshot of current machine before do it, avoiding problem migh occur during implementing
+
+1st: add new hard disk
+2nd: type 'fsdisk' to go into the fsdisk commands
+3rd: inside fsdisk command, type help to show all useful command
+4th: type n and press Enter to create partition
+5th: choose all default value (just for a lab and testing)
+6th: make sure type 'w' and Enter in the last step to save all info 
+7th: after done, type 'fsdisk -l" to show all partition disk. Remember the path of the new partion we just created (ex: /dev/sb1)
+8th: format the new partion to xfs by command: 'mkfs.xfs [path of the new partition]'
+9th: mount the new partition to a folder path you need by a command: 'mount [path of the new partition] [path of the new folder]'
+(Notice: this new folder mounts to the new partition will be removed after rebooting. To reserve it, we have to add new config into /etc/fstab file). The new config would be:
+[path of new partition] [tab] [path of new folder] [tab] [type of partition, ex: xfs) [tab] default [tab] 0 [tab] 0 -> save file
+if you want to unmount the partition to the path, type
+umount [path of new partition], then the mounted folder is also gone
