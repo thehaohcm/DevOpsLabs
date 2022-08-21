@@ -260,6 +260,7 @@ print the item in 2nd field and 5 line:
 Add new disk and create a new partition, mount partition to a specific path
 NOTICE: you should to backup/create a snapshot of current machine before do it, avoiding problem migh occur during implementing
 
+Become a root before doing this:
 1st: add new hard disk
 2nd: type 'fsdisk' to go into the fsdisk commands
 3rd: inside fsdisk command, type help to show all useful command
