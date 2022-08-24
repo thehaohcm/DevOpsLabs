@@ -131,6 +131,11 @@ create a snapshot with ectdctl
   
   - or check the pod static of etcd in /etc/kubernetes/manifests/etcd.yaml
   
+  List Pod (or K8s object) with custom columes by using jsonpath:
+    kubectl get [object] -o jsonpath="[ColumnName1]:.[jsonpath item value],[ColumnName2]:.[jsonpath item value]"
+    ex: List the nginx pod with custom columns POD_NAME and POD_STATUS
+    kubectl get pods -o jsonpath="POD_COLUMN:.metadata.name,POD_STATUS:.status.containerStatuses[].state"
+  
 -------------------------------
 
 tips:
