@@ -24,7 +24,7 @@ create new context:
 switch context:
   kubectl config use-context [context_name]
 
-CSR:
+CSR: is a K8s object which defines a user map to k8s (based on the key located in csr key file), then we can use kubectl to approve or deny it to use inside K8s cluster
   --option
     create a key and csr file
       openssl genrsa -out [filename].key 2048
@@ -135,6 +135,15 @@ create a snapshot with ectdctl
     kubectl get [object] -o jsonpath="[ColumnName1]:.[jsonpath item value],[ColumnName2]:.[jsonpath item value]"
     ex: List the nginx pod with custom columns POD_NAME and POD_STATUS
     kubectl get pods -o jsonpath="POD_COLUMN:.metadata.name,POD_STATUS:.status.containerStatuses[].state"
+    
+  DNS in K8s
+    we can nslookup a pod or service in k8s cluster with their own IP address, or use a DNS name. The DNS names are defined like:
+      + with pod: <ip-address-with-hyphen>.<namespace_name>.pod
+        ex: if pods IP address is 10.23.100.2 and the pod is located in default namespace 
+          => DNS name is: 10-23-100-2.default.pod
+      + with service: <service_name>.<namespace_name>
+        ex: if a service is named "nginx-service" and it is located in default namespace
+          => DNS name is: nginx-service.default
   
 -------------------------------
 
@@ -176,6 +185,9 @@ tips:
     kubectl run [pod_name] --image=busybox [--dry-run=client -oyaml > [yaml file]] --command -- sleep 1d
     
   to make sure the service has connected to a pod/deployment/... successfully, just type command: "kubectl get ep" to check if it has a new endpoint or not => if it has a new endpoint, that means the service connected to object successfully
+  
+  How to print a json result by jsonpath type as a text and then use "grep" or "less -p" to search an expected keyword by using pipes in linux:
+  ex: kubectl get pods -o jsonpath="{.items[*].status}" | jq . | grep -i "nodeName"
   
 -------------------------------
 
