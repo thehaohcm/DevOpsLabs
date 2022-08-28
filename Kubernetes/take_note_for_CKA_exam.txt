@@ -151,8 +151,36 @@ Uncordon: mark the node as available to k8s schedule
   kubectl uncordon [node-name]
 Drain: evict all pods running in the node and reschedule them to run on another node
   kubectl drain node [node-name]
+  NOTICE: the drain cmd can only be executed in the master node, cannot execute it on worker nodes
+          when you drain the node, then you want to allow it run back, execute the command UNCORDON
+          DRAIN = EVICT PODs + CORDON
+2nd step: apt update && apt-cache madison kubeadm
 Taint: mark a node with a special key and value to restrict all new pods can be deployed in this
 Toleration: make a pod with a taint key to indicate it can be deployed into the node which is tainted already
+
+-------------------------------
+
+Upgrade kubeadm & kubelet in node of cluster
+1st step: Drain each node before upgrading, to make sure all new pods will not be scheduled into the node during the upgrade progress
+Notice: the drain cmd can only be executed in the master node, cannot execute it on worker nodes
+Notice: when you drain the node, then you want to allow it run back, execute the command UNCORDON
+2nd step: apt update && apt-cache madison kubeadm
+3rd step:
+ apt-mark unhold kubeadm && \
+ apt-get update && apt-get install -y kubeadm=1.2x.x-00 && \
+ apt-mark hold kubeadm
+ 
+4th step: upgrade the kubeadm
+  kubeadm version
+  kubeadm upgrade plan
+  sudo kubeadm upgrade apply v1.2x.x
+
+5th step: upgrade the worker nodes
+  apt-mark unhold kubelet kubectl && \
+  apt-get update && apt-get install -y kubelet=1.2x.x-00 kubectl=1.2x.x-00 && \
+  apt-mark hold kubelet kubectl
+  sudo systemctl daemon-reload
+  sudo systemctl restart kubelet
 
 -------------------------------
 
