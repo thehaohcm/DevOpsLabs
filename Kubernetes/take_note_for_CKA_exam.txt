@@ -118,10 +118,10 @@ monitor resource in:
   - specifc pod + pods containers: kubectl top pods [pod_name] --containers
   
 create a snapshot with ectdctl
-  ETCDCTL_API=3 etcdctl --endponint=[endpoint_URL:127.0.0.1]:2379 \
-  --cert-file=[server.crt file path | /etc/kubernetes/pki/etcd/server.crt] \
-  --key-file=[server.key file path | /etc/kubernentes/pki/etcd/server.key] \
-  --trusted-ca-file=[ca.crt file path | /etc/kubernetes/pki/etcd/ca.crt] \
+  ETCDCTL_API=3 etcdctl --endpoints [endpoint_URL:127.0.0.1]:2379 \
+  --cert=[server.crt file path | /etc/kubernetes/pki/etcd/server.crt] \
+  --key=[server.key file path | /etc/kubernentes/pki/etcd/server.key] \
+  --cacert=[ca.crt file path | /etc/kubernetes/pki/etcd/ca.crt] \
   snapshot save [path of a new snapshot file]
   
   - or we can config all above parameters by a way:
@@ -145,6 +145,15 @@ create a snapshot with ectdctl
         ex: if a service is named "nginx-service" and it is located in default namespace
           => DNS name is: nginx-service.default
   
+Cordon: mark the node as unavailable to k8s schedule
+  kubectl cordon [node-name]
+Uncordon: mark the node as available to k8s schedule
+  kubectl uncordon [node-name]
+Drain: evict all pods running in the node and reschedule them to run on another node
+  kubectl drain node [node-name]
+Taint: mark a node with a special key and value to restrict all new pods can be deployed in this
+Toleration: make a pod with a taint key to indicate it can be deployed into the node which is tainted already
+
 -------------------------------
 
 tips:
