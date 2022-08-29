@@ -158,6 +158,19 @@ Drain: evict all pods running in the node and reschedule them to run on another 
 Taint: mark a node with a special key and value to restrict all new pods can be deployed in this
 Toleration: make a pod with a taint key to indicate it can be deployed into the node which is tainted already
 
+Network Policy
+spec:
+  podSelector:
+    matchLabels: apply this network policy for a pod which has same label
+    
+spec:
+  [ingress/egress]:
+    [from/to]:
+      podSelector: 
+        matchLabels: allow a pod which has same label to in (ingress) or out (egress) traffic through the network policy
+      namespaceSelector:
+        matchLabels: allow all pods in a namespace which has same label to in (ingress) or out (egress) traffic through the network policy
+
 -------------------------------
 
 Upgrade kubeadm & kubelet in node of cluster
