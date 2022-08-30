@@ -16,10 +16,10 @@ export now="--force --grace-period 0"
 echo "set ts=2 sts=2 sw=2 et" >> ~/.vimrc
 
 add label into a pod/deployments/...
-kubectl label [pod/deploy/...] [name] [key_1]=[value_1]...
+kubectl label [pod/deploy/...] [name] [key_1]=[value_1]...[key_N]=[value_N]
 
 overwrite a label
-kubectl label --overwrite [pod/deploy/...] [name] [key]=[value]
+kubectl label --overwrite [pod/deploy/...] [name] [key]=[value]...[key_N]=[value_N]
 
 create new user:
   kubectl config set-credentials [user_name] --client-certificate=[.crt_path] --client-key=[.key_path]
