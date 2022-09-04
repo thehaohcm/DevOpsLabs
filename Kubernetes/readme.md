@@ -1,3 +1,5 @@
+![alt text](https://github.com/thehaohcm/DevOpsLabs/blob/master/Kubernetes/IMG_2570.jpg)
+
 Commands for Kubernetes and AWS EKS:
 1. Create K8s cluster by eksctl cmd:
   - eksctl create cluster --profile debi-lab-user --name test-cluster --version 1.22 --region ap-southeast-1 --nodegroup-name linux-nodes --node-type t2.micro --nodes 2
