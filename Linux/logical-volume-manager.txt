@@ -55,6 +55,6 @@ Remove a physical group:
   pgremove /dev/[pg_name]
 
 Check info:
-+ physical volume: pvdisplay ([pv_name])
-+ volume group: vgdisplay ([vg_name])
++ physical volume: pvdisplay ([pv_name]) or pvs
++ volume group: vgdisplay ([vg_name]) or vgs
 + logical volume: lgdisplay ([lg_name])
