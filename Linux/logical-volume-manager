@@ -1,0 +1,31 @@
+Hard Drive -> Partitions -> Physical Volumes -> Volume Group -> Logical Volumes -> File Systems
+
+1st step: get hard drive info: fdisk (-l [hard_disk_name])
+2nd step: create a partion from hard disk: 
+  + fdisk [hard_disk_name]
+  + type 'm' to show all command
+  + type 'n' to create a new partition 
+  + type 'p' for creating a primary partition
+  + type a number in range 1-4 to create a partion with name /dev/[partition_name][1-4] (ex: /dev/sdb3)
+  + type 'w' to persist a partion
+3rd step: create a physical volume: pvcreate /dev/[pv_name]
+4th step: create a volume group: vgcreate [vg_name] [pv_name]
+5th step: create a logical volume: lvcreate -L [size] -n [lv_name] [vg_name]
+6th step: create a new file system: mkfs.ext3 /dev/[vg_name]/[lv_name]
+7th step: mount logical volume:
+  + create new dir for mounting logical volume: mkdir [path and name of the new dir]
+  + mount a dir to a logical volume: mount /dev/[vg_name]/[lv_name] [dir_path]
+  
+Increase/Decrease capacity of logical volume:
+  lgextend -L [-/+][size] /dev/[vg_name]/[lv_name]
+  resize2fs /dev/[vg_name]/[lv_name]
+  
+Remove a logical volume:
+  umount /dev/[vg_name]/[lv_name]
+  lvremove /dev/[vg_name]/[lv_name]
+
+Remove a volume group:
+  vgremove /dev/[vg_name]
+  
+Remove a physical group:
+  pgremove /dev/[pg_name]
