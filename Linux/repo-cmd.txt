@@ -1,2 +1,3 @@
 List all added repositories: dnf repolist all
 Add a repo: dnf config-manager --add-repo [repo_link]
+Remove repo: rm /etc/yum.repos.d/[repo_name_file]
