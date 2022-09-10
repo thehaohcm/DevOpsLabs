@@ -1,0 +1,2 @@
+List all added repositories: dnf repolist all
+Add a repo: dnf config-manager --add-repo [repo_link]
