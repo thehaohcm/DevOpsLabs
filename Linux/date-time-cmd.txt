@@ -3,3 +3,4 @@
 - get list all timezones: timedatectl list-timezones
 - search a specific timezone: timedatectl list | grep -i '[keyword]'
 - set new timezone: timedatectl set-timezone "[full_timezone_place_text]"
+- synchronize date time with NTP server: timedatectl set-ntp on 
