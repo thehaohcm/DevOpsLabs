@@ -17,8 +17,12 @@ Hard Drive -> Partitions -> Physical Volumes -> Volume Group -> Logical Volumes 
   + mount a dir to a logical volume: mount /dev/[vg_name]/[lv_name] [dir_path]
   
 Increase/Decrease capacity of logical volume:
-  lgextend -L [-/+][size] /dev/[vg_name]/[lv_name]
+  lvextend -L [-/+][size] /dev/[vg_name]/[lv_name]
   resize2fs /dev/[vg_name]/[lv_name]
+  
+Check all mounted directories:
+  lsblk
+  df -h
   
 Remove a logical volume:
   umount /dev/[vg_name]/[lv_name]
@@ -29,3 +33,8 @@ Remove a volume group:
   
 Remove a physical group:
   pgremove /dev/[pg_name]
+
+Check info:
++ physical volume: pvdisplay ([pv_name])
++ volume group: vgdisplay ([vg_name])
++ logical volume: lgdisplay ([lg_name])
