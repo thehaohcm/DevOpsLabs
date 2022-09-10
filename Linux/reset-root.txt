@@ -1,0 +1,35 @@
+There are 3 options:
+
+option 1:
+- reboot the machine, then in the option OS black screen, choose the 1st item, then hit 'e' key to edit
+- press a down arrow key to scroll down the text file until see the word 'linux16', then break 'end' key to go to the end of line
+- append this text in the end of line ' rd.break'
+- press ctr + X to save and reboot
+- in the next time when the OS booted, it will show a black terminal screen, type 'mount' and let see the last line with something like '[/sysroot] type xfs (ro,relatime,attr2,inode64,noquota)
+- type 'mount -o remount,rw [/sysroot]/'  (sysroot in this exam is a root directory of the OS)
+- type 'chroot [/sysroot]/'
+- type 'passwd' and type the new password twice
+- type 'touch /.autorelabel' (especially when we use SELinux, to avoid messing up the Linux environment when boot in the next time)
+- type 'exit' couple times to reboot the machine
+
+option 2:
+- reboot the machine, then in the option OS black screen, choose the 1st item, then hit 'e' key to edit
+- press a down arrow key to scroll down the text file until see the word 'linux16'
+- replace the 'ro' word in this line with a new is 'rw init=/sysroot/bin/sh'
+- press ctr + X to save and reboot
+- in the next time when the OS booted, it will show a black terminal screen, type below commands:
+  + chroot /sysroot
+  + passwd root
+  + touch /.autorelabel'
+  + exit
+
+option 3 (fastest way):
+- reboot the machine, then in the option OS black screen, choose the 2nd item (recuse...), then hit 'e' key to edit
+- press a down arrow key to scroll down the text file until see the word 'linux'
+- replace the 'ro' word with 'rw' and add 'init=/bin/bash' into the end of this line
+- press ctr + X to execute and wait for a minute to see a terminal come out, type below commands:
+  + passwd root
+  + new root password
+  + confirm new root password
+  + touch /.autorelabel
+  + exec /sbin/init
