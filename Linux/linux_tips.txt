@@ -186,7 +186,7 @@ iftop
 ------
 How to reset the root password on RHEL 7 and Centos 7
 
-There are 2 fast ways:
+There are 3 fast ways:
 
 1st way:
 - reboot the machine, then in the option OS black screen, choose the 1st item, then hit 'e' key to edit
@@ -210,7 +210,17 @@ There are 2 fast ways:
   + passwd root
   + touch /.autorelabel'
   + exit
-  
+
+3rd way (fastest way):
+- reboot the machine, then in the option OS black screen, choose the 2nd item (recuse...), then hit 'e' key to edit
+- press a down arrow key to scroll down the text file until see the word 'linux'
+- replace the 'ro' word with 'rw' and add 'init=/bin/bash' into the end of this line
+- press ctr + X to execute and wait for a minute to see a terminal come out, type below commands:
+  + passwd root
+  + new root password
+  + confirm new root password
+  + touch /.autorelabel
+  + exec /sbin/init
 ------
 SELinux = Security-Enhanced Linux
 SELinux has 3 modes:
