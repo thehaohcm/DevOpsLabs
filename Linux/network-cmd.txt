@@ -1,0 +1,14 @@
+[modify an active network interface configuration]
+command: nmcli
+- show a current active network interface: nmcli connection show --active
+- show all info of a specific network interface: nmcli connection show [network interface name]
+- change ipv4 address range (cidr): nmcli connnection modify [network interface name] ipv4.addresses [ip_address_range]
+- change gateway ip address: nmcli connnection modify [network interface name] ipv4.gateway [gateway_ip_address]
+- change to manual configuration (not use DHCP): nmcli connection modify [network interface name] ipv4.method manual
+- change dns ip address: nmcli connection modify [network interface name] ipv4.dns [dns_ip_address]
+After modifying, make sure to reload the network interface by 2 below commands:
+- nmcli connection reload
+or:
+- nmcli connection down [network interface name] && nmcli connection up [network interface nam
+
+Check status by command: ip address show [network interface name]
