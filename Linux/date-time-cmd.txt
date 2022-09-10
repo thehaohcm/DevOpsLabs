@@ -1,0 +1,5 @@
+[config timezone]
+- get date timezone: timedatectl
+- get list all timezones: timedatectl list-timezones
+- search a specific timezone: timedatectl list | grep -i '[keyword]'
+- set new timezone: timedatectl set-timezone "[full_timezone_place_text]"
