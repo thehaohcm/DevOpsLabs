@@ -1,3 +1,23 @@
+
+There are 3 kinds of partitions
+    Primary
+    Extended
+    Logical
+
+And two types of partitioning scheme used now a days
+    MBR (Master Boot Record) - old
+    GPT (GUID Partition Table) - new, it doesn't have such small limits, and does not need to use extended/logical partitions.
+    
+Primary partition, extended partition, and logical partition are much related to MBR disk, because GPT disk only contains primary partition.
+
+On an MBR disk, there can only be 4 primary partitions or 3 primary + 1 extended partition at most.
+
+MBR: < primary | primary | primary | primary >
+
+MBR: < primary | primary | extended [logical, logical, logical] >
+
+------------------
+
 Hard Drive -> Partitions -> Physical Volumes -> Volume Group -> Logical Volumes -> File Systems
 
 1st step: get hard drive info: fdisk (-l [hard_disk_name])
