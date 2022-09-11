@@ -1,0 +1,6 @@
+get list of package name installed in local: rpm -qa [package_name]
+search package is available in repository or not: dnf search [package_name]
+install package: dnf install [package_name]
+remove package: dnf remove [package_name]
+get list of existing repo: dnf replist
+
