@@ -1,0 +1,11 @@
+list partitions info: lsblk
+manage partitions:
+  + MBR: fdisk /dev/[physical_drive_name]
+  + GPT: gdisk /dev/[physical_drive_name]
+  + both: parted /dev/[physical_drive_name]
+	. mklabel gpt: mark it as a GPT partion
+	    + mkpart one 1MiB 1024MiB: create a partion of total 1Gi starting of the first 1Mi
+		+ quit
+		+ udevadm settle: apply changes
+
+	. mklabel msdos: mark it as a MBR partition	
