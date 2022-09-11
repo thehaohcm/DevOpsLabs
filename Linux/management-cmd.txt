@@ -1,0 +1,58 @@
+knowledge about some Security kinds existing in Linux:
+(more inf: https://kipalog.com/posts/Mo-hinh-phan-quyen---ACL--DAC--MAC--RBAC)
+
+- ACL (Access Control List)
+  + Stores all allowed/prohibit resources info-metadata into a file or database for each user
+  + The user will be checked its permission in database when they attemp to access a specific resource
+  + If the user has no permission => no allow to access
+  Example: grant access an user to some tables/DBs in DBMS
+
+- DAC (Discretionary Access Control)
+  + Store objects metaddata-info and their owner username into file or database
+  + The owner objects can change owner to another user, when changed, the previous owner will not be an owner of the object
+  + Permissions of the objects will be set based on owner
+  + Example: set owner for file/folder in Unix/Linux OS
+
+- MAC (Mandatory Access Control)
+  + Each object has its own label to check permission when a user execute it 
+  + Even an owner would not has permission to execute the file if the owner has not been added in object's label
+  + Example: SELinux
+
+- RBAC (Role Based Access Control)
+  + An User or group can be assigned to one or many Role
+  + We can set permission to role (instead of user or group)
+  + Very useful if we have to changed permission for a bunch of user/group frequently
+  + Example: grant permission for user in AWS...
+
+- ABAC (Attribute Based Access Control)
+  + A Resource/Object/User can be assigned to one or many Tag/Attribute
+  + We can set permission/policy to tag/attribute, then add permission/policy to user
+  + Almost be used in Resources
+  + Example: grant resources in AWS...
+
+add a normal user: useradd [username]
+add an user without login: useradd -s /sbin/nologin [username]
+add an user with specific ID: useradd -u [ID] [username]
+add an user and add it into a group: useradd -G [groupname] [username]
+add a password into an existing group: 
+  + echo "[password]" | passwd --stdin [username]
+  + passwd [username] => then enter a password
+delete an user: userdel -rf [username]
+
+add a new group: groupadd [groupname]
+add a new group with specific ID: groupadd -u [ID] [groupname]
+delete a group: groupdel [groupname]
+
+check and list all groups & users: cat /etc/passwd
+
+change user for file/folder: chown [username] [-R] [file/folderpath]
+change group for file/folder:
+  + chown :[groupname] [file/folderpath]
+  + chgrp [groupname] [file/folderpath]
+
+to make sure it work with ACL, we might use the cmd setfacl: 
+  + for file: setfacl -m g:[groupname]:rwx [filepath]
+  + for folder: setfacl -M g:[groupname]:rwx [folderpath]
+verify ACL of file/folder: getfacl [file/folderpath]
+
+set added sub-folder and sub-file in the future will also belongs to a groupname: chown g+x [folder/file]

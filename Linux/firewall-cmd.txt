@@ -1,0 +1,11 @@
+check status of firewall-cmd: systemctl status firewalld
+
+open port: firewall-cmd --zone=public --add-service=[service - ex: ssh] --permanent
+reload firewalld: firewall-cmd --reload
+verify: firewall-cmd --list-all
+verify again with another tool (iptables): iptables-save | grep dport\ [port_number]
+
+-------
+
+close port: firewall-cmd --zone=public --remove-service=[service - ex: ssh] --permanent
+reload firewalld: firewall-cmd --reload

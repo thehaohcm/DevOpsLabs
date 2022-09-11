@@ -1,0 +1,12 @@
+EPEL Stands for Extra Packages for Enterprise Linux, it is a free and open-source additional packages repository available for RHEL, CentOS Stream, AlmaLinux and Rocky Linux servers. As the name suggests, EPEL repository provides extra and additional packages which are not available in the default package repositories of RHEL 9 and RHEL 8.
+
+Download and install EPEL repository in RHEL 9:
+
+sudo dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+sudo dnf repolist epel -v
+
+List all available packages from EPEL Repository:
+sudo dnf repository-package epel list
+
+Search a package from EPEL Repository:
+sudo dnf repository-packages epel list | grep -i [package_name]
