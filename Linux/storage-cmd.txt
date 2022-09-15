@@ -9,3 +9,30 @@ manage partitions:
 		+ udevadm settle: apply changes
 
 	. mklabel msdos: mark it as a MBR partition	
+
+
+---------
+Remember level of Logical Volume Management - LVM
+Hard Disk -> partitions -> Physical Volume (PV) - Volume Group (VG) - Logical Volume (LV) -> File System
+
+Brief: PV -> VG -> LV -> FS
+
+Ex:
+Hard Disk: /dev/sdb
+Partition: /dev/sdb1 /dev/sdb2
+PV: pvcreate [partition_name] [partition_path]
+	pvs
+	pvdisplay
+
+VG: vgcreate [vg_name] [pv_path]
+	vgs
+	vgdisplay
+
+LV: lvcreate -L [capacity_size] -n [lv_name] [vg_name]
+	lvs
+	lvdisplay
+
+mkfs.xfs /dev/mapper/[vg_name]-[lv_name]
+vi /etc/fstab -> add new line with path /dev/mapper/[vg_name]-[lv_name] [new_mounted_path]   xfs  default  0  0
+mount -a
+

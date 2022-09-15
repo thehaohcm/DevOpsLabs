@@ -1,0 +1,14 @@
+get current runlevel target:
+systemctl get-default
+
+set runlevel target:
+system set-default [multi-user.target]
+
+after modifying, reboot the OS:
+reboot
+
+Notice:
+multi-user.target (or multi-user) = runlevel3.target (or runlevel3)
+
+if you don't want to reboot to affect the new change, can use this command:
+systemctl isolate [multi-user]

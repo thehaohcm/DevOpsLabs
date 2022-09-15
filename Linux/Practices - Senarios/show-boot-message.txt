@@ -1,0 +1,9 @@
+
+
+--------
+change it permanent:
+edit the file /etc/default/grub
+remove the word 'rhgb quiet' in the GRUB_CMDLINE_LINUX param
+save it
+run cmd: grub2-mkconfig -o /boot/grub2/grub.cfg
+reboot

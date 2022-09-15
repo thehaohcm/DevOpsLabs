@@ -1,0 +1,2 @@
+lvextend -L [+/-][more_capacity]M -r [path_of_lv]
+df -h
