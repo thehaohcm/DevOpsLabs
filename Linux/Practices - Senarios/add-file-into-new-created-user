@@ -1,0 +1,4 @@
+create new specify file into folder /etc/skel
+
+Ex: every new user will have a file named "Welcome" after created:
+touch /etc/skel/Welcome
