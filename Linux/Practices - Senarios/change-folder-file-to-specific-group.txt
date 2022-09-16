@@ -1,0 +1,2 @@
+chgrp [group_name] [folder_or_file]
+chgrp -hR [group_name] [folder_name]: recursive
