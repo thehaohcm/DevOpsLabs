@@ -1,0 +1,8 @@
+useradd [user_name]
+check in file: /etc/password
+
+groupadd [group_name]
+check in file: /etc/group
+
+add user to group:
+usermod -a -G [group_name] [user_name]
