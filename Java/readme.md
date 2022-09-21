@@ -14,4 +14,15 @@ This is a my own documentation related to Java which I collected to reach OCP 17
 12. Database Applications with JDBC
 13. Localization
 
-Notice: Security, Annotation, Generics & Widecart has been dropped in OCP 17. Please don't focus and take time on them
+Notice: 
++ Security, Annotation, Generics & Widecart has been dropped in OCP 17. Please don't focus and take time on them
++ New topics:
+  - Override methods, including that of an Object class.
+  - Switch Expression and no fall through behavior
+  - Multiline Strings / Text blocks
+  - Records
+  - Sealed classes
+  - instanceof and pattern matching
+  - API Changes - method additions - Date/Time API
+  
+(more info: https://enthuware.com/resources/java-certification-faq/220-ocp-java-17-certification-topics)
