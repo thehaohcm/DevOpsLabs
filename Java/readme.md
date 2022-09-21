@@ -5,17 +5,18 @@ This is a my own documentation related to Java which I collected to reach OCP 17
 3. Java Interfaces
 4. Generics and Collections
 5. Functional Interface & Lambda Expressions
+  - Published in Java 8
   - Functional Interface (FI):
     + FI is an interface which has one and only one abstract method
       ex: Runnable,...
     + There are over 40 FIs established in Java 8, which is located in 'java.util.functions' package
     + But we only have to take care 6 FIs:
-      * Function
-      * Consumer
-      * Supplier
-      * Predicate
-      * Operation
-      * UnaryOperator
+      * Function<T,V> => T apply(V v);
+      * Consumer<T> => void accept(T t);
+      * Supplier<T> => T get();
+      * Predicate<T> => boolean test(T t);
+      * BinaryOperator
+      * UnaryOperator<T> (overloaded Function<T,T>) => T apply(T t)
 6. Lambda Operations on Stream
 7. Migration to a Modular Application
 8. Service In Modular Application
@@ -51,6 +52,7 @@ This is a my own documentation related to Java which I collected to reach OCP 17
         """
         ```
     - Records
+      + Published in Java 14
       + This is a new way to create a DataModel class without defining a class, properties and methods inside
       + All properties inside the Records are 'final' (cannot modify during running)
       + The public instructor with all parameters will be created mapped with all properties we defined in Record
