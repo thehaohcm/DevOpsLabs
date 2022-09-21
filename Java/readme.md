@@ -15,13 +15,13 @@ This is a my own documentation related to Java which I collected to reach OCP 17
 13. Localization
 
 - Notice: 
-  + Security, Annotation, Generics & Widecart have been dropped in OCP 17. Please don't focus and take time on them
+  + ***Security, Annotation, Generics & Widecart have been dropped in OCP 17. Please don't focus and take time on them***
   + New topics in OCP 17 (compared with OCP 11):
     - Override methods, including that of an Object class.
-        ***In the previous versions of the exam, the equals and hashcode methods were dropped. We still haven't seen questions on it in the exam.***
+        + ***In the previous versions of the exam, the equals and hashcode methods were dropped. We still haven't seen questions on it in the exam.***
     - Switch Expression and no fall through behavior
       + Removing the 'break;' keyword which is always used in any case in switch previously
-      + use 'case [option(s)] -> { [logic]; } 
+      + use 'case [option(s)] -> { [logic]; }'
         ```
         switch(dayOfWeek){
           case 'Monday' -> { s.o.println("This is Monday"); }
@@ -71,6 +71,6 @@ This is a my own documentation related to Java which I collected to reach OCP 17
         ```
     - 'instanceof' and pattern matching
     - API Changes - method additions - Date/Time API
-      ***Although Math API has been added in the objectives, we haven't seen any question on it in the exam.***
+      + ***Although Math API has been added in the objectives, we haven't seen any question on it in the exam.***
   
 More info: https://enthuware.com/resources/java-certification-faq/220-ocp-java-17-certification-topics
