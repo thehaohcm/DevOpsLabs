@@ -5,6 +5,15 @@ This is a my own documentation related to Java which I collected to reach OCP 17
 3. Java Interfaces
 4. Generics and Collections
 5. Functional Interface & Lambda Expressions
+  - Functional Interface (FI):
+    + There are over 40 FIs established in Java 8, which is located in 'java.util.functions' package
+    + But we only have to take care 6 FIs:
+      * Function
+      * Consumer
+      * Supplier
+      * Predicate
+      * Operation
+      * UnaryOperator
 6. Lambda Operations on Stream
 7. Migration to a Modular Application
 8. Service In Modular Application
