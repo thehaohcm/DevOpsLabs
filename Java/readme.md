@@ -1,14 +1,14 @@
-This is a my own documentation related to Java which I collected to reach OCP 17. All most these below would be lack and more advanced because I got some basic knowledge already, and please note that almost info here baed on Java 17 version.
+This is a my own documentation related to Java which I collected to reach OCP 17. All these below info would be lack and more advanced because I got some basic knowledge already, and please note that almost info here based on Java 17 version.
 
 1. Fundamentals
-2. Exception handing & Assertion
+2. Exception handling & Assertion
 3. Java Interfaces
 4. Generics and Collections
 5. Functional Interface & Lambda Expressions
 6. Lambda Operations on Stream
 7. Migration to a Modular Application
 8. Service In Modular Application
-9. Cocurrency
+9. Concurrency
 10. Parallel Streams
 11. I/O (Fundamentals & NIO2)
 12. Database Applications with JDBC
