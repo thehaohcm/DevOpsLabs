@@ -3,6 +3,15 @@ This is a my own documentation related to Java which I collected to reach OCP 17
 1. Fundamentals
 2. Exception handling & Assertion
 3. Java Interfaces
+  - Interface can contain public/private/static methods
+  - All fields in Interface are **PUBLIC + STATIC + FINAL** => we cannot modify value of Interface's fields in derived classes
+  - We can redeclare a static method of parent-interface to be a default method in the sub-interface
+  - We can redeclare a default method of parent-interface in the sub-interface
+  - Private methods can be invoked only inside the Interface
+  - We cannot override static method to non-static and vice-versa.
+  - If class A implements Interface I. And class B extends A, and class C extends B
+  -   => it means B Is-a A, we can assign a = (B) b
+  -   => A referrence of type I, and B extends A, we can cast b to A: a = (B)(I) b
 4. Generics and Collections
 5. Functional Interface & Lambda Expressions
   - Published in Java 8
@@ -17,7 +26,15 @@ This is a my own documentation related to Java which I collected to reach OCP 17
       * Predicate<T> => boolean test(T t);
       * BinaryOperator
       * UnaryOperator<T> (overloaded Function<T,T>) => T apply(T t)
+      * IntFunction<R> => R apply(int value) - extends from Function
+  
+    + Besides, some FIs you should to take care more in OCP:
+      * Comparator<T> => int compare(T o1, T o2);
+        . if > 0:  o1 > o2
+        . if < 0: o1 < o2
+        . if = 0: o1 = o2
 6. Lambda Operations on Stream
+  - When defining a Lambda with 'var' words, please make sure all vars inside ( ) are always defined with 'var', otherwise, we cannot compile it 
 7. Migration to a Modular Application
 8. Service In Modular Application
 9. Concurrency
