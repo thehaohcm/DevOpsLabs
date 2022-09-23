@@ -3,7 +3,8 @@ This is a my own documentation related to Java which I collected to reach OCP 17
 1. Fundamentals
 2. Exception handling & Assertion
 
-Notice: print(exception) just show name of class + message, without any stacktrace. Show stacktrace with **exception.printStackTrace()**
+  Notice: print(exception) just show name of class + message, without any stacktrace. Show stacktrace with **exception.printStackTrace()**
+
 3. Java Interfaces
   - Interface can contain public/private/static methods
   - All fields in Interface are **PUBLIC + STATIC + FINAL** => we cannot modify value of Interface's fields in derived classes
