@@ -2,6 +2,8 @@ This is a my own documentation related to Java which I collected to reach OCP 17
 
 1. Fundamentals
 2. Exception handling & Assertion
+
+Notice: print(exception) just show name of class + message, without any stacktrace. Show stacktrace with **exception.printStackTrace()**
 3. Java Interfaces
   - Interface can contain public/private/static methods
   - All fields in Interface are **PUBLIC + STATIC + FINAL** => we cannot modify value of Interface's fields in derived classes
@@ -36,6 +38,40 @@ This is a my own documentation related to Java which I collected to reach OCP 17
 6. Lambda Operations on Stream
   - When defining a Lambda with 'var' words, please make sure all vars inside ( ) are always defined with 'var', otherwise, we cannot compile it 
 7. Migration to a Modular Application
+  - Describe module info: 
+    ```
+    java --describe-module [module-name]
+    ```
+    ex:
+    ```
+    java --describe-module java.logging
+    ```
+    
+  - List all dependencies of module:
+    ```
+    jdeps --print-module-deps -m [module-name]
+    ```
+    ex:
+    ```
+    jdeps --print-module-deps -m java.logging
+    ```
+    
+    note: -m can be written with full syntax as: --module
+    
+    for each module in the java project always have 1 file named module-info.java, which contains exports/requires all neccessary modules''s PACKAGEs need inside the module.
+    ex: Module B's packages (ex: example.java.b) and has a module package.b depends on Module A (ex: example.java.a) has a package package.a
+    module-info.java in module A
+    ```
+    module A {
+      exports package.a;
+    }
+    ```
+    module-info.java in module B
+    ```
+    module B {
+      requires example.java.a;
+    }
+    ```
 8. Service In Modular Application
 9. Concurrency
 10. Parallel Streams
