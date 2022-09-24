@@ -1,6 +1,10 @@
 This is a my own documentation related to Java which I collected to reach OCP 17. All these below info would be lack and more advanced because I got some basic knowledge already, and please note that almost info here based on Java 17 version.
 
 1. Fundamentals
+  - Static/Final/Private functions cannot be overridden
+  - By default, all instance's methods are considered as virtual function, except for static, final and private methods.
+  - Abstract methods in abstract class are Pure Virtual Functions
+  - A virtual call means that the call is bound to a method at run time and not at compile time.
 2. Exception handling & Assertion
 
   - Notice: 
@@ -29,6 +33,9 @@ This is a my own documentation related to Java which I collected to reach OCP 17
     + Arrays.asList() allow null item inside, but the list.of() doesn't allow it
   - Collectors:
     + Collectors.partitioningBy(): take a Predicate and return a Collector. This method return 2 groups: 'true' value and 'false' value
+  - Dequeue:
+    + Works as a reverse action of Queue, LIFO, same as Stack
+    + Notice that Stack is a class, whereas Dequeue is an Interface
 5. Functional Interface & Lambda Expressions
   - Published in Java 8
   - Functional Interface (FI):
@@ -50,7 +57,10 @@ This is a my own documentation related to Java which I collected to reach OCP 17
         . if < 0: o1 < o2
         . if = 0: o1 = o2
 6. Lambda Operations on Stream
+  - stream().filter(Predicate p)
   - When defining a Lambda with 'var' words, please make sure all vars inside ( ) are always defined with 'var', otherwise, we cannot compile it
+  - All intermediate operations (ex: sorted, filter, map) are not be executed until the terminal operation is invoked in the stream. If these intermediate operations are used in the end of stream line code, it will not be executed.
+  
 7. Migration to a Modular Application
   - Describe module info: 
     ```
@@ -86,11 +96,17 @@ This is a my own documentation related to Java which I collected to reach OCP 17
       requires example.java.a;
     }
     ```
+  - Packages are exported and used by using 'exports' and 'requires' keywords in module-info.java
+  - Services are exported and used by using 'provides' and 'uses' keywords in module-info.java
 8. Service In Modular Application
 9. Concurrency
 10. Parallel Streams
 11. I/O (Fundamentals & NIO2)
 12. Database Applications with JDBC
+  - execute() return boolean
+  - executeUpdate() method return the number of row that have been affected by the query
+  - executeQuery() return a ResultSet
+  
 13. Localization
 
 - Notice: 
