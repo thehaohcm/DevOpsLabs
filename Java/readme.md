@@ -18,6 +18,17 @@ This is a my own documentation related to Java which I collected to reach OCP 17
   -   => it means B Is-a A, we can assign a = (B) b
   -   => A referrence of type I, and B extends A, we can cast b to A: a = (B)(I) b
 4. Generics and Collections
+  - CopyOnWriteArrayList:
+      + is extended from ArrayList which supports thread-safe.
+      + Cannot use modification methods (Ex: add(),remove() items) via iterator in CopyOnWriteArrayList, it will throw UnsupportedOperationException
+  - List and ArrayList:
+    + List<?> means list is a List of **everything**, depends on the type of the first item. List<?> is not same as List<Object>. Never has something line "new ArrayList<?>"
+    + list.add([index], [value]);
+    + Diamond operator <> is always be used in the right hand side of = sign, cannot be used in the left hand side. List<> is invalid, use List<?> instead
+    + Arrays.asList() return a mutable list (can add or remove items), whereas List.of() return a immutable list (don't allow to add or remove items)
+    + Arrays.asList() allow null item inside, but the list.of() doesn't allow it
+  - Collectors:
+    + Collectors.partitioningBy(): take a Predicate and return a Collector. This method return 2 groups: 'true' value and 'false' value
 5. Functional Interface & Lambda Expressions
   - Published in Java 8
   - Functional Interface (FI):
@@ -39,7 +50,7 @@ This is a my own documentation related to Java which I collected to reach OCP 17
         . if < 0: o1 < o2
         . if = 0: o1 = o2
 6. Lambda Operations on Stream
-  - When defining a Lambda with 'var' words, please make sure all vars inside ( ) are always defined with 'var', otherwise, we cannot compile it 
+  - When defining a Lambda with 'var' words, please make sure all vars inside ( ) are always defined with 'var', otherwise, we cannot compile it
 7. Migration to a Modular Application
   - Describe module info: 
     ```
