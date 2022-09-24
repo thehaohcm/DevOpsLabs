@@ -3,7 +3,9 @@ This is a my own documentation related to Java which I collected to reach OCP 17
 1. Fundamentals
 2. Exception handling & Assertion
 
-  Notice: print(exception) just show name of class + message, without any stacktrace. Show stacktrace with **exception.printStackTrace()**
+  - Notice: 
+    + print(exception) just show name of class + message, without any stacktrace. Show stacktrace with **exception.printStackTrace()**
+    + Except([Except_1 | Except_2]) with Except_1 and Except_2 have to be different betwee Exception class (ex: except(RuntimeException|IOException e))
 
 3. Java Interfaces
   - Interface can contain public/private/static methods
