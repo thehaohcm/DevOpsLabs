@@ -1,6 +1,7 @@
 This is a my own documentation related to Java which I collected to reach OCP 17. All these below info would be lack and more advanced because I got some basic knowledge already, and please note that almost info here based on Java 17 version.
 
 1. Fundamentals
+  - Minimum object size is 16 bytes for modern 64-bit JDK
   - Static/Final/Private functions cannot be overridden
   - By default, all instance's methods are considered as virtual function, except for static, final and private methods.
   - Abstract methods in abstract class are Pure Virtual Functions
@@ -105,6 +106,14 @@ This is a my own documentation related to Java which I collected to reach OCP 17
   - stream().filter(Predicate p)
   - When defining a Lambda with 'var' words, please make sure all vars inside ( ) are always defined with 'var', otherwise, we cannot compile it
   - All intermediate operations (ex: sorted, filter, map) are not be executed until the terminal operation is invoked in the stream. If these intermediate operations are used in the end of stream line code, it will not be executed.
+  - Some common functions in stream:
+    + filter(Predicate)
+    + map(Function)
+    + flatMap(Function)
+    + foreach(Consumer)
+    + peek(Consumer)
+    + sorted(Comparator)
+    + collect(Collector or Supplier)
   
 7. Migration to a Modular Application
   - Describe module info: 
