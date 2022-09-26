@@ -161,10 +161,28 @@ This is a my own documentation related to Java which I collected to reach OCP 17
 9. Concurrency
 10. Parallel Streams
 11. I/O (Fundamentals & NIO2)
+  - Path.resolve() method: public Path resolve(Path other)
+    + combine a current path with a new path:
+    ```
+    Path p1 = Paths.get("C:\\exmaple\\test.txt");
+    Path p2 = Paths.get("report.pdf");
+    System.out.println(p1.resolve(p2)); // it prints C:\\example\test.txt\report.pdf
+    ```
 12. Database Applications with JDBC
+  - Always using javax.sql.DataSource instead of java.sql.DataManager in JDBC. DataSource supports more things about ConnectionPool, and improve more performance than the DataManager (by using JDNI)
   - execute() return boolean
   - executeUpdate() method return the number of row that have been affected by the query
   - executeQuery() return a ResultSet
+  - JNDI:
+    + stands for Java Naming and Directory Interface
+    + common-case used to set up a database connection pool on Java EE application. The application can gain connection by using JNDI name without having to know the connection detail.
+    + Pretty similar to a way of DNS, but only affect on DB connection and some service written in Java EE
+    + JNDI used with DataSource
+    ```
+    Context ctx = new InitialContext();
+    DataSource ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/MyLocalDB"); // lookup connection by JDNI name (ex: java:/comp/env/jdbc/MyLocalDB)
+    Connection c = dataSource.getConnection(); //no arguments
+    ```
   
 13. Localization
 
