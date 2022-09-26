@@ -141,7 +141,7 @@ This is a my own documentation related to Java which I collected to reach OCP 17
     for each module in the java project always have 1 file named module-info.java, which contains exports/requires all neccessary modules''s PACKAGEs need inside the module.
     ex: Module B's packages (ex: example.java.b) and has a module package.b depends on Module A (ex: example.java.a) has a package package.a
     module-info.java in module A
-    ```
+    ```java
     module A {
       exports package.a;
     }
@@ -163,7 +163,7 @@ This is a my own documentation related to Java which I collected to reach OCP 17
 11. I/O (Fundamentals & NIO2)
   - Path.resolve() method: public Path resolve(Path other)
     + combine a current path with a new path:
-    ```
+    ```java
     Path p1 = Paths.get("C:\\exmaple\\test.txt");
     Path p2 = Paths.get("report.pdf");
     System.out.println(p1.resolve(p2)); // it prints C:\\example\test.txt\report.pdf
@@ -178,7 +178,7 @@ This is a my own documentation related to Java which I collected to reach OCP 17
     + common-case used to set up a database connection pool on Java EE application. The application can gain connection by using JNDI name without having to know the connection detail.
     + Pretty similar to a way of DNS, but only affect on DB connection and some service written in Java EE
     + JNDI used with DataSource
-    ```
+    ```java
     Context ctx = new InitialContext();
     DataSource ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/MyLocalDB"); // lookup connection by JDNI name (ex: java:/comp/env/jdbc/MyLocalDB)
     Connection c = dataSource.getConnection(); //no arguments
@@ -194,7 +194,7 @@ This is a my own documentation related to Java which I collected to reach OCP 17
     - Switch Expression and no fall through behavior
       + Removing the 'break;' keyword which is always used in any case in switch previously
       + use 'case [option(s)] -> { [logic]; }'
-        ```
+        ```java
         switch(dayOfWeek){
           case 'Monday' -> { s.o.println("This is Monday"); }
           ...
@@ -202,7 +202,7 @@ This is a my own documentation related to Java which I collected to reach OCP 17
         ```
     - Multiline Strings / Text blocks
       + Instead of using "\n" to preresent a new line in Java code previously, now we can use """ and write a text with new line to be more readable
-        ```
+        ```java
         String html = """
         <html>
           <body>
@@ -217,7 +217,7 @@ This is a my own documentation related to Java which I collected to reach OCP 17
       + All properties inside the Records are 'final' (cannot modify during running)
       + The public instructor with all parameters will be created mapped with all properties we defined in Record
       + We can add more new method, but cannot add new property into Record's body
-        ```
+        ```java
         public record Student (int Id, String firstName, String lastName) {  }
         ```
     - Sealed classes / interfaces
@@ -225,7 +225,7 @@ This is a my own documentation related to Java which I collected to reach OCP 17
       + A new way to grant permission to parent class that only allow some specific subclasses to extend it
       + Use keyword 'selead class [class_name]' together with  'permits' [delivered_class]
       + The derived classes can be defined with one of keywords: 'non-sealed' / 'final' (for interface, only allow 'non-sealed'
-        ```
+        ```java
         public sealed class ParentClass permits SubClass1, SubClass2{
           ...
         }
