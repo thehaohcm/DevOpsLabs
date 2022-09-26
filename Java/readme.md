@@ -3,7 +3,7 @@ This is a my own documentation related to Java which I collected to reach OCP 17
 1. Fundamentals
   - Minimum object size is 16 bytes for modern 64-bit JDK
   - Static/Final/Private functions cannot be overridden
-  - By default, all instance's methods are considered as virtual function, except for static, final and private methods.
+  - By default, all instance's methods are considered as virtual function, except for static, final and private methods which are overridden in the derived classes to performce the polimophism perspective
   - Abstract methods in abstract class are Pure Virtual Functions
   - A virtual call means that the call is bound to a method at run time and not at compile time.
   - In the while loop, the code inside block have to be executed at least once. It means that the condition logic in while( ) is alway reachable (cannot be 'false'). If not, the code cannot be compiled.
@@ -38,12 +38,14 @@ This is a my own documentation related to Java which I collected to reach OCP 17
     + SQLException
   - RuntimeExceptions
     + IllegalArgumentException
-    + NullPointerException
+    + NullPointerException. Notice that when we print a null object -> it will be shown in screen is 'null'. NullPointerException only thrown when we invoke a method of the null object.
   - Notice: 
     + print(exception) just show name of class + message, without any stacktrace. Show stacktrace with **exception.printStackTrace()**
     + Except([Except_1 | Except_2]) with Except_1 and Except_2 have to be different betwee Exception class (ex: except(RuntimeException|IOException e))
     + if parent class's method throws a checked Exception, and the diverred class overrides this method also, the method not need to be threw these checked exception again. Overrided method is valid without throwing any checked exception
     + the override method of diverred class is only thrown the same or a sub-exception class of the supper-class method. Ex: if Supperclass's method() throws IOException -> the Childclass's method() can throw either IOException (by default without declaring) or FileNotFoundException (FileNotFoundException is a subclass of IOException)
+    + For RuntimeException and its derived classes, we don't need to add 'throws [Exception]' in the method define line as checked Exception
+    + with an empty method (without throwing any exception), we can also add 'throws' any RuntimeException and Exception without error compile
 
 3. Java Interfaces
   - Interface can contain public/private/static methods
@@ -59,6 +61,12 @@ This is a my own documentation related to Java which I collected to reach OCP 17
   -   => it means B Is-a A, we can assign a = (B) b
   -   => A referrence of type I, and B extends A, we can cast b to A: a = (B)(I) b
 4. Generics and Collections
+  - Array
+    + Cannot define an array with specific number length of array when initializing it with {} block
+    ```java
+    String[] sa = new String[3]{"a","b","c"} // compile error
+    String[] sa = new String[]{"a","b","c"} // compiled without error
+    ```
   - Iterable (Interface) -> Collection (Interface) 
   - CopyOnWriteArrayList:
       + is extended from ArrayList which supports thread-safe.
@@ -173,6 +181,7 @@ This is a my own documentation related to Java which I collected to reach OCP 17
   - execute() return boolean
   - executeUpdate() method return the number of row that have been affected by the query
   - executeQuery() return a ResultSet
+  - Set null for parameter in PrepareStatement by PrepareStatement.setNull([parameter_index-from-1], Type.[VARCHAR/INTEGER/...]) or .setString([paramter_index], null)
   - JNDI:
     + stands for Java Naming and Directory Interface
     + common-case used to set up a database connection pool on Java EE application. The application can gain connection by using JNDI name without having to know the connection detail.
