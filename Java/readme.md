@@ -1,6 +1,13 @@
 This is a my own documentation related to Java which I collected to reach OCP 17. All these below info would be lack and more advanced because I got some basic knowledge already, and please note that almost info here based on Java 17 version.
 
 1. Fundamentals
+  - Primitive types:
+    + byte: -128 to 127
+    + short:
+    + int:
+    + long:
+    + float:
+    + double:
   - Minimum object size is 16 bytes for modern 64-bit JDK
   - Static/Final/Private functions cannot be overridden
   - By default, all instance's methods are considered as virtual function, except for static, final and private methods which are overridden in the derived classes to performce the polimophism perspective
@@ -82,6 +89,15 @@ This is a my own documentation related to Java which I collected to reach OCP 17
   - Dequeue:
     + Works as a reverse action of Queue, LIFO, same as Stack
     + Notice that Stack is a class, whereas Dequeue is an Interface
+    + some methods:
+      - add(Object): add at the last
+      - addLast(Object): add at the last
+      - offer(Object): add at the last
+      - addFirst(Object): add at the first
+      - offerFirst(Object): add at the first
+      - push(Object): add at the first
+      - removeFirst(): remove first
+      - removeLast(): remove last
   - Map:
     + Map (Interface) -> SortedMap (sub-Interface) -> NavigableMap (sub-Interface) -> TreeMap (class)
     + TreeMap automatically sort items based on key when the new item is added
@@ -182,6 +198,8 @@ This is a my own documentation related to Java which I collected to reach OCP 17
   - executeUpdate() method return the number of row that have been affected by the query
   - executeQuery() return a ResultSet
   - Set null for parameter in PrepareStatement by PrepareStatement.setNull([parameter_index-from-1], Type.[VARCHAR/INTEGER/...]) or .setString([paramter_index], null)
+  - In a several DB, they automatically save/commit all changes in a period time without any permission from user. To avoid this issue or want to take care all commit in our code, we can turn on/off auto commit of DB by using method Connection.setAutoCommit(boolean)
+  - the commit() method is empty parameter, without passing anything into
   - JNDI:
     + stands for Java Naming and Directory Interface
     + common-case used to set up a database connection pool on Java EE application. The application can gain connection by using JNDI name without having to know the connection detail.
