@@ -38,6 +38,8 @@ This is a my own documentation related to Java which I collected to reach OCP 17
       '''
   - Methods:
     + an Overridding method is allowed to return a sub-type of the return type defined in the overridden method. (Ex: class A has method a() return Iterable, and class B has method a() overrided from class A, but it can return a sub-type like Collection. Because Collection is an sub-interface of Iterable interface)
+    + Cannot declare var in parameter of method. ex: void method(var a){ } // compile error
+    + The overriden method can have more visibility (ex: super's method() access modifier is default -> devired class's overriden method would be default or protected or public) 
 2. Exception handling & Assertion
 
   - Exceptions
@@ -50,9 +52,13 @@ This is a my own documentation related to Java which I collected to reach OCP 17
     + print(exception) just show name of class + message, without any stacktrace. Show stacktrace with **exception.printStackTrace()**
     + Except([Except_1 | Except_2]) with Except_1 and Except_2 have to be different betwee Exception class (ex: except(RuntimeException|IOException e))
     + if parent class's method throws a checked Exception, and the diverred class overrides this method also, the method not need to be threw these checked exception again. Overrided method is valid without throwing any checked exception
-    + the override method of diverred class is only thrown the same or a sub-exception class of the supper-class method. Ex: if Supperclass's method() throws IOException -> the Childclass's method() can throw either IOException (by default without declaring) or FileNotFoundException (FileNotFoundException is a subclass of IOException)
-    + For RuntimeException and its derived classes, we don't need to add 'throws [Exception]' in the method define line as checked Exception
+    + the override method of derived class is only thrown the same or a sub-exception class of the supper-class method. Ex: if Supperclass's method() throws IOException -> the Childclass's method() can throw either IOException (by default without declaring) or FileNotFoundException (FileNotFoundException is a subclass of IOException)
+    + If the super class have method which throws exception, we don't need to add 'throws [Exception]' in the method define line when override the method in devired classes
+    + If the method in super class is not included 'throws' but:
+      - the overriden method in devired class is included Exception  => compile error
+      - the overriden method in devired class in included RuntimeException => no error
     + with an empty method (without throwing any exception), we can also add 'throws' any RuntimeException and Exception without error compile
+    + The try-catch block is added based on an exception thrown by devired class's method (not based on super class' method). That means if super class' method throws Exception, but the devired class method doesn't throw anything => we don't need add try-catch block when calling an instance of devired class
 
 3. Java Interfaces
   - Interface can contain public/private/static methods
@@ -91,13 +97,18 @@ This is a my own documentation related to Java which I collected to reach OCP 17
     + Notice that Stack is a class, whereas Dequeue is an Interface
     + some methods:
       - add(Object): add at the last
-      - addLast(Object): add at the last
       - offer(Object): add at the last
-      - addFirst(Object): add at the first
-      - offerFirst(Object): add at the first
+        => REMEMBER: ADD() = OFFER() : ADD AT THE TAIL/LAST
       - push(Object): add at the first
-      - removeFirst(): remove first
-      - removeLast(): remove last
+      - poll(): remove first
+      - remove(): remove first
+        => REMEMBER: POLL() = REMOVE() : REMOVE FIRST AT THE HEAD/FIRST
+      - Queue's methods:
+        + addLast(Object): add at the last
+        + addFirst(Object): add at the first
+        + offerFirst(Object): add at the first
+        + removeFirst(): remove first
+        + removeLast(): remove last
   - Map:
     + Map (Interface) -> SortedMap (sub-Interface) -> NavigableMap (sub-Interface) -> TreeMap (class)
     + TreeMap automatically sort items based on key when the new item is added
@@ -131,14 +142,20 @@ This is a my own documentation related to Java which I collected to reach OCP 17
   - When defining a Lambda with 'var' words, please make sure all vars inside ( ) are always defined with 'var', otherwise, we cannot compile it
   - All intermediate operations (ex: sorted, filter, map) are not be executed until the terminal operation is invoked in the stream. If these intermediate operations are used in the end of stream line code, it will not be executed.
   - Some common functions in stream:
-    + filter(Predicate)
+    + filter(Predicate) - Intermediate operation
     + map(Function)
     + flatMap(Function)
     + foreach(Consumer)
-    + peek(Consumer)
+    + peek(Consumer) - Intermediate opration
     + sorted(Comparator)
     + collect(Collector or Supplier)
-  
+  - IntStream/LongStream/DoubleStreamm:
+    + present a stream of primitive type (int/long/double...)
+    + sum() method return a primitive value
+    + average() method return OptionalDouble. If the stream is empty or not element => return OptionalDouble will be empty (not 0 or empty)
+  - Intermediate & Terminal Operation:
+    + Intermediate Operation: It does not do anything until a terminal operation is invoked on the stream
+    + Terminal Operation: execute immediately the method when invoked on the stream
 7. Migration to a Modular Application
   - Describe module info: 
     ```
@@ -186,11 +203,17 @@ This is a my own documentation related to Java which I collected to reach OCP 17
 10. Parallel Streams
 11. I/O (Fundamentals & NIO2)
   - Path.resolve() method: public Path resolve(Path other)
-    + combine a current path with a new path:
+    + If the other parameter is an absolute path then this method trivially returns other
+    + If other is an empty path then this method trivially returns this pat
+    + Otherwise this method considers this path to be a directory and resolves the given path against this path
+    + In the simplest case, the given path does not have a root component, in which case this method joins the given path to this path and returns a resulting path that ends with the given path
     ```java
-    Path p1 = Paths.get("C:\\exmaple\\test.txt");
+    Path p1 = Paths.get("C:\\example\\test.txt");
     Path p2 = Paths.get("report.pdf");
     System.out.println(p1.resolve(p2)); // it prints C:\\example\test.txt\report.pdf
+    
+    Path p3 = Paths.get("C:\\example\\report.txt");
+    System.out.println(p1.resolve(p3)); // it prints C:\\example\report.pdf
     ```
 12. Database Applications with JDBC
   - Always using javax.sql.DataSource instead of java.sql.DataManager in JDBC. DataSource supports more things about ConnectionPool, and improve more performance than the DataManager (by using JDNI)
@@ -227,6 +250,7 @@ This is a my own documentation related to Java which I collected to reach OCP 17
           ...
         }
         ```
+      + all variables are valid inside switch() block, without any problem in different 'case'
     - Multiline Strings / Text blocks
       + Instead of using "\n" to preresent a new line in Java code previously, now we can use """ and write a text with new line to be more readable
         ```java
@@ -237,6 +261,19 @@ This is a my own documentation related to Java which I collected to reach OCP 17
           </body>
         </html>
         """
+        ```
+        Ex:
+        ```java
+        String hello = """
+        EH""" // hello.lines.count() = 1
+  
+        String hello = """
+        EH
+        """ // hello.lines.count() = 1
+  
+        String hello = """
+        EH
+        E""" // hello.lines.count() = 2
         ```
     - Records
       + Published in Java 14
