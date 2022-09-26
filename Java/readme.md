@@ -40,6 +40,7 @@ This is a my own documentation related to Java which I collected to reach OCP 17
     + an Overridding method is allowed to return a sub-type of the return type defined in the overridden method. (Ex: class A has method a() return Iterable, and class B has method a() overrided from class A, but it can return a sub-type like Collection. Because Collection is an sub-interface of Iterable interface)
     + Cannot declare var in parameter of method. ex: void method(var a){ } // compile error
     + The overriden method can have more visibility (ex: super's method() access modifier is default -> devired class's overriden method would be default or protected or public) 
+
 2. Exception handling & Assertion
 
   - Exceptions
@@ -73,6 +74,7 @@ This is a my own documentation related to Java which I collected to reach OCP 17
   - If class A implements Interface I. And class B extends A, and class C extends B
   -   => it means B Is-a A, we can assign a = (B) b
   -   => A referrence of type I, and B extends A, we can cast b to A: a = (B)(I) b
+
 4. Generics and Collections
   - Array
     + Cannot define an array with specific number length of array when initializing it with {} block
@@ -117,6 +119,7 @@ This is a my own documentation related to Java which I collected to reach OCP 17
     + NavigableMap<K,V> tailMap(K fromkey, boolean inclusive): return a Map contains entities whose key is greater than the key value "fromkey" (or include the entity of key if inclusive parameter = true) - cut and remove the tail of the original map from a key "fromkey" value, return the cut sub-map
   - Notice:
     + Collectors.groupingBy(Function): return a Collector(ex: Map,List,...) that groups all element by matching the Lambda expression in Function Interface. Ex: {C=[S3:C], A=[S1:A, S2:A]}
+
 5. Functional Interface & Lambda Expressions
   - Published in Java 8
   - Functional Interface (FI):
@@ -137,6 +140,7 @@ This is a my own documentation related to Java which I collected to reach OCP 17
         . if > 0:  o1 > o2
         . if < 0: o1 < o2
         . if = 0: o1 = o2
+
 6. Lambda Operations on Stream
   - stream().filter(Predicate p)
   - When defining a Lambda with 'var' words, please make sure all vars inside ( ) are always defined with 'var', otherwise, we cannot compile it
@@ -156,6 +160,7 @@ This is a my own documentation related to Java which I collected to reach OCP 17
   - Intermediate & Terminal Operation:
     + Intermediate Operation: It does not do anything until a terminal operation is invoked on the stream
     + Terminal Operation: execute immediately the method when invoked on the stream
+
 7. Migration to a Modular Application
   - Describe module info: 
     ```
@@ -198,9 +203,13 @@ This is a my own documentation related to Java which I collected to reach OCP 17
   - there are 2 ways to run a java file inside modele:
     + new way with module-path: java -p [jar_file] -m [module_name]/[classfile_with_fullpackage] (ex: java -p fx.jar -m xyz.fx/com.xyz.fx.Main)
     + legacy way with classpath (ignore the module): java -classpath [jar_file] [classfile_with_fullpackage] (ex: java -classpath fx.jar com.xyz.fx.Main)
+
 8. Service In Modular Application
+
 9. Concurrency
+
 10. Parallel Streams
+
 11. I/O (Fundamentals & NIO2)
   - Path.resolve() method: public Path resolve(Path other)
     + If the other parameter is an absolute path then this method trivially returns other
@@ -215,6 +224,7 @@ This is a my own documentation related to Java which I collected to reach OCP 17
     Path p3 = Paths.get("C:\\example\\report.txt");
     System.out.println(p1.resolve(p3)); // it prints C:\\example\report.pdf
     ```
+
 12. Database Applications with JDBC
   - Always using javax.sql.DataSource instead of java.sql.DataManager in JDBC. DataSource supports more things about ConnectionPool, and improve more performance than the DataManager (by using JDNI)
   - execute() return boolean
@@ -233,7 +243,7 @@ This is a my own documentation related to Java which I collected to reach OCP 17
     DataSource ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/MyLocalDB"); // lookup connection by JDNI name (ex: java:/comp/env/jdbc/MyLocalDB)
     Connection c = dataSource.getConnection(); //no arguments
     ```
-  
+
 13. Localization
 
 - Notice: 
