@@ -26,6 +26,32 @@ This is a my own documentation related to Java which I collected to reach OCP 17
     + enum's constant has a method named ordinal() return the index (starting with 0) of that constant like an index
     + enum's constant has a method named name(), return name of this constant
     + enum implements Comparable interface, so it can be added into sort collection. The natural order is based on ordinal value of constant
+    + unlike class, we cannot access or modify non-static fields in enum's constructor
+    + each Enum's constant can be considered as an anonymous subclass of enum, we can also override method of class
+      ex:
+      ```java
+      public enum Pets {
+        DOG(1, "D"),    
+        CAT(2, "C") 
+        {         
+          public String getData(){ 
+            return type+name; 
+          }    
+        },    
+        FISH(3, "F");    
+        int type;    
+        String name;       
+        Pets(int t, String s) { 
+          this.name = s; this.type = t;
+        }    
+        public String getData() { 
+          return name+type; 
+        } 
+      }
+      ```
+    + Enum's contants must be declared before anything else (ex: constructor, methods, fields...)
+    + Enum's construct is always implicitly private. You cannot make it public or protected
+    + we cannot declare fields inside enum with "var" word
   - label in Java (with {} or not) works with break/continue [label_name] as a loop function
   - When we do a mathematical operator (ex: *,/,+,-) between 2 number type integral except 'long' (ex: integer, short, byte,...), the result is always 'integer' with removing the exceeded values after comma 
     + Ex: 7/3 = 2,333334 = 2 in integer in java
@@ -40,6 +66,40 @@ This is a my own documentation related to Java which I collected to reach OCP 17
     + an Overridding method is allowed to return a sub-type of the return type defined in the overridden method. (Ex: class A has method a() return Iterable, and class B has method a() overrided from class A, but it can return a sub-type like Collection. Because Collection is an sub-interface of Iterable interface)
     + Cannot declare var in parameter of method. ex: void method(var a){ } // compile error
     + The overriden method can have more visibility (ex: super's method() access modifier is default -> devired class's overriden method would be default or protected or public) 
+  - Order object blocks run in Java:
+    + first, static block called IN THE ORDER they are defined
+    + Instance initializer block called IN THE ORDER they are defined
+    + Finally, Constructor
+    ex:
+    ```java
+    class A{
+      static int VALUE = 1; // because its order is lower than static block, it will be run first.
+      public A(){ // constructor (priority order: the last, when the objcect initialized)
+        VALUE = 4;
+      }
+      
+      static { // static block (priority order: 1st)
+        VALUE = 2;
+      }
+      
+      { // initializer block (priority order: 2st when the object initialized)
+        VALUE = 3;
+      }
+    }
+    
+    // if not create any object => A.VALUE = 2
+    // if create an object => A.VALUE = 4
+    ```
+  - Operators:
+    + == has higher precedence than =
+    ex:
+    ```java
+    boolean a = true;
+    int b = 1;
+    int b1 = 2;
+    if (a = b == b1) // means if (a = (b == b1)) => if (a = (false)), the if expression return false - same value in the left Handside of the expression
+    => if(false) => run else statement
+    ```
 
 2. Exception handling & Assertion
 
@@ -60,6 +120,7 @@ This is a my own documentation related to Java which I collected to reach OCP 17
       - the overriden method in devired class in included RuntimeException => no error
     + with an empty method (without throwing any exception), we can also add 'throws' any RuntimeException and Exception without error compile
     + The try-catch block is added based on an exception thrown by devired class's method (not based on super class' method). That means if super class' method throws Exception, but the devired class method doesn't throw anything => we don't need add try-catch block when calling an instance of devired class
+    + A method can be declared/defined with throwing any exception although the body has no throw any exception. No error run or compile
 
 3. Java Interfaces
   - Interface can contain public/private/static methods
@@ -68,13 +129,13 @@ This is a my own documentation related to Java which I collected to reach OCP 17
     + cannot define a field in Interface without initialize value
     + cannot define a field with private access modifier
   - We can redeclare a static method of parent-interface to be a default method in the sub-interface
-  - We can redeclare a default method of parent-interface in the sub-interface
+  - We can redeclare a default method of parent-interface in the sub-interface without 'default' keyword in method and without defining method's body
   - Private methods can be invoked only inside the Interface (private method can be static, but cannot define a protected method)
   - We cannot override static method to non-static and vice-versa.
   - If class A implements Interface I. And class B extends A, and class C extends B
-  -   => it means B Is-a A, we can assign a = b; and b = (B) a; 
+  -   => it means B Is-a A, we can assign a = b; and b = (B) a; and can check if(b instanceof A) => true 
   -   => A referrence of type I, and B extends A, we can cast b to A: a = (B)(I) b
-  -   Cannot cast a **REFERENCE super object** to **subclass type**, we can only cast a reference subclass object to super class type => the object casted based on reference object. If same type and lower class => no error, otherwise throws an error
+  - Cannot cast a **REFERENCE super object** to **subclass type**, we can only cast **a reference SUBCLASS object to SUPPERCLASS type (for invoking)** => the object casted based on reference object. If same type and lower class => no error, otherwise throws an error
   ex:
   ```java
   class A {
@@ -158,9 +219,10 @@ This is a my own documentation related to Java which I collected to reach OCP 17
       * Consumer<T> => void accept(T t);
       * Supplier<T> => T get();
       * Predicate<T> => boolean test(T t);
-      * BinaryOperator
+      * BinaryOperator<T> extend BiFunction<T,T,T> => T apply(T t,T t);
       * UnaryOperator<T> (overloaded Function<T,T>) => T apply(T t)
       * IntFunction<R> => R apply(int value) - extends from Function
+      * Comparator => int compare(Object obj1, Object obj2);
   
     + Besides, some FIs you should to take care more in OCP:
       * Comparator<T> => int compare(T o1, T o2);
@@ -180,10 +242,12 @@ This is a my own documentation related to Java which I collected to reach OCP 17
     + peek(Consumer) - Intermediate opration
     + sorted(Comparator)
     + collect(Collector or Supplier)
+    + reduce([default_result_integer_if_stream_empty],BinaryOperator) - terminal operation : do the BinaryOperator function step by step for each item in list stream. ex: if BinaryOperator ex=(e1,e2)->e1+e2; => it means the reduce() method will sum step by step current item with the next item, then return the sum in list stream. Ex: list=1,2,3,4 => reduce((e1,e2)->e1+e2) = 1+2=3, then 3+4= 7 => a result is 7
   - IntStream/LongStream/DoubleStreamm:
     + present a stream of primitive type (int/long/double...)
     + sum() method return a primitive value
     + average() method return OptionalDouble. If the stream is empty or not element => return OptionalDouble will be empty (not 0 or empty)
+    + max(Comparator)
   - Intermediate & Terminal Operation:
     + Intermediate Operation: It does not do anything until a terminal operation is invoked on the stream
     + Terminal Operation: execute immediately the method when invoked on the stream
@@ -225,11 +289,13 @@ This is a my own documentation related to Java which I collected to reach OCP 17
       requires example.java.a;
     }
     ```
-  - Packages are exported and used by using 'exports' and 'requires' keywords in module-info.java
-  - Services are exported and used by using 'provides' and 'uses' keywords in module-info.java
+  - Packages are exported and used by using 'exports' and 'requires' keywords in module-info.java. modules -> use 'requires'
+  - Services are exported and used by using 'provides' and 'uses' keywords in module-info.java.
+  - one module-info.java file can include both 'require' (for getting packages) and 'uses' (for getting services)
   - there are 2 ways to run a java file inside modele:
     + new way with module-path: java -p [jar_file] -m [module_name]/[classfile_with_fullpackage] (ex: java -p fx.jar -m xyz.fx/com.xyz.fx.Main)
     + legacy way with classpath (ignore the module): java -classpath [jar_file] [classfile_with_fullpackage] (ex: java -classpath fx.jar com.xyz.fx.Main)
+  - if one module (1) 'requires another module (2) declared already with 'requires transitive' other modules (3), that means the module (1) doesn't need to 'requires' 2 others modules (2) and (3) inside the module-info.java anymore, just 'requires' only the module (2)
 
 8. Service In Modular Application
 
@@ -272,6 +338,8 @@ This is a my own documentation related to Java which I collected to reach OCP 17
     ```
 
 13. Localization
+  - LocalDateTime.of(YEAR,MONTH,DATE,HOUR,MINUTE)
+  - ZoneDateTime.of(LocalDateTime,ZoneId.of(COUNTRY_STRING))
 
 - Notice: 
   + ***Security, Annotation, Generics & Widecart have been dropped in OCP 17. Please don't focus and take time on them***
@@ -302,15 +370,15 @@ This is a my own documentation related to Java which I collected to reach OCP 17
         Ex:
         ```java
         String hello = """
-        EH""" // hello.lines.count() = 1
+        EH""" // hello.lines.count() = 1, the output actually is "EH", no new line after H
   
         String hello = """
         EH
-        """ // hello.lines.count() = 1
+        """ // hello.lines.count() = 1, but actually the output is: "EH\n", still have new line after H
   
         String hello = """
         EH
-        E""" // hello.lines.count() = 2
+        E""" // hello.lines.count() = 2, the output actually is "EH\nE", new line after H
         ```
       + Notice: the backslash charater ("\") when appended into the last of line will remove the breaking line ("\n") of multiline string.
         ```java
@@ -330,8 +398,8 @@ This is a my own documentation related to Java which I collected to reach OCP 17
     - Sealed classes / interfaces
       + Published in Java 16
       + A new way to grant permission to parent class that only allow some specific subclasses to extend it
-      + Use keyword 'selead class [class_name]' together with  'permits' [delivered_class]
-      + The derived classes can be defined with one of keywords: 'non-sealed' / 'final' (for interface, only allow 'non-sealed'
+      + Use keyword 'selead class/interface [class_name/interface_name]' together with  'permits' [divered_class/divered_interface]
+      + The derived classes can be defined with one of keywords: 'non-sealed' / 'final' (for interface, only allow 'non-sealed')
         ```java
         public sealed class ParentClass permits SubClass1, SubClass2{
           ...
@@ -349,7 +417,8 @@ This is a my own documentation related to Java which I collected to reach OCP 17
           ...
         }
         ```
-      + If the sealed class or interface not added with 'permits' keyword, that means the class/interface has been extended/implemented by another already. Otherwise, the compiler will show error 
+      + If the sealed class or interface not added with 'permits' keyword, that means the class/interface has been extended/implemented by another already. Otherwise, the compiler will show error
+      + If the class declared in 'permits' doesn't use either 'sealed' or 'non-sealed' => compile error
     - 'instanceof' and pattern matching
     - API Changes - method additions - Date/Time API
       + ***Although Math API has been added in the objectives, we haven't seen any question on it in the exam.***
