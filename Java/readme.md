@@ -312,6 +312,12 @@ This is a my own documentation related to Java which I collected to reach OCP 17
         EH
         E""" // hello.lines.count() = 2
         ```
+      + Notice: the backslash charater ("\") when appended into the last of line will remove the breaking line ("\n") of multiline string.
+        ```java
+        String hello = """
+        Hello\
+        World""" // output: HelloWorld
+        ``` 
     - Records
       + Published in Java 14
       + This is a new way to create a DataModel class without defining a class, properties and methods inside
