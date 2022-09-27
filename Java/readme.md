@@ -63,7 +63,7 @@ This is a my own documentation related to Java which I collected to reach OCP 17
 
 3. Java Interfaces
   - Interface can contain public/private/static methods
-  - All fields in Interface are **PUBLIC + STATIC + FINAL**
+  - All fields in Interface are **PUBLIC + STATIC + FINAL** (from Java 8)
     + we cannot modify value of Interface's fields in derived classes
     + cannot define a field in Interface without initialize value
     + cannot define a field with private access modifier
@@ -72,8 +72,35 @@ This is a my own documentation related to Java which I collected to reach OCP 17
   - Private methods can be invoked only inside the Interface (private method can be static, but cannot define a protected method)
   - We cannot override static method to non-static and vice-versa.
   - If class A implements Interface I. And class B extends A, and class C extends B
-  -   => it means B Is-a A, we can assign a = (B) b
+  -   => it means B Is-a A, we can assign a = b; and b = (B) a; 
   -   => A referrence of type I, and B extends A, we can cast b to A: a = (B)(I) b
+  -   Cannot cast a **REFERENCE super object** to **subclass type**, we can only cast a reference subclass object to super class type => the object casted based on reference object. If same type and lower class => no error, otherwise throws an error
+  ex:
+  ```java
+  class A {
+  }
+  class B extends A{
+  }
+  class Main{
+    public static void Main(String[] args){
+      A a = new A();
+      B b = new B();
+      a = b; // no compile error; no run error
+      
+      // another example
+      A aa = new A();
+      B bb = new B();
+      bb = (B) aa; //no compile error; but run error
+      
+      //another example
+      A aaa = new A();
+      B bbb = new B();
+      aaa = bbb; //no compile error; no run error
+      bbb = (B) aaa; //no compile error; no run error. Because actually the aaa is assigned to B instance already. We can assign bbb to this B instance which the same object. So it is no error
+      
+    }
+  }
+  ```
 
 4. Generics and Collections
   - Array
