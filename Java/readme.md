@@ -177,7 +177,7 @@ This is a my own documentation related to Java which I collected to reach OCP 17
   - List and ArrayList:
     + List<?> means a List of **everything**, depends on the type of the first item.
     + Never has anything like "new ArrayList<?>"
-    + List<?> is not same as List<Object>
+    + List<?> is not same as List < Object >
     + list.add([index], [value]);
     + Diamond operator <> is always be used in the right hand side of = sign, cannot be used in the left hand side. List<> is invalid, use List<?> instead
     + Arrays.asList() return a mutable list (can add or remove items), whereas List.of() return a immutable list (don't allow to add or remove items)
