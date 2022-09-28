@@ -164,7 +164,49 @@ This is a my own documentation related to Java which I collected to reach OCP 17
   ```
 
 4. Generics and Collections
-
+  - Array
+    + Cannot define an array with specific number length of array when initializing it with {} block
+      ```java
+      String[] sa = new String[3]{"a","b","c"} // compile error
+      String[] sa = new String[]{"a","b","c"} // compiled without error
+      ```
+  - Iterable (Interface) -> Collection (Interface) 
+  - CopyOnWriteArrayList:
+    + is extended from ArrayList which supports thread-safe.
+    + Cannot use modification methods (Ex: add(),remove() items) via iterator in CopyOnWriteArrayList, it will throw UnsupportedOperationException
+  - List and ArrayList:
+    + List<?> means list is a List of **everything**, depends on the type of the first item. List<?> is not same as List<Object>. Never has something line "new ArrayList<?>"
+    + list.add([index], [value]);
+    + Diamond operator <> is always be used in the right hand side of = sign, cannot be used in the left hand side. List<> is invalid, use List<?> instead
+    + Arrays.asList() return a mutable list (can add or remove items), whereas List.of() return a immutable list (don't allow to add or remove items)
+    + Arrays.asList() allow null item inside, but the list.of() doesn't allow it
+  - Collectors:
+    + Collectors.partitioningBy(): take a Predicate and return a Collector. This method return 2 groups: 'true' value and 'false' value
+  - Dequeue:
+    + Works as a reverse action of Queue, LIFO, same as Stack
+    + Notice that Stack is a class, whereas Dequeue is an Interface
+    + some methods:
+      - add(Object): add at the last
+      - offer(Object): add at the last
+        => REMEMBER: ADD() = OFFER() : ADD AT THE TAIL/LAST
+      - push(Object): add at the first
+      - poll(): remove first
+      - remove(): remove first
+        => REMEMBER: POLL() = REMOVE() : REMOVE FIRST AT THE HEAD/FIRST
+      - Queue's methods:
+        + addLast(Object): add at the last
+        + addFirst(Object): add at the first
+        + offerFirst(Object): add at the first
+        + removeFirst(): remove first
+        + removeLast(): remove last
+  - Map:
+    + Map (Interface) -> SortedMap (sub-Interface) -> NavigableMap (sub-Interface) -> TreeMap (class)
+    + TreeMap automatically sort items based on key when the new item is added
+    + Map.Entry<K,V> pollFirstEntry(): remove and return a key-value mapping associated with the least key in this map, or null if the map is empty (remove the and return the first entity of map)
+    + Map.Entry<K,V> pollLastEntry(): remove and return a key-value mapping associated with the greatest key in this map, or null if the map is empty (remove the and return the last entity of map)
+    + NavigableMap<K,V> tailMap(K fromkey, boolean inclusive): return a Map contains entities whose key is greater than the key value "fromkey" (or include the entity of key if inclusive parameter = true) - cut and remove the tail of the original map from a key "fromkey" value, return the cut sub-map
+  - Notice:
+    + Collectors.groupingBy(Function): return a Collector(ex: Map,List,...) that groups all element by matching the Lambda expression in Function Interface. Ex: {C=[S3:C], A=[S1:A, S2:A]}
 
 5. Functional Interface & Lambda Expressions
   - Published in Java 8
