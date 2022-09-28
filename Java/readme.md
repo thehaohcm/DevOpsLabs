@@ -317,6 +317,11 @@ This is a my own documentation related to Java which I collected to reach OCP 17
     Path p3 = Paths.get("C:\\example\\report.txt");
     System.out.println(p1.resolve(p3)); // it prints C:\\example\report.pdf
     ```
+  - Path.normalize(): return a path from current path in which all redundant name elements are eliminated.
+    ```java
+    Path p1 = Paths.get("D:\\..\\..\\.\\p2\\core"); 
+    System.out.println(p1.normalize()); // print out: D:\p2\core
+    ```
 
 12. Database Applications with JDBC
   - Always using javax.sql.DataSource instead of java.sql.DataManager in JDBC. DataSource supports more things about ConnectionPool, and improve more performance than the DataManager (by using JDNI)
