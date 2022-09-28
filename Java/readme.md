@@ -175,9 +175,10 @@ This is a my own documentation related to Java which I collected to reach OCP 17
     + is extended from ArrayList which supports thread-safe.
     + Cannot use modification methods (Ex: add(),remove() items) via iterator in CopyOnWriteArrayList, it will throw UnsupportedOperationException
   - List and ArrayList:
-    + List<?> means list is a List of **everything**, depends on the type of the first item. List<?> is not same as List<Object>. Never has something line "new ArrayList<?>"
-    + list.add([index], [value]);
     
+    + Diamond operator <> is always be used in the right hand side of = sign, cannot be used in the left hand side. List<> is invalid, use List<?> instead
+    + Arrays.asList() return a mutable list (can add or remove items), whereas List.of() return a immutable list (don't allow to add or remove items)
+    + Arrays.asList() allow null item inside, but the list.of() doesn't allow it
   - Collectors:
     + Collectors.partitioningBy(): take a Predicate and return a Collector. This method return 2 groups: 'true' value and 'false' value
   - Dequeue:
