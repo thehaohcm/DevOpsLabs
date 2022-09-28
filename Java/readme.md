@@ -353,7 +353,7 @@ This is a my own documentation related to Java which I collected to reach OCP 17
   - LocalDateTime.of(YEAR,MONTH,DATE,HOUR,MINUTE)
   - ZoneDateTime.of(LocalDateTime,ZoneId.of(COUNTRY_STRING))
 
-- Notice: 
+14. Notice: 
   + ***Security, Annotation, Generics & Widecart have been dropped in OCP 17. Please don't focus and take time on them***
   + New topics in OCP 17 (compared with OCP 11):
     - Override methods, including that of an Object class.
