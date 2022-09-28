@@ -164,6 +164,16 @@ This is a my own documentation related to Java which I collected to reach OCP 17
   ```
 
 4. Generics and Collections
+  - Array
+    + Cannot define an array with specific number length of array when initializing it with {} block
+      ```java
+      String[] sa = new String[3]{"a","b","c"} // compile error
+      String[] sa = new String[]{"a","b","c"} // compiled without error
+      ```
+  - Iterable (Interface) -> Collection (Interface) 
+  - CopyOnWriteArrayList:
+    + is extended from ArrayList which supports thread-safe.
+    + Cannot use modification methods (Ex: add(),remove() items) via iterator in CopyOnWriteArrayList, it will throw UnsupportedOperationException
   
   - Collectors:
     + Collectors.partitioningBy(): take a Predicate and return a Collector. This method return 2 groups: 'true' value and 'false' value
