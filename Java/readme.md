@@ -172,8 +172,8 @@ This is a my own documentation related to Java which I collected to reach OCP 17
     ```
   - Iterable (Interface) -> Collection (Interface) 
   - CopyOnWriteArrayList:
-      + is extended from ArrayList which supports thread-safe.
-      + Cannot use modification methods (Ex: add(),remove() items) via iterator in CopyOnWriteArrayList, it will throw UnsupportedOperationException
+    + is extended from ArrayList which supports thread-safe.
+    + Cannot use modification methods (Ex: add(),remove() items) via iterator in CopyOnWriteArrayList, it will throw UnsupportedOperationException
   - List and ArrayList:
     + List<?> means list is a List of **everything**, depends on the type of the first item. List<?> is not same as List<Object>. Never has something line "new ArrayList<?>"
     + list.add([index], [value]);
