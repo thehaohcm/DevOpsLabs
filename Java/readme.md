@@ -166,6 +166,10 @@ This is a my own documentation related to Java which I collected to reach OCP 17
 4. Generics and Collections
   - Array
     + Cannot define an array with specific number length of array when initializing it with {} block
+      ```java
+      String[] sa = new String[3]{"a","b","c"} // compile error
+      String[] sa = new String[]{"a","b","c"} // compiled without error
+      ```
   - Iterable (Interface) -> Collection (Interface) 
   - CopyOnWriteArrayList:
     + is extended from ArrayList which supports thread-safe.
@@ -182,19 +186,7 @@ This is a my own documentation related to Java which I collected to reach OCP 17
     + Works as a reverse action of Queue, LIFO, same as Stack
     + Notice that Stack is a class, whereas Dequeue is an Interface
     + some methods:
-      - add(Object): add at the last
-      - offer(Object): add at the last
-        => REMEMBER: ADD() = OFFER() : ADD AT THE TAIL/LAST
-      - push(Object): add at the first
-      - poll(): remove first
-      - remove(): remove first
-        => REMEMBER: POLL() = REMOVE() : REMOVE FIRST AT THE HEAD/FIRST
-      - Queue's methods:
-        + addLast(Object): add at the last
-        + addFirst(Object): add at the first
-        + offerFirst(Object): add at the first
-        + removeFirst(): remove first
-        + removeLast(): remove last
+      
   - Map:
     + Map (Interface) -> SortedMap (sub-Interface) -> NavigableMap (sub-Interface) -> TreeMap (class)
     + TreeMap automatically sort items based on key when the new item is added
