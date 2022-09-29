@@ -2,6 +2,7 @@ This is a my own documentation related to Java which I collected to reach OCP 17
 
 1. Fundamentals
   - Primitive types:
+
   | Type    | Size    | Range value      | Default value |
   | :-----: | :---:   | :--------------: | :-----------: |
   | byte    | 1 byte  | -128 to 127      | 0             |
