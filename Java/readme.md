@@ -8,6 +8,18 @@ This is a my own documentation related to Java which I collected to reach OCP 17
     + long:
     + float:
     + double:
+  
+  | Type    | Size    | Range value      | Default value |
+  | :-----: | :---:   | :--------------: | :-----------: |
+  | byte    | 1 byte  | -128 to 127      | 0             |
+  | short   | 2 bytes |                  | 0             |
+  | int     | 4 bytes |                  | 0             |
+  | long    | 8 bytes |                  | 0L            |
+  | float   | 4 bytes |                  | 0.0f          |
+  | double  | 8 bytes |                  | 0.0d          |
+  | boolen  | 1 bite  | true or false    | false         |
+  | char    | 2 bytes |                  | '\u0000'      |
+  
   - Minimum object size is 16 bytes for modern 64-bit JDK
   - Static/Final/Private functions cannot be overridden
   - By default, all instance's methods are considered as virtual function, except for static, final and private methods which are overridden in the derived classes to performce the polimophism perspective
