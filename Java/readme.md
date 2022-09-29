@@ -356,8 +356,8 @@ This is a my own documentation related to Java which I collected to reach OCP 17
     + int executeUpdate(): used for DML - Data Manipulation Language statements (ex: INSERT, UPDATE, DELETE)
 
 13. Localization
-  - LocalDateTime.of(YEAR,MONTH,DATE,HOUR,MINUTE)
-  - ZoneDateTime.of(LocalDateTime,ZoneId.of(COUNTRY_STRING))
+  - LocalDateTime.of(int YEAR, int MONTH, int DATE, int HOUR, int MINUTE); // 5 values of type int
+  - ZoneDateTime.of(LocalDateTime,ZoneId.of(COUNTRY_STRING));
 
 14. Notice: 
   + ***Security, Annotation, Generics & Widecart have been dropped in OCP 17. Please don't focus and take time on them***
