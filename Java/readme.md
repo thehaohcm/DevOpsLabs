@@ -390,7 +390,9 @@ This is a my own documentation related to Java which I collected to reach OCP 17
     + new way with module-path: java -p [jar_file] -m [module_name]/[classfile_with_fullpackage] (ex: java -p fx.jar -m xyz.fx/com.xyz.fx.Main)
     + legacy way with classpath (ignore the module): java -classpath [jar_file] [classfile_with_fullpackage] (ex: java -classpath fx.jar com.xyz.fx.Main)
   - if one module (1) 'requires another module (2) declared already with 'requires transitive' other modules (3), that means the module (1) doesn't need to 'requires' 2 others modules (2) and (3) inside the module-info.java anymore, just 'requires' only the module (2)
-
+  - jmod: is used for mod files
+      + jmod describe jmods/ma.jmod : describe option which prints module details for a jmod file
+ 
 8. Service In Modular Application
 
 9. Concurrency
