@@ -82,7 +82,7 @@ This is a my own documentation related to Java which I collected to reach OCP 17
   - Methods:
     + an Overridding method is allowed to return a sub-type of the return type defined in the overridden method. (Ex: class A has method a() return Iterable, and class B has method a() overrided from class A, but it can return a sub-type like Collection. Because Collection is an sub-interface of Iterable interface)
     + Cannot declare var in parameter of method. ex: void method(var a){ } // compile error
-    + The overriden method can have more visibility (ex: super's method() access modifier is default -> devired class's overriden method would be default or protected or public) 
+    + The overriden method can have equal or more visibility (ex: super's method() access modifier is default -> devired class's overriden method would be default or protected or public) 
     + Overloaded methods means the methods have same name, would be same type, but absolutely different types of parameters between other methods
     + "+" operator:
       - the "+" operator is overloaded such that if any one of its two operands is a String then it will convert the other operand to a String. If neither one is String
@@ -133,6 +133,10 @@ This is a my own documentation related to Java which I collected to reach OCP 17
     + stripLeading(): ex: "   abc" => "abc"
     + stripTrailing(): ex: "abc  " => "abc"
     + str.isEmpty(): returns true if, and only if, length() is 0. Thus, it will return false even if the string contains only spaces.
+    + Hierarchy: CharSequence(Interface) -> String (class)
+                          |---------------> StringBuilder (class)
+                          |---------------> StringBuffer (class)
+                          |---------------> StringCharBuffer (class)
   
   - Read / Write data
     + BufferedWriter's append method = works same as the write(String) method, it **OVERWRITE** the existing content in file
@@ -154,7 +158,7 @@ This is a my own documentation related to Java which I collected to reach OCP 17
     + a label is assigned before a loop to specify a block code. We can use 'continue' or 'break' [Label_name] to execute a coressponding syntax with the label
     + if we use 'continue' or 'break' without [label_name], the code works as normal and don't take care the label
 2. Exception handling & Assertion
-
+  - the try{} block always work together either catch(Exceptionclass){} block or finally{} block, or both of them. the try{} block never work alone
   - java.lang.Exceptions
     + java.io.IOException -> java.io.FileNotFoundException
     + java.io.IOException
@@ -230,6 +234,7 @@ This is a my own documentation related to Java which I collected to reach OCP 17
       String[] sa = new String[3]{"a","b","c"} // compile error
       String[] sa = new String[]{"a","b","c"} // compiled without error
       ```
+    + Method toArray() return an array of Object (Object[]), not array of generic type assigned to the array
   - Iterable (Interface) -> Collection (Interface) 
   - CopyOnWriteArrayList:
     + is extended from ArrayList which supports thread-safe.
@@ -242,7 +247,7 @@ This is a my own documentation related to Java which I collected to reach OCP 17
     + List<?> means a List of **everything**, depends on the type of the first item.
     + Never has anything like "new ArrayList<?>"
     + List<?> is not same as List< Object >
-    + list.add([index], [value]);
+    + list.add([index], [value]); : insert a new value into a list with index and merge the rest value in right side to 1 more index. Ex: [1,2,3], then list.add(1,3) -> [1,3,2,3]
     + Diamond operator <> is always be used in the right hand side of = sign, cannot be used in the left hand side. List<> is invalid, use List<?> instead
     + Arrays.asList() return a mutable list (can add or remove items), whereas List.of() return a immutable list (don't allow to add or remove items)
     + Arrays.asList() allow null item inside, but the list.of() doesn't allow it
@@ -291,6 +296,7 @@ This is a my own documentation related to Java which I collected to reach OCP 17
     + There are over 40 FIs established in Java 8, which is located in 'java.util.functions' package
     + But we only have to take care 6 FIs:
       * Function<T,V> => T apply(V v);
+      * BiFunction<T,U,R> => R apply(T t, U u);
       * Consumer<T> => void accept(T t);
       * BiConsumer<T,U> => void accept(T t, U u);
       * Supplier<T> => T get();
@@ -474,10 +480,15 @@ This is a my own documentation related to Java which I collected to reach OCP 17
 
 13. Localization
   - java.time.LocalDateTime.of(int YEAR, int MONTH, int DATE, int HOUR, int MINUTE); // 5 values of type int. We can replace int value of MONTH by a constant in java.time.Month.[JANUARY-DECEMBER], month can not be used with String literally
+  - java.time.LocalTime.of(int hour, int minute): return LocalTime (static method)
+  - java.time.LocalTime until() method: return long
   - java.time.ZoneDateTime.of(LocalDateTime,ZoneId.of(COUNTRY_STRING));
   - java.time.Period(java.time.LocalDate, java.time.LocalDate): calculate and print a period time between 2 LocalDate with format "P-[number]D(Days)" (used to get period days)
   - java.time.Duration(java.time.LocalDateTime): calculate and print a duration time between 2 LocalDateTime with format "P-T[number]H(hours)[number]M(minutes) (used to get duration time - hours and minutes)
   - java.time.temporal.ChronoUnit
+    + ChronoUnit is an enum that implements TemporalUnit interface, which provides the standard units used in the Java Date Time API
+    + If we want to custom owner unit, we can implement this interface
+    + Some values in ChronoUnit enum: NANO, MICRO, MILIS, SECONDS, MINUTES, HOURS, HALF-DAYS, DAYS, WEEKS, MONTHS, YEARS, DECADES, CENTURIES, MILLENNIA, ERAS, FOREVER
   - java.util.Locale: Provide country and language specific formatting for Dates. Provide country specific formatting for Currencies.
 
 14. Notice: 
