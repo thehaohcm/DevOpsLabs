@@ -289,6 +289,8 @@ This is a my own documentation related to Java which I collected to reach OCP 17
     + Properties (and Map) has a method named keySet(), which returns Set<K>
   - Notice:
     + Collectors.groupingBy(Function): return a Collector(ex: Map,List,...) that groups all element by matching the Lambda expression in Function Interface. Ex: {C=[S3:C], A=[S1:A, S2:A]}
+    + Collection.forEach(Consumer<? extends ...>)
+    + Collection.sorted(Comparator<? extends ...>)
 
 5. Functional Interface & Lambda Expressions
   - Published in Java 8
@@ -300,8 +302,12 @@ This is a my own documentation related to Java which I collected to reach OCP 17
       * Function<T,V> => T apply(V v);
       * BiFunction<T,U,R> => R apply(T t, U u);
       * Consumer<T> => void accept(T t);
+        . Besides accept method, Consumer Interface also have one default method named 'andThen(Consumer)', which can be used to combine 1 more Consumer to do something afterward. 
       * BiConsumer<T,U> => void accept(T t, U u);
       * Supplier<T> => T get();
+      * DoubleSupplier => double getAsDouble(); (no generic, and return a double primitive type - not Double)
+      * IntSupplier => int getAsInteger(); (no generic, and return a int primitive type - not Integer)
+      * LongSupplier => long getAsLong(); (no generic, and return a long primitive type - not Long)
       * Predicate<T> => boolean test(T t);
       * BinaryOperator<T> extend BiFunction<T,T,T> => T apply(T t,T t);
       * UnaryOperator<T> (overloaded Function<T,T>) => T apply(T t)
