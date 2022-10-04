@@ -32,6 +32,7 @@ This is a my own documentation related to Java which I collected to reach OCP 17
       - A static nested class does not have a reference to a nesting instance, so a static nested class cannot invoke non-static methods or access non-static fields of an instance of the class within which it is nested
   - Constructor
     + If class A and class B are in different package, class B extends class A, and class B has its constructor without having access modifier (default access modifier) => the code cannot compile because by default, compiler automatically add 'super()' into the first line of class B's constructor (the devired class' constructor) => A() is not accessible in B
+    + If a parrent class A has at least 1 constructor which has at least 1 parameter => the devired class B MUST AT LEAST have 1 constructor (migh have argument or not, still okay) which use 'super(...)' keyword map to at least 1 constructor in super class A. If not => compile error
   - Enums (java.lang.Enum)
     + enum can be defined inside a class, or even method and constructor, but for these cases, we cannot defined enum with any access modifier. Enums defined by these ways are implicitly private
     + enum is implicitly final, we cannot extends or use it with 'sealed' keyword
@@ -226,6 +227,7 @@ This is a my own documentation related to Java which I collected to reach OCP 17
     + When a class implements Comparable, you can sort a collection (or array) of objects of that class using Collections.sort (or Arrays.sort) without requiring a separate Comparator object
 
 4. Generics and Collections
+  - The type inside <> is used with correct type when using the Generics (ex: in method or lambda). Ex: Predict<List> -> we can only add List object into, cannot use any sub-class such as ArrayList in this generic type)
   - Set
     + all item inside set are unique
   - Array
@@ -311,7 +313,7 @@ This is a my own documentation related to Java which I collected to reach OCP 17
         . if > 0:  o1 > o2
         . if < 0: o1 < o2
         . if = 0: o1 = o2
-  
+  - The 'return' keyword using in lambda must be inside curly brackets {}, and the parameter must be inside round brackets. If not => throws exception
   - Method Reference:
     + used as the same in method which allow Functional Interface by passing an existing method (a way to reduce code)
     + can be stored as variable with 'var' or an Interface type
@@ -570,6 +572,8 @@ This is a my own documentation related to Java which I collected to reach OCP 17
       + If the sealed class or interface not added with 'permits' keyword, that means the class/interface has been extended/implemented by another already. Otherwise, the compiler will show error
       + If the class declared in 'permits' doesn't use either 'sealed' or 'non-sealed' => compile error
     - 'instanceof' and pattern matching
+      + 'instanceof' keyword return a boolean which determined and return 'true' if an object is equal or referrenced to a class/super-class or interface
+      + If an object is not relevant to the class/interface in the right handside (ex: no extends or implemented from that) => compile error
     - API Changes - method additions - Date/Time API
       + ***Although Math API has been added in the objectives, we haven't seen any question on it in the exam.***
   
