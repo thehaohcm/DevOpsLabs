@@ -158,6 +158,9 @@ This is a my own documentation related to Java which I collected to reach OCP 17
   - Labels:
     + a label is assigned before a loop to specify a block code. We can use 'continue' or 'break' [Label_name] to execute a coressponding syntax with the label
     + if we use 'continue' or 'break' without [label_name], the code works as normal and don't take care the label
+  - Objects:
+    + Every object in java has method hashCode() which is generated to a code 
+      - Notice that in Integer Object, the hashCode() return a primitive value of the object. Ex: new Integer(4).hashCode() returns 4 (primitive type)
 2. Exception handling & Assertion
   - the try{} block always work together either catch(Exceptionclass){} block or finally{} block, or both of them. the try{} block never work alone
   - java.lang.Exceptions
