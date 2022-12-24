@@ -1,0 +1,21 @@
+Question 1: Setup Yum local repostiory using RHEL-9 ISO image mounted on either /mnt 
+Answer:
+  # mount RHEL-9.iso /mnt
+  # cp /mnt/media.repo /etc/yum.repos.d/rhel-9.repo
+  # chmod 644 /etc/yum.repos.d/rhel-9.repo
+  # vim /etc/yum.repos.d/rhel-9.repo
+  
+  # dnf/yum clean all
+  
+Question 2: Modify network interface to static configuration with the following settings:
+IPV4 – 192.168.1.211/24
+GW – 192.168.1.1
+DNS – 8.8.8.8
+
+Answer:
+  # nmcli device
+  # nmcli connection modify enp0s3 ipv4.addresses 192.168.1.211/24
+  # nmcli connection modify enp0s3 ipv4.gateway 192.168.1.1
+  # nmcli connection modify enp0s3 ipv4.dns 8.8.8.8
+  # nmcli connection down enp0s3 && nmcli connection up enp0s3
+  # ip address show enp0s3
