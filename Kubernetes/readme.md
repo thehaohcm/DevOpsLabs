@@ -307,7 +307,7 @@ tips:
   ex: kubectl get pods -o jsonpath="{.items[*].status}" | jq . | grep -i "nodeName"
   
 -------------------------------
-Preparing short-command before taking the exam:
+Common commands in Kubernetes
 
 alias ks="kubectl -n kube-system"
 
