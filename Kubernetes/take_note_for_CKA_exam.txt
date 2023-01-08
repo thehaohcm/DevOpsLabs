@@ -43,74 +43,74 @@ CSR: is a K8s object which defines a user map to k8s (based on the key located i
   create new rolebinding
 
 run temporary pod (and it will be removed after done) and run a command:
-  kubectl run [pod_name] --restart=Never --image=[image_name] --rm -ti --command -- [command]
-or kubectl -it  run busybox --rm --image=busybox -- sh
-ex: kubectl run test --image=busybox --rm -ti --command -- sleep 4600
+  + `kubectl run [pod_name] --restart=Never --image=[image_name] --rm -ti --command -- [command]`
+  + or `kubectl -it  run busybox --rm --image=busybox -- sh`
+ex: `kubectl run test --image=busybox --rm -ti --command -- sleep 4600`
 
 
 collect osImage item of all ndoes by using jsonpath:
-  kubectl get nodes -o jsonpath="{.item[*].status.nodeInfo.osImage}"
+  + `kubectl get nodes -o jsonpath="{.item[*].status.nodeInfo.osImage}"`
 or we can use jq tool to show json with pretty format:
-  kubectl get nodes -o jsonpath | jq
+  + `kubectl get nodes -o jsonpath | jq`
 otherwise: 
-  kubectl get nodes -o json | jq -c 'path(..)|[.[]|tostring]|join(".")' | grep -i osImage | grep -v managedFields
+  + `kubectl get nodes -o json | jq -c 'path(..)|[.[]|tostring]|join(".")' | grep -i osImage | grep -v managedFields`
 install jq tool: 
-  apt install jq
+  + `apt install jq`
 
 get resources in k8s cluster and sort by creation time:
-  kubectl api-resources --sort-by='.metadata.creationTime'
+  + `kubectl api-resources --sort-by='.metadata.creationTime'`
 
-create a new service account
-kubectl create sa [service_account_name]
+create a new service account:
+  + `kubectl create sa [service_account_name]`
 
 add serviceaccount for a pod (yaml file)
 spec:
   serviceAccount: [service_account_name]
   
 create role:
-  kubectl create role [role_name] [-n [namespace]] --verb=[create,update,delete,...] --resource=[pod,configmaps,secrets]
+  + `kubectl create role [role_name] [-n [namespace]] --verb=[create,update,delete,...] --resource=[pod,configmaps,secrets]`
 create rolebinding:
-  kubectl create rolebinding [role_binding_name] [-n [namespace]] --role=[role_name] [--serviceaccount=[namespace]:[serviceaccount_name]] [--user=[user_name]]
+  + `kubectl create rolebinding [role_binding_name] [-n [namespace]] --role=[role_name] [--serviceaccount=[namespace]:[serviceaccount_name]] [--user=[user_name]]`
 check auth:
-  kubectl auth can-i [verb] [resource] --as=system:serviceaccount:[namespace]:[service_account_name]
+  + `kubectl auth can-i [verb] [resource] --as=system:serviceaccount:[namespace]:[service_account_name]`
   
 get all resource in k8s cluster:
-  kubectl api-resources
+  + `kubectl api-resources`
   
 check network plugin info:
   find /etc/cni/net.d/
   then read a file inside this folder
 
 create a secret:
-  kubectl create secret generic [secret_name] --from-literal=[key1]=[value1] --from-literal=[key2]=[value2]...
+  + `kubectl create secret generic [secret_name] --from-literal=[key1]=[value1] --from-literal=[key2]=[value2]...`
   
 get cluster cidr network (2 ways):
-  - kubectl cluster-info dump | grep -i 'cluster-ip-range'
-  - cat /etc/kubernetes/manifests/kube-apiserver.yaml | grep -i 'server-cluster-ip-range'
-  - cat /etc/kubernetes/manifests/kube-controller-manager.yaml | grep -i 'server-cluster-ip-range'
+  - `kubectl cluster-info dump | grep -i 'cluster-ip-range'`
+  - `cat /etc/kubernetes/manifests/kube-apiserver.yaml | grep -i 'server-cluster-ip-range'`
+  - `cat /etc/kubernetes/manifests/kube-controller-manager.yaml | grep -i 'server-cluster-ip-range'`
   
 change the cluster IP range CIDR:
   change ip range in 'server-ip-cluster-range' value in 2 files:
-    - /etc/kubernetes/manifests/kube-apiserver.yaml 
-    - /etc/kubernetes/manifests/kube-controller-manager.yaml
+    - `/etc/kubernetes/manifests/kube-apiserver.yaml`
+    - `/etc/kubernetes/manifests/kube-controller-manager.yaml`
   (static-pod will automatically restart themself, we don't need to do anything after modifying)
   
 join a node worker into cluster:
   run this comment in the master node (ssh into master node):
-    kubeadm token create --print-join-command
+    + `kubeadm token create --print-join-command`
   ssh into the new one worker node:
     then copy the join command in the master node and past into the worker node
     
 get cert info of k8s clusters (server, client cert...):
-  openssl x509 -noout -text -in [path of the cert file]
-   ex: openssl x509 -noout -text -in /etc/kubernetes/pki/server.crt | grep -i 'After' -A3
-  kubeadm certs check-expiration
+  + `openssl x509 -noout -text -in [path of the cert file]`
+   ex: `openssl x509 -noout -text -in /etc/kubernetes/pki/server.crt | grep -i 'After' -A3`
+  + `kubeadm certs check-expiration`
   
-  client certificate: /etc/kubernetes/kubelet.conf
+  client certificate: `/etc/kubernetes/kubelet.conf`
   
 renew cert with command
-  kubeadm certs renew [service]
-  ex: kubeadm certs renew apiserver
+  + `kubeadm certs renew [service]`
+  ex: `kubeadm certs renew apiserver`
   
 both livenessProbe and readinessProbe are used to control health of an applicaiton
   + livenessProbe: check if container is available. Failing liveness probe will RESTART the container
@@ -118,10 +118,10 @@ both livenessProbe and readinessProbe are used to control health of an applicait
   + StartupProbe: check if container has properly started. StartupProbe has higher priority over the above types, which are disabled by K8s until the startup probe is successful
 
 monitor resource in:
-  - nodes: kubectl top nodes
-  - pod: kubectl top pods
-  - pod + pod's containers: kubectl top pods --containers
-  - specifc pod + pods containers: kubectl top pods [pod_name] --containers
+  - nodes: `kubectl top nodes`
+  - pod: `kubectl top pods`
+  - pod + pod's containers: `kubectl top pods --containers`
+  - specifc pod + pods containers: `kubectl top pods [pod_name] --containers`
   
 create a snapshot with ectdctl
   ETCDCTL_API=3 etcdctl --endpoints [endpoint_URL:127.0.0.1]:2379 \
@@ -138,9 +138,9 @@ create a snapshot with ectdctl
   - or check the pod static of etcd in /etc/kubernetes/manifests/etcd.yaml
   
   List Pod (or K8s object) with custom columes by using jsonpath:
-    kubectl get [object] -o jsonpath="[ColumnName1]:.[jsonpath item value],[ColumnName2]:.[jsonpath item value]"
-    ex: List the nginx pod with custom columns POD_NAME and POD_STATUS
-    kubectl get pods -o jsonpath="POD_COLUMN:.metadata.name,POD_STATUS:.status.containerStatuses[].state"
+  + `kubectl get [object] -o jsonpath="[ColumnName1]:.[jsonpath item value],[ColumnName2]:.[jsonpath item value]"`
+  ex: List the nginx pod with custom columns POD_NAME and POD_STATUS
+  + `kubectl get pods -o jsonpath="POD_COLUMN:.metadata.name,POD_STATUS:.status.containerStatuses[].state"`
     
   DNS in K8s
     we can nslookup a pod or service in k8s cluster with their own IP address, or use a DNS name. The DNS names are defined like:
@@ -152,15 +152,15 @@ create a snapshot with ectdctl
           => DNS name is: nginx-service.default
   
 Cordon: mark the node as unavailable to k8s schedule
-  kubectl cordon [node-name]
+  + `kubectl cordon [node-name]`
 Uncordon: mark the node as available to k8s schedule
-  kubectl uncordon [node-name]
+  + `kubectl uncordon [node-name]`
 Drain: evict all pods running in the node and reschedule them to run on another node
-  kubectl drain node [node-name]
+  + `kubectl drain node [node-name]`
   NOTICE: the drain cmd can only be executed in the master node, cannot execute it on worker nodes
           when you drain the node, then you want to allow it run back, execute the command UNCORDON
           DRAIN = EVICT PODs + CORDON
-2nd step: apt update && apt-cache madison kubeadm
+2nd step: `apt update && apt-cache madison kubeadm`
 Taint: mark a node with a special key and value to restrict all new pods can be deployed in this
 Toleration: make a pod with a taint key to indicate it can be deployed into the node which is tainted already
 
@@ -185,21 +185,21 @@ Notice: the drain cmd can only be executed in the master node, cannot execute it
 Notice: when you drain the node, then you want to allow it run back, execute the command UNCORDON
 2nd step: apt update && apt-cache madison kubeadm
 3rd step:
- apt-mark unhold kubeadm && \
- apt-get update && apt-get install -y kubeadm=1.2x.x-00 && \
- apt-mark hold kubeadm
+  + `apt-mark unhold kubeadm && \
+     apt-get update && apt-get install -y kubeadm=1.2x.x-00 && \
+     apt-mark hold kubeadm`
  
 4th step: upgrade the kubeadm
-  kubeadm version
-  kubeadm upgrade plan
-  sudo kubeadm upgrade apply v1.2x.x
+  + `kubeadm version`
+  + `kubeadm upgrade plan`
+  + `sudo kubeadm upgrade apply v1.2x.x`
 
 5th step: upgrade the worker nodes
-  apt-mark unhold kubelet kubectl && \
-  apt-get update && apt-get install -y kubelet=1.2x.x-00 kubectl=1.2x.x-00 && \
-  apt-mark hold kubelet kubectl
-  sudo systemctl daemon-reload
-  sudo systemctl restart kubelet
+  + `apt-mark unhold kubelet kubectl && \
+     apt-get update && apt-get install -y kubelet=1.2x.x-00 kubectl=1.2x.x-00 && \
+     apt-mark hold kubelet kubectl`
+  + `sudo systemctl daemon-reload`
+  + `sudo systemctl restart kubelet`
 
 -------------------------------
 
@@ -207,8 +207,8 @@ tips:
   if a question is asking for inspect to a container of pod:
     - find which node that the pod is running inside
     - ssh into the node
-    - use 'crictl ps | grep [pod_name]' to check and get pod's container_id and info
-      use 'crictl inspect [pod_ip]' to get info about the container
+    - use `crictl ps | grep [pod_name]` to check and get pod's container_id and info
+      use `crictl inspect [pod_ip]` to get info about the container
     (use crictl command as a docker command alter)
     
   if a question asking for create a deployment which only allow one pod will be run inside one node (include master node):
@@ -224,7 +224,7 @@ tips:
   4. use podAntiAffinity + (topologyKey: kubernete.io/hostname)
   
   How to get kubernetes manifest folder path (for static pods):
-    - ps aux | grep kubelet | grep -i '--config='
+    - `ps aux | grep kubelet | grep -i '--config='`
     
   if a question require to create a shared volume 
     => create an emptyDir{} in volumes section in yaml file
@@ -249,43 +249,43 @@ tips:
 
 linux stuff tips:
   find a text with insensitiy case:
-    grep -i '[word]'
+    + `grep -i '[word]'`
     
   find multi texts with insensity case:
-    grep -i -e '^([word1]|[word2])'
+    + `grep -i -e '^([word1]|[word2])'`
     
   count line number:
-    wc -l
+    + `wc -l`
     
   replace a word with another word:
-    sed -i 's/[word1]/[word2]/g'
+    + `sed -i 's/[word1]/[word2]/g'`
     
   check response of url:
-    curl -s [url/pod_name/service_name/ip]:[port]
+    + `curl -s [url/pod_name/service_name/ip]:[port]`
     
   get an absolute path of a file:
-    readlink -f [file_name]
+    + `readlink -f [file_name]`
     
   get a specific column data:
-    awk '{print $[column_num]}'
+    + `awk '{print $[column_num]}'`
     
   encode data 
-    echo -n "[word]" | base64
+    + `echo -n "[word]" | base64`
     (notice: "-n" paramter means don't print new line character)
     
   decode data
-    echo "[word]" | base64 --decode
+    + `echo "[word]" | base64 --decode`
     
   get last "n" line of a content
-    cat [file] | tail -[n]
+    + `cat [file] | tail -[n]`
     
   get first "n" line of a content
-    cat [file] | head -[n]
+    + `cat [file] | head -[n]`
     
 -------------------------------
 
 Notice:
   - If the nod is running out of resource, k8s will consider to terminate all pods that are using more than their request. That means all pod which doesn't have any "requests" section will be considered to terminated. To check them, just run command: 
-    + kubectl describe pods | grep -e -i "^(name:| requests:)" -A1
+    + `kubectl describe pods | grep -e -i "^(name:| requests:)" -A1`
     => all shown pods are pods that required resource, remove them from the considered list, then all the rest will be terminated
-    + kubectl get pod -o jsonpath="{range .items[*]} {.metadata.name} {.spec.containers[*].resources}{'\n'}"
+    + `kubectl get pod -o jsonpath="{range .items[*]} {.metadata.name} {.spec.containers[*].resources}{'\n'}"`
