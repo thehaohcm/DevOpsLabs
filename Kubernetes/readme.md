@@ -91,17 +91,17 @@ create new context:
 switch context:
   + `kubectl config use-context [context_name]`
 
-CSR: is a K8s object which defines a user map to k8s (based on the key located in csr key file), then we can use kubectl to approve or deny it to use inside K8s cluster
+CSR: is a K8s object which defines a user map to k8s (based on the key located in csr key file), then we can use kubectl to approve or deny it to use inside K8s cluster\
   --option
     create a key and csr file\
-      + `openssl genrsa -out [filename].key 2048`
-      + `openssl req -new -key [filename].key -out [filename].csr`
+      + `openssl genrsa -out [filename].key 2048`\
+      + `openssl req -new -key [filename].key -out [filename].csr`\
   --end--of--option\
-  create new csr with yaml format
-    spec.request: [run command to get encoded 64 text: echo [filename].csr | base64 | tr -d "\n"]
-  `kubectl certificate approve [csr_name] `
-  create new role
-  create new rolebinding
+  create new csr with yaml format\
+    spec.request: [run command to get encoded 64 text: echo [filename].csr | base64 | tr -d "\n"]\
+  `kubectl certificate approve [csr_name] `\
+  create new role\
+  create new rolebinding\
 
 run temporary pod (and it will be removed after done) and run a command:
   + `kubectl run [pod_name] --restart=Never --image=[image_name] --rm -ti --command -- [command]`\
@@ -158,7 +158,7 @@ change the cluster IP range CIDR:
   
 join a node worker into cluster:\
   run this comment in the master node (ssh into master node):\
-    + `kubeadm token create --print-join-command`
+    - `kubeadm token create --print-join-command`
   ssh into the new one worker node:\
     then copy the join command in the master node and past into the worker node
     
@@ -226,18 +226,18 @@ DNS in K8s
 Taint: mark a node with a special key and value to restrict all new pods can be deployed in this\
 Toleration: make a pod with a taint key to indicate it can be deployed into the node which is tainted already
 
-Network Policy\
->spec:\
->>  podSelector:\
->>>    matchLabels: apply this network policy for a pod which has same label\
+Network Policy
+>spec:
+>>  podSelector:
+>>>    matchLabels: apply this network policy for a pod which has same label
     
 >spec:
->>  [ingress/egress]:\
->>>    [from/to]:\
->>>>      podSelector: \
->>>>>        matchLabels: allow a pod which has same label to in (ingress) or out (egress) traffic through the network policy\
->>>>      namespaceSelector:\
->>>>>        matchLabels: allow all pods in a namespace which has same label to in (ingress) or out (egress) traffic through the network policy\
+>>  [ingress/egress]:
+>>>    [from/to]:
+>>>>      podSelector: 
+>>>>>        matchLabels: allow a pod which has same label to in (ingress) or out (egress) traffic through the network policy
+>>>>      namespaceSelector:
+>>>>>        matchLabels: allow all pods in a namespace which has same label to in (ingress) or out (egress) traffic through the network policy
 
 -------------------------------
 
