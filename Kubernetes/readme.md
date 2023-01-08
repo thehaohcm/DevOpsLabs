@@ -309,35 +309,35 @@ tips:
 -------------------------------
 Common commands in Kubernetes
 
-alias ks="kubectl -n kube-system"
+`alias ks="kubectl -n kube-system"`
 
-alias kgp="kubectl get pod"
-alias kgd="kubectl get deploy"
-alias kgs="kubectl get service"
-alias kgn="kubectl get node"
-alias kd="kubectl describe"
-alias kge="kubectl get events --sort-by='.metadata.creationTimestamp' | tail -8"
+`alias kgp="kubectl get pod"`
+`alias kgd="kubectl get deploy"`
+`alias kgs="kubectl get service"`
+`alias kgn="kubectl get node"`
+`alias kd="kubectl describe"`
+`alias kge="kubectl get events --sort-by='.metadata.creationTimestamp' | tail -8"`
 
-export dy="--dry-run=client -oyaml"
+`export dy="--dry-run=client -oyaml"`
 
-export now="--force --grace-period 0"
+`export now="--force --grace-period 0"`
 
-echo "set ts=2 sts=2 sw=2 et" >> ~/.vimrc
+`echo "set ts=2 sts=2 sw=2 et" >> ~/.vimrc`
 
 add label into a pod/deployments/...
-kubectl label [pod/deploy/...] [name] [key_1]=[value_1]...[key_N]=[value_N]
+  + `kubectl label [pod/deploy/...] [name] [key_1]=[value_1]...[key_N]=[value_N]`
 
 overwrite a label
-kubectl label --overwrite [pod/deploy/...] [name] [key]=[value]...[key_N]=[value_N]
+  + `kubectl label --overwrite [pod/deploy/...] [name] [key]=[value]...[key_N]=[value_N]`
 
 create new user:
-  kubectl config set-credentials [user_name] --client-certificate=[.crt_path] --client-key=[.key_path]
+  + `kubectl config set-credentials [user_name] --client-certificate=[.crt_path] --client-key=[.key_path]`
 
 create new context:
-  kubectl config set-context [context_name] --user=[user_name] --cluster=[cluster_name]
+  + `kubectl config set-context [context_name] --user=[user_name] --cluster=[cluster_name]`
 
 switch context:
-  kubectl config use-context [context_name]
+  + `kubectl config use-context [context_name]`
 
 CSR: is a K8s object which defines a user map to k8s (based on the key located in csr key file), then we can use kubectl to approve or deny it to use inside K8s cluster
   --option
@@ -488,27 +488,27 @@ spec:
 
 -------------------------------
 
-Upgrade kubeadm & kubelet in node of cluster
-1st step: Drain each node before upgrading, to make sure all new pods will not be scheduled into the node during the upgrade progress
-Notice: the drain cmd can only be executed in the master node, cannot execute it on worker nodes
-Notice: when you drain the node, then you want to allow it run back, execute the command UNCORDON
-2nd step: apt update && apt-cache madison kubeadm
-3rd step:
-  + `apt-mark unhold kubeadm && \
-     apt-get update && apt-get install -y kubeadm=1.2x.x-00 && \
-     apt-mark hold kubeadm`
+Upgrade kubeadm & kubelet in node of cluster\
+  - 1st step: Drain each node before upgrading, to make sure all new pods will not be scheduled into the node during the upgrade progress\
+Notice: the drain cmd can only be executed in the master node, cannot execute it on worker nodes\
+Notice: when you drain the node, then you want to allow it run back, execute the command UNCORDON\
+  - 2nd step: apt update && apt-cache madison kubeadm\
+  - 3rd step:
+    + `apt-mark unhold kubeadm && \
+       apt-get update && apt-get install -y kubeadm=1.2x.x-00 && \
+       apt-mark hold kubeadm`
  
-4th step: upgrade the kubeadm
-  + `kubeadm version`
-  + `kubeadm upgrade plan`
-  + `sudo kubeadm upgrade apply v1.2x.x`
+  - 4th step: upgrade the kubeadm
+    + `kubeadm version`
+    + `kubeadm upgrade plan`
+    + `sudo kubeadm upgrade apply v1.2x.x`
 
-5th step: upgrade the worker nodes
-  + `apt-mark unhold kubelet kubectl && \
-     apt-get update && apt-get install -y kubelet=1.2x.x-00 kubectl=1.2x.x-00 && \
-     apt-mark hold kubelet kubectl`
-  + `sudo systemctl daemon-reload`
-  + `sudo systemctl restart kubelet`
+  - 5th step: upgrade the worker nodes
+    + `apt-mark unhold kubelet kubectl && \
+       apt-get update && apt-get install -y kubelet=1.2x.x-00 kubectl=1.2x.x-00 && \
+       apt-mark hold kubelet kubectl`
+    + `sudo systemctl daemon-reload`
+    + `sudo systemctl restart kubelet`
 
 -------------------------------
 
