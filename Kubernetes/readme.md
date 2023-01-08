@@ -24,7 +24,7 @@ aws eks update-kubeconfig --name test-cluster --region ap-southeast-1 --profile 
 5. Delete cluster by eksctl cmd:
   - eksctl delete cluster --name test-cluster
 
-======
+=======
 
 If we have a Kubernetes Manifest yaml file (ex: deployment.yml), we can follow below steps to deploy it into nodes:
 
@@ -43,7 +43,7 @@ kubectl get svc --all-namespaces -o wide
 4. Display information about the Pod:
   - kubectl describe pod <pod-name>
 
-======
+=======
   
 Update the deployment (with a new yaml file, ex: deployment-update.yml)
 
@@ -53,13 +53,13 @@ Update the deployment (with a new yaml file, ex: deployment-update.yml)
 2. Watch the deployment create pods with new names and delete the old pods:
   - kubectl get pods -l app=nginx
 
-======
+=======
   
 Delete the deployment by name
   - kubectl delete deployment nginx-deployment
   
   
-======
+=======
 
 Common commands in Kubernetes:
 
@@ -79,7 +79,7 @@ export now="--force --grace-period 0"
 echo "set ts=2 sts=2 sw=2 et" >> ~/.vimrc
 
 add label into a pod/deployments/...
-kubectl label [pod/deploy/...] [name] [key_1]=[value_1]...[key_N]=[value_N]
+  kubectl label [pod/deploy/...] [name] [key_1]=[value_1]...[key_N]=[value_N]
 
 overwrite a label
 kubectl label --overwrite [pod/deploy/...] [name] [key]=[value]...[key_N]=[value_N]
