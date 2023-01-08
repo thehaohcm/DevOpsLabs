@@ -269,15 +269,15 @@ Notice: when you drain the node, then you want to allow it run back, execute the
 
 tips:
   if a question is asking for inspect to a container of pod: \
-    - find which node that the pod is running inside
-    - ssh into the node
-    - use `crictl ps | grep [pod_name]` to check and get pod''s container_id and info
-      use `crictl inspect [pod_ip]` to get info about the container
-    (use crictl command as a docker command alter)
+    + find which node that the pod is running inside
+    + ssh into the node
+    + use `crictl ps | grep [pod_name]` to check and get pod''s container_id and info
+    + use `crictl inspect [pod_ip]` to get info about the container
+    + (use crictl command as a docker command alter)
     
   if a question asking for create a deployment which only allow one pod will be run inside one node (include master node):
-    - use affinity + podAntiAffinity + (topologyKey: kubernetes.io/hostname): to make sure no node has 2 the same pod running inside
-    - use toleration to run a pod in the master node (copy a declaration in daemonset k8s doc)
+    + use affinity + podAntiAffinity + (topologyKey: kubernetes.io/hostname): to make sure no node has 2 the same pod running inside
+    + use toleration to run a pod in the master node (copy a declaration in daemonset k8s doc)
   => this deployment will behave as a daemonset  
   
   how to specify a pod to run a specific node:
@@ -288,25 +288,25 @@ tips:
   4. use podAntiAffinity + (topologyKey: kubernete.io/hostname)
   
   How to get kubernetes manifest folder path (for static pods):
-    - `ps aux | grep kubelet | grep -i '--config='`
+    + `ps aux | grep kubelet | grep -i '--config='`
     
-  if a question require to create a shared volume 
+  if a question require to create a shared volume \
     => create an `emptyDir{}` in volumes section in yaml file
     
   if we have to define a chain of command line in a container of pod, we have to add "/bin/sh" and "-c" command into the command section
-  ex:
-    command:
-    - `"/bin/sh"`
-    - `"-c"`
-    - `"echo...; echo...; echo..."`
+  ex:\
+    command:\
+    + `"/bin/sh"`
+    + `"-c"`
+    + `"echo...; echo...; echo..."`
     
   if a question ask to create a pod with running a while / keep running for sometime => use command sleep 1d 
-    - ex:`kubectl run [pod_name] --image=busybox [--dry-run=client -oyaml > [yaml file]] --command -- sleep 1d`
+    + ex:`kubectl run [pod_name] --image=busybox [--dry-run=client -oyaml > [yaml file]] --command -- sleep 1d`
     
   to make sure the service has connected to a pod/deployment/... successfully, just type command: `kubectl get ep` to check if it has a new endpoint or not => if it has a new endpoint, that means the service connected to object successfully
   
   How to print a json result by jsonpath type as a text and then use "grep" or "less -p" to search an expected keyword by using pipes in linux:
-   - ex: `kubectl get pods -o jsonpath="{.items[*].status}" | jq . | grep -i "nodeName"`
+   + ex: `kubectl get pods -o jsonpath="{.items[*].status}" | jq . | grep -i "nodeName"`
   
 -------------------------------
 
