@@ -64,10 +64,15 @@ Delete the deployment by name
 `alias ks="kubectl -n kube-system"`
 
 `alias kgp="kubectl get pod"`
+
 `alias kgd="kubectl get deploy"`
+
 `alias kgs="kubectl get service"`
+
 `alias kgn="kubectl get node"`
+
 `alias kd="kubectl describe"`
+
 `alias kge="kubectl get events --sort-by='.metadata.creationTimestamp' | tail -8"`
 
 `export dy="--dry-run=client -oyaml"`
