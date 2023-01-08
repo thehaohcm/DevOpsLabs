@@ -295,13 +295,13 @@ tips:
     
   if we have to define a chain of command line in a container of pod, we have to add "/bin/sh" and "-c" command into the command section
   ex:\
-    command:\
-    + `"/bin/sh"`
-    + `"-c"`
-    + `"echo...; echo...; echo..."`
+  command:\
+   + `"/bin/sh"`\
+   + `"-c"`\
+   + `"echo...; echo...; echo..."`\
     
-  if a question ask to create a pod with running a while / keep running for sometime => use command sleep 1d 
-    + ex:`kubectl run [pod_name] --image=busybox [--dry-run=client -oyaml > [yaml file]] --command -- sleep 1d`
+  if a question ask to create a pod with running a while / keep running for sometime => use command sleep 1d \
+   + ex:`kubectl run [pod_name] --image=busybox [--dry-run=client -oyaml > [yaml file]] --command -- sleep 1d`
     
   to make sure the service has connected to a pod/deployment/... successfully, just type command: `kubectl get ep` to check if it has a new endpoint or not => if it has a new endpoint, that means the service connected to object successfully
   
