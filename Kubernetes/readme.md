@@ -2,61 +2,61 @@
 
 Commands for Kubernetes and AWS EKS:
 1. Create K8s cluster by eksctl cmd:
-  - eksctl create cluster --profile debi-lab-user --name test-cluster --version 1.22 --region ap-southeast-1 --nodegroup-name linux-nodes --node-type t2.micro --nodes 2
+  - `eksctl create cluster --profile debi-lab-user --name test-cluster --version 1.22 --region ap-southeast-1 --nodegroup-name linux-nodes --node-type t2.micro --nodes 2`
 
 NOTICE: 
 - Config k8s cluster to correct IAM user by this command:
-aws eks update-kubeconfig --name [cluster-name] --region [region-code] --profile [aim-user-name-config]
+`aws eks update-kubeconfig --name [cluster-name] --region [region-code] --profile [aim-user-name-config]`
 
 - If encounter an issue of K8s clusters authentication, run this command to config again :
-aws eks update-kubeconfig --name test-cluster --region ap-southeast-1 --profile debi-lab-user
+`aws eks update-kubeconfig --name test-cluster --region ap-southeast-1 --profile debi-lab-user`
 
 
 2. Get nodes info by kubectl cmd:
-  - kubectl get nodes
+  - `kubectl get nodes`
 
 3. Get pod info by kuberctl cmd:
-  - kubectl get pod
+  - `kubectl get pod`
 
 4.
-  - kubectl get ns
+  - `kubectl get ns`
 
 5. Delete cluster by eksctl cmd:
-  - eksctl delete cluster --name test-cluster
+  - `eksctl delete cluster --name test-cluster`
 
 =======
 
 If we have a Kubernetes Manifest yaml file (ex: deployment.yml), we can follow below steps to deploy it into nodes:
 
 1. Create a Deployment based on the YAML file:
-  - kubectl apply -f deployment.yml
+  - `kubectl apply -f deployment.yml`
 
 2. Display information about the Deployment:
-  - kubectl describe deployemnt nginx-deployment
+  - `kubectl describe deployemnt nginx-deployment`
 
 3. List the Pods created by the deployment:
-  - kubectl get pods -l app=nginx
+  - `kubectl get pods -l app=nginx`
 
 Get external IP of k8s cluster:
-kubectl get svc --all-namespaces -o wide
+  - `kubectl get svc --all-namespaces -o wide`
 
 4. Display information about the Pod:
-  - kubectl describe pod <pod-name>
+  - `kubectl describe pod <pod-name>`
 
 =======
   
 Update the deployment (with a new yaml file, ex: deployment-update.yml)
 
 1. Apply the new YAML file:
-  - kubectl apply -f deployment-update.yml
+  - `kubectl apply -f deployment-update.yml`
 
 2. Watch the deployment create pods with new names and delete the old pods:
-  - kubectl get pods -l app=nginx
+  - `kubectl get pods -l app=nginx`
 
 =======
   
 Delete the deployment by name
-  - kubectl delete deployment nginx-deployment
+  - `kubectl delete deployment nginx-deployment`
   
   
 =======
@@ -212,12 +212,12 @@ create a snapshot with ectdctl:\
         ex: if a service is named "nginx-service" and it is located in default namespace
           => DNS name is: nginx-service.default
   
-Cordon: mark the node as unavailable to k8s schedule\
-  `kubectl cordon [node-name]`
-Uncordon: mark the node as available to k8s schedule\
-  `kubectl uncordon [node-name]`
-Drain: evict all pods running in the node and reschedule them to run on another node\
-  `kubectl drain node [node-name]`
+Cordon: mark the node as unavailable to k8s schedule
+  + `kubectl cordon [node-name]`
+Uncordon: mark the node as available to k8s schedule
+  + `kubectl uncordon [node-name]`
+Drain: evict all pods running in the node and reschedule them to run on another node
+  + `kubectl drain node [node-name]`
   NOTICE: the drain cmd can only be executed in the master node, cannot execute it on worker nodes
           when you drain the node, then you want to allow it run back, execute the command UNCORDON
           DRAIN = EVICT PODs + CORDON
@@ -225,18 +225,18 @@ Drain: evict all pods running in the node and reschedule them to run on another 
 Taint: mark a node with a special key and value to restrict all new pods can be deployed in this
 Toleration: make a pod with a taint key to indicate it can be deployed into the node which is tainted already
 
-Network Policy
-spec:
-  podSelector:
-    matchLabels: apply this network policy for a pod which has same label
+Network Policy\
+spec:\
+  podSelector:\
+    matchLabels: apply this network policy for a pod which has same label\
     
 spec:
-  [ingress/egress]:
-    [from/to]:
-      podSelector: 
-        matchLabels: allow a pod which has same label to in (ingress) or out (egress) traffic through the network policy
-      namespaceSelector:
-        matchLabels: allow all pods in a namespace which has same label to in (ingress) or out (egress) traffic through the network policy
+  [ingress/egress]:\
+    [from/to]:\
+      podSelector: \
+        matchLabels: allow a pod which has same label to in (ingress) or out (egress) traffic through the network policy\
+      namespaceSelector:\
+        matchLabels: allow all pods in a namespace which has same label to in (ingress) or out (egress) traffic through the network policy\
 
 -------------------------------
 
@@ -244,7 +244,7 @@ Upgrade kubeadm & kubelet in node of cluster
 1st step: Drain each node before upgrading, to make sure all new pods will not be scheduled into the node during the upgrade progress
 Notice: the drain cmd can only be executed in the master node, cannot execute it on worker nodes
 Notice: when you drain the node, then you want to allow it run back, execute the command UNCORDON
-2nd step: apt update && apt-cache madison kubeadm
+2nd step: `apt update && apt-cache madison kubeadm`
 3rd step:
  `apt-mark unhold kubeadm && \
  apt-get update && apt-get install -y kubeadm=1.2x.x-00 && \
