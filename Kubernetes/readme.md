@@ -93,10 +93,10 @@ switch context:
 
 CSR: is a K8s object which defines a user map to k8s (based on the key located in csr key file), then we can use kubectl to approve or deny it to use inside K8s cluster
   --option
-    create a key and csr file
+    create a key and csr file\
       + `openssl genrsa -out [filename].key 2048`
       + `openssl req -new -key [filename].key -out [filename].csr`
-  --end--of--option
+  --end--of--option\
   create new csr with yaml format
     spec.request: [run command to get encoded 64 text: echo [filename].csr | base64 | tr -d "\n"]
   `kubectl certificate approve [csr_name] `
@@ -157,7 +157,7 @@ change the cluster IP range CIDR:
   (static-pod will automatically restart themself, we don't need to do anything after modifying)
   
 join a node worker into cluster:\
-  run this comment in the master node (ssh into master node):
+  run this comment in the master node (ssh into master node):\
     + `kubeadm token create --print-join-command`
   ssh into the new one worker node:\
     then copy the join command in the master node and past into the worker node
@@ -198,18 +198,18 @@ create a snapshot with ectdctl:\
   
   - or check the pod static of etcd in /etc/kubernetes/manifests/etcd.yaml
   
-  List Pod (or K8s object) with custom columes by using jsonpath:
+  - List Pod (or K8s object) with custom columes by using jsonpath:
     + `kubectl get [object] -o jsonpath="[ColumnName1]:.[jsonpath item value],[ColumnName2]:.[jsonpath item value]"`
     ex: List the nginx pod with custom columns POD_NAME and POD_STATUS
     + `kubectl get pods -o jsonpath="POD_COLUMN:.metadata.name,POD_STATUS:.status.containerStatuses[].state"`
     
-  DNS in K8s
-    we can nslookup a pod or service in k8s cluster with their own IP address, or use a DNS name. The DNS names are defined like:
-      + with pod: <ip-address-with-hyphen>.<namespace_name>.pod
-        ex: if pods IP address is 10.23.100.2 and the pod is located in default namespace 
+DNS in K8s
+  - We can nslookup a pod or service in k8s cluster with their own IP address, or use a DNS name. The DNS names are defined like:
+    + with pod: <ip-address-with-hyphen>.<namespace_name>.pod
+      - ex: if pods IP address is 10.23.100.2 and the pod is located in default namespace \
           => DNS name is: 10-23-100-2.default.pod
-      + with service: <service_name>.<namespace_name>
-        ex: if a service is named "nginx-service" and it is located in default namespace
+    + with service: <service_name>.<namespace_name>
+      - ex: if a service is named "nginx-service" and it is located in default namespace \
           => DNS name is: nginx-service.default
   
 Cordon: mark the node as unavailable to k8s schedule
@@ -268,7 +268,7 @@ Notice: when you drain the node, then you want to allow it run back, execute the
 -------------------------------
 
 tips:
-  - If a question is asking for inspect to a container of pod: \
+  - If a question is asking for inspect to a container of pod: 
     + find which node that the pod is running inside
     + ssh into the node
     + use `crictl ps | grep [pod_name]` to check and get pod''s container_id and info
@@ -300,7 +300,7 @@ tips:
     + `"-c"`\
     + `"echo...; echo...; echo..."`\
     
-  - If a question ask to create a pod with running a while / keep running for sometime => use command sleep 1d \
+  - If a question ask to create a pod with running a while / keep running for sometime => use command sleep 1d 
     + ex:`kubectl run [pod_name] --image=busybox [--dry-run=client -oyaml > [yaml file]] --command -- sleep 1d`
     
   - To make sure the service has connected to a pod/deployment/... successfully, just type command: `kubectl get ep` to check if it has a new endpoint or not => if it has a new endpoint, that means the service connected to object successfully
