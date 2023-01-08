@@ -25,6 +25,7 @@ aws eks update-kubeconfig --name test-cluster --region ap-southeast-1 --profile 
   - eksctl delete cluster --name test-cluster
 
 ======
+
 If we have a Kubernetes Manifest yaml file (ex: deployment.yml), we can follow below steps to deploy it into nodes:
 
 1. Create a Deployment based on the YAML file:
@@ -43,6 +44,7 @@ kubectl get svc --all-namespaces -o wide
   - kubectl describe pod <pod-name>
 
 ======
+  
 Update the deployment (with a new yaml file, ex: deployment-update.yml)
 
 1. Apply the new YAML file:
@@ -51,12 +53,14 @@ Update the deployment (with a new yaml file, ex: deployment-update.yml)
 2. Watch the deployment create pods with new names and delete the old pods:
   - kubectl get pods -l app=nginx
 
-=====
+======
+  
 Delete the deployment by name
   - kubectl delete deployment nginx-deployment
   
   
-=====
+======
+
 Common commands in Kubernetes:
 
 alias ks="kubectl -n kube-system"
