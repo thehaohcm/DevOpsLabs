@@ -301,13 +301,12 @@ tips:
     - `"echo...; echo...; echo..."`
     
   if a question ask to create a pod with running a while / keep running for sometime => use command sleep 1d 
-  ex:
-    + `kubectl run [pod_name] --image=busybox [--dry-run=client -oyaml > [yaml file]] --command -- sleep 1d`
+    - ex:`kubectl run [pod_name] --image=busybox [--dry-run=client -oyaml > [yaml file]] --command -- sleep 1d`
     
-  to make sure the service has connected to a pod/deployment/... successfully, just type command: "kubectl get ep" to check if it has a new endpoint or not => if it has a new endpoint, that means the service connected to object successfully
+  to make sure the service has connected to a pod/deployment/... successfully, just type command: `kubectl get ep` to check if it has a new endpoint or not => if it has a new endpoint, that means the service connected to object successfully
   
   How to print a json result by jsonpath type as a text and then use "grep" or "less -p" to search an expected keyword by using pipes in linux:
-    + ex: `kubectl get pods -o jsonpath="{.items[*].status}" | jq . | grep -i "nodeName"`
+   - ex: `kubectl get pods -o jsonpath="{.items[*].status}" | jq . | grep -i "nodeName"`
   
 -------------------------------
 
