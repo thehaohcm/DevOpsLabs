@@ -240,13 +240,13 @@ spec:
 
 -------------------------------
 
-Upgrade kubeadm & kubelet in node of cluster<br\
+Upgrade kubeadm & kubelet in node of cluster
                                                  
 1st step: Drain each node before upgrading, to make sure all new pods will not be scheduled into the node during the upgrade progress\
 Notice: the drain cmd can only be executed in the master node, cannot execute it on worker nodes\
-Notice: when you drain the node, then you want to allow it run back, execute the command UNCORDON\
+Notice: when you drain the node, then you want to allow it run back, execute the command UNCORDON
                                                  
-2nd step: `apt update && apt-cache madison kubeadm`\
+2nd step: `apt update && apt-cache madison kubeadm`
                                                  
 3rd step:
  `apt-mark unhold kubeadm && \
