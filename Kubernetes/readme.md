@@ -212,31 +212,32 @@ DNS in K8s
       - ex: if a service is named "nginx-service" and it is located in default namespace \
           => DNS name is: nginx-service.default
   
-Cordon: mark the node as unavailable to k8s schedule
-  + `kubectl cordon [node-name]`
-Uncordon: mark the node as available to k8s schedule
-  + `kubectl uncordon [node-name]`
-Drain: evict all pods running in the node and reschedule them to run on another node
-  + `kubectl drain node [node-name]`
-  NOTICE: the drain cmd can only be executed in the master node, cannot execute it on worker nodes
+  - Cordon: mark the node as unavailable to k8s schedule
+    + `kubectl cordon [node-name]`
+  - Uncordon: mark the node as available to k8s schedule
+    + `kubectl uncordon [node-name]`
+  - Drain: evict all pods running in the node and reschedule them to run on another node
+    + `kubectl drain node [node-name]`
+  - NOTICE: the drain cmd can only be executed in the master node, cannot execute it on worker nodes
           when you drain the node, then you want to allow it run back, execute the command UNCORDON
           DRAIN = EVICT PODs + CORDON
-2nd step: `apt update && apt-cache madison kubeadm`
-Taint: mark a node with a special key and value to restrict all new pods can be deployed in this
+  
+2nd step: `apt update && apt-cache madison kubeadm`\
+Taint: mark a node with a special key and value to restrict all new pods can be deployed in this\
 Toleration: make a pod with a taint key to indicate it can be deployed into the node which is tainted already
 
 Network Policy\
-spec:\
-  podSelector:\
-    matchLabels: apply this network policy for a pod which has same label\
+>spec:\
+>>  podSelector:\
+>>>    matchLabels: apply this network policy for a pod which has same label\
     
-spec:
-  [ingress/egress]:\
-    [from/to]:\
-      podSelector: \
-        matchLabels: allow a pod which has same label to in (ingress) or out (egress) traffic through the network policy\
-      namespaceSelector:\
-        matchLabels: allow all pods in a namespace which has same label to in (ingress) or out (egress) traffic through the network policy\
+>spec:
+>>  [ingress/egress]:\
+>>>    [from/to]:\
+>>>>      podSelector: \
+>>>>>        matchLabels: allow a pod which has same label to in (ingress) or out (egress) traffic through the network policy\
+>>>>      namespaceSelector:\
+>>>>>        matchLabels: allow all pods in a namespace which has same label to in (ingress) or out (egress) traffic through the network policy\
 
 -------------------------------
 
@@ -293,15 +294,15 @@ tips:
   - If a question require to create a shared volume \
     => create an `emptyDir{}` in volumes section in yaml file
     
-  - If we have to define a chain of command line in a container of pod, we have to add "/bin/sh" and "-c" command into the command section
+  - If we have to define a chain of command line in a container of pod, we have to add "/bin/sh" and "-c" command into the command section\
   ex:\
-  command:\
-    + `"/bin/sh"`\
-    + `"-c"`\
-    + `"echo...; echo...; echo..."`\
+  command:
+    + `"/bin/sh"`
+    + `"-c"`
+    + `"echo...; echo...; echo..."`
     
   - If a question ask to create a pod with running a while / keep running for sometime => use command sleep 1d 
-    + ex:`kubectl run [pod_name] --image=busybox [--dry-run=client -oyaml > [yaml file]] --command -- sleep 1d`
+    + `kubectl run [pod_name] --image=busybox [--dry-run=client -oyaml > [yaml file]] --command -- sleep 1d`
     
   - To make sure the service has connected to a pod/deployment/... successfully, just type command: `kubectl get ep` to check if it has a new endpoint or not => if it has a new endpoint, that means the service connected to object successfully
   
@@ -311,38 +312,38 @@ tips:
 -------------------------------
 
 linux stuff tips:
-  find a text with insensitiy case:
+  - Find a text with insensitiy case:
     + `grep -i '[word]'`
     
-  find multi texts with insensity case:
+  - Find multi texts with insensity case:
     + `grep -i -e '^([word1]|[word2])'`
     
-  count line number:
+  - Count line number:
     + `wc -l`
     
-  replace a word with another word:
+  - Replace a word with another word:
     + `sed -i 's/[word1]/[word2]/g'`
     
-  check response of url:
+  - Check response of url:
     + `curl -s [url/pod_name/service_name/ip]:[port]`
     
-  get an absolute path of a file:
+  - Get an absolute path of a file:
     + `readlink -f [file_name]`
     
-  get a specific column data:
+  - Get a specific column data:
     + `awk '{print $[column_num]}'`
     
-  encode data 
+  - Encode data 
     + `echo -n "[word]" | base64`
     (notice: "-n" paramter means don't print new line character)
     
-  decode data
+  - Decode data
     + `echo "[word]" | base64 --decode`
     
-  get last "n" line of a content
+  - Get last "n" line of a content
     + `cat [file] | tail -[n]`
     
-  get first "n" line of a content
+  - Get first "n" line of a content
     + `cat [file] | head -[n]`
     
 -------------------------------
