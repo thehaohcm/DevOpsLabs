@@ -1,11 +1,17 @@
 Question 1: Setup Yum local repostiory using RHEL-9 ISO image mounted on either /mnt 
 Answer:
+1st way:
   # mount RHEL-9.iso /mnt
   # cp /mnt/media.repo /etc/yum.repos.d/rhel-9.repo
   # chmod 644 /etc/yum.repos.d/rhel-9.repo
   # vim /etc/yum.repos.d/rhel-9.repo
   
   # dnf/yum clean all
+  
+2nd way:
+  # dnf config-manager [repository_url]
+  # dnf config-manager --add-repo [repository_url]
+  # dnf update
   
 Question 2: Modify network interface to static configuration with the following settings:
 IPV4 – 192.168.1.211/24
