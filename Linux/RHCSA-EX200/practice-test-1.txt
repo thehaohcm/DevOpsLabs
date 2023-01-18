@@ -25,3 +25,12 @@ Answer:
   # nmcli connection modify enp0s3 ipv4.dns 8.8.8.8
   # nmcli connection down enp0s3 && nmcli connection up enp0s3
   # ip address show enp0s3
+
+Question : Recovery password
+1. Reboot machine
+2. Press 'e' 
+3. In line starting with 'linux...' -> replace 'ro' with 'rw' and add new word into the end of line: 'init=/bin/bash'
+  # passwd root
+  # touch /.autorelabel
+  # exec /sbin/init
+  
