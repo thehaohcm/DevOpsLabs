@@ -1,7 +1,7 @@
 Question 1: Setup Yum local repostiory using RHEL-9 ISO image mounted on either /mnt 
 Answer:
 1st way (setup an offiline local repository):
-  # mount RHEL-9.iso /mnt
+  # mount RHEL-9.iso /mnt/disc_rhel9/
   # cp /mnt/media.repo /etc/yum.repos.d/rhel-9.repo
   # chmod 644 /etc/yum.repos.d/rhel-9.repo
   # vim /etc/yum.repos.d/rhel-9.repo
