@@ -1,0 +1,3 @@
+# firewall-cmd --add-forward-port=port=[source-port]:proto=tcp:toport=[destination-port] --permanent
+# firewall-cmd --reload
+# firewall-cmd --list-all
