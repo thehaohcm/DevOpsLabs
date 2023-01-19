@@ -1,14 +1,32 @@
 Question 1: Setup Yum local repostiory using RHEL-9 ISO image mounted on either /mnt 
 Answer:
-1st way:
+1st way (setup an offiline local repository):
   # mount RHEL-9.iso /mnt
   # cp /mnt/media.repo /etc/yum.repos.d/rhel-9.repo
   # chmod 644 /etc/yum.repos.d/rhel-9.repo
   # vim /etc/yum.repos.d/rhel-9.repo
+  [Local-BaseOS]
+  
+  name=Red Hat Enterprise Linux 9 - BaseOS
+  metadata_expire=-1
+  gpgcheck=1
+  enabled=1
+  baseurl=file:///mnt/disc_rhel9//BaseOS
+  gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+  
+  [Local-AppStream]
+  
+  name=Red Hat Enterprise Linux 9 - AppStream
+  metadata_expire=-1
+  gpgcheck=1
+  enabled=1
+  baseurl=file:///mnt/disc_rhel9/AppStream/
+  gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+  
   
   # dnf/yum clean all
   
-2nd way:
+2nd way (setup an online repository via url):
   # dnf config-manager [repository_url]
   # dnf config-manager --add-repo [repository_url]
   # dnf update
