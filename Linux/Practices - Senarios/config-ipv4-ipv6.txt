@@ -1,0 +1,17 @@
+show all existing connection
+# nmcli connection show
+
+create a new connection based on the existing connection
+# nmcli connection add type ethernet con-name [connection-name] ifname [the-based-connection]
+
+modify the connection and assign a static ipv4 address
+# nmcli connection modify [conn-name] ipv4.addresses [range-ipv4-addresses] (ex: 1.1.1.1/24) ipv4.method manual connection.autoconnect yes
+
+modify the connection and assign a static ipv6 address
+# nmcli conneciton modify [conn-name] ipv6.address [range-ipv6-addresses] (ex: fe90::20c:29ff:fe6f:9b86/64) ipv6.method manual connection.autoconnect yes
+
+persist all changes:
+# nmcli connection up [conn-name]
+
+verify ip configuration:
+# ip addr show dev [conn-name]
