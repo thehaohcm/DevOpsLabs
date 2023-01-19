@@ -1,0 +1,9 @@
+get id of user:
+# id [user-name]
+
+# vi /etc/cron.deny
+-> add new user into the file, then save and quit
+
+login to an user to check
+# su - [user-name]
+# crontab -e
