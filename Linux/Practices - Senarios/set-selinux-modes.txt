@@ -1,0 +1,7 @@
+# getenforece
+# setenforce 1
+Notice: this way is not persistent. To make it persistent, follow this way:
+
+# vi /etc/selinux/config
+-> change the value of `SELINUX=' from `Permissive` to `Enforcing`
+# reboot
