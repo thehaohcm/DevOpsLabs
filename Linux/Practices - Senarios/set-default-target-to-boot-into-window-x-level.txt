@@ -1,0 +1,6 @@
+# systemctl get-default
+# systemctl set-default graphical.target // set default target to graphic
+# reboot
+
+# systemctl set-default multi-user.target // set default target to cli
+# reboot
