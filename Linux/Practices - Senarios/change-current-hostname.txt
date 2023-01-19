@@ -1,0 +1,15 @@
+# hostname
+-> check current host name
+
+1st way:
+# hostnamectl set-hostname [new-hostname]
+
+2nd way:
+# nmtui-hostname [new-hostname]
+
+3rd way:
+# vi /etc/hostname 
+then change the hostname inside the file
+# reboot
+or
+# systemctl restart NetworkManager
