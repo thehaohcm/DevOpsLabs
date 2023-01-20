@@ -1,0 +1,14 @@
+# sudo su -
+
+add user with specific uid:
+# useradd -u [uid] [user-name] [-G [group-name]]
+
+change password of a username:
+# passwd [user-name]
+
+change expiry date (notice: for example, you want to set expiry date after 6 months from now):
+# date -d "+6month" 
+# chage -E [yyyy-mm-dd] [user-name]
+
+show info of user:
+# chage -l [user-name]
