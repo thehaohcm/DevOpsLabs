@@ -1,0 +1,8 @@
+edit cronjobs with a specific username:
+# crontab -e -u [user-name]
+
+list all cronjobs with a specific username:
+# crontab -l -u [user-name]
+
+restart crond to effect:
+# systemctl restart crond
