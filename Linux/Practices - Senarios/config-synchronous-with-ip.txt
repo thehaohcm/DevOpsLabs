@@ -1,0 +1,5 @@
+# sudo yum install -y chrony
+# sudo vi /etc/chrony.conf
+server [chrony-server-ip]
+# sudo timdatectl set-ntp true
+# sudo systemctl enable --now chronyd
