@@ -1,0 +1,6 @@
+# dnf config-manager --add-repo=[repo-url]
+
+change config (if necessary):
+# vi /etc/yum.repos.d/local-rhel8.repo
+change gpgcheck=0
+change enabled=1
