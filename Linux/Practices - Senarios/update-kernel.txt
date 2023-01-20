@@ -1,0 +1,10 @@
+install a new kernel rpm package in verbose mode:
+# rpm -ivh [rpm-file.rpm]
+
+install a new kernel package via repository:
+# yum install -y kernel
+or
+# yum update kernel
+
+verify:
+# hostname -u
