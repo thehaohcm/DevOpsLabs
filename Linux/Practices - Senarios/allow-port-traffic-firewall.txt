@@ -1,3 +1,12 @@
 firewall-cmd --zone public --add-service http --permanent
 firewall-cmd --zone public --add-service https --permanent
 firewall-cmd --list-all
+
+open a specific port:
+# firewall-cmd --permanent --add-port=[port-number]/tcp
+
+open a serivce's port:
+# firewall-cmd --permanent --add-service=[service-name]
+
+after all, reload the firewall-cmd:
+# fireawall-cmd --complete-reload
