@@ -2,3 +2,4 @@
 
 search image registry "httpd" with filter official
 # podman search httpd --filter is-official=true
+# podman search httpd --filter=is-official
