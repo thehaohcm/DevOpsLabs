@@ -1,0 +1,42 @@
+Create new partition and physical volume:
+# lsblk
+assumming that we want to create a pv from /dev/sdb
+# fdisk -c /dev/sdb
+# m
+...
+# p
+# w
+# fdisk -l
+assumming that the result will show with partition /dev/sdb1
+# pvcreate /dev/sdb1
+# pvs // or pvdisplay
+
+Create new volumn group:
+# vgcreate [vg_name] /dev/sdb1
+# vgs // or vgdisplay
+
+Create new logical volume
+# lvcreate -n [lv_name] -L [size] (ex: 1G) [existing_vg_name]
+# lvs // or lvdisplay
+
+Format the logical volume with ext4 filesystem:
+# mkfs.ext4 /dev/mapper/[gv_name]-[lv_name] (ex: /dev/mapper/myvg-mylv)
+
+Format the logical volume with xfs filesystem:
+# mkfs.xfs -K /dev/mapper/[gv_name]-[lv_name] (ex: /dev/mapper/myvg-mylv) // "-K" no discard
+
+Mount and save the new logical volume to a specific folder:
+# mkdir /mylv
+# vi /etc/fstab
+/dev/mapper/myvg-mylv    /mylv    ext4    defaults    0    0
+:wq
+# mount -a
+# lsblk
+
+Extend the logical volume "mylv" with 100MB
+# lvextend -r -L +100M /dev/mapper/myvg-mylv
+# lvs // or lvdisplay
+# vgs // or vgdisplay
+
+lvextend -L [+/-][more_capacity]M -r [path_of_lv]
+df -h
