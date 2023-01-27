@@ -30,6 +30,7 @@ remove package in RedHat/Centos:
 
 get list of package name in RedHat/Centos:
   - rpm -qa 
+  - dnf/yum list installed
   
 list configuration files of a package name:
   - rpm -qc [package_name]
