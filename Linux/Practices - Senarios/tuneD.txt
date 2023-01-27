@@ -1,0 +1,15 @@
+install tuneD:
+# dnf/yum install -y tuned
+# systemctl enable --now tuned
+
+show all available profiles list:
+# tuned-adm list
+
+set profile for the compute with tuned:
+# tuned-adm profile virtual-guest [profile_name] (ex: powersave)
+
+show current active profile:
+# tuned-adm active
+
+verify:
+# tuend-adm verify
