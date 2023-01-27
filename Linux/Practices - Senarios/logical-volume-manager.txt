@@ -33,10 +33,11 @@ Mount and save the new logical volume to a specific folder:
 # mount -a
 # lsblk
 
-Extend the logical volume "mylv" with 100MB
+Extend the logical volume "mylv" with 100MB:
 # lvextend -r -L +100M /dev/mapper/myvg-mylv
 # lvs // or lvdisplay
 # vgs // or vgdisplay
+# df -h
 
-lvextend -L [+/-][more_capacity]M -r [path_of_lv]
-df -h
+Rename an existing logical volume:
+# lvrename [vg_name]/[current_vg_name] [vg_name][new_vg_name]
