@@ -1,0 +1,13 @@
+nice is used for setting a priority for a new process:
+# nice -5 wget http://....  // set priority with 5
+# nice --5 wget http://....  // set priority with -5
+
+renice cmd used for setting a priority for an existing process:
+# renice -n 5 -p [pid]
+# renice -n -5 -p [pid]
+# renice -n 5 -g [group-flag]
+# renice -n 5 -u [user-flag]
+
+Notice:
++ Use all above cmd with root privilege (use with prefix `sudo`)
++ Range of priority is between -20 (highest priority) to 19 (lowest priority)
