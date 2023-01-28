@@ -1,20 +1,20 @@
 #!/bin/bash
 
-// get the 1st parameter value
+# get the 1st parameter value
 a=$1
 
 echo "b value: "
-// read an input value from standard input
+# read an input value from standard input
 read b
 
-// calculate sum and diff value from a and b
+# calculate sum and diff value from a and b
 sum=$((a+b))
 diff=$((a-b))
 
-// print the results
+# print the results
 echo "sum: $sum, and diff: $diff"
 
-// compare value
+# compare value
 if [ a -lt b ]; then
   echo "$a is smaller than $b"
 elif [ a -gt b ]; then
@@ -23,17 +23,26 @@ else
   echo "$a is equal to $b"
 fi
 
-// for loop
+# for loop
 for index in {1..10}; do
   echo "welcome $i times"
 done
 
-// show all files in the current directory with for loop
+for (( c=1; c<=5; c++ )); do
+  echo "count: $c"
+done
+
+# loop with specific increasing number (ex: 2)
+for index in {1..10..2}; do
+  echo "index: $index"
+done
+
+# show all files in the current directory with for loop
 for file in `ls`; do
   echo "file name: $file"
 done
 
-// while loop
+# while loop
 n=1
 while [ $n -le 10 ]; do
   echo "line number: $n"
