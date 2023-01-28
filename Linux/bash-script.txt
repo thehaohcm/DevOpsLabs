@@ -35,7 +35,7 @@ done
 
 // while loop
 n=1
-while [ n -le 10 ]; do
+while [ $n -le 10 ]; do
   echo "line number: $n"
   n=$((n+1))
 done
