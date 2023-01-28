@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # check the 1st parameter is exist or not
+# if [ $# -eq 0 ]; then
 if [ -z "$1" ]; then
   echo "no arguments supplied"
   exit 1
