@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# check the 1st parameter is exist or not
+if [ -z "$1" ]; then
+  echo "no arguments supplied"
+  exit 1
+fi
+
 # get the 1st parameter value
 a=$1
 
