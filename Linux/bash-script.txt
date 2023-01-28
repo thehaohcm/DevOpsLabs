@@ -24,7 +24,18 @@ else
 fi
 
 // for loop
-for index in {1..10}
-do
+for index in {1..10}; do
   echo "welcome $i times"
+done
+
+// show all files in the current directory with for loop
+for file in `ls`; do
+  echo "file name: $file"
+done
+
+// while loop
+n=1
+while [ n -le 10 ]; do
+  echo "line number: $n"
+  n=$((n+1))
 done
