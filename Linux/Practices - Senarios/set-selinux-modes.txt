@@ -1,4 +1,4 @@
-# getenforece
+# getenforce
 # setenforce 1
 Notice: this way is not persistent. To make it persistent, follow this way:
 
