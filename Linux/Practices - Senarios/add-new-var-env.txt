@@ -1,0 +1,4 @@
+# vi /etc/bashrc
+export [VAR_NAME]=[VALUE]
+# source /etc/bashrc
+# echo $[VAR_NAME]
