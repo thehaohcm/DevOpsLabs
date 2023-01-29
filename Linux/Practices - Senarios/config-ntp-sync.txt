@@ -1,0 +1,8 @@
+# timedatectl
+
+install chrony:
+# dnf install -y chrony
+# systemctl enable --now chrony
+# cat /etc/chrony.conf
+# timedatectl set-ntp true
+# timedatectl
