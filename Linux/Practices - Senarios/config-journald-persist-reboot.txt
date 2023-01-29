@@ -1,0 +1,2 @@
+# vi /etc/system/journald.conf
+Change "#Storage=auto" to "Storage=persistent"
