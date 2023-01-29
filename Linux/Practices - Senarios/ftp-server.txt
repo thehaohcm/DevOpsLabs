@@ -1,8 +1,0 @@
-install ftp server:
-# dnf/yum install -y vsftpd
-# system enable vsftpd --now
-# system restart vsftpd
-
-config to allow anonymous user download file:
-# vi /etc/vsftpd/vsftpd.conf
-anonymous_enable=YES
