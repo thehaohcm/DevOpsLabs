@@ -1,0 +1,18 @@
+- soft link:
+Original file ---- soft link
+      |
+      |
+Data on disk
+
+# ln -s [original-path] [soft-link-name]
+# ls -l .
+
+--------------
+- hard link:
+Original file
+      |
+      |
+Data on disk ---- hard link
+
+# ln [original-path] [hard-link-name]
+# ls -l .
