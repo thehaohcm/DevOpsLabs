@@ -3,6 +3,11 @@ install ftp server:
 # system enable vsftpd --now
 # system restart vsftpd
 
+config firewall to allow ftp service:
+# firewall-cmd --add-service=ftp --zone=public --permanent
+# firewall-cmd --reload
+# firewall-cmd --list-all
+
 config to allow anonymous user download file:
 # vi /etc/vsftpd/vsftpd.conf
 anonymous_enable=YES
