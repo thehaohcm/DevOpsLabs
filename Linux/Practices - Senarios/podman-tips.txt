@@ -1,0 +1,18 @@
+pull the busybox image:
+# podman pull docker.io/library/busybox:latest
+
+inspect busybox image with skopeo:
+# skopeo inspect docker://docker.io/library/busybox:latest
+
+add the tag "mybusybox" to the "docker://docker.io/library/busybox:latest" image:
+# podman tag docker://docker.io/library/busybox mybusybox
+# podman images
+
+run container with image busybox with tag "mybusybox" in detached mode with name "busybox"
+# podman run -d --name busybox localhost/mybusybox
+# podman ps -a
+
+remove the busybox container:
+# podman rm -af
+// "-a" to remove all containers, "-f" to force all running and pausing containers
+# podman ps -a
