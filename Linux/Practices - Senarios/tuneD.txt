@@ -12,4 +12,4 @@ show current active profile:
 # tuned-adm active
 
 verify:
-# tuend-adm verify
+# tuned-adm verify
