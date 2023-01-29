@@ -1,0 +1,5 @@
+Make the httpd_t domain permissive:
+# semanage permissive -a httpd_t
+
+Remove the permissive of httpd_t domain:
+# semanage permissive -d httpd_t
