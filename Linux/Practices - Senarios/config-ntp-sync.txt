@@ -4,5 +4,11 @@ install chrony:
 # dnf install -y chrony
 # systemctl enable --now chrony
 # cat /etc/chrony.conf
+
+config firewall to allow ntp service
+# firewall-cmd --add-service=ntp --zone=public --permanent
+# firewall-cmd --reload
+# firewall-cmd --list-all
+
 # timedatectl set-ntp true
 # timedatectl
