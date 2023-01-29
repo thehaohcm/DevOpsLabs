@@ -3,6 +3,9 @@
 add user with specific uid:
 # useradd -u [uid] [user-name] [-G [group-name]]
 
+add user and set expire date:
+# useradd -u [uid] -e [yyyy-mm-dd] [user-name]
+
 change password of a username:
 # passwd [user-name]
 
