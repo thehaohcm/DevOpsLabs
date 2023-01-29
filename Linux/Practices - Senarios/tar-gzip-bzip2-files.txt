@@ -1,0 +1,22 @@
+archive file:
+# tar -cvf [filename].tar /[path]
+uncompress file:
+# tar -xvf [filename].tar
+
+tar.gz file:
+compress file:
+# tar -czvf [filename].tar.gz /[path]
+uncompress file:
+# tar -xzvf [filename].tar.gz
+
+bzip2 file:
+compress file:
+# tar -cjvf [filename].tar.bz2 /[path]
+uncompress file:
+# tar -xjvf [filename].tar.bz2
+
+xz file:
+compress file:
+# tar -cJvf [filename].tar.xz /[path]
+uncompress file:
+# tar -xJvf [filename].tar.xz
