@@ -6,6 +6,3 @@ Notice: not make the change persistent, will be clean after reboot
 To persist value:
 # echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
 => run command 'sysctl -p' to take affect
-
-restart sysctl:
-# sysctl --system
