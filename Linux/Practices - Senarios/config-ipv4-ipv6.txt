@@ -12,6 +12,12 @@ modify the connection and assign a static ipv6 address
 
 persist all changes:
 # nmcli connection up [conn-name]
+or
+# nmcli c reload [conn-name]
 
 verify ip configuration:
+# nmcli c show [conn-name]
+or
+# nmcli device show [conn-name]
+or
 # ip addr show dev [conn-name]
