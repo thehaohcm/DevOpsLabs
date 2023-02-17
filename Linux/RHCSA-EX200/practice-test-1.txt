@@ -63,8 +63,34 @@ Answer:
   # cat /proc/sys/net/ipv4/ip_forward
   # sysctl net.ipv4.ip_forward
   
-Question enable ipv6 forward
+Question: enable ipv6 forward
 Answer:
   # cat /proc/sys/net/ipv6/conf/all/forwarding
   # echo net.ipv6.conf.all.forwarding=1>>/etc/sysctl.conf
-  # 
+  # sysctl -p
+  # cat /proc/sys/net/ipv6/conf/all/forwarding
+  # sysctl net.ipv6.config.all.forwarding
+
+Question: install/update kernel
+Answer:
+  # yum/dnf -y update
+  # yum/dnf -y update kernel
+  # systemctl reboot
+
+Question: make linux machine boot into the `multi-user.target` by defaul
+Answer:
+  # systemctl get-default
+  # systemctl set-default multi-user.target
+
+Question: create a user `sally` whose UID is 5000, and the user has not access to any interactive shell
+Answer:
+  # useradd -u 5000 -s /sbin/nologin sally
+  # id sally
+  # su - sally
+  
+Question: configure the system to run in a virtual machine general non-specialized tuned profile
+Answer:
+  # tuned-adm list
+  # tuned-adm active profile 
+  # tuned-adm profile virtual-guest balanced
+  # tuned-adm active
