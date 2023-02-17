@@ -94,3 +94,85 @@ Answer:
   # tuned-adm active profile 
   # tuned-adm profile virtual-guest balanced
   # tuned-adm active
+
+Question: configure Apache to serve a basic website that shows the text "hello world" and also enable http/https port on firewall
+Answer:
+  # dnf/yum -y install httpd
+  # systemctl enable httpd --now
+  # systemctl start httpd
+  # firewall-cmd --add-service=http --zone=public --permanent
+  # firewall-cmd --add-service=https --zone=public --permanent
+  # firewall-cmd --reload
+  # vi /var/www/html/index.html
+  Hello World!
+  :wq
+  # systemctl restart httpd
+  # curl http://localhost
+  
+Question: write a shell named "execmd" in /tmp dir that will execute the following:
+User logged in
+Today's date
+Number of current users logged in
+Answer:
+  # vi /tmp/execmd.sh
+  #!/bin/bash
+  echo "Hello `whoami`"
+  echo "Today is `date`"
+  echo "Number of user login: `who | wc -l`"
+  :wq
+  # chmod a+x /tmp/execmd.sh
+  # /tmp/execmd.sh
+  
+Question: create a cronjob that run fidsk command `df -h` and ouput /tmp/diskstatus at 4:15 pm daily. The output should append to the file
+Answer:
+  # crontab -e
+  15 16 * * * df -h >> /tmp/diskstatus
+  :wq
+
+Question: create a "homebackup.tgz" file of /home directory in /Backup directory. Exclude the file type `pdf` while creating the compressed tar file
+Answer:
+  # tar -czvf /Backup/backup.tgz /home --exclude=*.pdf
+  
+Question: create a 2G partition, make it as an ext4 file system, mounted on /mnt/data, and auto-mounts at boot-start
+Answer:
+  # lsblk
+  # fdisk -c /dev/sdb
+  n
+  p
+  1
+  Press Enter to confirm the default sector
+  +2G
+  t
+  8e (for Linux LVM)
+  p
+  w
+  # mkfs.ext4 /dev/sdb1
+  # mkdir /mnt/data
+  # vi /etc/fstab
+  /dev/sdb1    /mnt/data    ext4    defaults    0    0
+  :wq
+  # mount -a
+  # lsblk
+  
+Question: create a new 1G swap partition on /dev/sdc1 with partition #1 which takes effect at boot start
+Answer:
+  # lsblk
+  # fdisk /dev/sdc
+  n
+  p
+  1
+  Press Enter to confirm the default sector
+  +1G
+  p
+  t
+  l
+  82 (for Linux Swap)
+  p
+  w
+  # lsblk
+  # mkswap /dev/sdc1
+  # vi /etc/fstab
+  /dev/sdc1    swap    swap    defaults    0    0
+  :wq
+  # lsblk
+  
