@@ -243,3 +243,22 @@
   Answer:
   # mkdir /data
   # chmod og+a /data
+
+- Question: Set SELinux to "permissive" mode
+  Answer:
+  # sestatus
+  # vi /etc/selinux/config
+  SELINUX=permissive
+  :wq
+  # setenforce permissive
+  # getenforece
+  # sestatus
+  
+Question: Enable boot messages:
+Answer:
+  # vi /etc/default/grub
+  In "GRUB_CMDLINE_LINUX" line, remove "rhgb quite"
+  :wq
+  # grub2-mkconfig -o /boot/grub2/grub.cfg
+  # systemctl reboot
+
