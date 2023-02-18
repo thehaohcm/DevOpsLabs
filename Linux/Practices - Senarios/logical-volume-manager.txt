@@ -19,11 +19,17 @@ Create new logical volume
 # lvcreate -n [lv_name] -L [size] (ex: 1G) [existing_vg_name]
 # lvs // or lvdisplay
 
+Create new logical volume VDO
+# lvcreate --type vdo --name [name] --size [size] --vritualsize [logical-size] [vg-name]
+
 Format the logical volume with ext4 filesystem:
 # mkfs.ext4 /dev/mapper/[gv_name]-[lv_name] (ex: /dev/mapper/myvg-mylv)
 
 Format the logical volume with xfs filesystem:
 # mkfs.xfs -K /dev/mapper/[gv_name]-[lv_name] (ex: /dev/mapper/myvg-mylv) // "-K" no discard
+
+Extend the file system xfs:
+# xfs_growfs /dev/centos/root
 
 Mount and save the new logical volume to a specific folder:
 # mkdir /mylv
@@ -32,6 +38,9 @@ Mount and save the new logical volume to a specific folder:
 :wq
 # mount -a
 # lsblk
+
+Extend the volum group "myvg" with /dev/sdc1
+# vgextend myvg /dev/sdc1
 
 Extend the logical volume "mylv" with 100MB:
 # lvextend -r -L +100M /dev/mapper/myvg-mylv
