@@ -1,178 +1,178 @@
-Question 1: Setup Yum local repostiory using RHEL-9 ISO image mounted on either /mnt 
-Answer:
-1st way (setup an offiline local repository):
-  # mount RHEL-9.iso /mnt/disc_rhel9/
-  # cp /mnt/media.repo /etc/yum.repos.d/rhel-9.repo
-  # chmod 644 /etc/yum.repos.d/rhel-9.repo
-  # vim /etc/yum.repos.d/rhel-9.repo
-  [Local-BaseOS]
-  
-  name=Red Hat Enterprise Linux 9 - BaseOS
-  metadata_expire=-1
-  gpgcheck=1
-  enabled=1
-  baseurl=file:///mnt/disc_rhel9//BaseOS
-  gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
-  
-  [Local-AppStream]
-  
-  name=Red Hat Enterprise Linux 9 - AppStream
-  metadata_expire=-1
-  gpgcheck=1
-  enabled=1
-  baseurl=file:///mnt/disc_rhel9/AppStream/
-  gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
-  
-  
-  # dnf/yum clean all
-  
-2nd way (setup an online repository via url):
-  # dnf config-manager [repository_url]
-  # dnf config-manager --add-repo [repository_url]
-  # dnf update
-  
-Question 2: Modify network interface to static configuration with the following settings:
-IPV4 – 192.168.1.211/24
-GW – 192.168.1.1
-DNS – 8.8.8.8
+- Question 1: Setup Yum local repostiory using RHEL-9 ISO image mounted on either /mnt 
+  Answer:
+  1st way (setup an offiline local repository):
+    # mount RHEL-9.iso /mnt/disc_rhel9/
+    # cp /mnt/media.repo /etc/yum.repos.d/rhel-9.repo
+    # chmod 644 /etc/yum.repos.d/rhel-9.repo
+    # vim /etc/yum.repos.d/rhel-9.repo
+    [Local-BaseOS]
 
-Answer:
-  # nmcli device
-  # nmcli connection modify enp0s3 ipv4.addresses 192.168.1.211/24
-  # nmcli connection modify enp0s3 ipv4.gateway 192.168.1.1
-  # nmcli connection modify enp0s3 ipv4.dns 8.8.8.8
-  # nmcli connection down enp0s3 && nmcli connection up enp0s3
-  # nmcli c reload enp0s3
-  # ip address show enp0s3
-  # nmcli c show enp0s3 | grep ipv4
+    name=Red Hat Enterprise Linux 9 - BaseOS
+    metadata_expire=-1
+    gpgcheck=1
+    enabled=1
+    baseurl=file:///mnt/disc_rhel9//BaseOS
+    gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
 
-Question : Recovery password
-Answer:
-1. Reboot machine
-2. Press 'e' 
-3. In line starting with 'linux...' -> replace 'ro' with 'rw' and add new word into the end of line: 'init=/bin/bash'
-  # passwd root
-  # touch /.autorelabel
-  # exec /sbin/init
+    [Local-AppStream]
+
+    name=Red Hat Enterprise Linux 9 - AppStream
+    metadata_expire=-1
+    gpgcheck=1
+    enabled=1
+    baseurl=file:///mnt/disc_rhel9/AppStream/
+    gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+
+
+    # dnf/yum clean all
+
+  2nd way (setup an online repository via url):
+    # dnf config-manager [repository_url]
+    # dnf config-manager --add-repo [repository_url]
+    # dnf update
+
+- Question 2: Modify network interface to static configuration with the following settings:
+  IPV4 – 192.168.1.211/24
+  GW – 192.168.1.1
+  DNS – 8.8.8.8
+
+  Answer:
+    # nmcli device
+    # nmcli connection modify enp0s3 ipv4.addresses 192.168.1.211/24
+    # nmcli connection modify enp0s3 ipv4.gateway 192.168.1.1
+    # nmcli connection modify enp0s3 ipv4.dns 8.8.8.8
+    # nmcli connection down enp0s3 && nmcli connection up enp0s3
+    # nmcli c reload enp0s3
+    # ip address show enp0s3
+    # nmcli c show enp0s3 | grep ipv4
+
+- Question : Recovery password
+  Answer:
+  1. Reboot machine
+  2. Press 'e' 
+  3. In line starting with 'linux...' -> replace 'ro' with 'rw' and add new word into the end of line: 'init=/bin/bash'
+    # passwd root
+    # touch /.autorelabel
+    # exec /sbin/init
   
-Question: enable ipv4 forward
-Answer:
+- Question: enable ipv4 forward
+  Answer:
   # cat /proc/sys/net/ipv4/ip_forward
   # echo net.ipv4.ip_forward=1>>/etc/sysctl.conf
   # sysctl -p
   # cat /proc/sys/net/ipv4/ip_forward
   # sysctl net.ipv4.ip_forward
   
-Question: enable ipv6 forward
-Answer:
-  # cat /proc/sys/net/ipv6/conf/all/forwarding
-  # echo net.ipv6.conf.all.forwarding=1>>/etc/sysctl.conf
-  # sysctl -p
-  # cat /proc/sys/net/ipv6/conf/all/forwarding
-  # sysctl net.ipv6.config.all.forwarding
+- Question: enable ipv6 forward
+  Answer:
+    # cat /proc/sys/net/ipv6/conf/all/forwarding
+    # echo net.ipv6.conf.all.forwarding=1>>/etc/sysctl.conf
+    # sysctl -p
+    # cat /proc/sys/net/ipv6/conf/all/forwarding
+    # sysctl net.ipv6.config.all.forwarding
 
-Question: install/update kernel
-Answer:
-  # yum/dnf -y update
-  # yum/dnf -y update kernel
-  # systemctl reboot
+- Question: install/update kernel
+  Answer:
+    # yum/dnf -y update
+    # yum/dnf -y update kernel
+    # systemctl reboot
 
-Question: make linux machine boot into the `multi-user.target` by defaul
-Answer:
-  # systemctl get-default
-  # systemctl set-default multi-user.target
+- Question: make linux machine boot into the `multi-user.target` by defaul
+  Answer:
+    # systemctl get-default
+    # systemctl set-default multi-user.target
 
-Question: create a user `sally` whose UID is 5000, and the user has not access to any interactive shell
-Answer:
-  # useradd -u 5000 -s /sbin/nologin sally
-  # id sally
-  # su - sally
+- Question: create a user `sally` whose UID is 5000, and the user has not access to any interactive shell
+  Answer:
+    # useradd -u 5000 -s /sbin/nologin sally
+    # id sally
+    # su - sally
   
-Question: configure the system to run in a virtual machine general non-specialized tuned profile
-Answer:
-  # tuned-adm list
-  # tuned-adm active profile 
-  # tuned-adm profile virtual-guest balanced
-  # tuned-adm active
+- Question: configure the system to run in a virtual machine general non-specialized tuned profile
+  Answer:
+    # tuned-adm list
+    # tuned-adm active profile 
+    # tuned-adm profile virtual-guest balanced
+    # tuned-adm active
 
-Question: configure Apache to serve a basic website that shows the text "hello world" and also enable http/https port on firewall
-Answer:
-  # dnf/yum -y install httpd
-  # systemctl enable httpd --now
-  # systemctl start httpd
-  # firewall-cmd --add-service=http --zone=public --permanent
-  # firewall-cmd --add-service=https --zone=public --permanent
-  # firewall-cmd --reload
-  # vi /var/www/html/index.html
-  Hello World!
-  :wq
-  # systemctl restart httpd
-  # curl http://localhost
-  
-Question: write a shell named "execmd" in /tmp dir that will execute the following:
-User logged in
-Today's date
-Number of current users logged in
-Answer:
-  # vi /tmp/execmd.sh
-  #!/bin/bash
-  echo "Hello `whoami`"
-  echo "Today is `date`"
-  echo "Number of user login: `who | wc -l`"
-  :wq
-  # chmod a+x /tmp/execmd.sh
-  # /tmp/execmd.sh
-  
-Question: create a cronjob that run fidsk command `df -h` and ouput /tmp/diskstatus at 4:15 pm daily. The output should append to the file
-Answer:
-  # crontab -e
-  15 16 * * * df -h >> /tmp/diskstatus
-  :wq
+- Question: configure Apache to serve a basic website that shows the text "hello world" and also enable http/https port on firewall
+  Answer:
+    # dnf/yum -y install httpd
+    # systemctl enable httpd --now
+    # systemctl start httpd
+    # firewall-cmd --add-service=http --zone=public --permanent
+    # firewall-cmd --add-service=https --zone=public --permanent
+    # firewall-cmd --reload
+    # vi /var/www/html/index.html
+    Hello World!
+    :wq
+    # systemctl restart httpd
+    # curl http://localhost
 
-Question: create a "homebackup.tgz" file of /home directory in /Backup directory. Exclude the file type `pdf` while creating the compressed tar file
-Answer:
-  # tar -czvf /Backup/backup.tgz /home --exclude=*.pdf
-  
-Question: create a 2G partition, make it as an ext4 file system, mounted on /mnt/data, and auto-mounts at boot-start
-Answer:
-  # lsblk
-  # fdisk -c /dev/sdb
-  n
-  p
-  1
-  Press Enter to confirm the default sector
-  +2G
-  t
-  8e (for Linux LVM)
-  p
-  w
-  # mkfs.ext4 /dev/sdb1
-  # mkdir /mnt/data
-  # vi /etc/fstab
-  /dev/sdb1    /mnt/data    ext4    defaults    0    0
-  :wq
-  # mount -a
-  # lsblk
-  
-Question: create a new 1G swap partition on /dev/sdc1 with partition #1 which takes effect at boot start
-Answer:
-  # lsblk
-  # fdisk /dev/sdc
-  n
-  p
-  1
-  Press Enter to confirm the default sector
-  +1G
-  p
-  t
-  l
-  82 (for Linux Swap)
-  p
-  w
-  # lsblk
-  # mkswap /dev/sdc1
-  # vi /etc/fstab
-  /dev/sdc1    swap    swap    defaults    0    0
-  :wq
-  # lsblk
+- Question: write a shell named "execmd" in /tmp dir that will execute the following:
+  User logged in
+  Today's date
+  Number of current users logged in
+  Answer:
+    # vi /tmp/execmd.sh
+    #!/bin/bash
+    echo "Hello `whoami`"
+    echo "Today is `date`"
+    echo "Number of user login: `who | wc -l`"
+    :wq
+    # chmod a+x /tmp/execmd.sh
+    # /tmp/execmd.sh
+
+- Question: create a cronjob that run fidsk command `df -h` and ouput /tmp/diskstatus at 4:15 pm daily. The output should append to the file
+  Answer:
+    # crontab -e
+    15 16 * * * df -h >> /tmp/diskstatus
+    :wq
+
+- Question: create a "homebackup.tgz" file of /home directory in /Backup directory. Exclude the file type `pdf` while creating the compressed tar file
+  Answer:
+    # tar -czvf /Backup/backup.tgz /home --exclude=*.pdf
+
+- Question: create a 2G partition, make it as an ext4 file system, mounted on /mnt/data, and auto-mounts at boot-start
+  Answer:
+    # lsblk
+    # fdisk -c /dev/sdb
+    n
+    p
+    1
+    Press Enter to confirm the default sector
+    +2G
+    t
+    8e (for Linux LVM)
+    p
+    w
+    # mkfs.ext4 /dev/sdb1
+    # mkdir /mnt/data
+    # vi /etc/fstab
+    /dev/sdb1    /mnt/data    ext4    defaults    0    0
+    :wq
+    # mount -a
+    # lsblk
+
+- Question: create a new 1G swap partition on /dev/sdc1 with partition #1 which takes effect at boot start
+  Answer:
+    # lsblk
+    # fdisk /dev/sdc
+    n
+    p
+    1
+    Press Enter to confirm the default sector
+    +1G
+    p
+    t
+    l
+    82 (for Linux Swap)
+    p
+    w
+    # lsblk
+    # mkswap /dev/sdc1
+    # vi /etc/fstab
+    /dev/sdc1    swap    swap    defaults    0    0
+    :wq
+    # lsblk
   
