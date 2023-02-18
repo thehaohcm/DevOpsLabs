@@ -21,8 +21,8 @@
     baseurl=file:///mnt/disc_rhel9/AppStream/
     gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
 
-
     # dnf/yum clean all
+    # dnf/yum repolist
 
   2nd way (setup an online repository via url):
     # dnf config-manager [repository_url]
