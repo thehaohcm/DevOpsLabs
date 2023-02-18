@@ -12,3 +12,9 @@ config firewall to allow ntp service
 
 # timedatectl set-ntp true
 # timedatectl
+
+config sync time with server:
+# vi /etc/chrony.conf
+server [server-ip]
+# timedatectl set-ntp true
+# systemctl enable chronyd --now
