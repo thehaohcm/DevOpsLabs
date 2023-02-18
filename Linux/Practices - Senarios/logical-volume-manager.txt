@@ -48,5 +48,10 @@ Extend the logical volume "mylv" with 100MB:
 # vgs // or vgdisplay
 # df -h
 
+Reduce the logical volume "mylv" **to** 100MB:
+# lvreduce -r -L 100M /dev/mapper/myvg-mylv
+# lvs
+# df -h
+
 Rename an existing logical volume:
 # lvrename [vg_name]/[current_vg_name] [vg_name][new_vg_name]
