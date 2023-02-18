@@ -1,0 +1,10 @@
+get current default kernel:
+# grubby --default-kernel
+get current kernel's index:
+# grubby --default-index
+set default kernel:
+# grubby --set-default /boot/vmlinux-....
+set default index:
+# grubby --set-default-index [index]
+get all info about kernels:
+# grubby --info=ALL
