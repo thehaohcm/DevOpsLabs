@@ -262,3 +262,34 @@ Answer:
   # grub2-mkconfig -o /boot/grub2/grub.cfg
   # systemctl reboot
 
+Question: set user expired day after 90 days and must be at least 8 characters in length
+Answer:
+  # vi /etc/login.defs
+  PASS_MAX_DAYS 90
+  :wq
+  # vi /etc/security/pwquality.conf
+  minlen = 8
+  :wq
+  
+Question: create a job that write "These pretzels are making me thirsty!" to the message log file in /var/log dir at 12pm only on weekdays
+Answer:
+  # crontab -e
+  0 12 * * 1-5 logger "These pretzels are making me thirsty!"
+  :wq
+  
+Question: Reset password of root account in Linux machine to `Password123`
+Answer:
+  type e
+  go to a line has prefix is "linux="
+  find and replace "ro" to "rw" and add "init=/bin/bash" into the end of this line
+  press ctrl + e
+  # passwd
+  type Password123
+  type Password123
+  # touch /.autorelabel
+  # exec /sbin/init
+ 
+Question: automatically create a new file named `HelloWorld` into all new users
+Answer:
+  # touch /etc/skel/HelloWorld
+  
