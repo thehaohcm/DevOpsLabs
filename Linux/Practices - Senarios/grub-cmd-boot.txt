@@ -1,0 +1,7 @@
+Show boot message when startup the Linux machine:
+# vi /etc/defaults/grub
+find the lind which is started with "linux=", then remove the last words "rhgb quiet" (rhgb stands for Red Hat graphic boot)
+[ESC] 
+:wq
+# grub2-mkconfig -o /boot/grub2/grub.cfg
+# system reboot
