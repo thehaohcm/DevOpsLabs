@@ -366,3 +366,8 @@ Answer:
   :wq
   # systemctl restart sshd
   
+Question: install the latest kernel
+Answer:
+  # dnf/yum update
+  # dnf/yum update -y kernel
+  # systemctl reboot
