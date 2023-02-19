@@ -20,7 +20,10 @@ Create new logical volume
 # lvs // or lvdisplay
 
 Create new logical volume VDO
-# lvcreate --type vdo --name [name] --size [size] --vritualsize [logical-size] [vg-name]
+Make sure to install vdo lvm2 kmod-kvdo
+# dnf/yum install -y vdo lvm2 kmod-kvdo
+# lvcreate --type vdo --name [name] --size [size] --virtualsize [logical-size] [vg-name]
+# lvcreate --type vdo -n [name] -L [size] -V [logical-size] [vg-name]
 
 Format the logical volume with ext4 filesystem:
 # mkfs.ext4 /dev/mapper/[gv_name]-[lv_name] (ex: /dev/mapper/myvg-mylv)
