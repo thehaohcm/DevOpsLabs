@@ -297,10 +297,34 @@ Question: Disable password authentication
 Question: Setup SSH Passwordless Login in one server for the user Sam
 
 Question: on /dev/sdb create a 500MiB swap partition which takes effect automatically at boot start
+Answer:
+  # lsblk
+  # fdisk /dev/sdb
+  type n
+  enter
+  enter
+  +500M
+  t
+  82 (Linux SWAP)
+  p
+  w
+  # lsblk
+  # mkswap /dev/sdb[num]
+  # vi /etc/fstab
+  /dev/sdb[num] swap  swap  defaults  0 0
+  [esc]
+  :wq
+  # mount -a
+  # swapon -a 
+or# swapon /dev/sdb[num]
+  # free -m
+  # lsblk
 
 Question: setup a local image repository in /var/lib/registry on port 5000 with Podman
+Answer:
 
 Question: push the httpd container image to the image repository
+Answer:
 
 Question: add user tom, and grant him root privileges
 Answer:
@@ -315,10 +339,30 @@ Question: run "yum update" command with a priority value of "30"
 Answer:
   # nice -n 30 yum update
   
-Question: configure the server one (NFS client) to automatically mount the share server-two:/share on /nfs directory
+Question: configure the server one (NFS client) to automatically mount the share rhcsa.server.com:/share on /nfs directory
+Answer:
+  # showmount -e rhcsa.server.com
+  # mkdir /nfs
+  # vi /etc/fstab
+  rhcsa.server.com/share  /nfs  nfs_netdev  defaults  0 0
+  [esc]
+  :wq
+  # mount -a 
+  # mount | grep nfs
+  
 Question: Prevent all users from using the crontab command except tom
 Answer:
   # echo ALL >> /etc/cron.deny
   # echo tom >> /etc/cron.allow
   
 Question: create a directory hierarchy /V1/V2/V3/, and recursively apply the SELinux context of the /etc directory
+Answer:
+
+Question: Restrict root login 
+Answer:
+  # vi /etc/ssh/sshd_config
+  PermitRootLogin no
+  [esc]
+  :wq
+  # systemctl restart sshd
+  
