@@ -8,6 +8,9 @@ add the tag "mybusybox" to the "docker://docker.io/library/busybox:latest" image
 # podman tag docker://docker.io/library/busybox mybusybox
 # podman images
 
+build image from `Containerfile`:
+# podman build [--format=docker] -t [image-name] .
+
 run container with image busybox with tag "mybusybox" in detached mode with name "busybox"
 # podman run -d --name busybox localhost/mybusybox
 # podman ps -a
