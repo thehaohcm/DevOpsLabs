@@ -90,7 +90,7 @@
   Answer:
     # tuned-adm list
     # tuned-adm active profile 
-    # tuned-adm profile virtual-guest balanced
+    # tuned-adm profile balanced
     # tuned-adm active
 
 - Question: configure Apache to serve a basic website that shows the text "hello world" and also enable http/https port on firewall
