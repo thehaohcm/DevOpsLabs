@@ -23,6 +23,12 @@
 
     # dnf/yum clean all
     # dnf/yum repolist
+    
+    # vi /etc/fstab
+    /dev/sr0  /mnt/ iso9660 ro,user,auto  0 0
+    [esc]
+    :wq
+    # mount -a
 
   2nd way (setup an online repository via url):
     # dnf config-manager [repository_url]
