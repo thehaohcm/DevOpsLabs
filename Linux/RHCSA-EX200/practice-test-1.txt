@@ -250,7 +250,7 @@
   SELINUX=permissive
   :wq
   # setenforce permissive
-  # getenforece
+  # getenforce
   # sestatus
   
 Question: Enable boot messages:
@@ -292,3 +292,33 @@ Question: automatically create a new file named `HelloWorld` into all new users
 Answer:
   # touch /etc/skel/HelloWorld
   
+Question: Disable password authentication
+
+Question: Setup SSH Passwordless Login in one server for the user Sam
+
+Question: on /dev/sdb create a 500MiB swap partition which takes effect automatically at boot start
+
+Question: setup a local image repository in /var/lib/registry on port 5000 with Podman
+
+Question: push the httpd container image to the image repository
+
+Question: add user tom, and grant him root privileges
+Answer:
+  # useradd tom
+  # echo | passwd --stdin "[password]"
+  # visudo 
+or# vi /etc/sudoers
+  tom ALL=(ALL) ALL
+  :wq
+
+Question: run "yum update" command with a priority value of "30"
+Answer:
+  # nice -n 30 yum update
+  
+Question: configure the server one (NFS client) to automatically mount the share server-two:/share on /nfs directory
+Question: Prevent all users from using the crontab command except tom
+Answer:
+  # echo ALL >> /etc/cron.deny
+  # echo tom >> /etc/cron.allow
+  
+Question: create a directory hierarchy /V1/V2/V3/, and recursively apply the SELinux context of the /etc directory
