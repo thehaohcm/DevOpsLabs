@@ -371,3 +371,5 @@ Answer:
   # dnf/yum update
   # dnf/yum update -y kernel
   # systemctl reboot
+
+inspect the ht
