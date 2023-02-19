@@ -89,8 +89,7 @@
 - Question: configure the system to run in a virtual machine general non-specialized tuned profile
   Answer:
     # tuned-adm list
-    # tuned-adm active profile 
-    # tuned-adm profile balanced
+    # tuned-adm profile balanced/powersave/...
     # tuned-adm active
 
 - Question: configure Apache to serve a basic website that shows the text "hello world" and also enable http/https port on firewall
