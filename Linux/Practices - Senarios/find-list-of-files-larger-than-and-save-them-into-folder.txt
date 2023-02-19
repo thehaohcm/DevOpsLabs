@@ -1,1 +1,1 @@
-find [source_folder_path] -size +[size]M -exec cp {} [dest_folder_path] \;
+find [source_folder_path] -size +[size]M -exec cp -rfp {} [dest_folder_path] \;
