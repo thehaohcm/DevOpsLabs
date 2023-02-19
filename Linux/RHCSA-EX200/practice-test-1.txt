@@ -379,3 +379,23 @@ Answer:
   # systemctl reboot
 
 inspect the ht
+
+Question: set the system time to Asia/Ho_Chi_Minh timezone
+Answer:
+  # timedatectl list-timzone | grep -e ".*Ho_Chi_Minh.*"
+  # timedatectl set-timezone "Asia/Ho_Chi_Minh"
+  # timedatectl
+  
+Question: Ensure NTP sync is configured
+Answer:
+  # systemctl status chronyd
+  
+  if `chronyd` is not installed:
+  # dnf/yum install -y chrony
+  # systemctl enable --now chronyd
+  # systemctl start chronyd
+  # cat /etc/chrony.conf
+  
+  # timedatectl set-ntp true
+  # timedatectl
+  
