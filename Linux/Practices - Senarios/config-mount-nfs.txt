@@ -1,5 +1,7 @@
 Assumming that we want to mount NFS from server rhcsa.server.com:/share to /nfs directory
-# showmount -e [server-ip/domain]
+
+To show the NFS server's export list:
+# showmount -e [server-ip/domain] 
 # mkdir /nfs
 # vi /etc/fstab
 [server-ip/domain]:/[folder]  /nfs  nfs_netdev defaults  0 0
