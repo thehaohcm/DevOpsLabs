@@ -27,10 +27,12 @@ Make sure to install vdo lvm2 kmod-kvdo
 NOTICE: make sure the size has to be greater than 4GiB
 
 Format the logical volume with ext4 filesystem:
-# mkfs.ext4 /dev/mapper/[gv_name]-[lv_name] (ex: /dev/mapper/myvg-mylv)
+# mkfs.ext4 /dev/mapper/[vg_name]-[lv_name] (ex: /dev/mapper/myvg-mylv)
 
 Format the logical volume with xfs filesystem:
-# mkfs.xfs -K /dev/mapper/[gv_name]-[lv_name] (ex: /dev/mapper/myvg-mylv) // "-K" no discard
+# mkfs.xfs -K /dev/mapper/[vg_name]-[lv_name] (ex: /dev/mapper/myvg-mylv) // "-K" no discard
+
+NOTICE: use either `/dev/mapper/[vg_name]-[lv_name]` or `/dev/[vg_name]/[lv_name]`
 
 Extend the file system xfs:
 # xfs_growfs /dev/centos/root
