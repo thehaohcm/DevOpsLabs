@@ -26,7 +26,6 @@ Question: Use podman to pull the ubi image
 Question: Configure a permanent storage for Journald logs with 100M max use
 Question: Enable persistent logging for the systemd journal
 Question: Configure the system to log all daemon messages to /var/log/mylog.log file
-Question: Install Apache and allow it to get documents from NFS mounted folder
 Question: Block the FTP service
 Question: Find all files in /etc/ directory that were modified more than 90 days ago and ouput to /tmp/90days
 Question: Create a backup file named /root/backup.tar.bz2, contains the content of /usr/local, tar must be bzip2 to compress
