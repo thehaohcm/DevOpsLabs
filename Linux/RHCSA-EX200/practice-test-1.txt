@@ -435,9 +435,19 @@ Answer:
   
 Question: Disable password authentication
 Answer:
+  # vi /etc/ssh/sshd_conf
+  PasswordAuthentication no
+  [esc]
+  :wq
+  # systemctl restart sshd
 
 Question: Setup SSH Passwordless Login in one server for the user Sam
 Answer:
+  # ssh-keygen
+  Enter
+  Enter
+  # ssh-copy-id [username]@[server_ip/address]
+  # ssh [username]@[server_ip/address]
   
 Question: install the latest kernel
 Answer:
