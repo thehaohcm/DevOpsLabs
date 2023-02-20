@@ -22,7 +22,8 @@
     gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
 
     # dnf/yum clean all
-    # dnf/yum repolist
+    # dnf/yum repolist all
+    # dnf/yum update
     
     # vi /etc/fstab
     /dev/sr0  /mnt/ iso9660 ro,user,auto  0 0
