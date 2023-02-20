@@ -353,11 +353,12 @@ Answer:
   # showmount -e rhcsa.server.com
   # mkdir /nfs
   # vi /etc/fstab
-  rhcsa.server.com/share  /nfs  nfs_netdev  defaults  0 0
+  rhcsa.server.com:/share  /nfs  nfs_netdev  defaults  0 0
   [esc]
   :wq
   # mount -a 
   # mount | grep nfs
+  # df -h
   
 Question: Install Apache and allow it to get documents from NFS mounted folder
 Answer:
