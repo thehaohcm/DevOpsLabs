@@ -224,6 +224,15 @@
   # echo "SystemMaxUse=100M">>/etc/systemd/journald.conf
   # systemctl restart systemd-journal
   
+- Question: Enable persistent logging for the systemd journal
+  Answer:
+   # vi /etc/systemd/journald.conf
+   Storage=peristent
+   [esc]
+   :wq
+   # systemctl restart systemd-journald
+   # ls /var/log/journal
+  
 - Question: Install Apache and allow it to get documents from NFS mounted folder
   Answer:
   # dnf/yum install -y httpd
@@ -297,10 +306,6 @@ Answer:
 Question: automatically create a new file named `HelloWorld` into all new users
 Answer:
   # touch /etc/skel/HelloWorld
-  
-Question: Disable password authentication
-
-Question: Setup SSH Passwordless Login in one server for the user Sam
 
 Question: on /dev/sdb create a 500MiB swap partition which takes effect automatically at boot start
 Answer:
@@ -332,6 +337,21 @@ Answer:
 Question: push the httpd container image to the image repository
 Answer:
 
+Question: inspect the official httpd image by using skopeo
+Answer:
+  # podman search httpd --filter=is-official
+  # skopeo inspect docker://docker.io/library/httpd
+  
+Question: use podman to search for the latest release of the RedHat Universal Base Images "ubi" container
+Answer:
+  # podman login registry.rehat.io
+  # podman search registry.redhat.io/ubi8/ubi
+  
+Question: use podman to pull the ubi image
+Answer:
+  # podman pull registry.redhat.io/ubi8/ubi
+  # podman images
+
 Question: add user tom, and grant him root privileges
 Answer:
   # useradd tom
@@ -339,6 +359,16 @@ Answer:
   # visudo 
 or# vi /etc/sudoers
   tom ALL=(ALL) ALL
+  :wq
+  
+Question: allow/deny user/group to use SSH
+Answer:
+  # vi /etc/ssh/sshd_conf
+  AllowUsers [user1] [user2] ...
+  DenyUsers [user1] [user2] ...
+  AllowGroups [group1] [group2] ...
+  DenyGroups [group1] [group2] ...
+  [esc]
   :wq
 
 Question: run "yum update" command with a priority value of "30"
@@ -356,6 +386,25 @@ Answer:
   # mount -a 
   # mount | grep nfs
   
+Question: Install Apache and allow it to get documents from NFS mounted folder
+Answer:
+  # dnf/yum install -y httpd
+  # firewall-cmd --add-service=http --permanent
+  # firewall-cmd --add-service=https --permanent
+  # firewall-cmd --reload
+  # firewall-cmd --list-all
+  # systemctl enable httpd --now
+  # systemctl restart httpd
+  # systemctl status httpd
+  # setsebool -P httpd_use_nfs 1 
+NOTICE: use `-P` to persist SE bool value when boot-time
+  # getsebool httpd_use_nfs
+
+Question: Allow Apache (httpd) to listen on tcp port 5569
+Answer:
+  # semanage port -l | grep http
+  # semanage port -a -t http_port_t -p tcp 5569
+
 Question: Prevent all users from using the crontab command except tom
 Answer:
   # echo ALL >> /etc/cron.deny
@@ -372,13 +421,17 @@ Answer:
   :wq
   # systemctl restart sshd
   
+Question: Disable password authentication
+Answer:
+
+Question: Setup SSH Passwordless Login in one server for the user Sam
+Answer:
+  
 Question: install the latest kernel
 Answer:
   # dnf/yum update
   # dnf/yum update -y kernel
   # systemctl reboot
-
-inspect the ht
 
 Question: set the system time to Asia/Ho_Chi_Minh timezone
 Answer:
@@ -399,3 +452,11 @@ Answer:
   # timedatectl set-ntp true
   # timedatectl
   
+Question: Install PostgreSQL 13 on your server as the default version
+Answer:
+  # dnf/yum module list postgresql
+  # dnf/yum module enable postgresql:13
+  # dnf/yum module list postgresql
+  # dnf/yum install -y postgresql
+  # psql -V
+  # psql --verison
