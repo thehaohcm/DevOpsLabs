@@ -222,18 +222,6 @@
   # echo "daemon.* /var/log/mylog.log" >> /etc/rsyslog.conf
   # systemctl restart rsyslog
   
-- Question: Install Apache and allow it to get documents from NFS mounted folder
-  Answer:
-  # dnf/yum install -y httpd
-  # firewall-cmd --add-service=http --zone=public --permanent
-  # firewall-cmd --add-service=https --zone=public --permanent
-  # firewall-cmd --reload
-  # firewall-cmd --list-all
-  # systemctl enable httpd --now
-  # systemctl start httpd
-  # setsebool -P httpd_use_nfs 1
-  # getsebool httpd_use_nfs
-  
 - Question: Block the FTP service
   Answer:
   # firewall-cmd --remove-service=ftp --zone=public --permanent
@@ -384,6 +372,7 @@ Answer:
   # setsebool -P httpd_use_nfs 1 
 NOTICE: use `-P` to persist SE bool value when boot-time
   # getsebool httpd_use_nfs
+or# semanage boolean -l | grep httpd_use_nfs
 
 Question: Allow Apache (httpd) to listen on tcp port 5569
 Answer:
