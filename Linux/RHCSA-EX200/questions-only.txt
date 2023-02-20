@@ -1,0 +1,64 @@
+Question 1: Setup Yum local repostiory using RHEL-9 ISO image mounted on either /mnt 
+Question 2: Modify network interface to static configuration with the following settings:
+  IPV4 – 192.168.1.211/24
+  GW – 192.168.1.1
+  DNS – 8.8.8.8
+Question : Recovery password
+Question: enable ipv4 forward
+Question: enable ipv6 forward
+Question: install/update kernel
+Question: make linux machine boot into the `multi-user.target` by defaul
+Question: create a user `sally` whose UID is 5000, and the user has not access to any interactive shell
+Question: configure the system to run in a virtual machine general non-specialized tuned profile
+Question: configure Apache to serve a basic website that shows the text "hello world" and also enable http/https port on firewall
+Question: write a shell named "execmd" in /tmp dir that will execute the following:
+  User logged in
+  Today's date
+  Number of current users logged in
+Question: create a cronjob that run fidsk command `df -h` and ouput /tmp/diskstatus at 4:15 pm daily. The output should append to the file
+Question: create a "homebackup.tgz" file of /home directory in /Backup directory. Exclude the file type `pdf` while creating the compressed tar file
+Question: create a 2G partition, make it as an ext4 file system, mounted on /mnt/data, and auto-mounts at boot-start
+Question: create a new 1G swap partition on /dev/sdc1 with partition #1 which takes effect at boot start
+Question: Setup SSH password less login for the user `peter` in `linux4.lab` machine
+Question: Change the hostname to `seinfeld.server.com` and make it persistent
+Question: Use podman to search for the latest release of RedHat Universal Base Image "ubi" container. Then inspect the ubi image using skopeo
+Question: Use podman to pull the ubi image
+Question: Configure a permanent storage for Journald logs with 100M max use
+Question: Enable persistent logging for the systemd journal
+Question: Configure the system to log all daemon messages to /var/log/mylog.log file
+Question: Install Apache and allow it to get documents from NFS mounted folder
+Question: Block the FTP service
+Question: Find all files in /etc/ directory that were modified more than 90 days ago and ouput to /tmp/90days
+Question: Create a backup file named /root/backup.tar.bz2, contains the content of /usr/local, tar must be bzip2 to compress
+Question: Create a directory /data and only the user owner and group owner member can have full access
+Question: Set SELinux to "permissive" mode
+Question: Enable boot messages
+Question: set user expired day after 90 days and must be at least 8 characters in length
+Question: create a job that write "These pretzels are making me thirsty!" to the message log file in /var/log dir at 12pm only on weekdays
+Question: Reset password of root account in Linux machine to `Password123`
+Question: automatically create a new file named `HelloWorld` into all new users
+Question: on /dev/sdb create a 500MiB swap partition which takes effect automatically at boot start
+Question: setup a local image repository in /var/lib/registry on port 5000 with Podman
+Question: push the httpd container image to the image repository
+Question: inspect the official httpd image by using skopeo
+Question: use podman to search for the latest release of the RedHat Universal Base Images "ubi" container
+Question: use podman to pull the ubi image
+Question: add user tom, and grant him root privileges
+Question: run "yum update" command with a priority value of "30"
+Question: configure the server one (NFS client) to automatically mount the share rhcsa.server.com:/share on /nfs directory
+Question: Install Apache and allow it to get documents from NFS mounted folder
+Question: Allow Apache (httpd) to listen on tcp port 5569
+Question: Prevent all users from using the crontab command except tom
+Question: create a directory hierarchy /V1/V2/V3/, and recursively apply the SELinux context of the /etc directory
+Question: Restrict root login 
+Question: Disable password authentication
+Question: allow/deny user/group to use SSH
+Question: Disable users' SSH password-less connection requests on linux4.lab
+Question: Set limit for the number of SSH login attempts to 2
+Question: Setup SSH Passwordless Login in one server for the user Sam
+Question: install the latest kernel
+Question: set the system time to Asia/Ho_Chi_Minh timezone
+Question: Ensure NTP sync is configured
+Question: Install PostgreSQL 13 on your server as the default version
+Question: Scan and analyze the audit.log file for SELinux denials and attempts and save the results to /audit_log.txt file
+Question: Resolve to server1.example.com where your DNS server is 172.24.254.254
