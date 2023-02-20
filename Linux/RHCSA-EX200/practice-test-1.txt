@@ -78,8 +78,9 @@
 
 - Question: install/update kernel
   Answer:
-    # yum/dnf -y update
-    # yum/dnf -y update kernel
+    # dnf/yum -y update
+    # dnf/yum -y update kernel
+    # dnf/yum -y install kernel
     # systemctl reboot
 
 - Question: make linux machine boot into the `multi-user.target` by defaul
