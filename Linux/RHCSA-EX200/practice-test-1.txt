@@ -232,6 +232,11 @@
    :wq
    # systemctl restart systemd-journald
    # ls /var/log/journal
+   
+- Question: Configure the system to log all daemon messages to /var/log/mylog.log file
+  Answer:
+  # echo "daemon.* /var/log/mylog.log" >> /etc/rsyslog.conf
+  # systemctl restart rsyslog
   
 - Question: Install Apache and allow it to get documents from NFS mounted folder
   Answer:
@@ -244,6 +249,12 @@
   # systemctl start httpd
   # setsebool -P httpd_use_nfs 1
   # getsebool httpd_use_nfs
+  
+- Question: Block the FTP service
+  Answer:
+  # firewall-cmd --remove-service=ftp --zone=public --permanent
+  # firewall-cmd --reload
+  # firewall-cmd --list-all
   
 - Question: Find all files in /etc/ directory that were modified more than 90 days ago and ouput to /tmp/90days
   Answer:
