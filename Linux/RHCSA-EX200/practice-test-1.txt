@@ -194,15 +194,6 @@
   Enter password of `peter`
   # ssh peter@linux4.lab
   
-- Question: Disable users' SSH password-less connection requests on linux4.lab
-  Answer:
-  # vi /etc/ssh/sshd_config
-  Uncomment and change
-  PermitEmptyPassword no
-  PubkeyAuthentication no
-  :wq
-  # systemctl restart sshd
-  
 - Question: Change the hostname to `seinfeld.server.com` and make it persistent
   Answer:
   # hostnamectl set-hostname seinfeld.server.com
@@ -373,16 +364,6 @@ Answer:
 or# vi /etc/sudoers
   tom ALL=(ALL) ALL
   :wq
-  
-Question: allow/deny user/group to use SSH
-Answer:
-  # vi /etc/ssh/sshd_conf
-  AllowUsers [user1] [user2] ...
-  DenyUsers [user1] [user2] ...
-  AllowGroups [group1] [group2] ...
-  DenyGroups [group1] [group2] ...
-  [esc]
-  :wq
 
 Question: run "yum update" command with a priority value of "30"
 Answer:
@@ -442,6 +423,33 @@ Answer:
   :wq
   # systemctl restart sshd
 
+Question: allow/deny user/group to use SSH
+Answer:
+  # vi /etc/ssh/sshd_conf
+  AllowUsers [user1] [user2] ...
+  DenyUsers [user1] [user2] ...
+  AllowGroups [group1] [group2] ...
+  DenyGroups [group1] [group2] ...
+  [esc]
+  :wq
+  
+Question: Disable users' SSH password-less connection requests on linux4.lab
+Answer:
+  # vi /etc/ssh/sshd_config
+  Uncomment and change
+  PermitEmptyPassword no
+  PubkeyAuthentication no
+  :wq
+  # systemctl restart sshd
+  
+Question: Set limit for the number of SSH login attempts to 2
+Answer:
+  # vi /etc/ssh/sshd_config
+  MaxAuthTries 2
+  [esc]
+  :wq
+  systemctl restart sshd
+
 Question: Setup SSH Passwordless Login in one server for the user Sam
 Answer:
   # ssh-keygen
@@ -483,3 +491,18 @@ Answer:
   # dnf/yum install -y postgresql
   # psql -V
   # psql --verison
+
+Question: Scan and analyze the audit.log file for SELinux denials and attempts and save the results to /audit_log.txt file
+Answer:
+  # cd /var/log/audit
+  # sealert -a audit.log > /audit_log.txt
+  # cat /audit_log.txt
+
+Question: Resolve to server1.example.com where your DNS server is 172.24.254.254
+Answer:
+  # vi /etc/resolv.conf
+  nameserver 172.24.254.254
+  host server1.example.com
+  [esc]
+  :wq
+  
