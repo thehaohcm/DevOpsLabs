@@ -148,7 +148,13 @@
     8e (for Linux LVM)
     p
     w
-    # mkfs.ext4 /dev/sdb1
+    # pvcreate /dev/sdb1
+    # pvs
+    # vgcreate vgvol /dev/sdb1
+    # vgs
+    # lvcreate -n lvvol -L 2G vgvol
+    # lvs
+    # mkfs.ext4 /dev/mapper/vgvol-lvvol
     # mkdir /mnt/data
     # vi /etc/fstab
     /dev/sdb1    /mnt/data    ext4    defaults    0    0
@@ -469,6 +475,16 @@ Answer:
   
   # timedatectl set-ntp true
   # timedatectl
+  
+Question: Configure NTP server to sync the time with test.zone.org
+Answer:
+  # vi /etc/chrony.conf
+  # remove the first line started with "pool ..."
+  server test.zone.org
+  allow 192.168.0.0/24
+  [esc]
+  :wq
+  # systemctl restart chronyd
   
 Question: Install PostgreSQL 13 on your server as the default version
 Answer:
