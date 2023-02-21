@@ -1,9 +1,10 @@
-Question 1: Setup Yum local repostiory using RHEL-9 ISO image mounted on either /mnt 
-Question 2: Modify network interface to static configuration with the following settings:
+Question: Setup Yum local repostiory using RHEL-9 ISO image mounted on either /mnt 
+Question: update the latest kernel and make it as a default
+Question: Modify network interface to static configuration with the following settings:
   IPV4 – 192.168.1.211/24
   GW – 192.168.1.1
   DNS – 8.8.8.8
-Question : Recovery password
+Question: Recovery password
 Question: enable ipv4 forward
 Question: enable ipv6 forward
 Question: install/update kernel
