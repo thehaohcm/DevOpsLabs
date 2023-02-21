@@ -1,4 +1,4 @@
-- Question 1: Setup Yum local repostiory using RHEL-9 ISO image mounted on either /mnt 
+- Question: Setup Yum local repostiory using RHEL-9 ISO image mounted on either /mnt 
   Answer:
   1st way (setup an offiline local repository):
     # mount RHEL-9.iso /mnt/disc_rhel9/
@@ -36,7 +36,13 @@
     # dnf config-manager --add-repo [repository_url]
     # dnf update
 
-- Question 2: Modify network interface to static configuration with the following settings:
+- Question: update the latest kernel and make it as a default
+  Answer:
+    # dnf/yum update -y kernel
+    # grubby --info=ALL
+    # grubby --set-default-index INDEX_OF_NEW_KERNEL
+    
+- Question: Modify network interface to static configuration with the following settings:
   IPV4 – 192.168.1.211/24
   GW – 192.168.1.1
   DNS – 8.8.8.8
@@ -50,7 +56,7 @@
     # nmcli c reload enp0s3
     # ip address show enp0s3
     # nmcli c show enp0s3 | grep ipv4
-  
+    
 - Question: enable ipv4 forward
   Answer:
   # cat /proc/sys/net/ipv4/ip_forward
