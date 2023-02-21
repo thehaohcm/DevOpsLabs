@@ -148,13 +148,7 @@
     8e (for Linux LVM)
     p
     w
-    # pvcreate /dev/sdb1
-    # pvs
-    # vgcreate vgvol /dev/sdb1
-    # vgs
-    # lvcreate -n lvvol -L 2G vgvol
-    # lvs
-    # mkfs.ext4 /dev/mapper/vgvol-lvvol
+    # mkfs.ext4 /dev/mapper/sdb1
     # mkdir /mnt/data
     # vi /etc/fstab
     /dev/sdb1    /mnt/data    ext4    defaults    0    0
