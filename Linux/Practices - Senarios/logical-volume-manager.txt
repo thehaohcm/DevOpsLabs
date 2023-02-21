@@ -49,13 +49,13 @@ Extend the volum group "myvg" with /dev/sdc1
 # vgextend myvg /dev/sdc1
 
 Extend the logical volume "mylv" with 100MB:
-# lvextend -L +100M /dev/mapper/myvg-mylv
+# lvextend -L +100M /dev/mapper/myvg-mylv -r
 # lvs // or lvdisplay
 # vgs // or vgdisplay
 # df -h
 
 Reduce the logical volume "mylv" **to** 100MB:
-# lvreduce -L 100M /dev/mapper/myvg-mylv
+# lvreduce -L 100M /dev/mapper/myvg-mylv -r
 # lvs
 # df -h
 
