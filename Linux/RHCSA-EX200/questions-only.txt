@@ -59,6 +59,7 @@ Question: Setup SSH Passwordless Login in one server for the user Sam
 Question: install the latest kernel
 Question: set the system time to Asia/Ho_Chi_Minh timezone
 Question: Ensure NTP sync is configured
+Question: Configure NTP server to sync the time with test.zone.org
 Question: Install PostgreSQL 13 on your server as the default version
 Question: Scan and analyze the audit.log file for SELinux denials and attempts and save the results to /audit_log.txt file
 Question: Resolve to server1.example.com where your DNS server is 172.24.254.254
