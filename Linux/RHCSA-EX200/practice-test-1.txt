@@ -591,3 +591,14 @@ Answer:
 Question: Find all files in /etc directory that contain text "server" (ignore case) and output to /tmp/serverkeyword
 Answer:
 
+Question: find all files that are modifed older than 30 days in the /etc directory
+Answer:
+  # find /etc -type f -mtime +30
+  
+Question: find all files that are modifed in last 30 days in the /etc directory
+Answer:
+  # find /etc -type f -mtime -30
+  
+Question: find all files that are larger than 5MB in /etc directory
+Answer:
+  # find /etc -type f -size +5M
