@@ -54,6 +54,7 @@
     # nmcli connection modify enp0s3 ipv4.dns 8.8.8.8
     # nmcli connection down enp0s3 && nmcli connection up enp0s3
     # nmcli c reload enp0s3
+    # systemctl restart NetworkManager
     # ip address show enp0s3
     # nmcli c show enp0s3 | grep ipv4
     
