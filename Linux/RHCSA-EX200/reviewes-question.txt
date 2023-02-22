@@ -23,4 +23,4 @@
   + Compress log files
 - Configure the system to log all daemon messages to the daemon.log in /va/log
 - Configure the bash history to be able to store the latest 1000 used commands
-- 
+- Use systemd to control the startup of the Redis podman container
