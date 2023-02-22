@@ -503,3 +503,19 @@ Answer:
   [esc]
   :wq
   
+Question: Successfully resolve to server1.example.com where your DNS server is 172.24.254.254
+Answer:
+  # vi /etc/resolv.conf
+  server 172.24.254.254
+  host server1.example.com
+  [esc]
+  :wq
+  
+Question: In the linux system you have a mounted iso image /run/example.iso on /mnt/iso directory. Make it permanent mount whenever the system reboots
+Answer:
+  # vi /etc/fstab
+  /run/example.iso  mnt/iso iso iso9660 0 0
+  [esc]
+  :wq
+  # mount -a
+  
