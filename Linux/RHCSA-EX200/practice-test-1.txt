@@ -519,3 +519,9 @@ Answer:
   :wq
   # mount -a
   
+Question: Scan and analyze the audit.log file for SELinux denials and attempts and save the results to /audit_log.txt file
+Answer:
+  # cd /var/log
+  # cd audit
+  # sealert -a audit.log > /audit_log.txt
+  # cat /audit_log.txt
