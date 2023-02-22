@@ -515,7 +515,7 @@ Answer:
 Question: In the linux system you have a mounted iso image /run/example.iso on /mnt/iso directory. Make it permanent mount whenever the system reboots
 Answer:
   # vi /etc/fstab
-  /run/example.iso  mnt/iso iso iso9660 0 0
+  /run/example.iso  mnt/iso iso9660 loop 0 0
   [esc]
   :wq
   # mount -a
