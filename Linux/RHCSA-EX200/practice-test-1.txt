@@ -237,7 +237,7 @@
   
 - Question: Find all files in /etc/ directory that were modified more than 90 days ago and ouput to /tmp/90days
   Answer:
-  # find /etc/ --type f -mtime +90 > /tmp/90days
+  # find /etc/ -type f -mtime +90 > /tmp/90days
   
 - Question: Create a backup file named /root/backup.tar.bz2, contains the content of /usr/local, tar must be bzip2 to compress
   Answer:
@@ -526,3 +526,68 @@ Answer:
   # cd audit
   # sealert -a audit.log > /audit_log.txt
   # cat /audit_log.txt
+
+Question: Create users uncleleo and micky which should be the members of reggis group
+Answer:
+  # useradd uncleleo
+  # useradd mickey
+  # groupadd reggis
+  # usermod -g reggis uncleleo
+  # usermod -g reggis mickey
+  
+Question: Change user nina to no have login access
+Answer:
+  # usermod -s /sbin/nologin nina
+  
+Question: Change expiration of user micky after 30 days
+Answer:
+  # chage -M 30 mickey
+  
+Question: remove user puddy
+Answer:
+  # userdel -r puddy
+  
+Question: grant group monk to full access to directory /groups/monk
+Answer:
+  # chmod g+rwx /groups/monk
+  
+Question: Remove others access from /groups/monk directory
+Answer:
+  # chmod o-x /groups/monk
+  
+Question: New files created in /groups/monk directory must belong to the group monk
+Answer:
+  # chmod g+s /groups/monk
+  
+Question: Add new env var "VAR" with value "Pass RHCSA EX200 Exam" which will be avaiable for remote login session for all users
+Answer:
+  # vi /etc/profile
+  export VAR='Pass RHCSA EX200 Exam'
+  [esc]
+  :wq
+  # source /etc/profile
+  echo $VAR
+  
+Question: Configure logrotate with the following specification:
+- Rotate log file weekly
+- Keep 2 weeks' worth of backlogs
+- Create new log files after rotating old ones
+- Compress log files
+Answer:
+
+
+Question: Configure the system to log all daemon messages to the daemonlog.log in /var/log
+Answer:
+  # vi /etc/rsyslog.conf
+  daemon.* >> /var/log/daemonlog.log
+  [esc]
+  :wq
+  # systemctl restart rsyslog
+  
+Question: Configure the bash history to be able to store the last 1000 used commands
+Answer:
+  #
+  
+Question: Find all files in /etc directory that contain text "server" (ignore case) and output to /tmp/serverkeyword
+Answer:
+
