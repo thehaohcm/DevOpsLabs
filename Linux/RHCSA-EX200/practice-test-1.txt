@@ -602,3 +602,18 @@ Answer:
 Question: find all files that are larger than 5MB in /etc directory
 Answer:
   # find /etc -type f -size +5M
+
+Question: On /dev/sdb, create a '2GiB' 'LUKS' encrypted volume with the name 'secret'. Make sure it is mounted persistently but not automatically on '/luksvol'. (off-topic question
+Answer:
+
+Question: set a sticky bit for the dir /tmp
+Answer:
+  # chmod +t /tmp
+or# chmod 1755 /tmp
+Notice: sticky bit is used to preventing a specific FOLDER from deleting or remaning all FILES inside the FOLDER, except folder's owner, file's owner, or root 
+
+Question: set setuid/setgid for a file /tmp/abc
+Answer:
+  # chmod +s /tmp/abc
+or# chmod 4775 /tmp/abc
+Notice: the setuid/setgid allows users to execute the file with the permissions of the file owner, but it can also pose security risks if not used properly
