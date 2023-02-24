@@ -96,7 +96,7 @@
 - Question: configure the system to run in a virtual machine general non-specialized tuned profile
   Answer:
     # tuned-adm list
-    # tuned-adm profile balanced/powersave/...
+    # tuned-adm profile balanced/powersave/desktop/accelerator-throughput
     # tuned-adm active
 
 - Question: configure Apache to serve a basic website that shows the text "hello world" and also enable http/https port on firewall
@@ -385,6 +385,13 @@ or# semanage boolean -l | grep httpd_use_nfs
 
 Question: Allow Apache (httpd) to listen on tcp port 5569
 Answer:
+  # vi /etc/httpd/conf/httpd.conf
+  listen 80 -> listen 5569
+  [esc]
+  :wq
+  # systemctl restart httpd
+  # firewall-cmd --add-port=5569/tcp --zone=public --permanent
+  # firewall-cmd --reload
   # semanage port -l | grep http
   # semanage port -a -t http_port_t -p tcp 5569
 
@@ -657,5 +664,7 @@ Answer:
   # echo "ALL" >> /etc/cron.deny
   # echo "tom" >> /etc/cron.allow
   
-
+Question: Make the httpd_t domain permissive
+Answer:
+  # semanage permissive -a httpd_t
   
