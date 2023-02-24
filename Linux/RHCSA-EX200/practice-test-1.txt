@@ -586,7 +586,12 @@ Answer:
   
 Question: Configure the bash history to be able to store the last 1000 used commands
 Answer:
-  #
+  # vi ~/.bashrc
+  HISTSIZE=1000
+  HISTFILESIZE=1000
+  [esc]
+  :wq
+  # source ~/.bashrc
   
 Question: Find all files in /etc directory that contain text "server" (ignore case) and output to /tmp/serverkeyword
 Answer:
