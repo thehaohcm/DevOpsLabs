@@ -11,6 +11,7 @@
     gpgcheck=1
     enabled=1
     baseurl=file:///mnt/disc_rhel9//BaseOS
+   #baseurl=http://server_ip
     gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
 
     [Local-AppStream]
@@ -622,3 +623,39 @@ Answer:
   # chmod +s /tmp/abc
 or# chmod 4775 /tmp/abc
 Notice: the setuid/setgid allows users to execute the file with the permissions of the file owner, but it can also pose security risks if not used properly
+
+Question: Use systemd to control the startup of the Redis podman container
+Answer:
+1st method:
+  # vi /etc/systemd/system/container.redis.service
+  [Unit]
+  Description=Redis Podman container
+  Wants=syslog.service
+  [Service]
+  Restart=always
+  ExecStart=/usr/bin/podman start -a redis //"-a" is used to attach the container's STDOUT and STDERR
+  ExecStop=/usr/bin/podman stop -t 10 redis //"-t" is used to set time to wait before forcibly stopping the container
+  [Install]
+  WantedBy=multi-user.target
+  [esc]
+  :wq
+  # systemctl enable container.redis --now
+  # systemctl status container.redis
+  
+2nd method:
+  # podman generate systemd -n redis --new -f
+  NOTICE: -n: --name, -f: --files
+  
+Question: Enable access to the atd service on Adman and deny it to Tom
+Answer:
+  # echo "Tom" >> /etc/at.deny
+  # echo "Adam" >> /etc/at.allow
+  # systemctl restart atd
+  
+Question: Prevent all users from using the crontab command except tom
+Answer:
+  # echo "ALL" >> /etc/cron.deny
+  # echo "tom" >> /etc/cron.allow
+  
+
+  
