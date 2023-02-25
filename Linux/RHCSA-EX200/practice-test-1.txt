@@ -680,3 +680,22 @@ Answer:
 Question: enable user marty
 Answer:
   # usermod -U marty
+  
+Question: mount a path /mnt/sdb2 to a ext4 formatted partition /dev/sdb2 by using autofs, and /mnt/nfs to server path 192.168.1.23:/nfs
+Answer:
+  # dnf install -y autofs
+  # systemctl enable --now autofs
+  # systemctl start autofs
+  # vi /etc/auto.master
+  /mnt  /etc/auto.sdb2
+  [esc]
+  :wq
+  # vi /etc/auto.sdb2
+  sdb2  -fstype=ext4  :/dev/sdb2
+  nfs   -fstype=nfs4   192.168.1.23:/nfs
+  [esc]
+  :wq
+  # systemctl restart autofs
+  # cd /mnt/sdb2
+  # df
+  # mount | grep sdb2
