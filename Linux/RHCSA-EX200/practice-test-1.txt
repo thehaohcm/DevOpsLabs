@@ -668,3 +668,10 @@ Question: Make the httpd_t domain permissive
 Answer:
   # semanage permissive -a httpd_t
   
+Question: disable user marty
+Answer:
+  # usermod -L marty
+  
+Question: enable user marty
+Answer:
+  # usermod -U marty
