@@ -1,6 +1,3 @@
-- change passwd expired age and length
-- find files which are larger than 5M / modified more than 30 days/ modified in last 30 days
-- Set limit for the number of SSH login attempts to 2
 - Scan and analyze the audit.log file for SELinux denials and attempts and save the result to /audit_log.txt file
 - Successful resolve to server1.example.com where your DNS server is 172.24.254.254
 - Disable password authentication on the linux server
@@ -9,19 +6,11 @@
   # vi /etc/containers/registries.conf
   registries = ['localhost:5000']
   
-- /etc/rsyslog.conf
-- Disable user marty
-- Configurethe system to run in a virtual machine general non-specialized tuned profile
-- set user's password to be expired after 30 days
 - setup ssh passwordless login for the user peter in linux machine
 - Disable users' SSH password-less connection requests on linux machine
-- Limit SSH access to Stella only on linux machine
 - Configure logrotate with the following specifications:
   + Rotate log files weekly
   + Keep 2 weeks' worth of backlog
   + Create new log files after rotating old ones
   + Compress log files
-- Configure the system to log all daemon messages to the daemon.log in /va/log
-- Configure the bash history to be able to store the latest 1000 used commands
-- Use systemd to control the startup of the Redis podman container
 - Install postgresql version 13 with dnf command
