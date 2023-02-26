@@ -28,8 +28,6 @@
     
     # vi /etc/fstab
     /dev/sr0  /mnt/ iso9660 ro,user,auto  0 0
-    [esc]
-    :wq
     # mount -a
 
   2nd way (setup an online repository via url):
@@ -109,7 +107,6 @@
     # firewall-cmd --reload
     # vi /var/www/html/index.html
     Hello World!
-    :wq
     # systemctl restart httpd
     # curl http://localhost
 
@@ -123,7 +120,6 @@
     echo "Hello `whoami`"
     echo "Today is `date`"
     echo "Number of user login: `who | wc -l`"
-    :wq
     # chmod a+x /tmp/execmd.sh
     # /tmp/execmd.sh
 
@@ -131,7 +127,6 @@
   Answer:
     # crontab -e
     15 16 * * * df -h >> /tmp/diskstatus
-    :wq
 
 - Question: create a "homebackup.tgz" file of /home directory in /Backup directory. Exclude the file type `pdf` while creating the compressed tar file
   Answer:
@@ -154,7 +149,6 @@
     # mkdir /mnt/data
     # vi /etc/fstab
     /dev/sdb1    /mnt/data    ext4    defaults    0    0
-    :wq
     # mount -a
     # lsblk
 
@@ -177,7 +171,6 @@
     # mkswap /dev/sdc1
     # vi /etc/fstab
     /dev/sdc1    swap    swap    defaults    0    0
-    :wq
     # lsblk
   
 - Question: Setup SSH password less login for the user `peter` in `linux4.lab` machine
@@ -220,8 +213,6 @@
   Answer:
    # vi /etc/systemd/journald.conf
    Storage=peristent
-   [esc]
-   :wq
    # mkdir /var/log/journal
    # systemctl restart systemd-journald
    # ls /var/log/journal
@@ -255,7 +246,6 @@
   # sestatus
   # vi /etc/selinux/config
   SELINUX=permissive
-  :wq
   # setenforce permissive
   # getenforce
   # sestatus
@@ -264,7 +254,6 @@ Question: Enable boot messages:
 Answer:
   # vi /etc/default/grub
   In "GRUB_CMDLINE_LINUX" line, remove "rhgb quite"
-  :wq
   # grub2-mkconfig -o /boot/grub2/grub.cfg
   # systemctl reboot
 
@@ -272,16 +261,13 @@ Question: set user expired day after 90 days and must be at least 8 characters i
 Answer:
   # vi /etc/login.defs
   PASS_MAX_DAYS 90
-  :wq
   # vi /etc/security/pwquality.conf
   minlen = 8
-  :wq
   
 Question: create a job that write "These pretzels are making me thirsty!" to the message log file in /var/log dir at 12pm only on weekdays
 Answer:
   # crontab -e
   0 12 * * 1-5 logger "These pretzels are making me thirsty!"
-  :wq
   
 Question: Reset password of root account in Linux machine to `Password123`
 Answer:
@@ -315,8 +301,6 @@ Answer:
   # mkswap /dev/sdb[num]
   # vi /etc/fstab
   /dev/sdb[num] swap  swap  defaults  0 0
-  [esc]
-  :wq
   # mount -a
   # swapon -a 
 or# swapon /dev/sdb[num]
@@ -351,7 +335,6 @@ Answer:
   # visudo 
 or# vi /etc/sudoers
   tom ALL=(ALL) ALL
-  :wq
 
 Question: run "yum update" command with a priority value of "30"
 Answer:
@@ -363,8 +346,6 @@ Answer:
   # mkdir /nfs
   # vi /etc/fstab
   rhcsa.server.com:/share  /nfs  nfs_netdev  defaults  0 0
-  [esc]
-  :wq
   # mount -a 
   # mount | grep nfs
   # df -h
@@ -388,8 +369,6 @@ Question: Allow Apache (httpd) to listen on tcp port 5569
 Answer:
   # vi /etc/httpd/conf/httpd.conf
   listen 80 -> listen 5569
-  [esc]
-  :wq
   # systemctl restart httpd
   # firewall-cmd --add-port=5569/tcp --zone=public --permanent
   # firewall-cmd --reload
@@ -408,16 +387,12 @@ Question: Restrict root login
 Answer:
   # vi /etc/ssh/sshd_config
   PermitRootLogin no
-  [esc]
-  :wq
   # systemctl restart sshd
   
 Question: Disable password authentication
 Answer:
   # vi /etc/ssh/sshd_conf
   PasswordAuthentication no
-  [esc]
-  :wq
   # systemctl restart sshd
 
 Question: allow/deny user/group to use SSH
@@ -427,8 +402,6 @@ Answer:
   DenyUsers [user1] [user2] ...
   AllowGroups [group1] [group2] ...
   DenyGroups [group1] [group2] ...
-  [esc]
-  :wq
   
 Question: Disable users' SSH password-less connection requests on linux4.lab
 Answer:
@@ -436,16 +409,13 @@ Answer:
   Uncomment and change
   PermitEmptyPassword no
   PubkeyAuthentication no
-  :wq
   # systemctl restart sshd
   
 Question: Set limit for the number of SSH login attempts to 2
 Answer:
   # vi /etc/ssh/sshd_config
   MaxAuthTries 2
-  [esc]
-  :wq
-  systemctl restart sshd
+  # systemctl restart sshd
 
 Question: Setup SSH Passwordless Login in one server for the user Sam
 Answer:
@@ -486,8 +456,6 @@ Answer:
   # remove the first line started with "pool ..."
   server test.zone.org
   allow 192.168.0.0/24
-  [esc]
-  :wq
   # systemctl restart chronyd
   
 Question: Install PostgreSQL 13 on your server as the default version
@@ -510,8 +478,6 @@ Answer:
   # vi /etc/resolv.conf
   nameserver 172.24.254.254
   host server1.example.com
-  [esc]
-  :wq
   
   ----
   another way (recommended):
@@ -523,15 +489,11 @@ Answer:
   # vi /etc/resolv.conf
   server 172.24.254.254
   host server1.example.com
-  [esc]
-  :wq
   
 Question: In the linux system you have a mounted iso image /run/example.iso on /mnt/iso directory. Make it permanent mount whenever the system reboots
 Answer:
   # vi /etc/fstab
   /run/example.iso  mnt/iso iso9660 loop 0 0
-  [esc]
-  :wq
   # mount -a
   
 Question: Scan and analyze the audit.log file for SELinux denials and attempts and save the results to /audit_log.txt file
@@ -577,8 +539,6 @@ Question: Add new env var "VAR" with value "Pass RHCSA EX200 Exam" which will be
 Answer:
   # vi /etc/profile
   export VAR='Pass RHCSA EX200 Exam'
-  [esc]
-  :wq
   # source /etc/profile
   echo $VAR
   
@@ -594,8 +554,6 @@ Question: Configure the system to log all daemon messages to the daemonlog.log i
 Answer:
   # vi /etc/rsyslog.conf
   daemon.* >> /var/log/daemonlog.log
-  [esc]
-  :wq
   # systemctl restart rsyslog
   
 Question: Configure the bash history to be able to store the last 1000 used commands
@@ -603,8 +561,6 @@ Answer:
   # vi ~/.bashrc
   HISTSIZE=1000
   HISTFILESIZE=1000
-  [esc]
-  :wq
   # source ~/.bashrc
   
 Question: Find all files in /etc directory that contain text "server" (ignore case) and output to /tmp/serverkeyword
@@ -650,8 +606,6 @@ Answer:
   ExecStop=/usr/bin/podman stop -t 10 redis //"-t" is used to set time to wait before forcibly stopping the container
   [Install]
   WantedBy=multi-user.target
-  [esc]
-  :wq
   # systemctl enable container.redis --now
   # systemctl status container.redis
   
@@ -689,13 +643,9 @@ Answer:
   # systemctl start autofs
   # vi /etc/auto.master
   /mnt  /etc/auto.sdb2
-  [esc]
-  :wq
   # vi /etc/auto.sdb2
   sdb2  -fstype=ext4  :/dev/sdb2
   nfs   -fstype=nfs4   192.168.1.23:/nfs
-  [esc]
-  :wq
   # systemctl restart autofs
   # cd /mnt/sdb2
   # df
