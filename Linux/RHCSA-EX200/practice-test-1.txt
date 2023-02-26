@@ -96,6 +96,10 @@
     # tuned-adm list
     # tuned-adm profile balanced/powersave/desktop/accelerator-throughput
     # tuned-adm active
+  Notice:
+    + non-specialized = balanced
+    + less power = powersavave
+    + throghput = accelerator-throughput
 
 - Question: configure Apache to serve a basic website that shows the text "hello world" and also enable http/https port on firewall
   Answer:
