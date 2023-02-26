@@ -151,28 +151,36 @@
     /dev/sdb1    /mnt/data    ext4    defaults    0    0
     # mount -a
     # lsblk
-
-- Question: create a new 1G swap partition on /dev/sdc1 with partition #1 which takes effect at boot start
+    
+- Question: Create a LVM by using /dev/sdb, name VG as "my-vg" and LV as "my-lv" with 100MB, then map it to /mnt/my-path
   Answer:
     # lsblk
-    # fdisk /dev/sdc
+    # fdisk -c /dev/sdb
     n
     p
     1
     Press Enter to confirm the default sector
-    +1G
-    p
+    +2G
     t
-    l
-    82 (for Linux Swap)
+    8e (for Linux LVM)
     p
     w
-    # lsblk
-    # mkswap /dev/sdc1
+    # pvcreate /dev/sdb1
+    # vgcreate my-vg /dev/sdb1
+    # lvcreate -n my-lv -L 100M my-vg
+    # mkfs.ext4 /dev/my-vg/my-lv
+    # mkdir /mnt/my-path
     # vi /etc/fstab
-    /dev/sdc1    swap    swap    defaults    0    0
+    /dev/sdb1    /mnt/mypath    ext4    defaults    0    0
+    # mount -a
     # lsblk
-  
+    
+- Question: assuming we have new partition /dev/sdc1, and we want to extend the "my-vg" with /dev/sdc1. Then add more 100MiB to my-lv
+  Answer:
+    # vgextend my-vg /dev/sdc1
+    # lvextend -L +100M /dev/my-vg/my-lv
+    # resize2fs /dev/my-vg/my-lv
+
 - Question: Setup SSH password less login for the user `peter` in `linux4.lab` machine
   Answer:
   # dnf/yum install -y openssh-server
