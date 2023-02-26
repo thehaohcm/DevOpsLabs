@@ -19,7 +19,8 @@ Question: write a shell named "execmd" in /tmp dir that will execute the followi
 Question: create a cronjob that run fidsk command `df -h` and ouput /tmp/diskstatus at 4:15 pm daily. The output should append to the file
 Question: create a "homebackup.tgz" file of /home directory in /Backup directory. Exclude the file type `pdf` while creating the compressed tar file
 Question: create a 2G partition, make it as an ext4 file system, mounted on /mnt/data, and auto-mounts at boot-start
-Question: create a new 1G swap partition on /dev/sdc1 with partition #1 which takes effect at boot start
+Question: Create a LVM by using /dev/sdb, name VG as "my-vg" and LV as "my-lv" with 100MB, then map it to /mnt/my-path
+Question: assuming we have new partition /dev/sdc1, and we want to extend the "my-vg" with /dev/sdc1. Then add more 100MiB to my-lv
 Question: Setup SSH password less login for the user `peter` in `linux4.lab` machine
 Question: Change the hostname to `seinfeld.server.com` and make it persistent
 Question: Use podman to search for the latest release of RedHat Universal Base Image "ubi" container. Then inspect the ubi image using skopeo
@@ -63,3 +64,35 @@ Question: Configure NTP server to sync the time with test.zone.org
 Question: Install PostgreSQL 13 on your server as the default version
 Question: Scan and analyze the audit.log file for SELinux denials and attempts and save the results to /audit_log.txt file
 Question: Resolve to server1.example.com where your DNS server is 172.24.254.254
+Question: In the linux system you have a mounted iso image /run/example.iso on /mnt/iso directory. Make it permanent mount whenever the system reboots
+Question: Scan and analyze the audit.log file for SELinux denials and attempts and save the results to /audit_log.txt file
+Question: Create users uncleleo and micky which should be the members of reggis group
+Question: Change user nina to no have login access
+Question: Change expiration of user micky after 30 days
+Question: remove user puddy
+Question: grant group monk to full access to directory /groups/monk
+Question: Remove others access from /groups/monk directory
+Question: New files created in /groups/monk directory must belong to the group monk
+Question: Add new env var "VAR" with value "Pass RHCSA EX200 Exam" which will be avaiable for remote login session for all users
+Question: Configure logrotate with the following specification:
+- Rotate log file weekly
+- Keep 2 weeks' worth of backlogs
+- Create new log files after rotating old ones
+- Compress log files
+Question: Configure the system to log all daemon messages to the daemonlog.log in /var/log
+Question: Configure the bash history to be able to store the last 1000 used commands
+Question: Find all files in /etc directory that contain text "server" (ignore case) and output to /tmp/serverkeyword
+Question: find all files that are modifed older than 30 days in the /etc directory
+Question: find all files that are modifed in last 30 days in the /etc directory
+Question: find all files that are larger than 5MB in /etc directory
+Question: On /dev/sdb, create a '2GiB' 'LUKS' encrypted volume with the name 'secret'. Make sure it is mounted persistently but not automatically on '/luksvol'. (off-topic question
+Question: set a sticky bit for the dir /tmp
+Question: set setuid/setgid for a file /tmp/abc
+Question: Use systemd to control the startup of the Redis podman container
+Question: Enable access to the atd service on Adman and deny it to Tom
+Question: Prevent all users from using the crontab command except tom
+Question: Make the httpd_t domain permissive
+Question: disable user marty
+Question: enable user marty
+Question: mount a path /mnt/sdb2 to a ext4 formatted partition /dev/sdb2 by using autofs, and /mnt/nfs to server path 192.168.1.23:/nfs
+Question: mount a path /sdb2 to ext4 partition /dev/sdb2 using autofs
