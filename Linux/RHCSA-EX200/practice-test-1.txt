@@ -699,3 +699,13 @@ Answer:
   # cd /mnt/sdb2
   # df
   # mount | grep sdb2
+
+Question: mount a path /sdb2 to ext4 partition /dev/sdb2 using autofs
+Answer:
+  # vi /etc/auto.master
+  /-  /etc/auto.sdb2
+  # vi /etc/auto.sdb2
+  sdb2  -fstype=ext4  :/dev/sdb2
+  # cd /sdb2
+  # lsblk
+  
