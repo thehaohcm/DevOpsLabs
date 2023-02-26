@@ -496,12 +496,6 @@ Answer:
   # nmcli c m enp0s3 ipv4.dns 172.24.254.254
   # nmcli c r enp0s3
   
-Question: Successfully resolve to server1.example.com where your DNS server is 172.24.254.254
-Answer:
-  # vi /etc/resolv.conf
-  server 172.24.254.254
-  host server1.example.com
-  
 Question: In the linux system you have a mounted iso image /run/example.iso on /mnt/iso directory. Make it permanent mount whenever the system reboots
 Answer:
   # vi /etc/fstab
