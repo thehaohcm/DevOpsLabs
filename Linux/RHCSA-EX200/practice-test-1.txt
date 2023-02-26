@@ -222,6 +222,7 @@
    Storage=peristent
    [esc]
    :wq
+   # mkdir /var/log/journal
    # systemctl restart systemd-journald
    # ls /var/log/journal
    
