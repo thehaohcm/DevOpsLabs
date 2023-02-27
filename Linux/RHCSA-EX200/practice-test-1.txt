@@ -571,6 +571,7 @@ Answer:
   
 Question: Find all files in /etc directory that contain text "server" (ignore case) and output to /tmp/serverkeyword
 Answer:
+  # grep -irl "server" /etc > /tmp/serverkeyword
 
 Question: find all files that are modifed older than 30 days in the /etc directory
 Answer:
