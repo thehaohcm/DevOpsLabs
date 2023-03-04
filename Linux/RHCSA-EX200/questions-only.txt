@@ -4,7 +4,6 @@ Question: Modify network interface to static configuration with the following se
   IPV4 – 192.168.1.211/24
   GW – 192.168.1.1
   DNS – 8.8.8.8
-Question: Recovery password
 Question: enable ipv4 forward
 Question: enable ipv6 forward
 Question: install/update kernel
@@ -13,9 +12,6 @@ Question: create a user `sally` whose UID is 5000, and the user has not access t
 Question: configure the system to run in a virtual machine general non-specialized tuned profile
 Question: configure Apache to serve a basic website that shows the text "hello world" and also enable http/https port on firewall
 Question: write a shell named "execmd" in /tmp dir that will execute the following:
-  User logged in
-  Today's date
-  Number of current users logged in
 Question: create a cronjob that run fidsk command `df -h` and ouput /tmp/diskstatus at 4:15 pm daily. The output should append to the file
 Question: create a "homebackup.tgz" file of /home directory in /Backup directory. Exclude the file type `pdf` while creating the compressed tar file
 Question: create a 2G partition, make it as an ext4 file system, mounted on /mnt/data, and auto-mounts at boot-start
@@ -33,12 +29,13 @@ Question: Find all files in /etc/ directory that were modified more than 90 days
 Question: Create a backup file named /root/backup.tar.bz2, contains the content of /usr/local, tar must be bzip2 to compress
 Question: Create a directory /data and only the user owner and group owner member can have full access
 Question: Set SELinux to "permissive" mode
-Question: Enable boot messages
+Question: Enable boot messages:
 Question: set user expired day after 90 days and must be at least 8 characters in length
 Question: create a job that write "These pretzels are making me thirsty!" to the message log file in /var/log dir at 12pm only on weekdays
 Question: Reset password of root account in Linux machine to `Password123`
 Question: automatically create a new file named `HelloWorld` into all new users
 Question: on /dev/sdb create a 500MiB swap partition which takes effect automatically at boot start
+Question: create VDO size 50GB actual size and 100GB virtual size with name VM4 from volume group `dev/VG1`
 Question: setup a local image repository in /var/lib/registry on port 5000 with Podman
 Question: push the httpd container image to the image repository
 Question: inspect the official httpd image by using skopeo
@@ -75,10 +72,6 @@ Question: Remove others access from /groups/monk directory
 Question: New files created in /groups/monk directory must belong to the group monk
 Question: Add new env var "VAR" with value "Pass RHCSA EX200 Exam" which will be avaiable for remote login session for all users
 Question: Configure logrotate with the following specification:
-- Rotate log file weekly
-- Keep 2 weeks' worth of backlogs
-- Create new log files after rotating old ones
-- Compress log files
 Question: Configure the system to log all daemon messages to the daemonlog.log in /var/log
 Question: Configure the bash history to be able to store the last 1000 used commands
 Question: Find all files in /etc directory that contain text "server" (ignore case) and output to /tmp/serverkeyword
