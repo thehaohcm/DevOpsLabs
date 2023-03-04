@@ -321,7 +321,7 @@ or# swapon /dev/sdb[num]
 
 Question: create VDO size 50GB actual size and 100GB virtual size with name VM4 from volume group `dev/VG1`
 Answer:
-  # dnf install -y vdo
+  # dnf install -y vdo kmod-kvdo lvm2
   # lvcrete --type vdo -n GM4 -L 50G -V 100G /dev/VG1
 
 Question: setup a local image repository in /var/lib/registry on port 5000 with Podman
