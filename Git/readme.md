@@ -6,7 +6,7 @@ How to rebase a specific branch:
 If have any conflict
 - git status
 - git add [conflicted-file]
-- git conflict —continue
+- git rebase —continue
 - git status
 
 Push code to git:
