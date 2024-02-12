@@ -46,3 +46,15 @@ Show the first 500 lines of testfile:
 # head -n 500 testfile
 Show the last 500 lines of testfile:
 # tail -n 500 testfile
+
+sort cmd:
+Sort content in testfile.txt by alphabetic and remove all duplicated values:
+# sort -du testfile.txt
+-d: sort by alphabetic
+-u: unique
+OR
+# sort -d testfile.txt | uniq
+Sort with alphabetic and insensitive case:
+# sort -duf testfile.txt
+-f: insensitive
+
