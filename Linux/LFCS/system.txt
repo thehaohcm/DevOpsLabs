@@ -1,5 +1,7 @@
 Shutdown after 120 minutes (2 hours):
 # shutdown +120
+Cancel shutdown
+# shutdown -c
 
 List all services in system:
 # systemctl -lt service
@@ -7,9 +9,10 @@ List all services in system:
 Reload daemonds:
 # systemctl daemon-reload
 
-Change default boot type (graphical/muti-user...):
+Change default boot target (graphical/muti-user...):
 # systemctl set-default graphical.target
-
+Show default boot target:
+# systemctl get-default
 Show all targets of linux system:
 # systemctl -l -t target
 
