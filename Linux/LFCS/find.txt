@@ -9,3 +9,9 @@ ex:
 # find . -perm /777 -type f
 => the result will return all files that have permission Owner >=7 OR Group >= 7 OR Other >=7
 ex: we have 2 file file1.txt has permission 755 and file2.txt has permission 171 => the above cmd will return both files
+
+Find all files/dir has been changed within last 5mins:
+# find . -mmin -5
+
+find all files/dir that the group can write to, but others cannot read or write to it
+# find . -perm -g=w ! -perm /o=rw
