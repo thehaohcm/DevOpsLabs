@@ -1,0 +1,34 @@
+Install VM:
+# dnf install -y libvirt qemu-kvm
+
+list:
+# virsh list
+# virsh list --all
+
+Create a new machine:
+# virsh define [xml file name]
+
+Start:
+# virsh start [machine]
+
+Reboot:
+# virsh reboot [machine]
+
+Force to reset:
+# virsh reset [machine]
+
+Shutdown:
+# virsh shutdown [machine]
+
+Poweroff:
+# virsh destroy [machine]
+
+Remove:
+# virsh undefine [machine]
+
+Get machine info:
+# virsh dominfo [machine]
+
+Auto start machine:
+# virsh autostart [machine]
+
