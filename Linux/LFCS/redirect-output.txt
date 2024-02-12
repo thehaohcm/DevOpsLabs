@@ -1,0 +1,8 @@
+run script.sh and save all normal output (except errors/warnings) in output.txt:
+# ./script.sh 1>output.txt
+
+run script.sh and save all normal output and include errors/warnings in output.txt:
+# ./script.sh 1>output.txt 2>&1
+
+run script.sh and save all erros into output.txt:
+# ./script.sh 2>output.txt
