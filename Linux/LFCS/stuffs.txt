@@ -1,0 +1,48 @@
+cut cmd:
+given a content of `testfile`:
+a;b;c;d
+x;y;z
+How to print the `b` and `y`?
+# cut -d ';' -f 2 testfile
+
+sed cmd:
+Change all values `enabled` to `disabled` in the `testfile`
+# sed -i 's/enabled/disbaled/g' testfile
+Ignore case:
+# sed -i 's/enabled/disbaled/gi' testfile
+Change only from line 200 to line 500:
+# sed -i '200,400s/enabled/disabled/g' testfile
+
+Replace string `#$%2jh//2840//124` with `$2//232985` in the `testfile`
+=> using `~` instead of `/`
+# sed -i 's~#$%2jh//2840//124~$2//232985~g' testfile
+
+grep/egrep cmd:
+Search all words which begin with Capital 1 word, and follow with 2 lower words in the testfile:
+# egrep -w '[A-Z][a-z]{2}' testfile
+
+Search a number has 5 digits in testfile:
+# egrep '[0-9]{5}' testfile
+
+Count how many line begin with `Section` regardless of case:
+# egrep -ic '^section' testfile
+# egrep -i '^section' testfile | wc -l
+
+vi cmd:
+Delete first 1000 line in testfile:
+# vi testfile
+type `1000` and then `dd`
+
+move a line 1000 to line 10 in testfile:
+# vi testfile
+:1000
+Ctrl+v => bold the line
+y => to copy or d to cut
+:10
+P => to paste
+
+head/tail cmd:
+Show the first 500 lines of testfile:
+# head -n 500 testfile
+Show the last 500 lines of testfile:
+# tail -n 500 testfile
