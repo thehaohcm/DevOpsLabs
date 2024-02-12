@@ -1,0 +1,4 @@
+Check and repair EXT4 filesystem:
+# fsck.ext4 -v -f -p /path/
+--f: force
+--p: preen mode - fix simple problem automatically
