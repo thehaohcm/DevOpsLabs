@@ -1,0 +1,15 @@
+Search package name
+# dnf search [package]
+
+Install package:
+# dnf install [package]
+
+Remove package:
+# dnf rm [package]
+
+Get path from cmd: 
+# which [cmd]
+Search package name from path:
+# dpkg --search [path]
+# rpm -qf [path]
+
