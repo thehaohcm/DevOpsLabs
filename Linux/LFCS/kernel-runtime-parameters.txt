@@ -12,4 +12,5 @@ To get a correct file path of sysctl config file:
 Then persist all changes:
 # sysctl -p /etc/sysctl.d/[file]
 Check again:
-# sysctl -a
+# sysctl -a | grep 'value'
+
