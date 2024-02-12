@@ -8,14 +8,27 @@ Create a compress file:
 # tar cvf[X] [filename].tar.[Y] /path1/ /path2/
 
 Extract a compress file:
-# tar xvf[X] [filename].tar.[Y] [-C /extracted path/]
+# tar xvf [filename].tar.[Y] [-C /extracted path/]
 
 X = x => Y = gz
 X = j => Y = bz/tbz (bzip2)
 X = J => Y = xz
+
+Extract the xz file:
+# unxz [file.xz]
+
+Extract the bzip2 file (bz2):
+# bunzip2 [file.bz2)
+
+NOTICE: you only can use cmd 'tar xvf' to extract the *.tar.* file, if the file is a single file, you have to use another tool
+bzip/bzip2 => bunzip2 
+xz => unxz 
 
 Show all files inside the tar file:
 # tar tfP [tar file]
 t: list all files/dirs
 f: show file
 P: show absolute path
+
+Create a bzip2 file with format [filename-and-extension].bz2:
+# bzip2 --keep /path/file
