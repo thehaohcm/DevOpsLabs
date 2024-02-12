@@ -4,5 +4,8 @@ Find all files with exactly permission 777:
 Find all files with NOT exactly permission 777 (ex: 644, 600, 400,..)
 # find . -perm -777 -type f
 
-Find all files with permission GREATER THAN OR EQUAL 777 (> 777):
+Find all files with permission GREATER THAN OR EQUAL for earch role:
+ex:
 # find . -perm /777 -type f
+=> the result will return all files that have permission Owner >=7 OR Group >= 7 OR Other >=7
+ex: we have 2 file file1.txt has permission 755 and file2.txt has permission 171 => the above cmd will return both files
