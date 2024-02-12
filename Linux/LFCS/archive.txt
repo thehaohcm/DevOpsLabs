@@ -8,9 +8,14 @@ Create a compress file:
 # tar cvf[X] [filename].tar.[Y] /path1/ /path2/
 
 Extract a compress file:
-# tar xvf[X] [filename].tar.[Y] [--C /extracted path/]
+# tar xvf[X] [filename].tar.[Y] [-C /extracted path/]
 
 X = x => Y = gz
 X = j => Y = bz/tbz (bzip2)
 X = J => Y = xz
 
+Show all files inside the tar file:
+# tar tfP [tar file]
+t: list all files/dirs
+f: show file
+P: show absolute path
