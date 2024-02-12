@@ -1,0 +1,51 @@
+SELinux looks like a virtual jail, hacker cannot do anything outside of the boundaries
+
+Get SELinux permission of specific file/folder:
+# ls -Z /path/file
+A result:
+[user]:[role]:[type]:[level]
+ex:
+unconfined_u:object_r:uder_home_t:S0
+
+Get processes with SELinux label & context:
+# ps auxZ
+
+Notice:
+- Every Linux user logged into a system is mapped to SELinux user as part of SELinux policy configuration
+4 Important things:
+- Only certain users can enter a certain roles and a certain types
+- It lets authorized users & processes do their jobs, by granting the permissions they need
+- Authorized users and processes are allowed to take only a limited set of actions
+- Everythings else is denied
+
+Change SELinux context for a certain files, ex: to httpd_sys_content_t
+Change Type:
+# chcon -t [typename] [file]
+Change User:
+# chcon -u [username] [file]
+Change Role:
+# chcon -r [role] file]
+Ex:
+# chcon -t httpd_sys_content_t [file]
+
+Set SELinux status:
+# setenfore [1|0]
+1: Enforcing
+0: Permissive
+
+Get SELinux status:
+# getenforce
+
+Notice: setenforce cmd is not a permanent way.
+To change it persistently, we can edit the enforce in the file
+# vi /etc/selinux/config
+
+Show all user label of SELinux:
+# seinfo -u
+Role label:
+# seinfo -r
+Type label:
+# seinfo -t
+
+Relabel SELinux:
+# selinux - active
