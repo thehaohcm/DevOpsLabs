@@ -1,0 +1,17 @@
+Create sub-directories recursively:
+# mkdir -p dir/1/2/3/4/5/6/7
+
+Copy file/folder with preserving all permissions:
+# cp -a /source/path /destination/path
+
+Create a hard link:
+# ln /dest/file /source/file
+
+Create a soft link:
+# ln -s /dest/file /source/file
+
+Info:
+# ls -i /path
+
+Get full time of file/dir:
+# ls --full-time /path/file
