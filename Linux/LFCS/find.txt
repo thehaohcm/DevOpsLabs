@@ -13,5 +13,17 @@ ex: we have 2 file file1.txt has permission 755 and file2.txt has permission 171
 Find all files/dir has been changed within last 5mins:
 # find . -mmin -5
 
-find all files/dir that the group can write to, but others cannot read or write to it
+Find all files/dir that the group can write to, but others cannot read or write to it
 # find . -perm -g=w ! -perm /o=rw
+
+Find and count all files that have permisison 0777:
+# find . -perm 0777 -type f | wc -l
+
+Find all files which have been modified in the last 2h:
+# find . -mmin -120 -type f | wc -l
+
+Find all files which have a size equal 20MB:
+# find . -type f -size 20M
+
+Find all files with have a size > 5MB and < 20MB:
+# find . -type f -size +5M -size -20M
