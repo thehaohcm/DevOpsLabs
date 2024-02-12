@@ -1,0 +1,21 @@
+Shutdown after 120 minutes (2 hours):
+# shutdown +120
+
+List all services in system:
+# systemctl -lt service
+
+Reload daemonds:
+# systemctl daemon-reload
+
+Change default boot type (graphical/muti-user...):
+# systemctl set-default graphical.target
+
+Show all targets of linux system:
+# systemctl -l -t target
+
+Change grub's default timeout to N second:
+# vi /etc/default/grub
+GRUB_TIMEOUT=N
+
+Install grub to /dev/vda:
+# grub2-install /dev/vda
