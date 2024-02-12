@@ -1,0 +1,15 @@
+Check all kernel runtime parameters:
+# sysctl -a
+
+Enable a specific parameter (not permanent way, all config will be reset after rebooting): 
+# sysctl -w net.ipv6.conf.default.disable_ipv6 = 1
+
+Permanent way:
+- add new config into /etc/sysctl.d/\*.conf 
+or we can create a new conf file into the path /etc/sysctl.d/
+To get a correct file path of sysctl config file:
+# man sysctl.d
+Then persist all changes:
+# sysctl -p /etc/sysctl.d/[file]
+Check again:
+# sysctl -a
