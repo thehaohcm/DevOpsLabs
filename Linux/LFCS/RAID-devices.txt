@@ -1,0 +1,26 @@
+Create a RAID array named md0 in linux:
+# mdadm --create /dev/md0 --level=0 --raid-devices /dev/vdd /dev/vde
+
+Create fs:
+# mkfs.ext4 /dev/md0
+
+Stop and deactive an array:
+# mdadm --stop /dev/md0
+
+wipe data in storage devices:
+# mdadm --zero-superblock /dev/vdc /dev/vdd/ /dev/vde
+
+add a spare disk to an array:
+# mdadm --create /dev/md0 --level=1 --raid-devices=2 /dev/vde /dev/vdd --spare-device=1 /dev/vde
+
+delete a super block:
+# mdadm --zero-superblock /dev/vdc /dev/vdd /dev/vde
+
+build a mirrore array with 2 devices:
+# mdadm --create /dev/md0 --level=1 --raid-devices=2 /dev/vdc /dev/vdd
+
+add new disk into array:
+# mdadm --manage /dev/md0 --add /dev/vde
+
+remove a disk from an array:
+# mdadm --manage /dev/md0 --remove /dev/vde
