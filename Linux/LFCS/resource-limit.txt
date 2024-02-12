@@ -1,0 +1,30 @@
+Limit conf file:
+# vi /etc/security/limits.conf
+
+<domain>  <type>  <core>  <value>
+[user]    hard
+@[group]  soft
+*[everyuser] -  
+
+Check limit info:
+# ulimit -a
+
+Set limit 5000 processes for current user:
+# ulimit -u 5000
+
+Allow user to do SUDOER:
+# gpasswd -a [user] wheel
+
+Remove user from the SUDOER:
+# sudo gpasswd -d [user] wheel
+
+Or we can edit conf file to grant sudoer:
+# visudo
+%[group]  <process ID> = <run as user>  <list of cmd>
+[user]
+
+ex: allow user trinity to run cmd as user aaron and john
+trinity  ALL=(aaron,john)  ALL
+
+Run sudo without password requires:
+trinity  ALL=(ALL)  NOPASSWD:ALL
