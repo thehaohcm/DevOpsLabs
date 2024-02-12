@@ -1,0 +1,2 @@
+Add suid, sgid stick into dir:
+# chmod u+s,g+s,a+t /path
