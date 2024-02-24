@@ -29,7 +29,7 @@ Ex:
 # chcon -t httpd_sys_content_t [file]
 
 Set SELinux status:
-# setenfore [1|0]
+# setenforce [1|0]
 1: Enforcing
 0: Permissive
 
@@ -49,3 +49,6 @@ Type label:
 
 Relabel SELinux:
 # selinux - active
+
+Get all SELinux Roles for a specific user (Ex: xguest_u)
+# semanage user -l | grep xguest_u
