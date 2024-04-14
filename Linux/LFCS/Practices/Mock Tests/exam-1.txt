@@ -1,0 +1,267 @@
+Question 1:
+In your home directory you will find a file named file1.
+
+A. Create a hard link to this file in the /opt/ directory. At the end of this exercise /opt/file1 should be hard-linked with /home/bob/file1.
+# ln /home/bob/file1 /opt/file1
+How to verify?
+
+B. Create a soft link to file1. Specifically, you should create a soft link at /opt/softlink that points to your file at /home/bob/file1. The soft link should point to this absolute path, /home/bob/file1 and not a relative path.
+#ln /home/bob/file1 /opt/softlink
+How to verify?
+
+
+Question 2:
+In your home directory you will find a file named file2. Perform the following actions on it:
+
+A. Change the owners of this file. It should be owned by the user called bob and the group called bob.
+# chown bob:bob file2
+
+B. Change permissions so that the user called bob can read, write, and execute this file. The group should be able to only read and write to this file (no execute permission) Other users should only be able to read this file, all other permissions denied. Otherwise said, after all permissions are changed, the ls -l command should show these permissions bits: -rwxrw-r--
+# chmod 764 file2
+
+C. Enable the SUID (set user id) special permission flag on file2. The ls -l command should now show you these permission bits: rwsrw-r--
+# chmod u+s file2
+Q: what is the number of SUID, SGID
+Question 3:
+In your home directory you will find three files, file3, file4, and file5. Perform the following actions:
+
+A. Create this directory: /opt/newdir/
+# mkdir /opt/newdir
+
+B. Move file3 to the /opt/newdir directory.
+# mv file3 /opt/newdir
+
+C. Copy file4 to the /opt/newdir directory.
+# cp file4 /opt/newdir
+
+D. Remove file5.
+# mv file5
+
+Question 4:
+Enable the sticky bit special permission on the following directory: /opt/sticky/
+# chmod +s /opt/sticky/
+Q: how to verify?
+
+Question 5:
+In the /opt/findme/ directory, you will find 1000 files. You need to filter out specific files.
+
+A. First, find all files that have the executable permission bit enabled for the user that owns them.
+Hint: the command you will use to search for files will need two parameters:
+- one that will make it look for objects that have at least the u=x permission enabled.
+- another that will filter results to only show file type objects, ignoring directories and others.
+Redirect the output of the find command to the /opt/foundthem.txt file.
+# find /opt/findme/ -type f -perm -u=x > /opt/foundthem.txt
+
+B. Find all files that have the SETUID permission enabled and delete them.
+# find /opt/findme/ -perm /4000 -exec rm -f {} \;
+
+C. Find any file that is larger than 1KB and copy it to the /opt/ directory.
+# find /opt/findme/ -type f -size +1k -exec cp "{}" /opt/ \;
+
+Question 6:
+In the /opt/findme/ directory there is a special file. It has some text content inside.
+Look for the word special through all the files in the /opt/findme/ directory and copy the file to the /opt/foundme/ directory which contains the special string.
+# grep -r special /opt/findme/
+# cp /opt/findme/file559 /opt/foundme/
+
+Question 7:
+In this exercise, you'll need to make some changes to the /etc/settings.cfg file.
+A. Add a new line at the end of this file. The line should have this content: system51=reserved . Save the file and exit the editor.
+# vi /etc/settings.cfg
+Shift + G -> system51=reserved
+
+B. Use the correct command to display only the systems that are disabled in this file. The command should output something like:
+system1=disabled
+system4=disabled
+and so on.
+Now redirect this filtered output to this file: /opt/disabledsystems.txt
+# grep disabled /etc/settings.cfg > /opt/disabledsystems.txt
+
+C. Use the correct tool to automate a search and replace action on the /etc/settings.cfg file. All of the words enabled should be changed to the word disabled.
+# sed -i "s/enabled/disabled/g" /etc/settings.cfg
+
+Question 8:
+In this exercise, we'll create different types of archives containing the /opt/manyfiles/ directory:
+A. First, create a simple TAR archive (uncompressed) that contains all files in the /opt/manyfiles/ directory. Store this archive at /opt/manyfiles.tar
+# cd /opt/ 
+# tar -cvf manyfiles.tar manyfiles/
+
+B. Compress the entire /opt/manyfiles/ directory into a GZipped TAR archive. Store this archive at /opt/manyfiles.tar.gz
+#tar -czvf manyfiles.tar.gz manyfiles
+
+C. Compress the entire /opt/manyfiles/ directory into a BZipped TAR archive. Store this archive at /opt/manyfiles.tar.bz2
+# tar -cjvf manyfiles.tar.bz2 manyfiles
+
+D. Finally, create a non-TAR archive. This time, create a simple compressed ZIP archive of /opt/manyfiles/ and store this archive at /opt/manyfiles.zip
+# zip -r manyfiles.zip manyfiles
+
+Question 9:
+In your home directory you will find two files: backup.tar.gz and backup.zip.
+A. Extract the contents of backup.tar.gz into the /opt/restoredgz/ directory.
+# sudo tar -xzvf backup.tar.gz -C /opt/restoredgz/
+
+B. Extract the contents of backup.zip into the /opt/restoredzip/ directory.
+# sudo unzip backup.zip -d /opt/restoredzip/
+
+Queston 10:
+Perform the following tasks:
+A. Install the software package called memcached.
+# dnf install memcached -y
+
+B. Enable the memcached service so that this application automatically starts up at boot time.
+# systemctl start memcached
+
+C. Start the memcached service.
+# systemctl enable memcached
+
+Question 11:
+A new sysadmin has joined your team, so you need to make sure he gets proper access to this system.
+A. First, create a new user called smith.
+# sudo useradd smith
+
+B. He said he prefers zsh instead of the default bash shell, so change his login shell to /bin/zsh
+# # sudo usermod -s /bin/zsh smith
+
+C. With no password set yet, he can't log in, so assign a password for smith. The password should be exampassed.
+# sudo passwd smith
+
+D. To be able to perform administrative tasks, he needs to be able to run sudo commands. All users in the wheel group can run such commands. Add smith to the wheel group. His primary group should remain the same (he's already part of a group called smith) so wheel should be a secondary group for him.
+# sudo useradd -G wheel smith
+
+Question 12:
+The company has two employees. One logs in with the username employee1, the other with the user employee2. The first one was on vacation, so someone locked his password temporarily, to make sure an unauthorized person cannot log in if the laptop gets stolen. But now he's returned, so you have to re-enable his password logins. The second employee is about to leave on vacation so you need to lock him out temporarily. Basically, you have two tasks:
+A. Lock the password for the user employee2 so he can't log in to this system while on vacation.
+# sudo passwd -l employee2
+
+B. Unlock the password for the user employee1 so he can log in to this system.
+# sudo passwd -u employee1
+
+Question 13:
+Define a resource limit for the user called jane. Set a limit for this user so that she can open no more than 30 processes. This should be a hard limit.
+# sudo vi /etc/security/limits.conf
+And add below given line at the end of the file:
+jane hard nproc 30
+
+Question 14:
+Edit the so-called skeleton directory so that whenever a new user is created on this system, a file called README is copied to his/her home directory.
+# sudo touch /etc/skel/README
+
+Question 15:
+The user called jack should no longer have sudo privileges. This means you have to remove him from the wheel group. Make sure his primary group called jack is preserved.
+# sudo gpasswd -d jack wheel
+
+Question 16:
+Display all the lines in the /etc/services file that start out with the text core. A line beginning with a word like corel_vncadmin should be a match, but a line beginning with a word likeopencore shouldn't be. Redirect this filtered output to /opt/coreservices.txt
+# sudo bash -c  "grep -E \"^core.*\" /etc/services  >> /opt/coreservices.txt"
+
+Queestion 17:
+A.The files /opt/left.txt and /opt/right.txt are almost identical. However, there is one unique line that only exists in one file, but not in the other one. Find that line and save the content of that line in /opt/difference.txt
+# sudo bash -c "diff /opt/left.txt /opt/right.txt >> /opt/difference.txt"
+
+B. /opt/dir1/ and /opt/dir2/ have very similar files. Find out which files only exist in /opt/dir2/ but not in /opt/dir1. Find the difference and save the output in the /opt/onlyindir2.txt file.
+# sudo bash -c "diff -q  /opt/dir1 /opt/dir2 >> /opt/onlyindir2.txt"
+
+Question 18:
+A. Create a new Docker container using nginx image and make sure its in running state.
+# sudo docker run -d nginx
+
+B. List what Docker container images are currently copied to this system. Remove all images except the nginx image. At the end of the exercise, the nginx image should be the only one remaining; all of the others should be removed.
+# sudo docker images -a
+# sudo docker rmi <IMAGE ID>
+
+Question 19:
+In this exercise, we'll analyze some networking details of our current system.
+A. First, use the correct command to list IP addresses. From that output extract the IP address of the eth0 network interface. Write that IP to the /opt/ip.txt file. For example, if in your output you would see something like inet 10.11.12.9/28 then you would write 10.11.12.9 in that file.
+# ip a
+
+B. Print out the network routing table and save the entire output to /opt/routes.txt file. Also make sure to preserve any existing content of this file.
+# ip route
+
+C. Use the correct command to inspect all programs that are listening for incoming connections on TCP ports.
+Hint: You'll get the best results if you use four options for that command. The options you pass should make it list the following:
+- listening
+- tcp
+- processes
+- numeric
+# ss -natp |grep 22
+
+Take a look at the process that is listening for incoming connections on port 22. What is the PID of this process? Write this number to the following file: /opt/pidof22.txt. For example, if in your output you see something like pid=922 then you would write 922 into this file.
+
+Question 20:
+SSH in to node01 using user bob and password caleston123
+A. Add an extra DNS resolver (nameserver) on this system: 8.8.8.8
+# ssh node01
+# sudo vi /etc/resolv.conf
+nameserver 8.8.8.8
+
+B. Add a static host so that the host called database resolves to this IP address: 10.0.0.12
+# sudo vi /etc/hosts
+Add 10.0.0.12 database line at the end of the file
+
+C. Find out the IP address of eth1 interface on node01 and add a temporary static route so that network traffic going to 192.168.5.0/24 is routed via the IP address you find.
+# ip a
+get ip of eth1
+# sudo ip route add 192.168.5.0/24 via [eth1 IP]
+
+Don't forget to log out from node01 when you're done with this exercise.
+
+Question 21:
+Create a bash script that performs two actions:
+A. It recursively copies the /var/www/ directory into the /opt/www-backup/ directory.
+B. It creates an empty file called jobdone at this location: /opt/jobdone
+sudo vi /opt/script.sh
+#!/bin/bash
+sudo cp -r /var/www/ /opt/www-backup/
+sudo touch /opt/jobdone
+
+C. Make sure that your script /opt/script.sh automatically runs every day at 4AM. More specifically, create a cron job for user bob that runs that script every day at 4AM.
+# crontab -e
+0 4 * * * sudo sh /opt/script.sh
+
+Save your script at /opt/script.sh.
+
+Question 22:
+In this exercise you'll deal with advanced file permissions or attributes.
+A. First, in your home directory you will find a file called bobandjane. Currently this file can only be read by bob. Add a new ACL permission so that jane can also read this. Jane should not have write or execute permissions, but only the read permission.
+# sudo setfacl --modify user:jane:r bobandjane
+
+B. Next, in your home directory you will find a file named frozenfile. This currently has the immutable attribute set on it. Remove the immutable attribute from this file
+# sudo chattr -i frozenfile
+
+Question 23:
+Send the SIGHUP signal to the httpd process.
+# sudo systemctl status httpd
+# sudo kill -SIGHUP 1234
+
+Question 24:
+In this exercise you'll prepare the disk found at /dev/vdb to be used by this system.
+A. First, you'll see that this disk has 1GB of unpartitioned space. Create two partitions. Each should be exactly 500MB in size.
+# sudo fdisk /dev/vdb
+n
+[enter]
+[enter]
+[enter]
++500M
+w
+
+B. Format the first partition, /dev/vdb1 to be used as swap and enable it.
+# sudo mkswap /dev/vdb1
+# sudo swapon /dev/vdb1
+
+C. Edit the correct file in /etc/ so that /dev/vdb1 is automatically mounted as swap space every time the system boots up.
+# sudo vi /etc/fstab
+/dev/vdb1 none swap defaults 0 0
+
+D. Format the second partition at /dev/vdb2 with the xfs filesystem.
+# sudo mkfs.xfs /dev/vdb2
+
+Question 25:
+In this exercise you'll need to create a Logical Volume Manager structure.
+A. First, add these two physical volumes to LVM: /dev/vdc and /dev/vdd
+# sudo pvcreate /dev/vdc /dev/vdd
+
+B. Next, create a volume group called volume1 out of these two physical volumes, /dev/vdc and /dev/vdd
+# sudo vgcreate volume1 /dev/vdc /dev/vdd
+
+C. Finally, create a logical volume of 1GB on the volume group volume1. The name of this logical volume should be logic1
+# sudo lvcreate --size 1G --name logic1 volume1
