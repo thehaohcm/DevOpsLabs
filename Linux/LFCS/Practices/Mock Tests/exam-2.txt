@@ -1,0 +1,263 @@
+Question 1:
+In your home directory you will find a directory called collection. Take the following steps:
+A. Copy this entire "collection" directory to the /opt/ directory. But make sure to preserve all permission and ownership information about the files it contains. Hint: consult the manual for the copying command and look for the "archive" option. Use that to preserve all permission/ownership info.
+# cp -rp /home/bob/collection /opt/collection
+
+B. With your copy safely in place, you can now remove this entire collection directory from your home directory
+# rm -rf /home/bob/collection
+
+C. Finally, create a new directory called collection2 in your /opt/ directory.
+# mkdir /opt/collection2
+
+Question 2:
+There is a directory called /opt/databases/. This should belong to your user, called bob. But someone entered the wrong commands and messed up the permissions and ownership information. Correct these in the following way:
+A. Change the user owner and group owner for this directory. /opt/databases/ should be owned by the user called bob and the group also called bob. Make sure to make this a recursive change, so that ownership is changed for the directory itself along with the files/directories it contains.
+# chown -R bob:bob /opt/databases
+
+B. The permissions for /opt/databases/ directory are 777 currently, which are way too open. Anyone can read and write to this directory. Change these permissions so that only the user called bob can read, write and execute within /opt/databases/ directory. Permissions for the group and for others should be all denied. These permissions should only be applied to the directory itself, not to the files/directories inside.
+# chmod 0700 /opt/databases
+
+C. Change permissions for all files inside the /opt/databases/ directory (file1, file2, file3). The user bob should have permissions to read and write to these files, but not to execute them. The group should have read only permissions on these files, nothing else. And others should not have any permissions at all (all denied).
+# chmod 0640 /opt/databases/*
+
+Question 3:
+The /opt/assets/ directory contains couple of files. You will need to find some special files inside it.
+A. Find and delete all the files which have the following octal permissions: 666.
+# find /opt/assets/ -perm -666 -type f -exec rm -f {} \;
+
+B. Find all the files that are exactly 1KB in size and copy them to /opt/exactly/ directory.
+# find /opt/assets/ -size 1k -type f -exec cp {} /opt/exactly/ \;
+
+C. Find all the files that are larger than 2KB and move them to /opt/larger/ directory.
+# find /opt/assets/ -size +2k -type f -exec mv {} /opt/larger/ \;
+
+Question 4:
+In this exercise, you will work with the /opt/services.txt file.
+A. First, use the correct command to filter out/display only the commented lines from this file. That means every line that starts with the # character. If # is not the first character on the line, then that line should not be a match. After you have successfully found the correct command to only display the commented lines, redirect this output (save it) to this file /opt/commented.txt
+# grep '^#' /opt/services.txt > /opt/commented.txt
+
+B. Add a new line to the /opt/services.txt file. Add this line at the end of the file. The line should contain this text: examservice 888/tcp # Our special service
+# vi /opt/services.txt
+examservice 888/tcp # Our special service
+
+C. Change every occurrence of the word SSH in /opt/services.txt file to the word NULL. Keep in mind that the word is in all UPPERCASE letters. So only SSH should be changed to NULL, not the ssh word (with lowercase letters).
+# sed -i 's/SSH/NULL/g' /opt/services.txt
+
+Remember to switch back to user bob.
+
+Question 5:
+Time to backup some directories and restore some files.
+
+A.First, in your home directory you will find a directory called somedata. Archive this entire directory with TAR and BZIP2 to /opt/archive.tar.bz2 file.
+# sudo tar -zcvf /opt/archive.tar.bz2 somedata
+
+B.Next, you will find this archive in your home directory: backup.tar.bz2. Extract all of the files inside it to the /opt/restore/ directory.
+# sudo tar -xf /home/bob/backup.tar.bz2 -C /opt/restore/
+
+Question 6:
+Write a bash script /home/bob/script.sh that does the following:
+lists all the files present inside /opt/ directory, pipes this output to the sha256sum command and then saves the output of the sha256sum command in /home/bob/binhash.txt file.
+Use the regular command to list the directory contents without any options like long listing format, hidden files etc. Make sure to give it executable permissions.
+# vi /home/bob/script.sh
+#!/bin/bash
+ls /opt/ | sha256sum > /home/bob/binhash.txt
+:wq
+
+# chmod +x /home/bob/script.sh
+
+Question 7:
+The contents of /opt/dir1/ and /opt/dir2/ directories are almost identical. However, there is one unique file that only exists in dir2. Save the name of that file in /opt/specialfile.txt. For example, if /opt/dir2/file994 would be the unique file, you would write file994 in /opt/specialfile.txt.
+# diff /opt/dir1 /opt/dir2
+save the name of file:
+# vi /opt/specialfile.txt
+
+Question 8:
+Due to some issue our server rebooted unexpectedly. The httpd daemon is installed but our website does not seem to be working. Let us debug the problem.
+
+A. Check if httpd service is enabled or disabled to start automatically at boot? If it is enabled, write enabled in /opt/service.txt file or if it is disabled, write disabled in the same file.
+# sudo systemctl status httpd
+# sudo vi /opt/service.txt
+
+B. If httpd service is disabled, then enable it to automatically start when the system boots.
+# sudo systemctl enable  httpd
+
+C. Change the port that httpd is listening on from 80 to 9090
+# sudo sed -i 's/Listen 80/Listen 9090/g' /etc/httpd/conf/httpd.conf
+
+D. Start the httpd service.
+# sudo systemctl start httpd.service
+
+Question 9:
+A process called memcached is running on this system. Change its nice value to +10.
+# ps -ef | grep memcached 
+# sudo renice -n +10 $PID_memcached
+
+Question 10:
+In this exercise you will create two scheduled jobs.
+
+A. First, create an anacron job with the following parameters:
+* Job will run once every three days.
+* The job delay is 10 minutes.
+* The job identifier (name) is exam.
+* The command it should run is /opt/anacron.sh.
+# sudo vi /etc/anacrontab
+3 10 exam /opt/anacron.sh
+[esc]:wq
+
+B. Next, create an at job. Schedule it to run at this exact date: August 21 2040. The at job should run the following command:
+echo 'Wow, this took a long time!' > finally.txt
+# at 082140
+echo 'Wow, this took a long time!' > finally.txt
+ctrl + d (to save)
+
+Question 11:
+A. Find out which software package provided this file: /usr/bin/botti on the system.
+# rpm -qf /usr/bin/botti
+
+B. Next remove that software package.
+# sudo yum remove irssi -y
+
+Question 12:
+At /dev/vde1 you will find an ext4 filesystem that is currently corrupted. Use the correct command to fix it.
+# sudo fsck /dev/vde1
+y
+
+Question 13:
+Execute the steps below to perform actions over users and groups:
+A. Create a new user called jane.
+# sudo useradd jane
+
+B. Create a new group called developers.
+# sudo groupadd developers
+
+C. Add the user called jane to the developers group. This should be a secondary/supplementary group, her primary group should remain unchanged.
+# sudo usermod -a -G developers jane
+
+D. Configure a resource limit for the developers group so that this group cannot exceed 5 logins (maxlogins).
+# sudo vi /etc/security/limits.conf
+@developers      -       maxlogins       5
+[esc]:wq
+
+Question 14:
+A. Create a new user called john and set D3vU3r321 password for this user.
+# sudo useradd john
+# sudo passwd john
+
+B. Edit the sudoers file and make sure that john can only run the shutdown command with sudo and without entering any password. It does not matter if you use localhost or ALL in the host section.
+# sudo visudo
+john ALL=(ALL)  NOPASSWD: /sbin/shutdown
+[esc]:wq
+
+Question 15:
+Modify the following kernel runtime parameter:
+vm.swappiness
+
+Set a value 10 for it. This can be a temporary change, so the parameter should temporarily keep this value in the current session, but the change should be forgotten at next boot.
+# sudo sysctl -w vm.swappiness=10
+
+Question 16:
+Inspect the httpd service and figure out its unit file. Further, find out the SELinux label that it has. Save this label to this file:
+/opt/label.txt
+
+For example, the SELinux label for /bin/sudo shows up like this system_u:object_r:sudo_exec_t:s0 /usr/bin/sudo In that case, you would write system_u:object_r:sudo_exec_t:s0 to that file, skipping the /usr/bin/sudo part.
+
+Question 17:
+SSH into node01 using user bob and password caleston123 , further perform the following actions on it:
+
+A. List all firewall rules and save the output in /opt/rules.txt file. Make sure to append the file so that you don not overwrite any existing content of the file.
+# ssh bob@node01
+# sudo su -
+#firewall-cmd --list-all >> /opt/rules.txt
+
+B. Add a new firewall rule so that traffic to port 80/tcp is allowed on this host. This rule should be applied immediately, for the current session. But also make this rule permanent so that it remains active for new sessions as well.
+# firewall-cmd --add-port=80/tcp --permanent
+# systemctl restart firewalld
+
+Do not forget to log out from this system when you finish this exercise.
+
+Question 18:
+Now, lets set up some email aliases:
+A. Add an email alias so that all emails sent to the user called bob are redirected to the user called root
+B. Add another email alias so that all emails sent to the user called john are redirected to an external email address: john@example.com
+# sudo vi /etc/aliases
+bob: root
+john: john@example.com
+[esc]:wq
+
+Question 19:
+SSH into node01 host using user bob and password caleston123 . You will need to make some changes to the configuration of the SSH daemon (not the client).
+
+A. First, disable the SSH root user login.
+# ssh bob@node01
+# sudo vi /etc/ssh/sshd_config
+change 'PermitRootLogin' yes to 'PermitRootLogin no'
+[esc]:wq[enter]
+
+B. Next, make sure the login grace time is changed from the default 2 minutes to 1 minute.
+# vi /etc/ssh/sshd_config
+change '#LoginGraceTime 2m' to 'LoginGraceTime 1m'
+# sudo systemctl restart sshd
+
+Don not forget to log out from this system when you finish this exercise.
+
+Question 20:
+Edit the main config file of the httpd daemon and make sure that Indexes are disabled for the /var/www/html/directory.
+# sudo vi /etc/httpd/conf/httpd.conf
+Under DocumentRoot "/var/www/html" change 'Options Indexes FollowSymLinks' to 'Options FollowSymLinks'
+# sudo systemctl restart httpd 
+
+Question 21:
+In this exercise you'll be working with a virtual machine. But first, you need to find out few things.
+
+A. List all VMs that exist on this host. Your VM is currently stopped so it won't show up in the regular command that lists virtual machines. Make sure to add the correct option to list all VMs, even the ones that are not currently running.
+# sudo virsh list --all
+
+B. Start this virtual machine.
+# sudo virsh start VM1
+
+Question 22:
+We have /dev/vdb disk on this system. Perform the following actions on it.
+
+A. Create a partition /dev/vdb1 of 400MB in size and format it as xfs file system. Edit the correct file in /etc/ so that /dev/vdb1 is automatically mounted into the /backups directory every time the system boots up. Default mount options should be used.
+# fdisk /dev/vdb
+n
+[enter]
+[enter]
+[enter]
++440M
+w
+# mkfs.xfs /dev/vdb1
+
+# vi /etc/fstab
+/dev/vdb1 /backups xfs defaults 0 0
+[esc]:wq[enter]
+
+B. Create a partition /dev/vdb2 of 100MB in size, format it as ext4 file system and mount it in /mnt/ . We want to keep some sensitive data on ext4 filesystem and we want to make sure that it is not modified. To solve this problem, mount /dev/vdb2 into the /mnt directory using read-only mount option. It does not matter what the other mount options are. Just make sure this mount point is read-only so that users cannot change contents on this filesystem.
+# fdisk /dev/vdb
+n
+[enter]
+[enter]
+[enter]
++100M
+w
+# mkfs.ext4 /dev/vdb2
+
+# mount --read-only /dev/vdb2 /mnt/
+
+C. Create a partition /dev/vdb3 of 450MB in size and format it with the xfs filesystem. To make this easier to spot in the future, among the other filesystems, set the filesystem label to ExamFS when you format it. Make sure that the label is exactly ExamFS and not examfs or anything that has different letters in UPPERCASE or lowercase. We will make use of this /dev/vdb3 partition in the upcoming questions so create it before moving to the next question.
+# fdisk /dev/vdb
+n
+[enter]
+[enter]
+[enter]
++450M
+w
+# mkfs.xfs -L "ExamFS" /dev/vdb3
+
+Question 23:
+Create a mirrored (level 1) RAID array with these two devices: /dev/vdc and /dev/vdd. The array should be created at /dev/md0
+# sudo mdadm --create /dev/md0 --level=1 --raid-devices=2 /dev/vdc /dev/vdd
+
+Question 24:
+Edit the disk quota for the user called bob. Limit the amount of storage space he can use (not inodes). Set a soft limit of 100MB and a hard limit of 500MB on /mydata partition.
+# sudo xfs_quota -x -c 'limit bsoft=100m bhard=500m bob' /mydata/
