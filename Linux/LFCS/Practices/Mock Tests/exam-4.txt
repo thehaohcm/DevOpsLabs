@@ -1,0 +1,297 @@
+Question 1:
+In your home directory you will find some files and directories.
+
+A. First, there is one hidden file under hidden directory, it is not appearing in a regular ls command without the proper command option. Find this hidden file and copy it to /opt/ directory.
+# ls -la hidden/
+# sudo cp hidden/.hiddenfile /opt/
+
+B. There is an another directory called preserved in your home directory. Move this directory and all the files it contains to /opt/ directory. In the move operation, make sure to use the proper options to preserve all metadata such as permission, owners, file creation times etc.
+# sudo cp -pr preserved /opt/
+# rm -rf preserved
+
+Question 2:
+Create a new directory: /opt/new/ then go through these steps:
+
+A. Create an empty file in that directory called empty. The full path to this file should be /opt/new/empty
+# sudo mkdir /opt/new/
+# sudo touch /opt/new/empty
+
+B. Create a hard link to this file in your home directory. /home/bob/samefile should be hard linked with /opt/new/empty
+# sudo ln /opt/new/empty /home/bob/samefile
+
+C. Create a soft link to /opt/new/ directory in your home directory. /home/bob/softlink should be a soft link that points to /opt/new/
+# sudo ln -s /opt/new/ /home/bob/softlink
+
+Question 3:
+Create a new directory: /opt/bob/ then go through these steps:
+
+A. Change the user owner of this directory to bob and the group owner to ftp.
+# sudo mkdir /opt/bob/
+# sudo chown bob.ftp /opt/bob
+
+B. Create 100 empty files (file{00..99}) in /opt/bob/ directory. Now make sure that all of these files are owned by the user bob and the group ftp
+# sudo touch /opt/bob/file{00..99}
+# sudo chown -R bob.ftp /opt/bob
+
+C. Currently, any user can read these files. Leave user and group permissions unchanged. However, make sure that all other users cannot read these files, file00, file01, all the way to file99. Change permissions ONLY ON THE FILES, leave permissions on the /opt/bob/ directory itself unchanged.
+# sudo chmod 640 /opt/bob/file00 /opt/bob/file01
+
+D. Remove ALL PERMISSIONS on the /opt/bob/file53 file. This means that user, group and other users should not have any permissions.
+# sudo chmod 000 /opt/bob/file53
+
+Question 4:
+In your home directory you will find a directory called databases.
+
+A. Remove the sticky bit special permission from this databases directory.
+# chmod -t databases/
+
+B. Find the file in databases/ directory that has the SETUID (special permission) set on it. Remove the SETUID special permission and the executable permission for the user owner from this file.
+# find databases/ -perm /4000
+# sudo chmod a-st-x databases/file3594
+
+C. Add the special SETGID (set group ID) permission to the databases directory.
+# chmod g+s databases/
+
+Question 5:
+In your home directory you will find a directory called collection. Perform the following tasks:
+
+A. Find the file(s) that are exactly 1 byte in size. Move these files to the /opt/foundfiles/ directory.
+# sudo find /home/bob/collection/ -type f -size 1c -exec mv {} /opt/foundfiles/ \;
+
+B. All of the remaining files in collection/ have some text content inside. Look through these all files and find the files that contain the letter e or E. For example, a file with the word help or HELP should match. Once you found these files, also move them to /opt/foundfiles/ directory.
+# sudo grep -ir 'e' /home/bob/collection/ 
+# sudo mv /home/bob/collection/file575 /opt/foundfiles/
+# sudo mv /home/bob/collection/file875 /opt/foundfiles/
+
+C. Find the file that is not readable by other users, rest of permissions don't matter. Once you found this, restore the +r permission for other users. Make this single change, leaving all other permission unchanged, in their original form.
+# sudo find /home/bob/collection/ -type f -perm 640 -exec sudo chmod o+r {} \;
+
+Question 6:
+In your home directory you will find two directories, dir1 and dir2. They are almost identical, containing the same filenames.
+
+A. There is one unique file in one of the directories, remove this file so that the directories become truly identical.
+# diff dir1 dir2
+# sudo rm -f dir2/file387
+
+B. Edit dir1/file007 file and add this text inside: This file has been edited
+# sudo bash -c "echo 'This file has been edited' >> dir1/file007"
+
+C. In your home directory, you will find two files yesfile1 and yesfile2 . These files are almost identical, just one word is different. What is this unique word? Write this word to this file: /opt/word.txt
+# diff yesfile1 yesfile2
+# sudo bash -c "echo 'maybe' > /opt/word.txt"
+
+D. Change all occurrences of the word yes to no in yesfile1 file.
+# sed -i 's/yes/no/g' yesfile1
+
+Question 7:
+In your home directory you will find a directory called uploads.
+
+A. Find the file in uploads/ directory that contains a word ending with the letter t. Remove this file.
+# grep -ro '\w*t\b' /home/bob/uploads/
+# rm /home/bob/uploads/upload5564
+
+B. Archive the uploads directory and save the archive to this file: /opt/backup.tar.gz
+# sudo tar -czvf /opt/backup.tar.gz /home/bob/uploads
+
+C. You will find an archive in your home directory called backup.tar.bz2. Restore the files from this archive to the /opt/restore/ directory.
+# sudo tar -xf backup.tar.bz2 -C /opt/restore/
+
+Question 8:
+In your home directory you will find a file containing the manual page for the ls command. The file is called lsmanpage.txt
+
+A. Find all the lines in lsmanpage.txt file, that match the exact word sort. Redirect this filtered output to the /opt/filtered.txt file. Make sure that this redirect overwrites any existing content in /opt/filtered.txt file.
+# sudo bash -c "grep -w 'sort' /home/bob/lsmanpage.txt  > /opt/filtered.txt"
+
+B. Find all the lines in lsmanpage.txt file, that match the word list , no matter if the letters are uppercase or lowercase (case insensitive search). Otherwise said, list, List, LIST and all such variations should match. Add this filtered output to the /opt/filtered.txt file. Make sure not to overwrite the existing content i.e append your filtered output to this file.
+# sudo bash -c "grep -iw 'list' lsmanpage.txt  >> /opt/filtered.txt"
+
+C. In your home directory you will find a file named shuffled.txt. Filter out all the lines that end with the digit 0 then sort this output alphabetically and write the final output to this file: /opt/filtsort.txt Example of correct output that should end up being saved in this file is:
+line00
+LINE00
+line10
+and so on.
+# sudo bash -c "grep -i '\w*0\b' /home/bob/shuffled.txt > /opt/filtsort.txt"
+
+Question 9:
+SSH into node01 using user bob and password caleston123
+# ssh bob@node01
+A. Change the default boot target of this system to graphical.target
+# sudo systemctl set-default graphical.target
+
+B. Schedule this system to power off at 23:45
+# sudo shutdown -h 23:45
+
+Remember to exit back from node01 host.
+
+Question 10:
+Create a bash script and save it at /opt/script.sh. Make sure this script does the following things:
+
+A. It archives the /var/www/ directory and stores this archive in /opt/webserver.tar.gz
+B. It then restarts the nginx service.
+# sudo vi /opt/script.sh
+#!/bin/bash
+sudo tar -czvf /opt/webserver.tar.gz  /var/www/
+sudo systemctl restart nginx
+[esc]:wq[enter]
+
+Question 11:
+Look for a process which has the word cached in its name. Then perform the following actions:
+
+A. Save the PID number of this process to this file: /opt/pid.txt
+# sudo netstat -p  | grep cached
+# sudo bash -c "echo '<PID>' > /opt/pid.txt"
+
+B. List the opened files used by this process and save this list to /opt/openedfiles.txt
+# sudo bash -c "lsof -p '<PID>'  >> /opt/openedfiles.txt"
+
+Question 12:
+A user tried to run a command with sudo (root) privileges but entered the wrong password.
+Look through your system logs and find out the exact username that failed to provide the correct password. Then save this username to /opt/userfail.txt
+For example, if the user called smith provided the wrong password then you just write smith to that file.
+# sudo cat /var/log/secure | grep "sudo:auth"
+# sudo bash -c "echo 'jane' > /opt/userfail.txt"
+
+Question 13:
+Create a cron job for user root that will run every Monday, and Friday, at 3AM (03:00). This should be a single cron job. This job should run a command that archives the /etc/ directory and stores this archive at /opt/etcbackup.tar.gz
+# sudo crontab -e
+0 3 * * mon,fri tar -czvf /opt/etcbackup.tar.gz /etc
+[esc]:wq[enter]
+
+Question 14:
+A. Upgrade tzdata packages on this system to the latest version available.
+# sudo dnf update tzdata -y
+
+B. Next, install the software package group called RPM Development Tools.
+# sudo dnf groupinstall "RPM Development Tools"
+
+C. Finally, find out what software package installed this file: /etc/zlogin. Then remove that package from the system.
+# sudo dnf provides /etc/zlogin
+# sudo dnf remove zsh -y
+
+Question 15:
+There's an ext4 filesystem at /dev/vde1. It's currently corrupted. Repair this filesystem.
+# sudo fsck /dev/vde1
+enter y if it asks for the confirmation
+
+Question 16:
+In this exercise you will work with kernel runtime parameters.
+
+A. List all kernel parameters that contain the word cache. Redirect this filtered output to the file /opt/kruntime.txt
+# sudo sysctl -a | sudo bash -c 'grep cache > /opt/kruntime.txt'
+
+B. Set the kernel runtime parameter vm.swappiness to this value: 5. Make this both a persistent change and a non-persistent change. Otherwise said, every time this system boots in the future, the value of vm.swappiness should be set to 5, automatically. But vm.swappiness should be changed to 5 for your current boot session as well.
+# sudo vi /etc/sysctl.conf
+vm.swappiness=5 
+[esc]:wq[enter]
+# sudo sysctl -p
+
+Question 17:
+There's a user account with the name smith on this system. Perform the following actions:
+
+A. Remove smith from the adm group.
+# sudo gpasswd -d smith adm
+
+B. Set smith password to Exam4Passed
+# echo 'smith:Exam4Passed' | sudo chpasswd
+
+C. Change their login shell to /bin/sh
+# sudo usermod --shell /bin/sh smith
+
+D. Set a resource limit for this user. Make sure that smith can launch not more than 30 processes. This should be a hard limit.
+# sudo vi /etc/security/limits.conf
+smith           hard    nproc           30
+[esc]:wq[enter]
+
+Question 18:
+Inspect your system and find out what application is listening for incoming connections on TCP port 11211. Write the PID number for the process associated with that application, to the following file: /opt/pidof11211.txt
+# sudo ss -natp | grep 11211
+# sudo vi /opt/pidof11211.txt
+[PID]
+[esc]:wq[enter]
+
+Question 19:
+SSH into node01 using user bob and password caleston123
+# ssh bob@node01
+# sudo su - 
+A. Find out what DNS resolver(s) this system is using, save the IP address of at least one of the DNS resolvers to the following file: /opt/resolverandroutes.txt
+# cat /etc/resolv.conf | grep nameserver
+# vi /opt/resolverandroutes.txt
+
+B. Print out the routing table of this system and save the output to the same file: /opt/resolverandroutes.txt Make sure you don't overwrite the previous file contents.
+# ip r >> /opt/resolverandroutes.txt
+
+C. Add a static host to this system. The hostname you should add is webserver and it should statically resolve to the following IP address: 1.1.1.1
+# vi /etc/hosts
+1.1.1.1 webserver
+[esc]:wq[enter]
+
+Remember to exit back from node01 host.
+
+Question 20:
+In this exercise, you will work with Docker. Perform the following actions:
+
+A. List the containers available on this system. In your output, you should see only one docker instance available. Save its name (the one you see under the NAMES field in that output) to this file: /opt/containername.txt
+# sudo docker ps -a
+# sudo vi /opt/containername.txt
+[container name]
+[esc]:wq[enter]
+
+B. Remove the following docker image: nginx. You can make any change you think is necessary to achieve this.
+# sudo docker rmi nginx
+
+C. Create a new container called exam4 that will run the httpd daemon. Use the httpd docker image for this container. Make sure port 8081 on the host is mapped to port 80 of the container.
+# sudo docker run --name exam4 -p 8081:80 -d httpd
+
+Question 21:
+There is one virtual machine created on this system, but it's currently in a stopped state.
+
+A. Start this virtual machine.
+# sudo virsh list --all
+# sudo virsh start VM1
+
+B. Also, make sure this virtual machine will automatically start every time the system boots up.
+# sudo virsh autostart VM1
+
+Question 22:
+You have a disk available at /dev/vdb.
+
+A. Create a 500MB partition on this disk.
+# fdisk /dev/vdb
+n
+[enter]
+[enter]
+[enter]
++500M
+w
+
+B. Create an ext4 filesystem with a block size of 2048 bytes on this partition.
+# mkfs.ext4 -b 2048 /dev/vdb1
+
+C. Manually mount this filesystem in the /mnt directory.
+# mount /dev/vdb1 /mnt/
+
+Question 23:
+In your home directory you will find two files.
+
+A. Edit this file, imm.txt and add the following text under the existing line: New line added successfully
+# sudo chattr -i imm.txt
+# vi imm.txt
+
+B. Edit this file, app.txt and correct that equation. It should be 1+1=2 instead.
+# sudo chattr -a app.txt
+# vi app.txt
+
+Question 24:
+There is a LVM structure available. Perform the following actions:
+
+A. Remove the following PV, physical volume: /dev/vdd
+# sudo pvremove /dev/vdd
+
+B. Create a VG, volume group. The name of this volume should be examVG. This VG should consist of only the /dev/vdc physical volume.
+# sudo vgcreate examVG /dev/vdc
+
+C. Create an LV, logical volume. Its size should be 100 megabytes. Its name should be examLV. Of course, this LV should be created on the examVG volume group.
+# sudo lvcreate -L 100MB -n examLV examVG
+
+D. Create an xfs filesystem with a block size of 1024 bytes on the examLV logical volume.
+# sudo mkfs.xfs -b size=1024 /dev/examVG/examLV
