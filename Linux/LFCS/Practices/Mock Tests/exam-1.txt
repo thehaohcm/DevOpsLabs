@@ -6,7 +6,7 @@ A. Create a hard link to this file in the /opt/ directory. At the end of this ex
 How to verify?
 
 B. Create a soft link to file1. Specifically, you should create a soft link at /opt/softlink that points to your file at /home/bob/file1. The soft link should point to this absolute path, /home/bob/file1 and not a relative path.
-#ln /home/bob/file1 /opt/softlink
+#ln -s /home/bob/file1 /opt/softlink
 How to verify?
 
 
@@ -21,7 +21,12 @@ B. Change permissions so that the user called bob can read, write, and execute t
 
 C. Enable the SUID (set user id) special permission flag on file2. The ls -l command should now show you these permission bits: rwsrw-r--
 # chmod u+s file2
-Q: what is the number of SUID, SGID
+Q: what is the number of SUID, SGID, sticky
+A:
+- SUID = 4 (apply for file): Run the file with user owner's permission, regardless user executes
+- SGID = 2 (apply for file): Run the file with group owner's permisison, regardless group/user executes 
+- Sticky = 1: Prevent user delete file or folder (ex: /tmp dir)
+
 Question 3:
 In your home directory you will find three files, file3, file4, and file5. Perform the following actions:
 
@@ -54,6 +59,7 @@ Redirect the output of the find command to the /opt/foundthem.txt file.
 
 B. Find all files that have the SETUID permission enabled and delete them.
 # find /opt/findme/ -perm /4000 -exec rm -f {} \;
+(-perm /[permission]: find all files which have permission 4000 and 4xxx - at least 4000)
 
 C. Find any file that is larger than 1KB and copy it to the /opt/ directory.
 # find /opt/findme/ -type f -size +1k -exec cp "{}" /opt/ \;
