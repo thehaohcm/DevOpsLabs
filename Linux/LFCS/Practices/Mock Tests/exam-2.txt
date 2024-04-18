@@ -160,6 +160,9 @@ Inspect the httpd service and figure out its unit file. Further, find out the SE
 /opt/label.txt
 
 For example, the SELinux label for /bin/sudo shows up like this system_u:object_r:sudo_exec_t:s0 /usr/bin/sudo In that case, you would write system_u:object_r:sudo_exec_t:s0 to that file, skipping the /usr/bin/sudo part.
+# systemctl status httpd
+-> get file path of httpd
+# ls -lZ $HTTPD_PATH
 
 Question 17:
 SSH into node01 using user bob and password caleston123 , further perform the following actions on it:
