@@ -1,0 +1,31 @@
+Question 1:
+Write the Linux Kernal release into /opt/course/1/kernel
+# uname -r > /opt/course/1/kernel
+
+Write the current value of Kernel parameter ip_forward into /opt/course/1/ip_forward
+# sysctl -a | grep "ip_forward" | tr "ip_forward" "" > /opt/course/1/ip_forward
+
+Write the system timezone into /opt/course/1/timezone
+# date +%Z > /opt/course/1/timezone
+OR
+# cat /etc/timezone > /opt/course/1/timezone
+OR
+# datetimectl | grep "Time zone" 
+
+Question 2:
+On server data-001, user asset-manager is responsible for timed operations on existing data. Some changes and addtions are necessary.
+Currently there is one system-wide cronjob configured that runs every day at 8:30pm. Convert it from being a system-wide cronjob to one owned and exected by user asset-manager. This means that user should see it when running crontab -l.
+Create a new cronjob owned and executed by user asset-manager that runs bash /home/asset-manager/clean.sh every week on Monday and Thursday at 11:15am.
+# ssh data001
+# vi /etc/crontab
+remove the line defines "30 20 * * * ..."
+# crontab -e -u asset-manager
+30 20 * * * bash /home/asset-manager/generate.sh
+15 11 * * 1,4 bash /home/asset-manager/clean.sh
+# crontab -l
+
+Question 3:
+Time synchronisation configuration needs to be updated:
+1. set 0.pool.ntp.org and 1.pool.ntp.org as main NTP servers
+2. set ntp.ubuntu.com and 0.debian.pool.ntp.org as fallback NTP servers
+3. The maxium pool interval should be 1000 seconds and connection retry 20 seconds
