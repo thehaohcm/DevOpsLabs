@@ -1,0 +1,41 @@
+Install the systemd-timesyncd utility:
+# dnf install -y systemd-timesyncd
+
+Enable NTP:
+# timedatectl set-ntp true
+
+Show date time:
+# timedatectl
+
+Check status:
+# sytemctl status systemd-timesync
+
+Show all list timezones:
+# timedatectl list-timezones
+
+Set timezone:
+# timedatectl set-timezone [America/New_York]
+
+Change settings:
+# vi /etc/systemd/timesyncd.conf
+[Time]
+NTP=0.us.pool.ntp.org 1.us.pool.ntp.org
+#FallbackNTP=ntp.ubuntu.com
+#RootDistanceMaxSec=5
+#PoolIntervalMinSec=32
+#PoolIntervalMaxSec=2048
+
+Other cmds of systemd-timesync:
+list-timezones
+show
+show-timesync
+timesync-status
+status
+ntp-servers
+
+set-ntp
+set-timezone
+set-time
+set-local-rtc
+
+revert
