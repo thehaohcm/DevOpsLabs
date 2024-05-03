@@ -3,6 +3,7 @@ Find all files with exactly permission 777:
 
 Find all files with NOT exactly permission 777 (ex: 644, 600, 400,..)
 # find . -perm -777 -type f
+=> find all files have permission u=rwx OR g=rwx OR o=rwx
 
 Find all files with permission GREATER THAN OR EQUAL for earch role:
 ex:
@@ -22,8 +23,9 @@ Find all files/dir has been changed exactly 5mins (=5m):
 Find all inodes (metadata) has been changed:
 # find . -cmin [-/+/none]5
 
-Find all files/dir that the group can write to, but others cannot read or write to it
+Find all files/dir that the group can write to, but others cannot read OR write to it
 # find . -perm -g=w ! -perm /o=rw
+NOTICE: "/" meanning "OR" (others have READ OR WRITE permission)
 
 Find and count all files that have permisison 0777:
 # find . -perm 0777 -type f | wc -l
@@ -36,3 +38,6 @@ Find all files which have a size equal 20MB:
 
 Find all files with have a size > 5MB and < 20MB:
 # find . -type f -size +5M -size -20M
+
+Find all files that either size = 213 kilobyte OR permission = 402 
+# find . -type f -size 213k -o -perm 402
