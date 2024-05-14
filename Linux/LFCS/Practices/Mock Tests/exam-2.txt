@@ -238,6 +238,8 @@ w
 # vi /etc/fstab
 /dev/vdb1 /backups xfs defaults 0 0
 [esc]:wq[enter]
+verify:
+# mount -a
 
 B. Create a partition /dev/vdb2 of 100MB in size, format it as ext4 file system and mount it in /mnt/ . We want to keep some sensitive data on ext4 filesystem and we want to make sure that it is not modified. To solve this problem, mount /dev/vdb2 into the /mnt directory using read-only mount option. It does not matter what the other mount options are. Just make sure this mount point is read-only so that users cannot change contents on this filesystem.
 # fdisk /dev/vdb
