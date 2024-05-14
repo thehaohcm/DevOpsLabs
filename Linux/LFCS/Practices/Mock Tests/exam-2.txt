@@ -142,6 +142,8 @@ Question 14:
 A. Create a new user called john and set D3vU3r321 password for this user.
 # sudo useradd john
 # sudo passwd john
+OR
+# sudo bash -c "echo 'D3vU3r321' | passwd john --stdin"
 
 B. Edit the sudoers file and make sure that john can only run the shutdown command with sudo and without entering any password. It does not matter if you use localhost or ALL in the host section.
 # sudo visudo
