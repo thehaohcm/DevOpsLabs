@@ -195,6 +195,8 @@ SSH into node01 host using user bob and password caleston123 . You will need to 
 A. First, disable the SSH root user login.
 # ssh bob@node01
 # sudo vi /etc/ssh/sshd_config
+find a `root` word in vi:
+:/\croot[enter]
 change 'PermitRootLogin' yes to 'PermitRootLogin no'
 [esc]:wq[enter]
 
