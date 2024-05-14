@@ -260,6 +260,8 @@ n
 +450M
 w
 # mkfs.xfs -L "ExamFS" /dev/vdb3
+verify:
+# lsblk -o name,label /dev/vdb3
 
 Question 23:
 Create a mirrored (level 1) RAID array with these two devices: /dev/vdc and /dev/vdd. The array should be created at /dev/md0
