@@ -1,1 +1,63 @@
+Question 1: What command would find files and directories modified in the last 5 minutes in /dev directory?
+Answer: find /dev -mmin -5
 
+Question 2: What command removes the write permission for the group from a file?
+Answer: chmod g-w some_file
+
+Question 3: Find files/directories under /var/log/ directory that the group can write to, but others cannot read or write to it. Save the list of the files/directories (with complete parent path) in /home/bob/data.txt file.
+You can use the redirection to save your command's output in a file i.e [your-command] > /home/bob/data.txt
+To make this easier to understand, the logic of the command can be broken down like this:
+-> Permissions for the group have to be at least w. If there's also an extra r or x in there, it will still match.
+-> Permissions for others have not to be r or w. That means, if any of these two permissions, r or w match for others, the result has to be excluded.
+Answer:
+
+Question 4: Find our secret file under /home/bob. You can either look for a file that is exactly 213 kilobytes or a file that has permission 402 in octal.
+Save the name (including the parent directory path) of this file in /home/bob/secfile.txt file.
+You can use the redirection to save your command's output in a file i.e [your-command] > /home/bob/secfile.txt
+Answer: 
+
+Question 5: In our lessons we briefly mentioned the setuid, setgid and sticky bit special permissions. Consider that setuid is short for set user id. setgid is short for set group id.
+Add the permissions for setuid, setgid and sticky bit on /home/bob/datadir directory.
+Answer:
+
+Question 6: Find dogs.txt file under /usr/share directory.
+Save the location of the file in /home/bob/dogs file.
+Answer:
+
+Question 7: Find cats.txt file under bob's home directory and copy it into /opt directory.
+Answer:
+
+Question 8: Find all directories named pets in /var/directory and save the output (along with directory path) in /home/bob/pets.txt file.
+You should be able to save the output in a file using redirection i.e <your-command> > /home/bob/pets.txt
+Answer:
+
+Question 9: Find all the files whose permissions are 0777 in /var directory.
+How many such files did you find?
+Answer:
+
+Question 10: Find all the files whose permissions are 0640 in /usr/ directory and save the output (along with parent path) in /home/bob/.opt/permissions.txt file.
+You should be able to save the output in a file using redirection i.e <your-command> > /home/bob/.opt/permissions.txt
+Answer:
+
+Question 11: Find all the files which have been modified in the last 2 hours in /usr directory.
+How many such files did you find?
+Answer:
+
+Question 12: Find all the files which have been modified in the last 30 minutes in the /var directory.
+How many such files did you find?
+Answer:
+
+Question 13: Find all the files with size 20MB in /var directory.
+How many such files did you find?
+Answer:
+
+Question 14: Find all files between 5mb and 10mb in the /usr directory and save the output (along with parent path) in /home/bob/size.txt file.
+You should be able to save the output in a file using redirection i.e <your-command> > /home/bob/size.txt
+Answer:
+
+Question 15: Create a directory named LFCS under bob's home directory and update its user owner permissions to only x (execute), and group and others should not have any permissions.
+It should give us a permission denied error while listing the contents of the directory.
+Answer:
+
+Question 16: Update the permissions for some_directory to rwxr-xr-x
+Answer:
