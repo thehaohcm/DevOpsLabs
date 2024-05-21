@@ -1,1 +1,38 @@
+Question 1: The ssh command has an option to display its version number. Use man to find out what is the correct command line option.
+Answer: ssh -V
 
+Question 2: Find out using which command you can change the static hostname of your Linux system?
+Answer: hostnamectl
+
+Question 3: If the apropos command does not work because your manual pages are not indexed, what command you can use to manually refresh these?
+Answer: mandb
+
+Question 4: You are trying to use ssh alex@localhost to log in through SSH. Your connection is refused. ssh has a command line option to show you the verbose output. That will show a lot more status messages and help you debug why this connection is failing. What is the correct option for that? (you need not to make ssh connection work at this point)
+Answer: ssh -v alex@localhost
+
+Question 5: You type host in the terminal. What keys do you press to see some suggestions about what you can type here?
+Answer: TAB TAB
+
+Question 6: What section of the manual pages deals with System administration commands?
+Answer: Section 8
+Hint: # man man
+
+Question 7: How many hidden files are there in /home/bob/data/ directory?
+Answer: 2
+Hint: # ls -lha data/
+
+Question 8: SSH into dev-host01 host from centos-host and create a blank file called /home/bob/myfile in dev-host01 host.
+Answer:
+# ssh ...
+# touch myfile
+# exit
+
+Question 9: We are trying to run apropos ssh command to get some details about the commands related to ssh but we are getting this error: `ssh: nothing appropriate`.
+Look into the issue and fix the same to make apropos ssh command work.
+Answer:
+# sudo mandb
+
+Question 10: Using apropos command, find out the the configuration file for NFS mounts and save its name in /home/bob/nfs file.
+Answer:
+# apropos "NFS mounts"
+# echo "nfsmount.conf">nfs
