@@ -1,1 +1,89 @@
+Question 1: Which of the following commands can be used to manipulate strings in a file?
+Answer: sed
 
+Question 2: Which of the following commands you will use to display the top 5 lines of a file called myfile?
+Answer: head -5 myfile
+
+Question 3: Which of the following commands you can use to filter out the lines that contain a particular pattern?
+Answer: grep
+
+Question 4: How can we ignore the case (small or capital) differences while comparing two files using diff command?
+Answer: diff -i
+
+Question 5: You have below given content in /home/bob/testfile (this is just an example file):
+a;b;c;d
+x;y;z
+How would you extract/print the b and the y?
+Answer: cut d ';' -f 2 testfile
+
+Question 6: Change all values enabled to disabled in /home/bob/values.conf config file.
+Answer: 
+# sed -i 's/enabled/disabled/g' /home/bob/values.conf
+
+Question 7: While ignoring the case sensitivity, change all values disabled to enabled in /home/bob/values.conf config file.
+For example, any string like disabled, DISABLED, Disabled etc must match and should be replaced with enabled.
+Answer:
+# sed -i 's/disabled/enabled/gi' /home/bob/values.conf 
+
+Question 8: Change all values enabled to disabled in /home/bob/values.conf config file from line number 500 to 2000.
+Answer:
+# sed -i '500,2000s/enabled/disabled/g' values.conf
+
+Question 9: Change all values #%$2jh//238720//31223 to $2//23872031223 in /home/bob/data.txt file.
+Answer:
+# sed -i 's~#%$2jh//238720//31223~$2//23872031223~g' /home/bob/data.txt
+
+Question 10: Filter out the lines that contain any word that starts with a capital letter and are then followed by exactly two lowercase letters in /etc/nsswitch.conf file and save the output in /home/bob/filtered1 file.
+You can use the redirection to save your command's output in a file i.e [your-command] > /home/bob/filtered1
+Answer:
+# egrep -w '[A-Z][a-z]{2}' /etc/nsswitch.conf > /home/bob/filtered1
+
+Question 11: Open /home/bob/testfile file in any editor (vi, nano etc) and move line present on line no:1049 to line no: 5.
+Answer:
+# vi /home/bob/testfile
+:1024
+Shift + V
+yy
+dd
+:1049
+Shift + P
+:wq
+
+Question 12: Delete first 1000 lines from /home/bob/testfile file.
+Answer:
+# vi /home/bob/testfile
+1000
+dd
+:wq
+
+Question 13: /home/bob/file1 and /home/bob/file2 are 99% identical. But there's 1 unique line that exists only in /home/bob/file1 or in /home/bob/file2.
+Find that line and save the same in /home/bob/file3 file.
+Answer:
+# diff file1 file2 
+Copy the line you got in the output from the above command and save the same in file3:
+# vi file3
+
+Question 14: In /home/bob/textfile file there's a number that has 5 digits. Save the same in /home/bob/number file.
+You can use the redirection to save your command's output in a file i.e [your-command] > /home/bob/number
+Answer:
+# egrep "[0-9]{5}" /home/bob/textfile > /home/bob/number
+
+Question 15: How many numbers in /home/bob/textfile begin with a number 2, save the count in /home/bob/count file.
+You can use the redirection to save your command's output in a file i.e [your-command] > /home/bob/count
+Answer:
+# egrep "^2" /home/bob/textfile | wc -l > /home/bob/count
+
+Question 16: How many lines in /home/bob/testfile file begin with string Section, regardless of case.
+Save the count in /home/bob/count_lines file.
+Answer:
+# egrep -i "^Section" /home/bob/testfile | wc -l > /home/bob/count_lines
+
+Question 17: Find all lines in /home/bob/testfile file that contain string man, it must be an exact match.
+For example the line like # before /usr/man. or NOCACHE keeps man should match but # given manpath. or For a manpath must not match.
+Save the filtered lines in /home/bob/man_filtered file.
+Answer:
+# grep -w "man" /home/bob/testfile > /home/bob/man_filtered
+
+Question 18: Save last 500 lines of /home/bob/textfile file in /home/bob/last file.
+Answer:
+# tail -500 /home/bob/textfile > /home/bob/last
