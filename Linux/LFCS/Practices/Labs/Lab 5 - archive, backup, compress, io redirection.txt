@@ -1,1 +1,61 @@
+Question 1: Create a tar archive logs.tar (under bob's home) of /var/log/ directory.
+Answer:
+# sudo tar cvfP logs.tar /var/log/
 
+Question 2: Create a compressed tar archive logs.tar.gz (under bob's home) of /var/log/ directory.
+Answer:
+# sudo tar cvfzP logs.tar.gz /var/log/
+
+Question 3: List the content of /home/bob/logs.tar archive and save the output in /home/bob/tar_data.txt file.
+Answer:
+# tar tfP /home/bob/logs.tar > /home/bob/tar_data.txt
+
+Question 4: Extract the contents of /home/bob/archive.tar.gz to the /tmp directory.
+Answer:
+# tar xvf /home/bob/archive.tar.gz -C /tmp
+
+Question 5: Execute /home/bob/script.sh script and save all normal output (except errors/warnings) in /home/bob/output_stdout.txt file.
+Answer:
+# sudo /home/bob/script.sh > /home/bob/output_stdout.txt
+
+Question 6: Execute /home/bob/script.sh script and save all command output (both errors/warnings and normal output) in /home/bob/output.txt file.
+Answer:
+# sudo /home/bob/script.sh > /home/bob/output.txt  2>&1
+
+Question 7: Execute /home/bob/script.sh script and save all errors only in /home/bob/output_errors.txt file.
+Answer:
+# sudo /home/bob/script.sh 2>/home/bob/output_errors.txt
+
+Question 8: Create a bzip archive under bob's home named file.txt.bz2 out of /home/bob/file.txt, but preserve the original file. At the end of the exercise you should have both:
+Answer:
+# sudo /home/bob/script.sh 2>/home/bob/output_errors.txt
+
+Question 9:
+Answer:
+
+Question 10:
+Answer:
+
+Question 11:
+Answer:
+
+Question 12:
+Answer:
+
+Question 13:
+Answer:
+
+Question 14:
+Answer:
+
+Question 15:
+Answer:
+
+Question 16:
+Answer:
+
+Question 17:
+Answer:
+
+Question 18:
+Answer:
