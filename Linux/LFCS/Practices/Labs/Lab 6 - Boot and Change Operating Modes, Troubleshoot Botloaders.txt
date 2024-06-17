@@ -1,1 +1,25 @@
+Question 1: On a system booting through legacy BIOS mode, what file would you edit before generating a new grub configuration file?
+Answer: /etc/default/grub
 
+Question 2: After you edited the file mentioned previously, what command would you use to generate the new grub configuration file?
+Answer: # sudo grub2-mkconfig -o /boot/grub2/grub.cfg
+
+Question 3: Schedule this system to power off two hours later from now.
+Answer: # sudo shutdown +120
+
+Question 4: The system is currently booting to a text-only console. Change it to boot to a graphical desktop by default.
+Answer: # sudo systemctl set-default graphical.target
+(get all targets: # sudo systemctl list-units --all --type target)
+
+Question 5: Change grub's default timeout from 1 seconds to 5 second.
+Answer: # vi /etc/default/grub
+change `GRUB_TIMEOUT=1` to `GRUB_TIMEOUT=5`
+
+Question 6: Install grub to /dev/vda. Make sure to save the installation command output to /home/bob/grub.txt file.
+Answer: # sudo grub2-install /dev/vda > /home/bob/grub.txt 2>&1
+
+Question 7: Find out what is the system's current default boot target and save the value in /home/bob/boot-target.txt file.
+Answer: # sudo systemctl get-default > /home/bob/boot-target.txt
+
+Question 8: Cancel the scheduled shutdown you configured in the beginning.
+Answer: # sudo shutdown -c
