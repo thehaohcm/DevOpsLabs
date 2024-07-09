@@ -1,0 +1,17 @@
+# sudo systemctl poweroff --force --force
+# sudo systmectl reboot --force --force
+
+Schedule shutdown at 02:00
+# sudo shutdown 02:00
+
+Schedule shutdown after 15m:
+# sudo shutdown +15
+
+Schedule restart at 02:00
+# sudo shutdown -r 02:00
+
+Schedule restart after 15m:
+# sudo shutdown -r +15
+
+Write down a message to Screen before shutdown/restart 1 min: (use single quote)
+# sudo shutdown [-r] +1 '[Message]'
