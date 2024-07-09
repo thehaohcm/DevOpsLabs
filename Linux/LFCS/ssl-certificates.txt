@@ -1,0 +1,7 @@
+Generate a (private) key and Certificate Signing Request (CRS):
+# openssl req -newkey rsa:2048 -keyout key.pem -out req.pem
+
+# openssl req -x509 -noenc -newkey rsa:4096 -days 365 -keyout myprivate.key -out mycert.crt
+
+Show cert's detail:
+# openssl x509 -in mycert.crt -text
