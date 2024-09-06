@@ -5,7 +5,7 @@
 # mandb : init the apropos cmd database 
 # apropos "NFS mounts" : find name and description of keyword in the manual page
 
-# chmod
+# chmod +x ./script.sh : add execute permission int the ./script.sh file
 # chgrp
 
 # find /path -iname "keyword" : find all files have keyword name with insensitive case
@@ -16,17 +16,38 @@
 # find /path -perm -664 : find files have equal or greater than 664 permission
 # find /path -perm /664 : find files have permission o=6 OR g=6 OR o=4 
 
-# find /path -mtime 5
-# find /path -mtime +5
-# find /path -mtime -5
+# find /path -mmin 5 : find all files created at now - 5min (exact time)
+# find /path -mmin +5 : find all files created from [(now - 5min) to now]
+# find /path -mmin -5 : find all files created before now - 5min
+# find /path -mtime : -mtime calculate with day number
+# find /path -ctime : -ctime & -cmin will select all files modified. Whereas mtim & mmin select all files created
 
-# find /path -ctime 5
-# find /path -ctime +5
-# find /path -ctime -5
 
 # grep -iRn "keyword" /path : find all files which contain the keyword recursively from /path
 # grep -r --text "keyword" /path
+# egrep "^c*e$" /path : find all files which contain the keyword beginning by 'c' character and ending with 'e' character
 
+Git:
+# git add .
+# git commit -m "message"
+# git push .
+# git branch new_branch: create a new branch
+# git checkout -b new_branch
+# git branch -D new_branch : delete branch
+# git log --raw
+# git merge master
+# git push origin master
+# git pull origin master
+# git clone repository
+
+Docker:
+# docker images
+# docker build -t "image_name" .
+# docker push
+# docker run --name new image_name
+
+Stuffs:
+# ping -c 4 8.8.8.8 : ping 4 times to IP 8.8.8.8
 
 *Operations Deployment*
 # shutdown +120 : shutdown the computer after 120m (=2h)
@@ -34,19 +55,16 @@
 
 # sleep 10 : sleep for 10 seconds
 
-# systemctl --list-all
-
 # ps aux : show all processes
 # ps lax : show all processes with nice values
 # ps 1 : display inform about the process
-# ps u 1 : provide more info such as ram cpu about the process
-
+# ps u 1 : provide more info such as ram cpu about the process (u = show resources as ramm,cpu,...)
 # pgrep -a rpcbind : get PID of the process name rpcbind
-
-# kill -SIGHUP 1 : send a SIGHUP signal to PID 1
+# lsof -p 1 : list all files that opened by process ID = 1
 
 # [cmd] & : run the cmd in the background
 # fg : get back the backgroup cmd
+# bg [PID] : resume a stopped process
 # ctrl + z : send the cmd or app to background
 
 # ls -laZ /bin/sudo : checkout the SELinux label for the files stored at /bin/sudo
@@ -99,7 +117,88 @@ Check value:
 # free --mega : Show memory
 # uptime : Show how long the system is up
 # lscpu : Show CPU info
+# lspci : show network interface info
 
+# nproc: limit process numbers that the user can run
+
+Set limit resources:
+# vi /etc/security/limit.conf
+Change limit resources with soft way:
+# ulimit -n 10 : change the nproc limit
+# ulimit -Hn 10 : change the hard nproc limit
+
+Check limit resources:
+# nproc : get limit process 
+
+System service:
+# man systemd.service
+# systemctl daemon-reload
+# systemctl revert ssh
+# systemctl restart ssh
+# systemctl reload ssh
+# systemctl restart-or-reload ssh
+# systemctl enable --now ssh
+# systemctl disbale --now ssh
+# systemctl is-enabled ssh
+# systemctl mask ssh : force way to prevent start/enable service
+# systemctl umask ssh : allow to start/enable service
+# systemctl list-units --type [service/socket/timer] --all
+# systemctl daemon-reload : reload the daemon system after editing the serivce files
+
+# nice -n [priority value] [cmd] : run a cmd with priority value
+# renice [priority value] [PID] : change a priority value of an existing process
+# kill -L : list all signal supported
+# kill -SIGHUP 1 : send a SIGHUP signal to PID 1
+
+System Logs:
+# journalctl -f -t [service]
+# journalctl -S 01:00 -U 02:00 : show logs that from 01:00 to 02:00
+# journalctl -b 0 : show logs since the system booted
+# journalctl -b -1  : show logs for the previous boot
+
+# last : see history who logged into the system
+# lastlog : see history who logged into the system
+
+*Schedule tasks*
+Cron (for a purpose that run the job frequently per day):
+# crontab -u root -e
+# crontab -l
+# crontab -e
+
+Anacron (for a purpose that run the job once per day):
+# vi /etc/anacrontab
+# anacron -T : check syntax & verify
+
+At (for a purpose that run the job once):
+# at 'Aug 20 204'
+# at '20:00'
+# at 'now + 30 minutes/days/hours/weeks/months'
+# atq : list all jobs
+# atrmm [id] : remove a job with [id]
+
+*Software*
+*APT*
+# apt update
+# apt list --upgradable
+# apt upgrade
+# apt search "apache http server" : Search for package
+# apt install -y apache2
+# dpkg --search /bin/ls : find out the name of package by path
+# dpkg --listfiles coreutils : list oall fiels that belongs to package
+# apt remove --auto-remove apache2 : auto remove all dependencies and package
+# add-apt-repository ppa:john/latest-app : add a new repository
+# add-apt-repository ppa:graphics-driver/ppa : add an existing repository
+# add-apt-reposiroty --list : list all repositories
+# add-apt-reposiroty --remove ppa:graphics-driver/ppa : remove a repository
+
+*Install softwware form source code*
+# git clone ...
+# cd htop
+Install all dependencies mentioned in README.md
+# ./autogen.sh : generate all necessary files
+# ./configure.sh : configure & check os/application
+# make . : compile & build
+# make install : install the application into the dedicated dir
 
 *Users And Groups*
 *Users*
@@ -143,17 +242,6 @@ Show all groups:
 # groupdel groupname
 
 Notice: cmd groupadd is a native whereas addgroup is an extension written in perl
-
-# nproc: limit process numbers that the user can run
-
-Set limit resources:
-# vi /etc/security/limit.conf
-Change limit resources with soft limit:
-# ulimit -n 10 : change the nproc limit
-# ulimit -Hn 10 : change the hard nproc limit
-
-Check limit resources:
-# nproc : get limit process 
 
 *Networking*
 # hostname : get hostname only
@@ -204,9 +292,61 @@ Checking network services:
 -u: UDP
 -n: numeric values (port number, ex: :22)
 -p: processes
+# ss -tn : show the current IP address connecting to the server
 
+*Configure IP*
+# ip link
+# ip -c a
+# ip link set enp0s3 down
+# ip link set enp0s3 up
+# ip a add 10.0.0.1/24 dev enp0s3
+# ip a delete 10.0.0.40/24 dev enp0s3
 
+*Firewall*
+# ufw status [verbose] : check ufw status
+# ufw status numbered : show all rule with order number
+# ufw allow 22 : allow port 22
+# ufw allow 22/tcp : allow port 22 in TCP
+# ufw enable : enable ufw
+# ufw allow from 10.0.0.1 to any 22/tcp : only allow IP 10.0.0.1 connect to port 22 in TCP
+# ufw delete [ID] : delete a rule with ID number
+# ufw delete allow 22/tcp : delete the rule that allows port 22 TCP
+# ufw allow from 10.0.0.0/24 to any port 22 : allow range IP 10.0.0.0 - 10.0.0.225 to port 22
+# ufw allow from 10.0.0.0/24 to any : allow range IP 10.0.0.0 - 10.0.0.225 to any port
+# ufw deny from 10.0.0.37 : deny IP 10.0.0.37 to any port
+# ufw insert 1 deny from 10.0.0.37 : add 1 rule with ID=1 that deny IP 10.0.0.37
+# ufw deny out on enp0s3 to 8.8.8.8 : add 1 rule that deny go out network package, specify on interface network enp0s3 to 8.8.8.8
+# ufw allow in on enp0s3 from 10.0.0.192 to 10.0.0.100 proto tcp
+# ufw allow out on enp0s3 from 10.0.0.100 to 10.0.0.192 proto tcp
+
+*Synchronize System Time*
+# timedatectl list-timezones : list all timezones
+# timedatectl set-timezone America/Los_Angeles : set timezone
+# timedatectl : Show date time and info
+# apt install -y systemd-timesyncd : install ntp package
+# timedatectl set-ntp true : enable ntp
+file config ntp: # vi /etc/systemd/timesyncd.conf
+
+*Configure SSH Server and Client*
+SSH config file in server: # vi /etc/ssh/sshd_config
+SSH config file in client: # vi ~/.ssh/config (make sure the file has chmod 600)
+content:
+Host ubuntu-vm
+  HostName 10.0.0.14
+  Port 22
+  User jeremy
+
+Create a new public/private keys
+In your local PC, run these 2 cmds:
+# ssh-keygen : generate a fingerprint (a pair of key)
+# ssh-copy-id user@server_host : copy a public key to server
+OR
+copy a content from .pub key (from client) and past it to path ~/.ssh/authorized_key (in server). Change permission # chmod 600 ~/.ssh/authorized_key (this way is not recommended)
+# ssh-keygen -R [host_server] && rm ~/.ssh/known_host: remove a fingerprint 
 
 *Storage*
-# xfs_repair /dev/vdb : Check XFS filesystem
-# mkfs.ext4 -S /dev/vdb : Check ext4 filesystem
+# xfs_repair -v /dev/vdb : Check XFS filesystem (xfs is a default filesystem in RedHat)
+# fsck.ext4 -v -f -p /dev/vdb : Check ext4 filesystem (ext4 is a default filesystem in Ubuntu)
+
+*Physical Storage Partitions*
+
