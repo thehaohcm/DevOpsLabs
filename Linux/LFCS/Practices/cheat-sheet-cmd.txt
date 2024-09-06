@@ -1,0 +1,212 @@
+*Essential Commands*
+# ssh -V : show version
+# ssh -v user@host : show status messages & debug connection
+
+# mandb : init the apropos cmd database 
+# apropos "NFS mounts" : find name and description of keyword in the manual page
+
+# chmod
+# chgrp
+
+# find /path -iname "keyword" : find all files have keyword name with insensitive case
+# find /path \! -name "keyword" : find all files has not keyword name
+# find /path -name "keywork" -exec cp {} /opt/ \; : find and copy all files have keywork name and cp them to /opt/ path
+
+# find /path -perm 664 : find files have exactly 664 permission
+# find /path -perm -664 : find files have equal or greater than 664 permission
+# find /path -perm /664 : find files have permission o=6 OR g=6 OR o=4 
+
+# find /path -mtime 5
+# find /path -mtime +5
+# find /path -mtime -5
+
+# find /path -ctime 5
+# find /path -ctime +5
+# find /path -ctime -5
+
+# grep -iRn "keyword" /path : find all files which contain the keyword recursively from /path
+# grep -r --text "keyword" /path
+
+
+*Operations Deployment*
+# shutdown +120 : shutdown the computer after 120m (=2h)
+# shutdown -c : cancel the scheduled shutdown you configured before
+
+# sleep 10 : sleep for 10 seconds
+
+# systemctl --list-all
+
+# ps aux : show all processes
+# ps lax : show all processes with nice values
+# ps 1 : display inform about the process
+# ps u 1 : provide more info such as ram cpu about the process
+
+# pgrep -a rpcbind : get PID of the process name rpcbind
+
+# kill -SIGHUP 1 : send a SIGHUP signal to PID 1
+
+# [cmd] & : run the cmd in the background
+# fg : get back the backgroup cmd
+# ctrl + z : send the cmd or app to background
+
+# ls -laZ /bin/sudo : checkout the SELinux label for the files stored at /bin/sudo
+
+Get all users of SELinux defined in OS:
+# semanage user -l
+Get all roles of SELinux defined in OS:
+# seinfo -r 
+
+Change SELinux status:
+Temporary way:
+# seenforce 0 (turn off)
+# seenforce 1 (turn on)
+Permanent way:
+# vi /etc/selinux/config
+SELINUX=disable
+SELINUX=permissive
+SELINUX=enforcing
+# reboot
+Check status:
+# sestatus
+# getenforce
+
+Change the SELinux context temporarily:
+# chcone -vR system_u:object_r:httpd_sys_script_exec_t:s0 /var/www/*/*php
+Chane only type:
+# chcon -t httpd_sys_content_t /var/index.html 
+Change only user:
+# chcon -u system_u /var/index.html 
+Change only role:
+# chcon -r object_r /var/index.html 
+Change the SELinux content permanently (not finished yet)**TODO**:
+# semanage fcontext 
+
+Change kernel runtime parameters:
+Temporary way:
+# sysctl -w kernel.modules_disabled=1
+Permanent way:
+# vi /etc/sysctl.conf
+[add new parameters and value]
+Apply new changes:
+# sysctl -p
+OR
+# sysctl --system
+Check value:
+# systectl -a
+
+# df / : Show % space of / partition is in used
+# du -sh /bin/ : Show storage space of directory
+# free --mega : Show memory
+# uptime : Show how long the system is up
+# lscpu : Show CPU info
+
+
+*Users And Groups*
+*Users*
+# useradd john
+# useradd -u 1 -G sudo -s /bin/csh -d /home/acb jane
+# useradd --system bot : create a bot user system
+
+# usermod -e 2030-03-01 janeL : set the expired date of jane user
+# usermod -e "" jane : remove the expired date of jane
+# usermod -L jane : lock the user jane
+# usermod -U jane : unlock the user
+# usermod -s /bin/csh jane : change the shell of jane user
+# usermod -d /home/other jane : change home dir of jane user
+
+Add user to group
+# usermod -a -G group user
+OR
+# gpasswd -a user group
+Remove user from group
+# gpasswd -d user group
+
+Notice: add user to sudo group
+Option 1:
+# gpasswd -a user sudo
+Option 2:
+# visudo
+%sudo   ALL=(ALL) ALL
+If we don't need to type password:
+user   ALL=(ALL) PASSWD:ALL
+
+# userdel -r jane : delete user jane, include the home dir
+
+Notice: cmd useradd is a native whereas adduser is an extension written in perl
+
+*Groups*
+Show all groups:
+# groups
+
+# groupadd groupname
+# groupmod -n new_group old_group
+# groupdel groupname
+
+Notice: cmd groupadd is a native whereas addgroup is an extension written in perl
+
+# nproc: limit process numbers that the user can run
+
+Set limit resources:
+# vi /etc/security/limit.conf
+Change limit resources with soft limit:
+# ulimit -n 10 : change the nproc limit
+# ulimit -Hn 10 : change the hard nproc limit
+
+Check limit resources:
+# nproc : get limit process 
+
+*Networking*
+# hostname : get hostname only
+# hostnamectl : get hostname and info
+# hostnamectl set-hostname "hostname" : set hostname permanently without rebooting
+
+set hostname permanently (rebooting required)
+# vi /etc/hostname
+# vi /etc/hosts : add or change the IP alias name
+# systemctl reboot
+
+Change nameserver:
+Option 1: use systemd-resolved
+# vi /etc/systemd/resolved.conf
+[Resolve]
+DNS=8.8.8.8 8.8.4.4
+FallbackDNS=1.1.1.1 1.0.0.1
+# systemctl restart systemd-resolved
+# resolvectl status : check status
+
+Option 2: use resolvconf (tranditional way)
+# apt install -y resolvconf
+# vi /etc/resolv.conf
+nameserver x.x.x.x
+nameserver y.y.y.y
+# resolvconf -u : update the new change
+
+Option 3: use netplan
+# vi /etc/netplan/99-custom.yaml
+---
+network:
+  version: 2
+  ethernets:
+    eth0:
+      nameserverss:
+        addresses:
+          - 8.8.8.8
+          - 8.8.4.4
+# netplan apply
+# resolvctl status | grep "DNS Server" -A2
+Notice: netplan doc: 
+# ls /usr/share/doc/netplan/examples/
+
+Checking network services:
+# ss -tunlp
+-l: listing
+-t: TCP
+-u: UDP
+-n: numeric values (port number, ex: :22)
+-p: processes
+
+
+
+*Storage*
+# xfs_repair /dev/vdb : Check XFS filesystem
+# mkfs.ext4 -S /dev/vdb : Check ext4 filesystem
