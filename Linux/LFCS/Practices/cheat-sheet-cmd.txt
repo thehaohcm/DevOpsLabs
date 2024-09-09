@@ -76,8 +76,8 @@ Get all roles of SELinux defined in OS:
 
 Change SELinux status:
 Temporary way:
-# seenforce 0 (turn off)
-# seenforce 1 (turn on)
+# setenforce 0 (Permissive - turn off)
+# setenforce 1 (Enforce - turn on)
 Permanent way:
 # vi /etc/selinux/config
 SELINUX=disable
@@ -98,6 +98,8 @@ Change only role:
 # chcon -r object_r /var/index.html 
 Change the SELinux content permanently (not finished yet)**TODO**:
 # semanage fcontext 
+Restore the SELinux label:
+# restorecon -R /path
 
 Change kernel runtime parameters:
 Temporary way:
@@ -349,4 +351,31 @@ copy a content from .pub key (from client) and past it to path ~/.ssh/authorized
 # fsck.ext4 -v -f -p /dev/vdb : Check ext4 filesystem (ext4 is a default filesystem in Ubuntu)
 
 *Physical Storage Partitions*
+# lsblk : show all virtual disks and partitions
+# fdisk /dev/vdb1 : show all info about the partition /dev/vdb1
+# cfdisk : add/change/delete partitions
 
+Create file and format as a swap:
+# dd if=/dev/zero of=/swap bs=1M count=128 status=progress : create a file /swap with size 128
+# chmod 600 /swap
+# mkswap /swap : format the swap file
+# swapon -v /swap : turn on the swap
+# swapon -s : show all swap files
+# swapoff /swap : turn off the swap
+
+Notice: 
+XFS: mkfs.xfs + utility: xfs_admin
+EXT4: mkfs.ext4 + utility: tune2fs
+
+XFS filesystem:
+# mkfs.xfs /dev/sdb1 : format the xfs filesystem
+# mkfs.xfs -L "BackupVolume" /dev/sdb1 : format and set label for the xfs filesystem
+# mkfs.xfs -f -i size=512 -L "BackupVolume" /dev/sdb1 : format, set node size = 512 and set label 
+# xfs_admin -L "FirstFS" /dev/sdb1 : change the label
+# xfs_admin -l /dev/sdb1 : show label
+
+EXT4 filesystem:
+# mkfs.ext4 /dev/sdb2 : format the ext4 filesystem
+# mkfs.ext4 -N 5000 /dev/sdb2 : specify a maximum node number. If the node number is ran out => we cannot create more file even the disk capacity is still remaining
+# tune2fs -l /dev/sdb2 : show info & properties of the partition (include name)
+# tune2fs -L "SecondFS" /dev/sdb2 : change label of the partition
