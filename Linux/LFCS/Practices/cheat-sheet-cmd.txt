@@ -22,10 +22,21 @@
 # find /path -mtime : -mtime calculate with day number
 # find /path -ctime : -ctime & -cmin will select all files modified. Whereas mtim & mmin select all files created
 
-
 # grep -iRn "keyword" /path : find all files which contain the keyword recursively from /path
 # grep -r --text "keyword" /path
 # egrep "^c*e$" /path : find all files which contain the keyword beginning by 'c' character and ending with 'e' character
+
+SUID, GUID, sticky bit
+SUID: 4 (S/s in rwS/rws) : execute the file as owner user
+the permission file will be: rwS/rws
+uppercase S : SUID bit is on, and the execution bit is off
+lowercase s : both SUID and execution bit are on
+GUID: 2 (S: execute the file as onwer group
+set both SUID and GUID: # chmod 6664 (4+2=6)
+sticky bit: 1 : retrict anyone to remove the directory (in sake of sharing the director to people). Not allow for applying the file
+only owner and root can delete the file which enabled sticky bit
+set sticky bit: # chmod 1777 dir/ or # chmod +t dir/
+the permission dir will be drwxrwxrwt (when execution bit is on together) or drwxrwxrwT )when execution bit is off)
 
 Git:
 # git add .
@@ -455,3 +466,37 @@ attach a remote block device:
 Unmount and remove the remote block device:
 # umount /mnt
 # ndb-client -d /dev/nbd0
+
+LVM Storage
+LVM is a way make resize a particular partition easier
+Install LVM tool:
+# apt install -y lvm2
+There are 4 terms in LVM in ordered:
+PV: Physical Volume: represent real storage or partition of devices that LVM manage & works
+Check pv: # lvmdiskscan
+Create pv: # pvcreate /dev/sdc /dev/sdd
+Show total size of pv: # pvs
+Remove the pv: # pvremove /dev/sde
+
+VG: Volume Group: represent a storage capacity of one or some PVs combined
+Create vg: # vgcreate [NameOfGroup] [NameOfPV] (ex: vgcreate my_vol /dev/sdc /dev/sdd)
+notice: we can keep growing the VG by adding more disks by # vgextend (ex vgextend my_vol /dev/sde)
+Or reduce a disk from the VG by # vgreduce my_vol /dev/sde
+Show VGs: # vgs
+
+LV: Logical Volume: a "partition term" in LVM manages & works
+Create LV: # lvcreate --size [sizeK/M/G] --name [lvmName] [LvmName] [VgName] (ex: # lvcreate --size 2G --name partition1 my_vol)
+Show LVs: # lvs
+Extend LV: # lvresize --extends 100%VG my_vol/partition1 : extend 100% of all VG size is available
+Reduce/Shrink: # lvresize --size 2G my_vol/partition1
+Path of LVM: /dev/nameOfVG/nameOfLV
+See all info of LV: # lvdisplay
+Create an ext4 file system from LV:
+# mkfs.ext4 /dev/my_vol/partition1
+Resize the LV and the file system inside
+# lvresize --resizefs --size 3G my_vol/partition1
+
+
+PE: Physical Extent: a real partition LVM manage and merged when you extend the LV
+
+
