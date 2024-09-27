@@ -379,3 +379,79 @@ EXT4 filesystem:
 # mkfs.ext4 -N 5000 /dev/sdb2 : specify a maximum node number. If the node number is ran out => we cannot create more file even the disk capacity is still remaining
 # tune2fs -l /dev/sdb2 : show info & properties of the partition (include name)
 # tune2fs -L "SecondFS" /dev/sdb2 : change label of the partition
+
+Find mount:
+# findmnt
+# findmnt -t ext4,xfs
+
+Mount partition to path:
+# mount -o [r|w|o|remount][,noexec][,nosuid] /dev/[partition] /[path]
+noexec: cannot launch the program inside
+nosuid: don't allow to run with root privileges without needing sudo cmd
+noexec + nosuid: impove security on filesystem inside to run program
+# mount -o allocsize=32k /dev/vdb1 /mybackups
+
+Network Filesystem (NFS)
+install:
+NFS Server side
+# apt install nfs-kernel-server
+config (share the path /srv/homes/ to the hostname1):
+# vi /etc/exports
+/srv/homes       hostname1(rw,sync,no_subtree_check) hostname2(ro,sync,no_subtree_check)
+/srv/homes       *.hostname.com(rw,sync,no_subtree_check) 
+/srv/homes       *(rw,sync,no_subtree_check): share to any user
+/srv/homes       127.0.0.1/24(rw,sync,no_subtree_check)
+1st option:
++rw:
++ro:
+2nd option:
++ sync: synchronous writes
++ async: asynchronous writes. This allows clients to do things faster, but it doesn't guarantee that all changes are actually stored (it would be incorrect especially in case the server reboot unexpectedly) 
+3rd option:
++ no_subtree_check: disbales subtree checking
++ no_root_squash: allows root user to have root privileges
+apply new change:
+# exportfs -r 
+see current exported nfs:
+# exportfs -v
+
+NFS Client side
+# apt install -y nfs-common
+Mount a remote NFS share:
+# mount [IP/hostname]:/path/to/remote/ /path/to/local
+Unmount:
+# mount /path/to/local
+Auto-mount:
+# vi /etc/fstab
+127.0.0.1:/path/ /path/to/local nfs defaults 0 0
+
+NBD
+NDB server:
+# apt isntall nbd-server
+Config:
+# vi /etc/nbd-server/config
+comment nbd user , not allow nbd user use it
+# user = nbd
+# group = nbd
+allow ndb client to list what exports the server has available, we can see what block devices can share with us:
+allowlist = true
+add new partion:
+[partition2]
+  exportname=/dev/
+restart NBD:
+# systemctl restart ndb-server
+
+NBD client side:
+# apt install nbd-client
+config to config new network block:
+# modprobe nbd: we need to do it everytime we restart the system
+Config the new network block:
+# vi /etc/modules-load.d/modules.conf
+# nbd
+[save file]
+attach a remote block device:
+# nbd-client 127.0.0.1 -N partition2
+# mount /dev/nbd0 /mnt
+Unmount and remove the remote block device:
+# umount /mnt
+# ndb-client -d /dev/nbd0
