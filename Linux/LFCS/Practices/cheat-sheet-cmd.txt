@@ -26,6 +26,89 @@
 # grep -r --text "keyword" /path
 # egrep "^c*e$" /path : find all files which contain the keyword beginning by 'c' character and ending with 'e' character
 
+cat [file_name]
+tac [file_name]
+head -n [number_line] [file_name]
+tail -n [number_line] [file_name]
+sed [-i] 's/[old_word]/[new_word]/g' [file_name]
+sed [-i] 's/[old_word]/[new_word]/gi' [file_name]: change old word (with ignore sensitive case) to new word
+sed [-i] '200,500s/[old_word]/[new_word]/g[i]' [file_name]: only apply from line 200 to 500
+sed [-i] 's~[old_word]~[new_word]~g' [file_name]: apply for complex words
+cut -d ' ' -f [column_num] [file_name]
+uniq [file_name]: remove duplicated words in the next line
+sort [file_name]
+diff [file1] [file2]
+< only exists in file1
+-----
+> only exists in file2
+diff -c [file1] [file2]: show context of file in summary
+diff -y [file1] [file2]: show diff side by side
+diff -i: ignore the case, insenstive case
+
+LESS usage:
+-i/[key_word]: search with insensitive keyword in less
+
+vim stands for VI IMPROVED
+/[key_word]\c : search with insensitive keyword in vim
+yy (double y): copy the line
+d: cut the line
+p: paste the line
+:set number : show line number
+1000 dd : delete first 1000 lines
+
+GREP usage:
+# grep -ir --color : force grep to show color 
+# grep -v : invert the result, that mean all lines hadn't shown in the grep orginal will be show by this cmd.
+ex: # grep -v '^#': show all lines configured in the file
+# grep -w : search with particular word
+# grep -ow : show only the word and not care about the rest of line, it is useful when use togethe with wc -l cmd to count how many words appear in the file
+
+Regular Expression:
+'^Pass': line has word start with 'Pass'
+'word$': line has word end with 'word'
+grep -w '7$': find all words have number 7
+'c.t': dot(.) represent for a only character. Ex: a, b, c, 1, 2, ...
+grep '\.': find a word with dot(.) word
+grep 'let*':
+grep '0\+' or grep -E '0+' or egrep '0+' : find all words have 0 and follow one or many 0 backward
+grep -ic '^SECTION': count all words started with S and ignore case
+egrep '0{3,}': find all words has at least 3 zeros
+egrep '10{,3}': find all words contain 1 and followed by most 3 zeros
+egrep '0{3}': find all words have exactly 3 zeros
+egrep 'disabled?': find all words have either 'disable' or 'disabled'
+egrep 'enabled|disabled': find all words have either 'enabled' or 'disabled'
+egrep 'c[au]t': find all words have 'c' and a to u word and finally the 't'
+egerp '/dev/.*': find all words 
+egrep '/dev/[a-z]*'
+egrep '/dev/[a-z]*[0-9]?'
+egrep '/dev/([a-z]*[0-9]?)*'
+egrep 'https[^:]': find all words have https and end with anything expect ':', ex: 'https,' 'httpso'...
+
+TAR usage:
+# tar tf: list tar files
+# tar cf: create tar file
+# tar rf: append tar file
+# tar xf -C: extract tar file
+
+gzip/bzip2/xz
+gzip file1
+gzip --list file1.gz
+gunzip --keep file1.gz
+tar cvfz archive.tar.gz file1
+
+bzip2 file2
+bunzip --keep file2.bz2
+tar cvfj archive.tar.bz2 file2
+
+xz file3
+tar cvfJ archive.xz file 2
+unxz --keep file3.xz
+
+zip archive.zip file1
+zip -r archive.zip Picture/
+unzip archive.zip
+
+
 SUID, GUID, sticky bit
 SUID: 4 (S/s in rwS/rws) : execute the file as owner user
 the permission file will be: rwS/rws
