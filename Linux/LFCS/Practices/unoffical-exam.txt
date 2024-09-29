@@ -1,0 +1,89 @@
+Q1:
+Get the kernel name of linux
+Get the value of kernel parameter ip_forward
+Get the system timezone
+
+Q2:
+migrate a cronjob belongs to user 'user1' in /etc/crontab to user1's crontab that we can list it by cmd 'crontab -l'
+create a new cronjob to exec file clean.sh by 'user1' every Monday and Thurday at 11:15 am
+
+Q3:
+Config the NTP servers to 0.pool.ntp.org and 1.pool.ntp.org
+Config the fallback NTP servers to ntp.ubuntu.com and 0.debian.pool.ntp.org
+Set maxium pool interval to 1000s and connection retry to 20s
+
+Q4:
+add new variable VAR1=random-string into the .bashrc file
+create a new script script.sh with following vars:
+VAR2 contains 'v2'
+VAR3 contains VAR1-extended, which is available in the script and all sub-processes
+print VAR3
+
+Q5:
+There is a file import01.tar.bz2, we have to create a new compress gz file named as import01.tar.gz
+write all file names and sort all files inside to 2 coresponding files 'import01.tar.bz2_list' and 'import01.tar.gz_list'
+
+Q6:
+change group of user1 to dev and change home dir to /home/user1
+add user2 with group 'dev' and 'op', home dir to /home/user2 and default terminal is /bin/bash
+configure to allow user2 can run file 'dangerous.sh' without entering root password
+
+Q7:
+Close port 5000
+Redirect all traffic from port 6000 to 6001
+Only allow IP 192.168.1.1 to access the port 6002
+Block all traffic to 192.168.1.2
+
+Q8:
+Format the /dev/vdb to ext4, mount to /mnt/backup
+Find the fullest of disk /dev/vdc and /dev/vdd, and remove all files inside the .trash folder
+between 2 processes 'matter1' and 'mater2', find the one is consumming more RAM, then unmount the disk where it's excuting
+
+Q9:
+At dir /opt/
+Delete all files created before 01-09-2024
+Move all files smaller than 3kb to /opt/3kb/
+Move all files larger than 10kb to /opt/10kb/
+Move all files have permission 777 to /opt/777/
+A:
+Backup the dir /opt/
+
+Q10:
+
+Q11:
+Stop container 'fe_v1'
+Collect and write all info about 'fe_v1' to /opt/info:
+- assigned ip address
+- volume mount destination dir
+Start a new container with name 'fe_v3' from image 'nginx:alpine' with limited ram is 30m and expose to port 1234 from port 80 inside the container
+
+Q12:
+Clone a repo /repository/project1 to /home/user1/project1
+Check file 'config.yaml' inside 3 branchs 'dev1' 'dev2' 'dev3', which one does contain 'user_level' inside? Then merge the branch to 'main'
+Create new dir 'logs' and 'logs/.keep' file into the 'main' branch, then commit all things with msg 'added new log dir'
+
+Q13:
+
+Q14:
+run the file /opt/generate.sh many times with following below requirements:
+- redirect stdout to /var/1.out
+- redirect stderr to /var/2.out
+- redirect both stdout and stderr to /var/3.out
+- write the exit code number to /var/4.out
+
+Q15:
+install the terminal browser from source located in /opt/links2/, with configuring the location to /usr/bin/links2, turn off the ipv6 support
+
+Q16:
+
+Q17:
+
+Q18:
+Remove the disk /dev/vdh from vg vol1
+Create a new vg vol2 from disk /dev/vdh
+Create 50M lv named pv1 for vg vol2
+format the pv1 with ext4
+
+Q19:
+
+Q20:
