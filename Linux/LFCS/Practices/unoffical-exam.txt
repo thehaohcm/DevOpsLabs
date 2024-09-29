@@ -49,6 +49,8 @@ A:
 Backup the dir /opt/
 
 Q10:
+Mount dir /data-export from server1 to /opt/server1/data-export in server 'master' by using SSHFS with format 'read-only' and enable option 'allow_other'
+Mount the NFS dir /nfs/share in server 'master' to /opt/nfs/ dir in 'server1'
 
 Q11:
 Stop container 'fe_v1'
@@ -63,6 +65,8 @@ Check file 'config.yaml' inside 3 branchs 'dev1' 'dev2' 'dev3', which one does c
 Create new dir 'logs' and 'logs/.keep' file into the 'main' branch, then commit all things with msg 'added new log dir'
 
 Q13:
+There are 3 processes named 'process1' 'process2' and 'process3'. Currently the server has an system security alert. Let find where the alert came from in these 3 processes and stop it by using cmd 'kill'. 
+Notice: use 'strace -p PID' 
 
 Q14:
 run the file /opt/generate.sh many times with following below requirements:
@@ -75,8 +79,15 @@ Q15:
 install the terminal browser from source located in /opt/links2/, with configuring the location to /usr/bin/links2, turn off the ipv6 support
 
 Q16:
+server1 has 2 apps, which are opening 2 port 1111 and 2222 and using nginx as webservers.
+Try to create a LoadBalanacer on that server which:
+- Listens on port 8001 and forward/redirect traffics to server1:2222/special
+- Listens on port 8000 and balances traffic between server1:1111 and server1:2222 by using Random or Round Robin
 
 Q17:
+Disable the X11Forwarding of OpenSSH in server1
+Disable PasswordAuthentication for everyone except user1
+Enable Banner with file /etc/ssh/sshd-banner for user user1 and user2
 
 Q18:
 Remove the disk /dev/vdh from vg vol1
@@ -85,5 +96,9 @@ Create 50M lv named pv1 for vg vol2
 format the pv1 with ext4
 
 Q19:
+Find all log lines in /var/nginx/nginx.log where URLs start with /app/user and were accessed by browser identity 'bot/1.2', write all them into /opt/log-collection.extracted
+Find and replace all lines starting with 'container.web', end with '24h' and have word 'Running' anywhere in-between with 'SENSITIVE LINE REMOVE' in file /var/ngin/server.log
 
 Q20:
+Find the soft limit we added for user 'jackier' for number of processes need to be run in .bashrc file, then set it as a hard limit 
+Enforce the group 'operations' can only ever log in once at the same time
