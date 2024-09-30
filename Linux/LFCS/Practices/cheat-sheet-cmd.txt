@@ -521,7 +521,7 @@ Auto-mount:
 
 NBD
 NDB server:
-# apt isntall nbd-server
+# apt install nbd-server
 Config:
 # vi /etc/nbd-server/config
 comment nbd user , not allow nbd user use it
@@ -582,4 +582,14 @@ Resize the LV and the file system inside
 
 PE: Physical Extent: a real partition LVM manage and merged when you extend the LV
 
-
+Openssl
+Create a key with RSA 2056:
+# openssl genrsa -out priv.key 2048
+Create a csr with key file:
+# openssl req -new -key priv.key -out mycsr.csr
+Create both key and csr:
+# openssl req -newkey rsa:[2048|4096] -keyout priv.key -out mycsr.csr
+Create a self-signed cert with key and csr:
+# openssl x509 -req -day 365 -in mycsr.csr -signkey priv.key -out mycert.crt
+Show info of the CSR:
+# openssl x509 -noout -text -in [.key|.csr|.crt]
