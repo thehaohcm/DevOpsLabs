@@ -16,6 +16,8 @@
 # find /path -perm -664 : find files have equal or greater than 664 permission
 # find /path -perm /664 : find files have permission o=6 OR g=6 OR o=4 
 
+# find /path -type f -perm u=r ! -perm /o=wr : find all files in the /path that owner can read and either other can write or write
+
 # find /path -mmin 5 : find all files created at now - 5min (exact time)
 # find /path -mmin +5 : find all files created from [(now - 5min) to now]
 # find /path -mmin -5 : find all files created before now - 5min
