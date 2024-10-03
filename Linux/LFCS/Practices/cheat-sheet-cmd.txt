@@ -27,6 +27,7 @@
 # grep -iRn "keyword" /path : find all files which contain the keyword recursively from /path
 # grep -r --text "keyword" /path
 # egrep "^c*e$" /path : find all files which contain the keyword beginning by 'c' character and ending with 'e' character
+# egrep "\b2[0-9]{0,}\b" : find all numbers in files that begining with '2'
 
 cat [file_name]
 tac [file_name]
@@ -423,6 +424,7 @@ Checking network services:
 # timedatectl : Show date time and info
 # apt install -y systemd-timesyncd : install ntp package
 # timedatectl set-ntp true : enable ntp
+# timedatectl show-timesync : show all info of timedate and NTP
 file config ntp: # vi /etc/systemd/timesyncd.conf
 
 *Configure SSH Server and Client*
@@ -595,3 +597,20 @@ Create a self-signed cert with key and csr:
 # openssl x509 -req -day 365 -in mycsr.csr -signkey priv.key -out mycert.crt
 Show info of the CSR:
 # openssl x509 -noout -text -in [.key|.csr|.crt]
+
+Load Balancer
+Add new server IP as a load balancer:
+# vi /etc/nginx/sites-available/loadbalancer.conf
+Add new line to the upstream block:
+server 10.9.0.3 weight=3;
+Create a symlink to the sites-enabled directory:
+# ln -s /etc/nginx/site-available/loadbalancer.conf /etc/nginx/site-enabled/loadbalancer.conf
+Notice: ln -s [source] [destination]
+Reload/restart the nginx:
+# systemctl reload nginx
+
+Port Redirection
+Setup a port redirection rule from [sourceIP] port 8080, then redirect to [DestinationIP] port 80:
+# iptables -t nat -A PREROUTING -s [source IP] -p tcp --dport 8080 -j DNAT --to-destionation [destination IP]
+Setup masqueraging so that traffic can also be returned to the [sourceIP]:
+# iptables -t nat -A POSTROUTING -s [source IP] -j MASQUERADE
