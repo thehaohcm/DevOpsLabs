@@ -154,7 +154,7 @@ Stuffs:
 
 # ps aux : show all processes
 # ps lax : show all processes with nice values
-# ps 1 : display inform about the process
+# ps 1 : display inform about the process with PID = 1
 # ps u 1 : provide more info such as ram cpu about the process (u = show resources as ramm,cpu,...)
 # pgrep -a rpcbind : get PID of the process name rpcbind
 # lsof -p 1 : list all files that opened by process ID = 1
@@ -184,6 +184,25 @@ SELINUX=enforcing
 Check status:
 # sestatus
 # getenforce
+Set SELabel for a specific file:
+# setfacl -m u:hjeremy:rw file1 : set facl for user jeremy can read and write the file
+# setfacl -m g:sudo:--- file1 : set facl for group sudo no permisison this file
+# setfacl --remove-all file3 : remove all selabel permisison for this file
+# setfactl --recursive --remove group:sudo dir1/ : remove user jeremy from dir1 and it's sub files & folders
+# getfacl file1 : get SE label facl for the file file1
+# setfacl -m mask:r file1 : specific that the maximum permisison for this file is just 'read', even though we did define the facl is 'rw'
+Notice: the 'mask' defines the maximum permission taht this file or dir can have
+
+Files and Dirs attribute
+When we turn on an attr, it makes its behave in a diff way then it would normally.
+Notice: Only root user can enable or disable the attribute
+Attribute 'a' (append):
+# chattr +a newfile : enable 'append' attribute, that me we can only append data AFTER, cannot change or overwrite data, ex: echo "acb" >> newfile
+# chattr -a newfile : remove the attribute 'append' from the file
+Attribute 'i' (immutable):
+# chattr +i newfile: enable 'immutable' attribute, that mean we cannot change the file 's data, edit, rename, delete, edit anyway (even root, until it is removed)
+# chattr -i newfile : remove the attribute 'immutable' from the file
+# lsattr newfile : check attribute of file
 
 Change the SELinux context temporarily:
 # chcone -vR system_u:object_r:httpd_sys_script_exec_t:s0 /var/www/*/*php
@@ -535,7 +554,7 @@ allow ndb client to list what exports the server has available, we can see what 
 allowlist = true
 add new partion:
 [partition2]
-  exportname=/dev/
+  exportname=/dev/vda1
 restart NBD:
 # systemctl restart ndb-server
 
@@ -596,21 +615,58 @@ Create both key and csr:
 Create a self-signed cert with key and csr:
 # openssl x509 -req -day 365 -in mycsr.csr -signkey priv.key -out mycert.crt
 Show info of the CSR:
-# openssl x509 -noout -text -in [.key|.csr|.crt]
+# openssl x509 -in [.key|.csr|.crt] -text -nout
+
+Nginx
 
 Load Balancer
 Add new server IP as a load balancer:
 # vi /etc/nginx/sites-available/loadbalancer.conf
 Add new line to the upstream block:
 server 10.9.0.3 weight=3;
+Notice: the /etc/nginx/site-available dir is also storing all config files. If you want to enable it to nginx use, we have to create a symlink from it to /etc/nginx/site-availble
 Create a symlink to the sites-enabled directory:
 # ln -s /etc/nginx/site-available/loadbalancer.conf /etc/nginx/site-enabled/loadbalancer.conf
 Notice: ln -s [source] [destination]
 Reload/restart the nginx:
 # systemctl reload nginx
 
+Ex nginx config for proxy:
+server{
+  listen 80;
+  location / {
+    proxy_pass http://1.1.1.1;
+  }
+}
+
+Ex nginx config for load balancer:
+upstream mywebservers{
+  least_conn; //config nginx to traffic all requests to servers which less connection
+  server 1.2.3.4:8081 weight=3; //config weight to specify that this server has higher resource than the others
+  server 5.6.7.8 down; //we can mark the server is being maintained as 'down' keyword, then a new request will not be sent
+  server 10.20.30.40 backup; //'backup' keyword is marked for this server to specify that this server is not sent any request until any server above is down
+}
+server{
+  location / {
+    proxy_pass http://mywebservers;
+  }
+}
+
 Port Redirection
 Setup a port redirection rule from [sourceIP] port 8080, then redirect to [DestinationIP] port 80:
 # iptables -t nat -A PREROUTING -s [source IP] -p tcp --dport 8080 -j DNAT --to-destionation [destination IP]
 Setup masqueraging so that traffic can also be returned to the [sourceIP]:
 # iptables -t nat -A POSTROUTING -s [source IP] -j MASQUERADE
+
+Monitor Hard Disk:
+# apt instal -y sysstat
+there are 2 tools in sysstat:
+# iostat : monitor input/output data (I/O statistics)
+# iostat 1 : monitor them and refresh every second
+# iostat -h : 
+# iostat -p ALL : show all devices
+# isostat -p sda: show all sda devices
+# pidstat : monitor process ID statistics
+# pidstat -d : show proccess (PIDs) running that affect the read/write speed storage
+# dmsetup info /dev/dm-0 : 
+
