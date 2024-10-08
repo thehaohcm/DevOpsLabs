@@ -662,6 +662,8 @@ Setup masqueraging so that traffic can also be returned to the [sourceIP]:
 # iptables -t nat -A POSTROUTING -s [source IP] -j MASQUERADE
 Persist iptables rules:
 # apt install iptables-peristent
+List all iptables rules:
+# iptables -S
 
 Monitor Hard Disk:
 # apt instal -y sysstat
