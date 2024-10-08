@@ -338,6 +338,9 @@ OR
 Remove user from group
 # gpasswd -d user group
 
+Add password for user:
+# echo "[user]:[password]" | sudo chpasswd
+
 Notice: add user to sudo group
 Option 1:
 # gpasswd -a user sudo
@@ -654,9 +657,11 @@ server{
 
 Port Redirection
 Setup a port redirection rule from [sourceIP] port 8080, then redirect to [DestinationIP] port 80:
-# iptables -t nat -A PREROUTING -s [source IP] -p tcp --dport 8080 -j DNAT --to-destionation [destination IP]
+# iptables -t nat -A PREROUTING -s [source IP] -p tcp --dport [port] -j DNAT --to-destionation [destination IP]
 Setup masqueraging so that traffic can also be returned to the [sourceIP]:
 # iptables -t nat -A POSTROUTING -s [source IP] -j MASQUERADE
+Persist iptables rules:
+# apt install iptables-peristent
 
 Monitor Hard Disk:
 # apt instal -y sysstat
@@ -670,3 +675,12 @@ there are 2 tools in sysstat:
 # pidstat -d : show proccess (PIDs) running that affect the read/write speed storage
 # dmsetup info /dev/dm-0 : 
 
+LDAP
+Config file: /etc/nslcd.conf
+Get User data config file: /etc/nsswitch.conf
+# systemctl restart nslcd
+
+Virt-Virsh
+# virsh list --all
+# virt-install --os-variant ubuntu --ram 2048 --vcpus 1 --name virtualPC --import --disk /var/lib/libvirt/images/ubunut22.img --noautoconsole
+# virsh autostart virtualPC
