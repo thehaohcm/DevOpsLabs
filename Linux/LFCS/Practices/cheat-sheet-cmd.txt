@@ -448,6 +448,7 @@ Checking network services:
 # timedatectl set-ntp true : enable ntp
 # timedatectl show-timesync : show all info of timedate and NTP
 file config ntp: # vi /etc/systemd/timesyncd.conf
+Test ntp: # ntpdate -q 0.de.pool.ntp.org
 
 *Configure SSH Server and Client*
 SSH config file in server: # vi /etc/ssh/sshd_config
@@ -471,7 +472,8 @@ copy a content from .pub key (from client) and past it to path ~/.ssh/authorized
 # fsck.ext4 -v -f -p /dev/vdb : Check ext4 filesystem (ext4 is a default filesystem in Ubuntu)
 
 *Physical Storage Partitions*
-# lsblk : show all virtual disks and partitions
+# lsblk : show all virtual/physical disks and partitions
+# fdisk -l : show all virtual/physical disks info
 # fdisk /dev/vdb1 : show all info about the partition /dev/vdb1
 # cfdisk : add/change/delete partitions
 
