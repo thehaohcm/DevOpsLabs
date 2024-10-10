@@ -477,6 +477,8 @@ copy a content from .pub key (from client) and past it to path ~/.ssh/authorized
 
 Create file and format as a swap:
 # dd if=/dev/zero of=/swap bs=1M count=128 status=progress : create a file /swap with size 128
+OR
+# fallocate -l 1024M /swap
 # chmod 600 /swap
 # mkswap /swap : format the swap file
 # swapon -v /swap : turn on the swap
@@ -534,6 +536,8 @@ apply new change:
 # exportfs -r 
 see current exported nfs:
 # exportfs -v
+Get all directories shared via nfs in localhost (NFS server):
+# showmount -e 127.0.0.1
 
 NFS Client side
 # apt install -y nfs-common
