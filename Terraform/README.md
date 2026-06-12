@@ -29,6 +29,7 @@ Notice: add parameter "-auto-approve" if you don't want to wait and type "yes" f
 - https://www.youtube.com/watch?v=XxTcw7UTues
 
 ## Concepts 
+
 ### Wordflow
 Core Terraform worldflow:
 write -> init -> plan -> apply -> destroy
@@ -39,6 +40,10 @@ resource: create & manages infra objects
 data: reads existing external data, retrieve exsting data resources
 
 variable: parameterizes configuration
++ map(string) { key = value }
++ list [item1, item2,...]
++ string
++ number
 
 output: exposes values after apply
 
@@ -47,6 +52,8 @@ locals: computed intermediate values
 terraform: settings, backend & required_providers
 
 module: consume repeatable packages
+
+import: bring an existing resources to terminal screen
 
 ### Essential commands
 terraform init: intialize working directory
@@ -68,6 +75,11 @@ terraform console: interactive expression evaluation
 terraform graph: generate dependency graph
 
 terraform providers: show required providers
+
+terraform show: read info in *.tfstate file (entire)
+
+terraform state show [resource id]: read info about the specific resource
+
 
 ### Variable definition precendence (from top to bottom)
 -var flag
@@ -93,7 +105,13 @@ ENV (TF_VAR_[VARNAME]
 
 -refresh-only: update- state, no changes
 
+ex: terraform plan: update the current state from provider's resources (aws, azure,...) to .tfstate file, then check the new change in tf file with the .tfstate file. Whereas `terraform plan -refresh-only` only check and update the current state of provider's resource to .tfstate file.
+
 -out=plan.out: save plan to file
+
+-generate-config-out=[tf file] : use together with teraform plan and import block to allow terraform automatically generate & write down an existing resources from cloud providers to local ts file.
+
+ex: terraform plan -generate-config-out=generated_resources.tf
 
 ### Enviroment variables
 TF_LOG: TRACE, DEBUG, etc.
@@ -113,6 +131,29 @@ terraform {
   }
 }
 ```
+
+Notice: how to distingue among terraform public, private, and local by `source`: 
+
+local: start with `./`
+
+public: format `[org]/[name]/[provider]`
+
+private: `[company.domain]/[company-org]/....`
+
+Run trigger: when the previous wordspace runsuccessfully, it automatically start and run the next wordspace
+
+## Others
+.terraform/ folder: list
+  + provider folder: downloaded providers libraries
+  + terraform.tfstate file: backend metadata
+  + modules/ folder: backup of modules
+
+"alias" keyword: use together with `provider` that allow to separate a same provider (ex: aws) which has difference region (for instance)
+
+drift: conflict/error between current infrastructures and terraform code
+
+terraform data source: retrieve and read info from cloud providers to use in .tf file
+
 ## License
 
 **Author: Hao Nguyen**
