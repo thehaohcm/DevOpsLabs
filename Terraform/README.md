@@ -88,6 +88,7 @@ TF_LOG_PATH: write logs to file
 TP_VAR_[name]: set input variable
 
 ### HCP Terraform
+```
 terraform {
   cloud {
     organization="org"
@@ -96,7 +97,7 @@ terraform {
     }
   }
 }
-
+```
 ## License
 
 **Author: Hao Nguyen**
