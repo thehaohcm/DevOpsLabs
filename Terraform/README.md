@@ -36,7 +36,7 @@ write -> init -> plan -> apply -> destroy
 ### HCL block types
 resource: create & manages infra objects
 
-data: reads existing external data
+data: reads existing external data, retrieve exsting data resources
 
 variable: parameterizes configuration
 
