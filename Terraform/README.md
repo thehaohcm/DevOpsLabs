@@ -35,23 +35,38 @@ write -> init -> plan -> apply -> destroy
 
 ### HCL block types
 resource: create & manages infra objects
+
 data: reads existing external data
+
 variable: parameterizes configuration
+
 output: exposes values after apply
+
 locals: computed intermediate values
+
 terraform: settings, backend & required_providers
+
 module: consume repeatable packages
 
 ### Essential commands
 terraform init: intialize working directory
+
 terraform fmt: format files to cannonical types
+
 terraform validate: check config syntax & logic
+
 terraform plan: preview execution plan
+
 terraform apply: apply changes to infrastrcuture
+
 terraform destroy: destroy managed resources
+
 terraform output: read output values
+
 terraform console: interactive expression evaluation
+
 terraform graph: generate dependency graph
+
 terraform providers: show required providers
 
 ### Variable definition precendence (from top to bottom)
