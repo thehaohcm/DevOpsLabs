@@ -28,6 +28,64 @@ Notice: add parameter "-auto-approve" if you don't want to wait and type "yes" f
 ## Reference
 - https://www.youtube.com/watch?v=XxTcw7UTues
 
+## Concepts 
+### Wordflow
+Core Terraform worldflow:
+write -> init -> plan -> apply -> destroy
+
+### HCL block types
+resource: create & manages infra objects
+data: reads existing external data
+variable: parameterizes configuration
+output: exposes values after apply
+locals: computed intermediate values
+terraform: settings, backend & required_providers
+module: consume repeatable packages
+
+### Essential commands
+terraform init: intialize working directory
+terraform fmt: format files to cannonical types
+terraform validate: check config syntax & logic
+terraform plan: preview execution plan
+terraform apply: apply changes to infrastrcuture
+terraform destroy: destroy managed resources
+terraform output: read output values
+terraform console: interactive expression evaluation
+terraform graph: generate dependency graph
+terraform providers: show required providers
+
+### Variable definition precendence (from top to bottom)
+-var flag
+-var-file flag
+*.auto.tfvars
+terraform.tfvars
+ENV (TF_VAR_[VARNAME]
+
+*Notice:* CLI -var and -var-file always override file-based and environment definitions. Auto-loaded files are processed in alphabetical order
+
+### Useful flags
+-auto-approve: skip confirmation prompt
+-target= : apply to specific resource
+-var= : set variable inline
+-var-file= : load variable files
+-refresh-only: update- state, no changes
+-out=plan.out: save plan to file
+
+### Enviroment variables
+TF_LOG: TRACE, DEBUG, etc.
+TF_LOG_PATH: write logs to file
+TP_VAR_[name]: set input variable
+
+### HCP Terraform
+terraform {
+  cloud {
+    organization="org"
+    workspaces {
+      name="my-app"
+    }
+  }
+}
+
 ## License
 
 **Author: Hao Nguyen**
