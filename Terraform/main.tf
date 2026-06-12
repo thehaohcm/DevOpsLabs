@@ -1,6 +1,27 @@
+# Retrieve the list of AZs in the current AWS region
+data "aws_availability_zones" "available" {}
+data "aws_region" "current" {}
+
 provider "aws" {
   profile = "lab_user"
   region = "ap-southeast-1"
+}
+
+variable "vpc_cidr" {
+  type = "string"
+  description ="cidr block of vpc"
+  default = "10.0.0.0/24"
+}
+
+# Define the VPC
+resource "aws_vpc" "vpc" {
+  cidr_block = var.vpc_cidr
+
+  tags = {
+    Name = var.vpc_name
+    Environment = "demo_environment"
+    Terraform = "true"
+  }
 }
 
 resource "aws_security_group" "terraform-ec2-sg" {
