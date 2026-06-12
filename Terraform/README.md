@@ -56,24 +56,35 @@ terraform providers: show required providers
 
 ### Variable definition precendence (from top to bottom)
 -var flag
+
 -var-file flag
+
 *.auto.tfvars
+
 terraform.tfvars
+
 ENV (TF_VAR_[VARNAME]
 
 *Notice:* CLI -var and -var-file always override file-based and environment definitions. Auto-loaded files are processed in alphabetical order
 
 ### Useful flags
 -auto-approve: skip confirmation prompt
+
 -target= : apply to specific resource
+
 -var= : set variable inline
+
 -var-file= : load variable files
+
 -refresh-only: update- state, no changes
+
 -out=plan.out: save plan to file
 
 ### Enviroment variables
 TF_LOG: TRACE, DEBUG, etc.
+
 TF_LOG_PATH: write logs to file
+
 TP_VAR_[name]: set input variable
 
 ### HCP Terraform
