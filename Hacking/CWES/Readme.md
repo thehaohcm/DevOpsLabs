@@ -1,4 +1,4 @@
-Resources:
+# Resources:
 
 https://www.udemy.com/course/learn-bug-bounty-hunting-web-security-testing-from-scratch (1 month)
 
@@ -10,21 +10,19 @@ CWES (1 month)
 
 Report tools (for CWES exam): https://github.com/Syslifters/HackTheBox-Reporting
 
-Cheat sheets:
+### Cheat sheets:
 
 https://github.com/Touexe/CBBH-CWES
 
 https://github.com/Burdy98/Pentest-Methodology/blob/main/CWES-Methodology.md
 
-Others:
+### Others:
 
 http://portswigger.net/: collection of all vulnerable websites, we can choose and practice on these websites safely & legally
 
-### Cheat sheet:
-
 ## Attack Techniques:
 
-# SQL Injections:
+### SQL Injections:
 
 '
 
@@ -36,17 +34,17 @@ http://portswigger.net/: collection of all vulnerable websites, we can choose an
 
 UNION SELECT NULL--
 
-# XSS
+### XSS
 
 <script>alert(1)</script>
 
 <img src=x onerror=alert(1)>
 
-# SSRF
+### SSRF
 
 payload http://127.0.0.1 -> server returns its public ip in cloud
 
-# JWT
+### JWT
 
 alg:none
 
@@ -56,7 +54,7 @@ Session Cookie
 
 Trust Client Claims
 
-# File Upload
+### File Upload
 
 shell.php.jpg
 
@@ -64,7 +62,7 @@ shell.php.jpg
 
 .phar
 
-# Access Control
+### Access Control
 
 IDOR:
 
@@ -88,11 +86,11 @@ MFA Bypass
 
 Session Fixation
 
-# Business Logic
+### Business Logic
 
 Coupon discount $50 -> discount more $50 -> loop 
 
-### Tools
+# Tools
 
 Proxy
 
@@ -104,35 +102,35 @@ Intruder
 
 Logger
 
-### Mock exam
+# Mock exam
 
 Build on your self
 
-# DVWA (Damn Vulnerable Web Application): create a bugging web application for pentest
+### DVWA (Damn Vulnerable Web Application): create a bugging web application for pentest
 ```
 docker run -d \
 -p 8080:80 \
 raesene/bwapp
 ```
 
-# bWAPP (Buggy Web Application): create a bug web application, more than DVWA
+### bWAPP (Buggy Web Application): create a bug web application, more than DVWA
 ```
 docker run -d \
 -p 8080:80 \
 raesene/bwapp
 ```
 
-# Juice shop (OWASP Juice Shop, a bugging e-commerce website, same as real life)
+### Juice shop (OWASP Juice Shop, a bugging e-commerce website, same as real life)
 ```
 docker run -d \
 -p 3000:3000 \
 bkimminich/juice-shop
 ```
 
-# PortSwigger: Hacking labs
+### PortSwigger: Hacking labs
 
-### target: Gaining system control for 2 hours
+# target: Gaining system control for 2 hours
 
-### Tools
+# Tools
 
 https://github.com/epi052/feroxbuster
