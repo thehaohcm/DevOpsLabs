@@ -58,7 +58,7 @@ import: bring an existing resources to terminal screen
 ### Essential commands
 terraform init: intialize working directory
 
-terraform fmt: format files to cannonical types
+terraform fmt: format files to cannonical types. Only applied for all tf files from current directory (not allied for parent and sub dirs)
 
 terraform validate: check config syntax & logic
 
@@ -82,7 +82,13 @@ terraform providers: show required providers
 
 terraform show: read info in *.tfstate file (entire)
 
+terraform state list: show all resources
+
 terraform state show [resource id]: read info about the specific resource
+
+terraform -install-autocomplete: by using this cmd, terraform can automatically complete the syntax in bash or zsh cmd when using tab
+
+terraform [cmd] --help
 
 
 ### Variable definition precendence (from top to bottom)
@@ -94,7 +100,9 @@ terraform state show [resource id]: read info about the specific resource
 
 terraform.tfvars
 
-ENV (TF_VAR_[VARNAME]
+ENV (TF_VAR_[VARNAME])
+
+notice: besides the TF_VAR_ prefix, terraform also read some specific providers API key and secret eg. AWS, Azure, GCP, Vault... to implement the resources
 
 *Notice:* CLI -var and -var-file always override file-based and environment definitions. Auto-loaded files are processed in alphabetical order
 
@@ -164,6 +172,45 @@ Terraform default manage 10 operations in parallel but can be modified using -pa
 terraform apply -parallism=5
 
 Besides Terraform (acquired by IBM), OpenTofu is a opensource of Terraform (folk). We can download and use it with cmd tofu
+
+Structure & Organizations (these named & adopted by Terraform community)
+
+main.tf: primary infrastrture components
+
+providers.tf: provider configurations and requirements
+
+variables.tf: variables definations throughout infrastructure
+
+terraform.tfvars: defines values for variables in variables.tf (usually ignore in .gitignore)
+
+resources.tf
+
+output.tf: output blocks to output values to terminal or used for inputs to other modules
+
+# Additional files:
+
+terraform.tfstate: store state, no push to git
+
+terraform.tfstate.backup: store the previous state when having a new state. No push to git
+
+.terraform.lock.hcl: track and select providers version (must push to git, same as package.json)
+
+
+# Working Directory
+
+Main directory
+|--Prod
+   |--main.tf
+   |--variables.tf
+   |--output.tf
+|--UAT
+   |--main.tf
+   |--variables.tf
+   |--output.tf
+|--Test
+   |--main.tf
+   |--variables.tf
+   |--output.tf
 
 ## License
 
