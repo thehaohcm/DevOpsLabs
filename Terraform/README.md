@@ -32,7 +32,7 @@ Notice: add parameter "-auto-approve" if you don't want to wait and type "yes" f
 
 ### Wordflow
 Core Terraform worldflow:
-write -> init -> plan -> apply -> destroy
+write -> init -> validate (optional) -> plan -> apply -> destroy
 
 ### HCL block types
 resource: create & manages infra objects
