@@ -7,3 +7,116 @@ PortSwigger Web Security Academy (2 months)
 OWASP Juice Shop (2 months)
 
 CWES (1 month)
+
+### Cheat sheet:
+
+## Attack Techniques:
+
+# SQL Injections:
+
+'
+
+"
+
+--
+
+#
+
+UNION SELECT NULL--
+
+# XSS
+
+<script>alert(1)</script>
+
+<img src=x onerror=alert(1)>
+
+# SSRF
+
+payload http://127.0.0.1 -> server returns its public ip in cloud
+
+# JWT
+
+alg:none
+
+Weak secret
+
+Session Cookie
+
+Trust Client Claims
+
+# File Upload
+
+shell.php.jpg
+
+.phtml
+
+.phar
+
+# Access Control
+
+IDOR:
+
+ID=1 -> ID=2 -> ID=3
+
+Vertical Privilege Escalation
+
+User -> Admin
+
+Horizontal Privilege Escalation
+
+User1 -> User2
+
+#Authentication
+
+Brute Force
+
+Password Spraying
+
+MFA Bypass
+
+Session Fixation
+
+# Business Logic
+
+Coupon discount $50 -> discount more $50 -> loop 
+
+### Tools
+
+Proxy
+
+Repeater
+
+Decoder (JWT, Base64)
+
+Intruder
+
+Logger
+
+### Mock exam
+
+Build on your self
+
+# DVWA (Damn Vulnerable Web Application): create a bugging web application for pentest
+```
+docker run -d \
+-p 8080:80 \
+raesene/bwapp
+```
+
+# bWAPP (Buggy Web Application): create a bug web application, more than DVWA
+```
+docker run -d \
+-p 8080:80 \
+raesene/bwapp
+```
+
+# Juice shop (OWASP Juice Shop, a bugging e-commerce website, same as real life)
+```
+docker run -d \
+-p 3000:3000 \
+bkimminich/juice-shop
+```
+
+# PortSwigger: Hacking labs
+
+### target: Gaining system control for 2 hours
