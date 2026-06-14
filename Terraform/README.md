@@ -68,6 +68,10 @@ terraform apply: apply changes to infrastrcuture
 
 terraform destroy: destroy managed resources
 
+terraform destroy -target=[resource_name]
+
+Notice: if you only need to move a specific resource by above cmd withou eliminate it in the terraform file, in the next apply state, this resources will be comeback again
+
 terraform output: read output values
 
 terraform console: interactive expression evaluation
@@ -107,7 +111,9 @@ ENV (TF_VAR_[VARNAME]
 
 ex: terraform plan: update the current state from provider's resources (aws, azure,...) to .tfstate file, then check the new change in tf file with the .tfstate file. Whereas `terraform plan -refresh-only` only check and update the current state of provider's resource to .tfstate file.
 
--out=plan.out: save plan to file
+-out=plan.out: save plan to file (ex: tfplan)
+
+tfplan can be used to push to vcs (git...), review and apply after confidence. Ex: # terraform apply plan.out
 
 -generate-config-out=[tf file] : use together with teraform plan and import block to allow terraform automatically generate & write down an existing resources from cloud providers to local ts file.
 
@@ -153,6 +159,11 @@ Run trigger: when the previous wordspace runsuccessfully, it automatically start
 drift: conflict/error between current infrastructures and terraform code
 
 terraform data source: retrieve and read info from cloud providers to use in .tf file
+
+Terraform default manage 10 operations in parallel but can be modified using -parallism flag. ex:
+terraform apply -parallism=5
+
+Besides Terraform (acquired by IBM), OpenTofu is a opensource of Terraform (folk). We can download and use it with cmd tofu
 
 ## License
 
