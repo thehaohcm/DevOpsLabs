@@ -44,16 +44,16 @@ https://github.com/danielmiessler/SecLists/blob/master/Discovery/Web-Content/com
 
 --
 
-#
+`#
 
 UNION SELECT NULL--
 
 ### XSS
-
+```
 <script>alert(1)</script>
 
 <img src=x onerror=alert(1)>
-
+```
 ### SSRF
 
 payload http://127.0.0.1 -> server returns its public ip in cloud
