@@ -8,6 +8,18 @@ OWASP Juice Shop (2 months)
 
 CWES (1 month)
 
+Report tools (for CWES exam): https://github.com/Syslifters/HackTheBox-Reporting
+
+Cheat sheets:
+
+https://github.com/Touexe/CBBH-CWES
+
+https://github.com/Burdy98/Pentest-Methodology/blob/main/CWES-Methodology.md
+
+Others:
+
+http://portswigger.net/: collection of all vulnerable websites, we can choose and practice on these websites safely & legally
+
 ### Cheat sheet:
 
 ## Attack Techniques:
@@ -120,3 +132,7 @@ bkimminich/juice-shop
 # PortSwigger: Hacking labs
 
 ### target: Gaining system control for 2 hours
+
+### Tools
+
+https://github.com/epi052/feroxbuster
