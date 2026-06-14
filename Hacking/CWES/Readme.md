@@ -110,9 +110,9 @@ Build on your self
 
 ### DVWA (Damn Vulnerable Web Application): create a bugging web application for pentest
 ```
-docker run -d \
--p 8080:80 \
-raesene/bwapp
+docker run --rm -it \
+-p 4280:80 \
+vulnerables/web-dvwa
 ```
 
 ### bWAPP (Buggy Web Application): create a bug web application, more than DVWA
