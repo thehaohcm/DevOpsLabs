@@ -2,6 +2,8 @@
 
 https://www.udemy.com/course/learn-bug-bounty-hunting-web-security-testing-from-scratch (1 month)
 
+https://www.reddit.com/r/hackthebox/comments/1u2mrwh/cwes_preparation/
+
 PortSwigger Web Security Academy (2 months)
 
 OWASP Juice Shop (2 months)
