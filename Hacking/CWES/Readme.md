@@ -10,6 +10,14 @@ CWES (1 month)
 
 Report tools (for CWES exam): https://github.com/Syslifters/HackTheBox-Reporting
 
+# Labs
+
+https://orange-cyberdefense.github.io/GOAD/labs/MINILAB/
+
+https://hackthebox.com
+
+htpps://tryhackme.com
+
 # Cheat sheets:
 
 https://github.com/Touexe/CBBH-CWES
@@ -21,6 +29,8 @@ https://github.com/Burdy98/Pentest-Methodology/blob/main/CWES-Methodology.md
 http://portswigger.net/: collection of all vulnerable websites, we can choose and practice on these websites safely & legally
 
 https://github.com/epi052/feroxbuster
+
+https://github.com/danielmiessler/SecLists/blob/master/Discovery/Web-Content/common.txt
 
 ## Attack Techniques:
 
