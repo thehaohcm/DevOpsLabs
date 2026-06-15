@@ -74,6 +74,59 @@ nmap/rustscan -> find out port 80/433 -> use feroxbuster -> find out path /api/v
 
 ## Attack Techniques:
 
+## Attach Network Service
+
+# Banner Grabbing
+
+Auto scan 1,000 ports:
+nmap -sV --script=banner [IP]
+
+we can also attempt this manually using netcat (nc cmd):
+nc -nv [ip] [port]
+
+# FTP
+ftp -p [IP] : connect FTP (input 'anonymous' if prompt ask to check)
+
+collect priviledges: 
+
+get login.txt
+or
+get password.txt
+
+# SMB
+
+nmap --script smb-os-discovery.nse -p445 [IP]
+
+nmap -A -p445 [IP]
+
+# Shares
+
+smbclient -N -L \\\\[IP] : retrieve a list of available shares on the IP (-L), while -N suppresses the password prompt
+
+smbclient \\\\[IP]\\users : connect SMB server with guest user
+
+smb: \> ls
+
+smb: \> cd flag
+
+smb: \flag\> get flag.txt
+
+smb: \> exit
+
+cat flag.txt
+
+try to connect with specific username  (ex:bob in bob:Weblcome1)
+smbclient -U [username] //[IP]/users
+
+# SNMP (port 161 UDP)
+In SNMP, we have 2 strings public and private. Private string allows to read/write system info of device
+
+snmpwalk -v 2c -c public [IP] [private string - OID - Object Identifier. ex: 1.3.6.1.2.1.1.5.0]
+
+snmpwalk -v 2c -c private  10.129.42.253 
+
+onesixtyone -c dict.txt [IP] : Brute force tool
+
 # Attack Active Directory & Internal network
 
 NetExec / CrackMapExec: password spraying, list share SMB, check admin privilenge, execute remotely cmd
@@ -222,3 +275,44 @@ bkimminich/juice-shop
 SysReport
 
 Obsidian / Notion
+
+# tmux: 
+Ctrl + B is a prefix command default of tmux
+
+Ctrl + B, then C : open a new windows
+
+Ctrl + B, then 0 or 1 : switch to windows
+
+Ctrl + B, then [Shift + %] : split a windows vertically into panes
+
+Ctrl + B, then [Shift + "] : split a windows horizontally into panes
+
+use up down arrow to switch horizontal windows, and let right arrow to switch vertical windows
+
+more info: https://tmuxcheatsheet.com/
+
+# vim
+
+https://vimsheet.com/
+
+### useful commands
+
+netcat [IP] [port][ get banner string of server
+
+nmap -sV [IP] : scan and explore network devices, port scanning. By default, it will scan 1.000 ports. -sV params used to know what app, version, OS running
+
+nmap -sC [IP] : run with default scripts to collect detail infos (website header, file sharing config...)
+
+notice:
+
+locate scripts/citrix : get all list of default script
+
+nmap --script [script name] -p[port] [host/ip] : run with specific script
+
+
+nmap -sCV [IP] : combine 2 above cmds
+
+nmap -sCV -p- [IP] : scan all 65,535 TCP ports
+
+
+
