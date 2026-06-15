@@ -1,4 +1,4 @@
-### Resources:
+# Resources:
 
 https://www.udemy.com/course/learn-bug-bounty-hunting-web-security-testing-from-scratch (1 month)
 
@@ -12,7 +12,7 @@ CWES (1 month)
 
 Report tools (for CWES exam): https://github.com/Syslifters/HackTheBox-Reporting
 
-### Labs
+# Labs
 
 https://orange-cyberdefense.github.io/GOAD/labs/MINILAB/
 
@@ -20,25 +20,25 @@ https://hackthebox.com
 
 htpps://tryhackme.com
 
-### Cheat sheets:
+# Cheat sheets:
 
 https://github.com/Touexe/CBBH-CWES
 
 https://github.com/Burdy98/Pentest-Methodology/blob/main/CWES-Methodology.md
 
-### Tools/Others:
+# Tools/Others:
 
 http://portswigger.net/: collection of all vulnerable websites, we can choose and practice on these websites safely & legally
 
 ## Reconnaissance & Enumeration tools
 
-# Infrastructure & Network
+### Infrastructure & Network
 
 nmap
 
 https://github.com/bee-san/RustScan
 
-# Web Surface
+### Web Surface
 
 https://github.com/OJ/gobuster
 
@@ -46,11 +46,11 @@ https://github.com/epi052/feroxbuster
 
 https://github.com/maurosoria/dirsearch
 
-# list of common vulnerability
+### list of common vulnerability
 
 https://github.com/danielmiessler/SecLists/blob/master/Discovery/Web-Content/common.txt
 
-# Vulnerability Scanning
+### Vulnerability Scanning
 
 https://github.com/projectdiscovery/nuclei
 
@@ -58,7 +58,7 @@ https://github.com/aquasecurity/trivy
 
 https://github.com/aquasecurity/kube-hunter
 
-# Exploitation & Deep Testing
+### Exploitation & Deep Testing
 
 https://portswigger.net/burp
 
@@ -68,7 +68,7 @@ https://github.com/ffuf/ffuf
 
 https://github.com/xmendez/wfuzz
 
-# Common flow:
+### Common flow:
 
 nmap/rustscan -> find out port 80/433 -> use feroxbuster -> find out path /api/v1/user -> use Burp suite -> analyze api request -> use ffuf -> brute-force ID parameter -> find out IDOR (Insecure Direct Object Reference) or use Nuclei -> scan API CVE
 
@@ -76,7 +76,7 @@ nmap/rustscan -> find out port 80/433 -> use feroxbuster -> find out path /api/v
 
 ## Attach Network Service
 
-# Banner Grabbing
+### Banner Grabbing
 
 Auto scan 1,000 ports:
 nmap -sV --script=banner [IP]
@@ -84,7 +84,7 @@ nmap -sV --script=banner [IP]
 we can also attempt this manually using netcat (nc cmd):
 nc -nv [ip] [port]
 
-# FTP
+### FTP
 ftp -p [IP] : connect FTP (input 'anonymous' if prompt ask to check)
 
 collect priviledges: 
@@ -93,13 +93,13 @@ get login.txt
 or
 get password.txt
 
-# SMB
+### SMB
 
 nmap --script smb-os-discovery.nse -p445 [IP]
 
 nmap -A -p445 [IP]
 
-# Shares
+### Shares
 
 smbclient -N -L \\\\[IP] : retrieve a list of available shares on the IP (-L), while -N suppresses the password prompt
 
@@ -118,7 +118,7 @@ cat flag.txt
 try to connect with specific username  (ex:bob in bob:Weblcome1)
 smbclient -U [username] //[IP]/users
 
-# SNMP (port 161 UDP)
+### SNMP (port 161 UDP)
 In SNMP, we have 2 strings public and private. Private string allows to read/write system info of device
 
 snmpwalk -v 2c -c public [IP] [private string - OID - Object Identifier. ex: 1.3.6.1.2.1.1.5.0]
@@ -127,7 +127,7 @@ snmpwalk -v 2c -c private  10.129.42.253
 
 onesixtyone -c dict.txt [IP] : Brute force tool
 
-# Attack Active Directory & Internal network
+### Attack Active Directory & Internal network
 
 NetExec / CrackMapExec: password spraying, list share SMB, check admin privilenge, execute remotely cmd
 
@@ -139,18 +139,18 @@ Responder: Poisoning LLMNR/NBT-NS, collect NTLMv2
 
 Rubeus & Minikatz: 
 
-# Privillege Escalation
+### Privillege Escalation
 
 WinPEAS / LinPEAS
 
-# Pivoting & Tunneling
+### Pivoting & Tunneling
 
 Ligolo-ng
 
 Chisel
 
 
-### SQL Injections:
+# SQL Injections:
 
 '
 
@@ -162,11 +162,11 @@ Chisel
 
 UNION SELECT NULL--
 
-# tools:
+### tools:
 
 https://github.com/sqlmapproject/sqlmap
 
-### XSS
+# XSS
 ```
 <script>alert(1)</script>
 
@@ -179,11 +179,11 @@ https://github.com/webhooksite/webhook.site
 XSS Hunder
 
 ```
-### SSRF
+# SSRF
 
 payload http://127.0.0.1 -> server returns its public ip in cloud
 
-### JWT
+# JWT
 
 alg:none
 
@@ -193,7 +193,7 @@ Session Cookie
 
 Trust Client Claims
 
-### File Upload
+# File Upload
 
 shell.php.jpg
 
@@ -201,7 +201,7 @@ shell.php.jpg
 
 .phar
 
-### Access Control
+# Access Control
 
 IDOR:
 
@@ -225,7 +225,7 @@ MFA Bypass
 
 Session Fixation
 
-### Business Logic
+# Business Logic
 
 Coupon discount $50 -> discount more $50 -> loop 
 
@@ -276,7 +276,7 @@ SysReport
 
 Obsidian / Notion
 
-# tmux: 
+### tmux: 
 Ctrl + B is a prefix command default of tmux
 
 Ctrl + B, then C : open a new windows
@@ -291,11 +291,11 @@ use up down arrow to switch horizontal windows, and let right arrow to switch ve
 
 more info: https://tmuxcheatsheet.com/
 
-# vim
+### vim
 
 https://vimsheet.com/
 
-### useful commands
+# useful commands
 
 netcat [IP] [port][ get banner string of server
 
