@@ -18,7 +18,7 @@ https://orange-cyberdefense.github.io/GOAD/labs/MINILAB/
 
 https://hackthebox.com
 
-htpps://tryhackme.com
+https://tryhackme.com
 
 # Cheat sheets:
 
@@ -150,7 +150,7 @@ Ligolo-ng
 Chisel
 
 
-# SQL Injections:
+### SQL Injections:
 
 '
 
@@ -166,7 +166,7 @@ UNION SELECT NULL--
 
 https://github.com/sqlmapproject/sqlmap
 
-# XSS
+### XSS
 ```
 <script>alert(1)</script>
 
@@ -179,11 +179,11 @@ https://github.com/webhooksite/webhook.site
 XSS Hunder
 
 ```
-# SSRF
+### SSRF
 
 payload http://127.0.0.1 -> server returns its public ip in cloud
 
-# JWT
+### JWT
 
 alg:none
 
@@ -193,7 +193,7 @@ Session Cookie
 
 Trust Client Claims
 
-# File Upload
+### File Upload
 
 shell.php.jpg
 
@@ -201,7 +201,7 @@ shell.php.jpg
 
 .phar
 
-# Access Control
+### Access Control
 
 IDOR:
 
@@ -215,7 +215,7 @@ Horizontal Privilege Escalation
 
 User1 -> User2
 
-# Authentication
+### Authentication
 
 Brute Force
 
@@ -225,7 +225,7 @@ MFA Bypass
 
 Session Fixation
 
-# Business Logic
+### Business Logic
 
 Coupon discount $50 -> discount more $50 -> loop 
 
