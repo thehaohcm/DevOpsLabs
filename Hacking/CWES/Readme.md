@@ -1,4 +1,4 @@
-# Resources:
+### Resources:
 
 https://www.udemy.com/course/learn-bug-bounty-hunting-web-security-testing-from-scratch (1 month)
 
@@ -12,7 +12,7 @@ CWES (1 month)
 
 Report tools (for CWES exam): https://github.com/Syslifters/HackTheBox-Reporting
 
-# Labs
+### Labs
 
 https://orange-cyberdefense.github.io/GOAD/labs/MINILAB/
 
@@ -20,21 +20,82 @@ https://hackthebox.com
 
 htpps://tryhackme.com
 
-# Cheat sheets:
+### Cheat sheets:
 
 https://github.com/Touexe/CBBH-CWES
 
 https://github.com/Burdy98/Pentest-Methodology/blob/main/CWES-Methodology.md
 
-# Tools/Others:
+### Tools/Others:
 
 http://portswigger.net/: collection of all vulnerable websites, we can choose and practice on these websites safely & legally
 
+## Reconnaissance & Enumeration tools
+
+# Infrastructure & Network
+
+nmap
+
+https://github.com/bee-san/RustScan
+
+# Web Surface
+
+https://github.com/OJ/gobuster
+
 https://github.com/epi052/feroxbuster
+
+https://github.com/maurosoria/dirsearch
+
+# list of common vulnerability
 
 https://github.com/danielmiessler/SecLists/blob/master/Discovery/Web-Content/common.txt
 
+# Vulnerability Scanning
+
+https://github.com/projectdiscovery/nuclei
+
+https://github.com/aquasecurity/trivy
+
+https://github.com/aquasecurity/kube-hunter
+
+# Exploitation & Deep Testing
+
+https://portswigger.net/burp
+
+https://github.com/zaproxy/zaproxy
+
+https://github.com/ffuf/ffuf
+
+https://github.com/xmendez/wfuzz
+
+# Common flow:
+
+nmap/rustscan -> find out port 80/433 -> use feroxbuster -> find out path /api/v1/user -> use Burp suite -> analyze api request -> use ffuf -> brute-force ID parameter -> find out IDOR (Insecure Direct Object Reference) or use Nuclei -> scan API CVE
+
 ## Attack Techniques:
+
+# Attack Active Directory & Internal network
+
+NetExec / CrackMapExec: password spraying, list share SMB, check admin privilenge, execute remotely cmd
+
+Impacket: get sensitive data
+
+BloodHound & SharpHound: collewct AD data and draw map, find out a chain of complex atatck
+
+Responder: Poisoning LLMNR/NBT-NS, collect NTLMv2
+
+Rubeus & Minikatz: 
+
+# Privillege Escalation
+
+WinPEAS / LinPEAS
+
+# Pivoting & Tunneling
+
+Ligolo-ng
+
+Chisel
+
 
 ### SQL Injections:
 
@@ -48,11 +109,22 @@ https://github.com/danielmiessler/SecLists/blob/master/Discovery/Web-Content/com
 
 UNION SELECT NULL--
 
+# tools:
+
+https://github.com/sqlmapproject/sqlmap
+
 ### XSS
 ```
 <script>alert(1)</script>
 
 <img src=x onerror=alert(1)>
+
+# tools:
+
+https://github.com/webhooksite/webhook.site
+
+XSS Hunder
+
 ```
 ### SSRF
 
@@ -144,3 +216,9 @@ bkimminich/juice-shop
 ### PortSwigger: Hacking labs
 
 ### target: Gaining system control for 2 hours
+
+### Others
+
+SysReport
+
+Obsidian / Notion
