@@ -162,7 +162,7 @@ Horizontal Privilege Escalation
 
 User1 -> User2
 
-#Authentication
+# Authentication
 
 Brute Force
 
