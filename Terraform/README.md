@@ -37,7 +37,7 @@ write -> init -> validate (optional) -> plan -> apply -> destroy
 ### HCL block types
 resource: create & manages infra objects
 
-data: reads existing external data, retrieve exsting data resources
+data: reads existing external data, retrieve exsting data resources that outside the current terraform configuration
 
 variable: parameterizes configuration
 + map(string) { key = value }
@@ -57,6 +57,8 @@ import: bring an existing resources to terminal screen
 
 ### Essential commands
 terraform init: intialize working directory
+
+terraform init -upgrade: reinitalizes the working directory while upgrading provider and module versions
 
 terraform fmt: format files to cannonical types. Only applied for all tf files from current directory (not allied for parent and sub dirs)
 
@@ -156,6 +158,11 @@ private: `[company.domain]/[company-org]/....`
 
 Run trigger: when the previous wordspace runsuccessfully, it automatically start and run the next wordspace
 
+## Terraform Cloud
+Sentinel Policies: manage policies as code, works as a firewall to compliant and secure the infrastructure before initializing. Sentinel will be evaluated after planing but before applying cmd 
+
+Diffent with running on local, in terraform cloud, we have multiple workspace which is specifc to run in diff projects or env. We also don't need to take care about the lock state file which has to store in DynamicDB to use remote, terraform cloud will take care it, and we can run terraform cmd in cloud instead of local
+
 ## Others
 .terraform/ folder: list
   + provider folder: downloaded providers libraries
@@ -186,6 +193,10 @@ terraform.tfvars: defines values for variables in variables.tf (usually ignore i
 resources.tf
 
 output.tf: output blocks to output values to terminal or used for inputs to other modules
+
+Terraform core take a responsiblity for managing the lifecycle of resources and building the dependency graph
+
+If a resource is deleted manually form cloud provider without updating the terraform configuration, the terraform will detect th diff and propose to recreate the resource during the next plan
 
 # Additional files:
 
