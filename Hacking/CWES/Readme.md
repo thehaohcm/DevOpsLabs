@@ -72,7 +72,7 @@ https://github.com/xmendez/wfuzz
 
 nmap/rustscan -> find out port 80/433 -> use feroxbuster -> find out path /api/v1/user -> use Burp suite -> analyze api request -> use ffuf -> brute-force ID parameter -> find out IDOR (Insecure Direct Object Reference) or use Nuclei -> scan API CVE
 
-## Attack Techniques:
+### Attack Techniques:
 
 ## Attach Network Service
 
@@ -126,6 +126,35 @@ snmpwalk -v 2c -c public [IP] [private string - OID - Object Identifier. ex: 1.3
 snmpwalk -v 2c -c private  10.129.42.253 
 
 onesixtyone -c dict.txt [IP] : Brute force tool
+
+# Web Enumeration
+
+gobuster dir -u [URL/IP] -w common.txt
+
+common.txt download from this link: https://github.com/danielmiessler/SecLists/blob/master/Discovery/Web-Content/common.txt
+
+gobuster dns -u [URL/IP] -w common.txt : find out subdomains
+
+Tips:
+  curl -IL [URL/IP]: read header, get web server info (apache, nginx,version,os...)
+  
+  whatweb [IP]: get tech stacks of website (wordpress, php, version, jquery...)
+
+  whatweb --no-errors [CIRD]: get all tech stacks of IP ranges, no return error if specific IP doesn't exist.
+  
+  SSL/TLS certs
+  
+  robots.txt: get sensitive paths
+  
+  read source code website (ctrl + u)
+
+# Public Exploits
+
+install searchsploit: sudo apt isntall -y exploitdb
+
+searchsploit openssh 7.2 : search for a specific application by its name
+
+MEtrasploit Primer : Metasploit Framework (MSF): pentest tool
 
 ### Public Exploits
 
