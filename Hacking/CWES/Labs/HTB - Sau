@@ -1,0 +1,31 @@
+$ sudo nmap -sCV -oA nmap/sau 10.10.11.224
+
+go to website 10.10.11.224:55555 and create a basket by clicking button
+```
+[GET] /2jmmeym
+headers
+Accept: */*
+User-Agent: curl/7.88.1
+```
+$ curl http://10.10.11.224:55555/2jmmeym -A "Please Subscribe"
+```
+[GET] /2jmmeym
+headers
+Accept: */*
+User-Agent: Please Subscribe
+```
+
+Try putting special characters 
+$ curl http://10.10.11.224:55555/2jmmeym -A "{{ Please Subscribe }}'\" Thank You"
+```
+[GET] /2jmmeym
+headers
+Accept: */*
+User-Agent: {{ Please Subscribe }}'" Thank You
+```
+
+go to setting of page, input ip address of my local into the forward ip address
+
+listening on port 80 (on my local)
+$ sudo nc -lvnp 80
+
