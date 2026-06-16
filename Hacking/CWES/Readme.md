@@ -156,7 +156,7 @@ searchsploit openssh 7.2 : search for a specific application by its name
 
 MEtrasploit Primer : Metasploit Framework (MSF): pentest tool
 
-### Public Exploits
+## Public Exploits
 
 After finding out a tech stacks and services, version running on server, the next step is that check in search engine (google,bing...) whether having an vulnerability declared or not with keyword "[app/service name] [version] exploit"
 
@@ -172,7 +172,7 @@ $ searchsploit [app/service name] [version]
 
 Or checkout on online DB: https://www.exploit-db.com/ and https://www.rapid7.com/db/
 
-Metasploit Framework (MSF)
+### Metasploit Framework (MSF)
 
 MSF is a powerful framework, which allows to exploit testing, integrate robust features and tools such as run script to collect info, check target server has vulnerability or not,.... It can run on Windows, Linux, MacOS
 
@@ -212,6 +212,22 @@ $ run
 // enter cli
 $ shell
 ```
+
+# Types of shells
+
+## Reverse shell
+Connects back to our system and gives us control through a reverse connection.
+```
+$ nc -lvnp 1234
+$ ip a
+
+```
+
+## Bind shell
+Waits for us to connect to it and gives us control once we do.
+
+## Web shell
+Communicates through a web server, accepts our commands through HTTP parameters, executes them, and prints back the output.
 
 ### Attack Active Directory & Internal network
 
@@ -394,6 +410,8 @@ https://www.metasploit.com/
 # useful commands
 
 netcat [IP] [port][ get banner string of server
+
+nc -lvnp 1234: create a temporary server listening on port 1234
 
 nmap -sV [IP] : scan and explore network devices, port scanning. By default, it will scan 1.000 ports. -sV params used to know what app, version, OS running
 
