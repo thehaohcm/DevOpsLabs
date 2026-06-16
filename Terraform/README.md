@@ -37,7 +37,7 @@ write -> init -> validate (optional) -> plan -> apply -> destroy
 ### HCL block types
 resource: create & manages infra objects
 
-data: reads existing external data, retrieve exsting data resources that outside the current terraform configuration
+data: reads existing external data, retrieve exsting data resources that outside the current terraform configuration (read-only existing infrastructure)
 
 variable: parameterizes configuration
 + map(string) { key = value }
