@@ -1,4 +1,6 @@
 # Resources
+https://beafn28.gitbook.io/
+https://beafn28.gitbook.io/beafn28/apuntes-hacking/using-web-proxies
 
 # Labs
 
