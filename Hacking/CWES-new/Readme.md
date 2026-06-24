@@ -17,6 +17,10 @@ zaproxy
 ```
 ## FoxyProxy (Firefox extension for Burp and ZAP)
 
+## Zap 
+### Zap fuzzer
+https://forum.hackthebox.com/t/help-with-question-proxies-zap-fuzzer/257933/23
+
 Notice: setup CA cert for 3 tools
 
 ## Proxychains
