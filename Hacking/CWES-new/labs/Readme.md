@@ -153,3 +153,24 @@ responder -I tun0 -rdw
 # Mở cổng lắng nghe shell trả về
 nc -lvnp 4444
 ```
+
+### Check domain contractor
+```bash
+# whois [domain]
+```
+
+### Check domain info
+```bash
+# dig [domain/IP] [record (A/MX/...)
+# dig +short [domain/IP]
+```
+
+### Check doamin mapped to IP (reversing)
+```bash
+# dig +x [IP]
+```
+
+### Subdomain bruteforcing
+```bash
+# dnsenum --enum [domain] -f  /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt
+```
