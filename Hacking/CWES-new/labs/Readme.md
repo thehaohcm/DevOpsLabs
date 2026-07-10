@@ -174,3 +174,24 @@ nc -lvnp 4444
 ```bash
 # dnsenum --enum [domain] -f  /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt
 ```
+
+### DNS Zone Transfers (AXFR)
+## Defination
+DNS Zone transfers is a wholesale copy of all DNS records within a zone (domain and its subdomains) from one name server to another for maintaining consistency and redundancy across DNS servers. There are 5 steps:
+ 1. secondary DNS name servers send a AXFR request to primary DNS server
+ 2. the primary server responses a SOA records to check data updated
+ 3. the primary server transfer sequentially DNS records like A, AAAA, MX, CNAME,...
+ 4. the primary server notifies the transfer accomplished
+ 5. the secondary server send a confirm package (ACK)
+
+# Implementation
+The Zone Transfer Vulnerability: is a DNS misconfiguration that allow anyone (instead of reliable servers) send an AXFR requests and fetch wholesale copy of all DNS records, the hackers can get all info about sudomains (stagging, production, dev,...), IP addresses, name servers information... by using `dig axfr` cmd
+```bash
+# dig axfr @[nameserver IP/domain] [target IP]
+```
+ex:
+```bash
+# dig axfr @nsztm1.digi.ninja zonetransfer.me
+```
+## Remediation
+Configurate the DNS servers that only allows strictly requests from a whitelist of trusted servers 
