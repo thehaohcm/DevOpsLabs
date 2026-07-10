@@ -175,7 +175,7 @@ nc -lvnp 4444
 # dnsenum --enum [domain] -f  /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt
 ```
 
-### DNS Zone Transfers (AXFR)
+# DNS Zone Transfers (AXFR)
 ## Defination
 DNS Zone transfers is a wholesale copy of all DNS records within a zone (domain and its subdomains) from one name server to another for maintaining consistency and redundancy across DNS servers. There are 5 steps:
  1. secondary DNS name servers send a AXFR request to primary DNS server
@@ -184,7 +184,7 @@ DNS Zone transfers is a wholesale copy of all DNS records within a zone (domain 
  4. the primary server notifies the transfer accomplished
  5. the secondary server send a confirm package (ACK)
 
-# Implementation
+### Implementation
 The Zone Transfer Vulnerability: is a DNS misconfiguration that allow anyone (instead of reliable servers) send an AXFR requests and fetch wholesale copy of all DNS records, the hackers can get all info about sudomains (stagging, production, dev,...), IP addresses, name servers information... by using `dig axfr` cmd
 ```bash
 # dig axfr @[nameserver IP/domain] [target IP]
@@ -195,3 +195,25 @@ ex:
 ```
 ## Remediation
 Configurate the DNS servers that only allows strictly requests from a whitelist of trusted servers 
+
+# Virtual Host (VHOST)
+## Defination
+VHOST is a configuration on Web servers (Apache, Nginx, IIS,...) allows multi website/applications running on only 1 IP address. Website will rely on HTTP Host Header in request to know exactly IP address target, then redirect to DocumentRoot (eg. /var/www/html). VHOST doesn't have DNS public records, whereas subdomain does. VHOST can only access internally by configuration via hosts file. There are some type of VHOST:
+ 1. Name-Based: use the samne IP, distinguish by Host Header.
+ 2. IP-Based: each webiste has its own IP address.
+ 3. Port-Based: use identical IP address, but has own port service (ex: port 80, 8080, 3000...)
+## Tools (VHOST Fuzzing)
+ - Gobuster
+   ```bash
+   # gobuster vhost -u http://<Target_IP> --domain <domain_name> -w <Path_to_Wordlist> --append-domain
+   ex:
+   # gobuster vhost -u http://1.2.3.4 --domain test.test -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt --append-domain [-o output.txt]
+   ```
+ - Forexbuster
+ - ffuf
+   ```bash
+   # ffuf -u http://94.237.57.211:46627 \
+     -H "Host: FUZZ.<domain>" \
+     -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt \
+     -fs 116
+   ```
