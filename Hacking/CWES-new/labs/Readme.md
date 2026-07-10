@@ -217,3 +217,20 @@ VHOST is a configuration on Web servers (Apache, Nginx, IIS,...) allows multi we
      -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt \
      -fs 116
    ```
+# Certificate Tranparency (CT) LOGS
+## Tools
+### crt.sh
+Query and get JSON result:
+
+```bash
+# curl -s "https://crt.sh/?q=[domain_name]&output=json"
+```
+
+```bash
+# curl -s "https://crt.sh/?q=[domain_name]&output=json" | jq -r '.[] | "\(.name_value)\n\(.common_name)"' | sort -u
+```
+
+Filter & extract subdomain list
+```bash
+# curl -s "https://crt.sh/?q=inlanefreight.com&output=json" | jq -r '.[] | "\(.name_value)\n\(.common_name)"' | sort -u
+```
