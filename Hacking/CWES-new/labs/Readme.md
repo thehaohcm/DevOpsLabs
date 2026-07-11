@@ -234,3 +234,102 @@ Filter & extract subdomain list
 ```bash
 # curl -s "https://crt.sh/?q=inlanefreight.com&output=json" | jq -r '.[] | "\(.name_value)\n\(.common_name)"' | sort -u
 ```
+
+# Web Fingerprinting
+## Banner Grabbing
+Use curl cmd to fetch HTTTP header which may leak some tech stack info
+```bash
+# curl -I [domain/ip]
+```
+Note: if domain redirect to another, keep using the curl -I cmd with the new one until getting info
+
+## WAF Detection
+use `wafw00f` tool to investigate target domain/ip whether using WAF or not. This way help you to head up to be blocked before scanning
+### Installation
+```bash
+# pip3 install git+https://github.com/EnableSecuirty/wafw00f
+```
+### How to use
+```bash
+# wafw00f [domain/ip]
+```
+### Web server scanning
+USe `Nikto` to deeply scan to web server configuration to find out sensitive files, obsolete version, vulnerable config error
+### Installation
+```bash
+# sudo apt update && sudo apt install -y perl
+# git clone https://github.com/sullo/nikto
+# cd nikto/program
+# chmod +x ./nikto.pl
+```
+### How to use
+```bash
+# nikto -h [domain/ip] -Tuning b
+```
+Explanation:
+-h: identify host
+-Tuning b: important option, 'b' option instructs Nikto only run neccessary modules, which identifies softwares/tools/tech stacks, ignore the rest (such as SQLi, XSS,...) to reduce time and noise by WAF.
+
+# Well-known URI
+1. /robot.txt: allow/disallow path for crawling robots
+2. /.well-known/security.txt: contains contact info of security team
+3. /.well-known/change-password: standard path direct to change password page
+4. /.well-known/openid-configuration: OpenID Connect config - identify layer in OAuth 2.0 (IMPORTANCE), it returns JSON format contains entire delegation of authority map of system. From this json, we can exploit `authorization_endpoint`, `token_endpoint`, `userinfo_endpoint` URLs, JWKS URI (`jwks_uri`), `scopes_supported`, `id_token_signing_alg_values_supported`
+5. /.well-known/assetlinks.json: verify link connection between mobile and webapp
+6. /.well-known/mta-sts.txt: SMTP MTA Strict Transport Security configuration, enhance and security check for Mail system
+
+# Web crawling by Scrapy (Creepy Crawlies)
+## Tools
+1. Burp Suite Spider
+2. OWASP ZAP (Opensource)
+3. Scrapy (Python)
+4. Apache Nutch (Java)
+## How to install
+```bash
+# pip3 install scrapy
+# wget -O ReconSpider.zip https://academy.hackthebox.com/storage/modules/144/ReconSpider.v1.2.zip
+# unzip ReconSpider.zip
+```
+## How to use
+```bash
+# python3 ReconSpider.py [domain/ip]
+```
+## Analysis result.json
+- emails: leaked emails
+- links: internal/external links (web map)
+- external_files: PDF/words... files (senstive data, metadata leak)
+- js_files: javascript files, contains logic code, API keys, hidden endpoints
+- comments: notes by developers, may contains password...
+
+# Search Engine Discovery (Google Dorking/Google Hacking)
+A technique to get sensitive info, hidden pages, vulnerability, configuration by using advance features and operator of search engine (google, bing,...) as OSNIT, which is free and legal. There are some google operators:
+- site:[domain] : limit result with a specific domain
+- inurl:[keyword] : find out page which has keyword
+- filetype:[pdf] or ext:[pdf]: find out particular extension files
+- intitle:"index of" : find out pages having title has keyword
+- intext:"password reset" : findout keyword having in the page content
+- cache:[domain] : checkout the cached of page by google captured
+- site:[domain] -inurl:www : exclude result in the -inurl operator
+- "[keywords]" : find out exactly keywords
+## Examples
+1. Search admin page and hidden login 
+```bash
+site:examplecom (inurl:login OR inurl:admin) OR inurl:dashboard)
+```
+2. Hunting Exposed Hidden files
+```bash
+site:example.com (filetype:pdf OR filetype:xls OR filetype:docx OR filetype:txt)
+```
+3. Search config system file - may leak password
+```bash
+site:exmaple.com inurl:config.php
+site:example (ext:conf OR ext:cnf OR ext:ini)
+``` 
+4. Locate backup files and database backup
+```bash
+site:example.com inurl:backup
+site:example.com filetype:sql
+```
+
+# Web Archinve
+Wayback machine (web.archive.org) allows use to view websites snapshots/captures with specific time in the past
