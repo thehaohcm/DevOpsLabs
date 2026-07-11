@@ -333,3 +333,28 @@ site:example.com filetype:sql
 
 # Web Archinve
 Wayback machine (web.archive.org) allows use to view websites snapshots/captures with specific time in the past
+
+# Automating Recon
+## Benefits:
+- Efficiency: do schedule tasks faster
+- Scalability: Scan huge targes and domain at the same time
+- Consistency: Reduce humanility glitch
+- Comprehensive Coverage
+## Popular Automating Reconnaissance Frameworks
+- FinalRecon (python): powerful, check http header, ssl, whois, crawling, subdomains
+- Recon-ng (python): UI same as Metasploit, comprehensive reconnaissance
+- theHarvester: collect email, subdomains, employee names, ports from OSINT sources such as google, shodan
+- SpiderFoot: Automating OSINT tools, integrated with bunch of data source to collect IP, domain, social network
+- OSINT Framework
+## How to install FinalRecon
+```bash
+git clone https://github.com/thewhiteh4t/FinalRecon.git
+cd FinalRecon
+pip3 install -r requirements.txt
+chmod +x ./finalrecon.py
+```
+## How to use FinalReon
+```bash
+./finalrecon.py --headers --whois --url http://inlanefreight.com
+```
+Note: default result file stores in path ~/.local/share/finalrecon/dumps/
