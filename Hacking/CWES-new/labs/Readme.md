@@ -32,6 +32,8 @@ ffuf -w /usr/share/wordlists/dirb/common.txt -u http://<TARGET_IP>/FUZZ -mc 200,
 # Dò tìm Virtual Host (VHost) - Lọc bỏ các trang lỗi có size cố định (-fs)
 ffuf -w /usr/share/wordlists/SecLists/Discovery/DNS/subdomains-top1million-5000.txt -u http://<TARGET_DOMAIN> -H "Host: FUZZ.<TARGET_DOMAIN>" -fs 42
 
+ffuf -u http://inlanefreight.htb:30494 -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt -mc 200,403 -t 60 -H "Host: FUZZ.inlanefreight.htb" -ac
+
 # Dò tìm tham số (Parameter) cho GET Request
 ffuf -w /usr/share/wordlists/SecLists/Discovery/Web-Content/burp-parameter-names.txt -u http://<TARGET_IP>/api/users?FUZZ=test
 ```
